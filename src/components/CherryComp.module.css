@@ -1,0 +1,721 @@
+/* Cherry.module.css - Versione semplificata senza animazioni */
+
+/* ===== CONTAINER E LAYOUT BASE ===== */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  padding: 20px;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; */
+}
+
+/* ===== SLOT MACHINE PRINCIPALE ===== */
+.slotMachine {
+  border-radius: 2rem;
+  padding: 2rem;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  min-height: 500px; /* ALTEZZA FISSA */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ===== AREA RICOMPENSA - SEMPRE PRESENTE ===== */
+.rewardMessage {
+  min-height: 120px; /* ALTEZZA FISSA */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding: 1.5rem; */
+  border-radius: 1rem;
+}
+
+.placeholder {
+  font-size: 1rem;
+  color: rgb(75, 85, 99);
+  font-weight: 500;
+}
+
+.xpAmount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.trophy {
+  font-size: 2rem;
+}
+
+.rewardText {
+  font-size: 1.125rem;
+  color: rgb(17, 24, 39);
+  margin: 0;
+  font-weight: 600;
+}
+
+.failText {
+  font-size: 1.125rem;
+  color: rgb(153, 27, 27);
+  font-weight: 600;
+  margin: 0;
+}
+
+.blockText {
+  font-size: 0.875rem;
+  color: rgb(75, 85, 99);
+  margin: 1rem 0 0 0;
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+
+/* ===== BASE DELLE SLOT ===== */
+.slotBase {
+  border-radius: 1rem;
+  padding: 2rem;
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ===== CONTAINER DELLE SLOT ===== */
+.slotsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.slotWrapper {
+  /* Nessuna prospettiva 3D */
+}
+
+/* ===== SINGOLA SLOT ===== */
+.slot {
+  width: 100px;
+  height: 130px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.slot:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.slotFace {
+  position: relative;
+  z-index: 2;
+}
+
+.symbol {
+  font-size: 52px;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.slot:hover .symbol {
+  transform: scale(1.05);
+}
+
+.slotShadow {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 25px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.1) 0%,
+    transparent 70%
+  );
+  filter: blur(12px);
+}
+
+/* ===== PULSANTE ===== */
+.editProfileBtn {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(17, 24, 39);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  min-height: 56px;
+}
+
+.editProfileBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+}
+
+.editProfileBtn:disabled {
+  background: rgba(156, 163, 175, 0.2);
+  color: rgb(156, 163, 175);
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.buttonIcon {
+  font-size: 16px;
+}
+
+.buttonText {
+  font-weight: bold;
+}
+
+/* ===== EFFETTO LIQUID SEMPLIFICATO ===== */
+.liquidButton::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: rgba(239, 68, 68, 0.2);
+  border-radius: 50%;
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+.liquidButton:hover:not(:disabled)::before {
+  top: -10%;
+}
+
+.liquidButton:hover:not(:disabled) .buttonContent {
+  color: rgb(153, 27, 27);
+}
+
+/* ===== INFORMAZIONI STATO ===== */
+.statusInfo {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.statusItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: rgb(75, 85, 99);
+  font-weight: 500;
+}
+
+.failureCount {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.failureFilled {
+  color: rgb(153, 27, 27);
+  font-size: 1.25rem;
+}
+
+.failureEmpty {
+  color: rgb(203, 213, 225);
+  font-size: 1.25rem;
+  opacity: 0.6;
+}
+
+/* ===== DEBUG INFO ===== */
+.debugInfo {
+  font-size: 11px;
+  color: #666;
+  margin-top: 8px;
+  padding: 4px;
+  background-color: #f9f9f9;
+  border-radius: 3px;
+}
+
+/* CherryComp.module.css - Aggiungi questi stili */
+
+/* 🆕 HEADER SLOT */
+.slotHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.slotTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.infoButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* color: #3b82f6; */
+}
+
+.infoButton:hover {
+  background: rgba(59, 130, 246, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  color: #ca923e;
+}
+
+/* 🆕 OVERLAY - Identico al settings */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(99, 102, 241, 0.3);
+  backdrop-filter: blur(35px);
+  z-index: 9998;
+  animation: overlayFadeIn 0.3s ease-out;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(35px);
+  }
+}
+
+/* 🆕 MODAL CONTAINER */
+.infoModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0) scale(1);
+  }
+}
+
+/* 🆕 MODAL CONTENT - Stile glassmorphism come settings */
+.infoModalContent {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(35px) saturate(150%);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+/* 🆕 HEADER MODAL */
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modalTitleSection {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.modalIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(59, 130, 246, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #1e40af;
+  flex-shrink: 0;
+}
+
+.modalTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.25rem 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
+}
+
+.modalSubtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #6b7280;
+}
+
+.closeButton:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: #dc2626;
+}
+
+/* 🆕 SEZIONE RIASSUNTO */
+.summarySection {
+  margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quickInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quickInfoItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.875rem;
+}
+
+.quickInfoIcon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* 🆕 LINEA TRATTEGGIATA */
+.divider {
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    transparent,
+    transparent 5px,
+    rgba(0, 0, 0, 0.2) 5px,
+    rgba(0, 0, 0, 0.2) 10px
+  );
+  margin: 1.5rem 0;
+}
+
+/* 🆕 SEZIONE DETTAGLIATA */
+.detailedSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.gridItems {
+  display: grid;
+}
+
+/* 🆕 ITEM GUIDA - Stile simile ai menuItem */
+.guideItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.guideItem:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.guideIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #374151;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.guidCookie {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 2rem; */
+  height: 2rem;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #374151;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  gap: 8px;
+}
+
+.guideContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.guideTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.guideDescription {
+  font-size: 0.8rem;
+  color: #4b5563;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* 🆕 ESEMPI RICOMPENSE */
+.rewardExamples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.rewardExample {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.symbolsExample {
+  font-size: 1rem;
+  font-weight: bold;
+  min-width: 4rem;
+  text-align: center;
+}
+
+.xpAmount {
+  font-weight: 600;
+  color: #d8a32f;
+  min-width: 3rem;
+}
+
+.rewardLabel {
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+/* 🆕 INDICATORE FALLIMENTI */
+.failureIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+}
+
+.failureDots {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.failureDot {
+  color: #ef4444;
+  font-size: 0.75rem;
+}
+
+/* 🆕 LISTA LIMITAZIONI */
+.limitationsList {
+  margin: 0.75rem 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.limitationsList li {
+  font-size: 0.8rem;
+  color: #4b5563;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* 🆕 TIP FINALE */
+.tipSection {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.tipIcon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.tipContent {
+  font-size: 0.8rem;
+  color: #065f46;
+  line-height: 1.4;
+}
+
+/* 🆕 RESPONSIVE */
+/* @media (max-width: 640px) {
+  .infoModal {
+    width: 95%;
+    max-height: 85vh;
+  }
+
+  .infoModalContent {
+    padding: 1rem;
+  }
+
+  .modalHeader {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .modalTitle {
+    font-size: 1.1rem;
+  }
+
+  .guideItem {
+    padding: 0.75rem;
+  }
+
+  .rewardExample {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+} */
+
+/* 🆕 DARK MODE */
+@media (prefers-color-scheme: dark) {
+  .infoModalContent {
+    background: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .modalTitle,
+  .sectionTitle,
+  .guideTitle {
+    color: rgb(243, 244, 246);
+  }
+
+  .modalSubtitle,
+  .guideDescription {
+    color: rgb(156, 163, 175);
+  }
+
+  .quickInfoItem,
+  .guideItem {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .guideIcon,
+  .modalIcon {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgb(229, 231, 235);
+  }
+}

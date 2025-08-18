@@ -1,0 +1,684 @@
+/* SkillsSection.module.css - Minimal Design */
+/* Following ShareModal structure for consistency */
+
+.container {
+  width: 355px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 20px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 16px 20px; */
+  margin-top: 20px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin: 0;
+}
+
+.addButton {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.addButton:hover {
+  background-color: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+}
+
+.addButton:active {
+  transform: scale(0.95);
+}
+/* Content */
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Skill Item */
+.skillItem {
+  /* border-bottom: 1px solid #f0f0f0; */
+  transition: all 0.3s ease;
+}
+
+.skillCard {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 15px;
+  color: #1a1a1a;
+  transition: background-color 0.2s ease;
+  text-align: left;
+  margin: 8px 0;
+}
+
+.skillCard:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+}
+
+.skillInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.skillIcon {
+  font-size: 18px;
+  color: #10363a;
+  flex-shrink: 0;
+}
+
+.skillName {
+  font-weight: 600;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.skillMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.skillGems {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #10363a;
+}
+
+.gemsCount {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.expandIcon {
+  color: #2d2d2d;
+  transition: transform 0.2s ease;
+}
+
+.expandIcon.expanded {
+  transform: rotate(180deg);
+}
+
+/* Expanded Content */
+.skillExpanded {
+  padding: 0 20px 20px 20px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Description Box - same as ShareModal */
+.descriptionBox {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(35px) saturate(150%);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 1rem;
+}
+
+.descriptionBoxHoverable {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.descriptionBoxHoverable:hover {
+  border: 1px solid #a15c3a;
+  /* box-shadow: 0 0 8px rgba(56, 189, 248, 0.4), 0 0 16px rgba(56, 189, 248, 0.3),
+    0 0 24px rgba(56, 189, 248, 0.2), inset 0 0 12px rgba(56, 189, 248, 0.08); */
+  /* background: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.06) 0%,
+    rgba(56, 189, 248, 0.02) 50%,
+    rgba(56, 189, 248, 0.06) 100%
+  ); */
+  /* transform: translateY(-1px); */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.descriptionText {
+  font-size: 0.875rem;
+  color: #1f2937;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.descriptionClickable {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  margin: -8px;
+}
+
+.descriptionClickable:hover {
+  /* background-color: rgba(255, 255, 255, 0.1); */
+}
+
+.descriptionPlaceholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Edit Description */
+.editDescriptionContainer {
+  margin-bottom: 1rem;
+}
+
+.editDescriptionTextarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  color: #1a1a1a;
+  box-sizing: border-box;
+}
+
+/* .editDescriptionTextarea:focus {
+  outline: 2px solid #d0b0b0;
+  outline-offset: 2px;
+  border-color: #d0b0b0;
+  background: rgba(255, 255, 255, 0.2);
+} */
+
+/* .editActions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 12px;
+} */
+
+.editCancelButton,
+.editSaveButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.editCancelButton {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #333;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.editCancelButton:hover {
+  background-color: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+}
+
+.editSaveButton {
+  background-color: #22c55e;
+  color: #ffffff;
+}
+
+.editSaveButton:hover:not(:disabled) {
+  background-color: #16a34a;
+  transform: translateY(-1px);
+}
+
+.editSaveButton:disabled {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Divider - same as ShareModal */
+.divider {
+  border-top: 2px dashed rgba(248, 248, 248, 0.6);
+  /* margin: 1rem 0; */
+}
+
+/* Footer - same as ShareModal */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0.3rem 0 0.3rem;
+  /* background: rgba(255, 255, 255, 0.2); */
+  /* backdrop-filter: blur(8px); */
+  /* border-radius: 1rem; */
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  /* margin-bottom: 1rem; */
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fed7aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarEmoji {
+  font-size: 1.25rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.userName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
+}
+
+.skillGemsDisplay {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.375rem 0.75rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.skillGemsDisplay .gemsIcon {
+  font-size: 1.125rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.skillGemsDisplay .gemsCount {
+  font-weight: 700;
+  color: #111827;
+  font-size: 0.875rem;
+}
+
+/* Actions - same as ShareModal */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.viewActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.cancelButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(107, 114, 128, 0.8);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  flex: 1;
+  justify-content: center;
+}
+
+.cancelButton:hover {
+  background: rgba(75, 85, 99, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 0px 20px 20px 20px;
+  color: #404854;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.emptyTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1a1a1a;
+}
+
+.emptyDescription {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: #1a1a1a;
+    border-bottom-color: #333;
+  }
+
+  .skillCard {
+    color: #ffffff;
+  }
+
+  .skillCard:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .title {
+    color: #ffffff;
+  }
+
+  .skillName {
+    color: #ffffff;
+  }
+
+  .skillMeta,
+  .skillGems {
+    color: #e8e7e7;
+  }
+
+  .gemsCount,
+  .userName {
+    color: #ffffff;
+  }
+
+  .addButton,
+  .editCancelButton {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .addButton:hover,
+  .editCancelButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .descriptionBox {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .descriptionText {
+    color: #e5e7eb;
+  }
+
+  .editDescriptionTextarea {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+  }
+
+  .footer {
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  .descriptionClickable {
+    /* color: #ffffff; */
+  }
+
+  .descriptionPlaceholder {
+    color: #9ca3af;
+  }
+
+  .emptyTitle {
+    color: #ffffff;
+  }
+
+  .skillItem {
+    border-bottom-color: #333;
+  }
+
+  .expandIcon {
+    color: #ffffff;
+  }
+}
+
+.skillExpanded {
+  /* padding: 0 20px 0px 20px; */
+  padding: 5px;
+  animation: slideDown 0.3s ease;
+  border-bottom: none; /* Rimuovi border separato */
+}
+
+.skillItem.expanded {
+  /* border: 1px solid rgba(255, 255, 255, 0.8); */
+  border-radius: 12px;
+  /* border-bottom: 2px solid rgba(255, 255, 255, 0.8); */
+  /* box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); */
+  /* background: rgba(255, 255, 255, 0.05); */
+  background: #d0b0b0;
+  margin: 8px 0;
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  color: rgb(17, 24, 39);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.actionButton:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.actionButton:active {
+  transform: translateY(0);
+}
+
+.actionButtonEdit {
+  background-color: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.4);
+  color: rgb(15, 118, 110);
+  flex: 1;
+  min-width: 120px;
+}
+
+.actionButtonEdit:hover {
+  background-color: rgba(34, 197, 94, 0.3);
+  border-color: rgba(34, 197, 94, 0.6);
+  color: rgb(6, 95, 70);
+}
+
+/* NUOVO: Stili per il bottone Delete */
+.actionButtonDelete {
+  background-color: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: rgb(153, 27, 27);
+  /* flex: 1; */
+  /* min-width: 120px; */
+  margin-right: auto;
+  flex-grow: 1;
+}
+
+.actionButtonDelete:hover {
+  background-color: rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.6);
+  color: rgb(127, 29, 29);
+}
+
+.actionButtonSecondary {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgb(55, 65, 81);
+  padding: 0.5rem;
+  min-width: 40px;
+}
+
+.actionButtonSecondary:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(17, 24, 39);
+}
+
+/* NUOVO: Spacer per allineare le icone a destra in viewer mode */
+.actionSpacer {
+  flex: 1;
+}
+
+/* Edit Actions Container */
+.editActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  /* justify-content: flex-end; */
+  justify-content: flex-end;
+}
+
+/* Base style per entrambi i pulsanti */
+.editCancelButton,
+.editSaveButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  min-width: 80px;
+}
+
+/* Stile specifico per il pulsante Annulla */
+.editCancelButton {
+  background-color: rgba(107, 114, 128, 0.2);
+  border-color: rgba(107, 114, 128, 0.4);
+  color: rgb(55, 65, 81);
+}
+
+.editCancelButton:hover {
+  background-color: rgba(107, 114, 128, 0.3);
+  border-color: rgba(107, 114, 128, 0.6);
+  color: rgb(31, 41, 55);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Stile specifico per il pulsante Salva */
+.editSaveButton {
+  background-color: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.4);
+  color: rgb(15, 118, 110);
+}
+
+.editSaveButton:hover:not(:disabled) {
+  background-color: rgba(34, 197, 94, 0.3);
+  border-color: rgba(34, 197, 94, 0.6);
+  color: rgb(6, 95, 70);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Stato disabilitato per il pulsante Salva */
+.editSaveButton:disabled {
+  background-color: rgba(156, 163, 175, 0.2);
+  border-color: rgba(156, 163, 175, 0.3);
+  color: rgb(156, 163, 175);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Effetto active per entrambi i pulsanti */
+.editCancelButton:active,
+.editSaveButton:active:not(:disabled) {
+  transform: translateY(0);
+}

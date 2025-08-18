@@ -1,0 +1,61 @@
+/* =============================================
+   5. Stili aggiuntivi per integrazione GameHUD
+   ============================================= */
+
+/* Se hai bisogno di stili specifici per il GameHUD */
+.gameHudNotifications {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Dark mode support (se hai dark mode) */
+@media (prefers-color-scheme: dark) {
+  .dropdown {
+    background: #1f2937;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .header {
+    background: #111827;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .header h4 {
+    color: #f9fafb;
+  }
+
+  .notificationTitle {
+    color: #f9fafb;
+  }
+
+  .notificationMessage {
+    color: #d1d5db;
+  }
+
+  .notificationTime {
+    color: #9ca3af;
+  }
+
+  .notificationItem:hover {
+    background-color: #374151;
+  }
+
+  .notificationItem.unread {
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+
+  .notificationIcon {
+    background: #374151;
+    color: #d1d5db;
+  }
+
+  .bellButton {
+    color: #d1d5db;
+  }
+
+  .bellButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f9fafb;
+  }
+}

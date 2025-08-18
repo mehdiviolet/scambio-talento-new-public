@@ -1,0 +1,400 @@
+/* ExperiencesSection.module.css - Minimal Design */
+/* Following SkillsSection structure for consistency */
+/* Aggiungi nel :root se mancanti */
+:root {
+  --border-radius: 0.75rem;
+  --border-radius-large: 1.5rem;
+  --transition-normal: 0.3s ease;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-bg-light: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --backdrop-blur: blur(20px);
+  --gradient-ocean: linear-gradient(135deg, #3b82f6 0%, #d28117 100%);
+  --text-secondary-light: rgba(255, 255, 255, 0.9);
+  --text-primary-light: #ffffff;
+  --shadow-colored: 0 4px 15px rgba(59, 130, 246, 0.3);
+  --surface-glass: rgba(255, 255, 255, 0.1);
+}
+.container {
+  width: 355px;
+  overflow: hidden;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; */
+  position: relative;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 20px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 16px 20px; */
+  /* flex-direction: column; */
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.experiencesIcon {
+  font-size: 18px;
+}
+
+.addButton {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.addButton:hover {
+  background-color: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+}
+
+.addButton:active {
+  transform: scale(0.95);
+}
+
+.disabledMessage {
+  font-size: 12px;
+  color: #9ca3af;
+  font-style: italic;
+  padding: 8px 12px;
+  background: rgba(156, 163, 175, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(156, 163, 175, 0.2);
+}
+
+/* Content */
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0px 20px 0px;
+}
+
+/* Experiences Grid */
+.experiencesGrid {
+  display: grid;
+  /* gap: 1.5rem; */
+  /* gap: 0.5rem; */
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 0px 20px 20px 20px;
+  color: #404854;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.emptyTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1a1a1a;
+}
+
+.emptyDescription {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: #1a1a1a;
+    border-bottom-color: #333;
+  }
+
+  .title {
+    color: #ffffff;
+  }
+
+  .addButton {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .addButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .disabledMessage {
+    color: #6b7280;
+    background: rgba(156, 163, 175, 0.05);
+    border-color: rgba(156, 163, 175, 0.1);
+  }
+
+  .emptyTitle {
+    color: #ffffff;
+  }
+
+  .emptyDescription {
+    color: #9ca3af;
+  }
+}
+
+.filterButtons {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.filterButton {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.filterButton:hover {
+  background: #f0f0f0;
+}
+
+.filterButton.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* ExperiencesSection.module.css - Aggiungi questi stili */
+
+/* 🆕 SEZIONE MOSTRA DI PIÙ */
+.showMoreSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* 🆕 BOTTONE MOSTRA DI PIÙ */
+.showMoreButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  min-width: 200px;
+  justify-content: center;
+}
+
+.showMoreButton:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.showMoreButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* 🆕 CONTATORE CARTE */
+.cardCount {
+  font-size: 12px;
+  opacity: 0.8;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+/* 🆕 BOTTONE MOSTRA MENO */
+.showLessButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: transparent;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.showLessButton:hover {
+  background: #f9fafb;
+  color: #374151;
+  border-color: #9ca3af;
+}
+
+/* 🆕 RESPONSIVE */
+@media (max-width: 768px) {
+  .showMoreSection {
+    margin-top: 16px;
+    padding: 16px;
+  }
+
+  .showMoreButton {
+    padding: 10px 20px;
+    font-size: 13px;
+    min-width: 180px;
+  }
+
+  .showLessButton {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+/* 🆕 ANIMAZIONE FADE-IN per nuove carte */
+.experiencesGrid {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ********************* */
+
+/* 🆕 HEADER MIGLIORATO */
+/* .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+  border-bottom: 1px solid var(--glass-border);
+  margin-bottom: 0;
+} */
+
+/* 🆕 FILTRI CON GLASSMORPHISM */
+.filterItems {
+  display: flex;
+  gap: 8px;
+  /* background: rgba(255, 255, 255, 0.1); */
+  padding: 6px;
+  border-radius: var(--border-radius);
+  /* backdrop-filter: blur(10px); */
+  /* border: 1px solid var(--glass-border); */
+  /* margin: 0 auto; */
+  justify-content: center;
+  margin: 14px 0 12px 0;
+}
+
+.filterButton {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary-light);
+  transition: var(--transition-normal);
+  white-space: nowrap;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+}
+
+.filterButton:hover {
+  background: var(--glass-bg-light);
+  border-color: var(--glass-border);
+  transform: translateY(-1px);
+}
+
+.filterButton.active {
+  background: var(--gradient-ocean);
+  color: var(--text-primary-light);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-colored);
+  transform: translateY(-2px);
+}
+
+/* 🆕 CONTENUTO CON BACKGROUND COERENTE */
+/* .content {
+  background: var(--surface-glass);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: 0 0 var(--border-radius-large) var(--border-radius-large);
+  padding: 20px;
+  border: 1px solid var(--glass-border);
+  border-top: none;
+} */
+
+/* 🆕 BOTTONE MOSTRA ALTRE - STILE COERENTE */
+.showMoreButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--gradient-ocean);
+  color: var(--text-primary-light);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  backdrop-filter: var(--backdrop-blur);
+  box-shadow: var(--shadow-colored);
+  min-width: 200px;
+  justify-content: center;
+}
+
+.showMoreButton:hover {
+  background: var(--gradient-sky);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+/* 🆕 CONTAINER PRINCIPALE */
+/* .container {
+  background: transparent;
+  border-radius: var(--border-radius-large);
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 24px;
+} */

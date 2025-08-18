@@ -1,0 +1,222 @@
+/* DayModeToggle.module.css - Menu Verticale */
+
+.toggleContainer {
+  display: flex;
+  flex-direction: column; /* Menu verticale */
+  position: fixed;
+  top: 30px;
+  left: 60px;
+  z-index: 9999;
+  gap: 2px; /* Gap ridotto per menu compatto */
+
+  /* Glassmorphism come i pannelli principali */
+  background: var(--glass-bg);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--glass-border);
+  padding: 8px;
+
+  /* Rimuovo l'ombra come richiesto */
+  /* box-shadow: var(--shadow-strong); */
+
+  /* Transizioni smooth */
+  transition: var(--transition-normal);
+  min-width: 160px; /* Larghezza fissa per menu verticale */
+}
+
+.toggleContainer:hover {
+  background: var(--glass-bg-light);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: var(--shadow-colored);
+}
+
+.toggleButton {
+  padding: 8px 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-small);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  width: 100%; /* Occupa tutta la larghezza del container */
+  text-align: left; /* Allineamento a sinistra per menu verticale */
+
+  /* Glassmorphism per i pulsanti */
+  background: transparent;
+  backdrop-filter: var(--backdrop-blur);
+  color: var(--text-secondary);
+
+  /* Nessuna ombra come richiesto */
+  position: relative;
+}
+
+.toggleButton:hover {
+  background: var(--glass-bg-light);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--text-primary);
+}
+
+.toggleButton.active {
+  background: var(--gradient-azure); /* Gradiente per stato attivo */
+  color: var(--text-primary);
+  border-color: rgba(34, 211, 238, 0.6);
+  font-weight: 600;
+
+  /* Effetto glow per indicare selezione */
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
+}
+
+/* Effetto click - animazione di feedback */
+.toggleButton:active {
+  transform: scale(0.98);
+  background: var(--gradient-ocean);
+}
+
+/* Indicatore visivo per il pulsante corrente */
+.toggleButton.active::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--gradient-azure);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Indicatori giorni speciali */
+.dayButton.current {
+  position: relative;
+}
+
+.dayButton.current::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 8px;
+  height: 8px;
+  background: var(--gradient-success);
+  border-radius: 50%;
+  border: 2px solid var(--text-primary);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.dayButton.completed {
+  background: var(--gradient-success);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: var(--text-primary);
+}
+
+.dayButton.completed::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .toggleContainer {
+    left: 10px;
+    top: 10px;
+    padding: 6px;
+    gap: 1px;
+    min-width: 120px;
+  }
+
+  .toggleButton {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .statusIndicator {
+    padding: 4px 6px;
+    font-size: 9px;
+  }
+}
+
+/* Varianti tematiche */
+.toggleContainer.morning {
+  background: linear-gradient(
+    135deg,
+    rgba(251, 191, 36, 0.1) 0%,
+    rgba(249, 115, 22, 0.1) 100%
+  );
+}
+
+.toggleContainer.evening {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(168, 85, 247, 0.1) 100%
+  );
+}
+/* Rimuovi .toggleButton.active generico e aggiungi questi specifici */
+
+/* Giorno 1 - Verde (inizio) */
+.day1Button.active {
+  background: var(--gradient-success) !important;
+  color: var(--text-primary);
+  border-color: rgba(16, 185, 129, 0.6);
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.day1Button.active::before {
+  background: var(--gradient-success);
+}
+
+/* Giorno 8 - Blu (intermedio) */
+.day8Button.active {
+  background: var(--gradient-ocean) !important;
+  color: var(--text-primary);
+  border-color: rgba(59, 130, 246, 0.6);
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+}
+
+.day8Button.active::before {
+  background: var(--gradient-ocean);
+}
+
+/* Giorno 19 - Arancione (avanzato) */
+.day19Button.active {
+  background: var(--gradient-warning) !important;
+  color: var(--text-primary);
+  border-color: rgba(251, 191, 36, 0.6);
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+}
+
+.day19Button.active::before {
+  background: var(--gradient-warning);
+}
+
+/* Mantieni le regole inactive e hover esistenti */
+.toggleButton.inactive {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+}
+
+.toggleButton.inactive:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  transform: none !important;
+}
+
+/* Indicatore laterale generico */
+.toggleButton.active::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+}

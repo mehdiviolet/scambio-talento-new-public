@@ -1,0 +1,573 @@
+/* Glassmorphism Modal Styles */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(99, 102, 241, 0.3);
+  backdrop-filter: blur(35px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+  flex-direction: column;
+}
+
+.modal {
+  background: #e9be31;
+  backdrop-filter: blur(20px) saturate(150%);
+  border-radius: 2rem;
+  max-width: 28rem;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  overflow-y: auto;
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Webkit browsers (Chrome, Safari, Edge) */
+  -webkit-scrollbar: none;
+  /* Firefox */
+  scrollbar-width: none;
+  /* IE */
+  -ms-overflow-style: none;
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* gap: 5px; */
+}
+
+.header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  text-align: center;
+  letter-spacing: -0.025em;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  margin: 0;
+}
+
+.closeButton {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.closeButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: rgb(55, 65, 81);
+}
+
+.closeButton:hover svg {
+  color: rgb(17, 24, 39);
+}
+
+.content {
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  max-height: calc(90vh - 120px);
+  overflow-y: auto;
+}
+
+/* Styling della scrollbar per glassmorphism */
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.centerAlign {
+  text-align: center;
+}
+
+.wheelContainer {
+  position: relative;
+  width: 100%;
+  max-width: 20rem;
+  margin: 0 auto 2rem;
+}
+
+.selectionHighlight {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  border-radius: 1rem;
+  transform: translateY(-50%);
+  z-index: 10;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.scrollContainer {
+  height: 20rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.scrollContent {
+  transition: transform 0.5s ease-out;
+  padding: 8rem 0;
+}
+
+.skillItem {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.skillItem.selected {
+  color: rgb(17, 24, 39);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.skillItem:not(.selected) {
+  color: rgb(55, 65, 81);
+}
+
+.skillContent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.skillIcon {
+  font-size: 1.875rem;
+  transition: all 0.5s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.skillItem.selected .skillIcon {
+  transform: scale(1.1);
+}
+
+.skillName {
+  font-weight: 500;
+  font-size: 1.125rem;
+  transition: all 0.5s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.skillItem.selected .skillName {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.controlButton {
+  padding: 0.2rem 0.5rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: rgb(31, 41, 55);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controlButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.primaryButton {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  color: rgb(17, 24, 39);
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.primaryButton:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+.primaryButton:active {
+  transform: scale(0.98);
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stepHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.iconContainer {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1rem;
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.iconContainer span {
+  font-size: 2.25rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.stepTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  margin: 0;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(17, 24, 39);
+  display: block;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  color: rgb(17, 24, 39);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: rgb(75, 85, 99);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.textarea {
+  resize: none;
+}
+
+.suggestions {
+  display: flex;
+  /* flex-wrap: wrap; */
+  gap: 0.5rem;
+}
+
+.suggestionButton {
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: rgb(31, 41, 55);
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.suggestionButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.continueButton {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  border: 1px solid;
+}
+
+.continueButton.enabled {
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  color: rgb(17, 24, 39);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.continueButton.enabled:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+.continueButton.disabled {
+  background-color: rgba(107, 114, 128, 0.2);
+  color: rgb(107, 114, 128);
+  border-color: rgba(156, 163, 175, 0.3);
+  cursor: not-allowed;
+}
+
+.configGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.editNavigation {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 8px;
+  /* flex-direction: column; */
+}
+.navButton:first-child {
+  flex: 1;
+}
+
+.navButtons {
+  /* border: 1px solid rgb(21, 42, 226); */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.navButton {
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgb(17, 24, 39);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.previewCard {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.previewPadding {
+  padding: 1rem;
+}
+
+.previewHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.previewIconContainer {
+  width: 3rem;
+  height: 3rem;
+  margin: 0;
+}
+
+.previewIconLarge {
+  font-size: 1.5rem;
+}
+
+.previewTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+}
+
+.previewDescription {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: rgb(75, 85, 99);
+}
+
+.configSummary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: rgb(31, 41, 55);
+}
+
+.costHighlight {
+  color: rgb(34, 197, 94);
+  font-weight: 700;
+}
+
+.userPreview {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  /* padding: 0.5rem 1.25rem; */
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.userPreviewContent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  justify-content: space-between;
+}
+
+.userAvatar {
+  width: 3rem;
+  height: 3rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.userAvatar span {
+  font-size: 1.25rem;
+}
+
+.userInfo {
+  flex: 1;
+}
+
+.userName {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: rgb(17, 24, 39);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.userStats {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: rgb(55, 65, 81);
+  margin-top: 0.25rem;
+}
+
+.userStats span {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.userPreviewIcon {
+  font-size: 1.875rem;
+  opacity: 0.6;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.createButton {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border: 1px solid;
+}
+
+.createButton.enabled {
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  color: rgb(17, 24, 39);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.createButton.enabled:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+.createButton.enabled:active {
+  transform: scale(0.98);
+}
+
+.createButton.disabled {
+  background-color: rgba(107, 114, 128, 0.2);
+  color: rgb(107, 114, 128);
+  border-color: rgba(156, 163, 175, 0.3);
+  cursor: not-allowed;
+}

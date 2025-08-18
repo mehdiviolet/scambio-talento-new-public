@@ -1,0 +1,133 @@
+/* StatusFilter.module.css - Stili aggiornati con design MyExplorePage */
+
+.me {
+  /* border: 1px solid rgba(255, 255, 255, 0.3); */
+  /* width: 100%; */
+}
+.filterButtons {
+  display: flex;
+  /* gap: 12px; */
+  /* gap: 4px; */
+  margin-left: auto;
+  /* background: rgba(255, 255, 255, 0.05); */
+  /* padding: 8px; */
+  border-radius: 12px;
+  /* backdrop-filter: blur(10px); */
+  /* border: 1px solid rgba(255, 255, 255, 0.1); */
+  /* flex-wrap: wrap; */
+  justify-content: space-evenly;
+  margin-top: 12px;
+}
+
+.filterButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 8px 14px; */
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.filterButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.filterButton.active {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  color: white;
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+.filterLabel {
+  font-weight: inherit;
+}
+
+.filterCount {
+  font-size: 10px;
+  opacity: 0.8;
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+/* Variante con glassmorphism (già applicata) */
+.filterButtons.glass {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px;
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  justify-content: center;
+  margin: 14px 0 12px 0;
+}
+
+.filterButtons.glass .filterButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.filterButtons.glass .filterButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.filterButtons.glass .filterButton.active {
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  color: #ffffff;
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Stati speciali */
+.filterButton.rejected {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  color: white;
+  border-color: rgba(220, 38, 38, 0.5);
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+}
+
+.filterButton.selected {
+  background: linear-gradient(135deg, #22d3ee, #06b6d4);
+  color: white;
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
+}
+
+.filterButton.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .filterButtons {
+    gap: 8px;
+    padding: 6px;
+  }
+
+  .filterButton {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .filterCount {
+    font-size: 9px;
+  }
+}

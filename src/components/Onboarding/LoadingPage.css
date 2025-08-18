@@ -1,0 +1,373 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+  --primary-gradient: linear-gradient(
+    135deg,
+    #a855f7 0%,
+    #ec4899 50%,
+    #3b82f6 100%
+  );
+  --overlay-gradient-1: linear-gradient(
+    45deg,
+    #22d3ee 0%,
+    #a855f7 50%,
+    #ec4899 100%
+  );
+  --overlay-gradient-2: linear-gradient(
+    225deg,
+    #60a5fa 0%,
+    #6366f1 50%,
+    #a855f7 100%
+  );
+  --text-color: #ffffff;
+
+  /* Variabili per il cerchio di progresso */
+  --circle-size: 120px;
+  --circle-border-width: 3px;
+  --circle-bg-opacity: 0.05;
+  --circle-border-opacity: 0.2;
+
+  /* Colori per l'effetto schizzi */
+  --splash-primary: rgba(255, 255, 255, 0.9);
+  --splash-secondary: rgba(255, 255, 255, 0.7);
+  --splash-tertiary: rgba(255, 255, 255, 0.5);
+}
+
+/* ===== ANIMAZIONI ===== */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  53%,
+  80%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%,
+  43% {
+    transform: translate3d(0, -15px, 0);
+  }
+  70% {
+    transform: translate3d(0, -8px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+/* Animazione per l'effetto schizzi */
+@keyframes splash-fill {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+  }
+  100% {
+    clip-path: circle(50% at 50% 50%);
+  }
+}
+
+@keyframes splash-ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* ===== LAYOUT PRINCIPALE ===== */
+.loading-screen {
+  min-height: 100vh;
+  background: var(--primary-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* Overlay animati */
+.loading-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-gradient-1);
+  animation: pulse 4s ease-in-out infinite;
+  opacity: 0.3;
+}
+
+.loading-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-gradient-2);
+  animation: pulse 4s ease-in-out infinite;
+  animation-delay: 2s;
+  opacity: 0.2;
+}
+
+/* ===== CARTA PRINCIPALE ===== */
+.loading-card {
+  position: relative;
+  max-width: 32rem;
+  width: 100%;
+  height: 90vh;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  /* animation: float 6s ease-in-out infinite, fadeInScale 0.8s ease-out; */
+  overflow: hidden;
+  transition: all 0.8s ease;
+}
+
+/* Effetto shimmer sulla carta */
+.loading-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  border-radius: 2rem;
+}
+
+/* ===== CONTENUTO DELLA CARTA ===== */
+.loading-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2rem;
+}
+
+/* ===== CERCHIO DI PROGRESSO ===== */
+.progress-container {
+  position: relative;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cerchio di sfondo */
+.progress-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: var(--circle-border-width) solid
+    rgba(255, 255, 255, var(--circle-border-opacity));
+  background: rgba(255, 255, 255, var(--circle-bg-opacity));
+  backdrop-filter: blur(10px);
+}
+
+/* Cerchio di progresso con effetto schizzi */
+.progress-fill {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.progress-fill::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(
+      circle at 20% 30%,
+      var(--splash-primary) 8%,
+      transparent 8%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      var(--splash-secondary) 6%,
+      transparent 6%
+    ),
+    radial-gradient(
+      circle at 60% 70%,
+      var(--splash-primary) 10%,
+      transparent 10%
+    ),
+    radial-gradient(
+      circle at 30% 80%,
+      var(--splash-tertiary) 7%,
+      transparent 7%
+    ),
+    radial-gradient(
+      circle at 90% 60%,
+      var(--splash-secondary) 5%,
+      transparent 5%
+    ),
+    radial-gradient(circle at 10% 60%, var(--splash-primary) 9%, transparent 9%),
+    radial-gradient(
+      circle at 70% 40%,
+      var(--splash-tertiary) 8%,
+      transparent 8%
+    ),
+    radial-gradient(
+      circle at 40% 10%,
+      var(--splash-secondary) 6%,
+      transparent 6%
+    ),
+    linear-gradient(45deg, var(--splash-primary), var(--splash-secondary));
+
+  /* Maschera circolare che si riempie in base al progresso */
+  mask: conic-gradient(
+    from 0deg,
+    white 0%,
+    white var(--progress, 0%),
+    transparent var(--progress, 0%)
+  );
+  -webkit-mask: conic-gradient(
+    from 0deg,
+    white 0%,
+    white var(--progress, 0%),
+    transparent var(--progress, 0%)
+  );
+
+  /* Maschera interna per creare l'effetto anello */
+  mask-composite: subtract;
+  -webkit-mask-composite: subtract;
+
+  /* Aggiungi una seconda maschera per l'anello */
+  mask: conic-gradient(
+      from 0deg,
+      white 0%,
+      white var(--progress, 0%),
+      transparent var(--progress, 0%)
+    ),
+    radial-gradient(
+      farthest-side,
+      transparent calc(50% - 12px),
+      white calc(50% - 12px)
+    );
+  -webkit-mask: conic-gradient(
+      from 0deg,
+      white 0%,
+      white var(--progress, 0%),
+      transparent var(--progress, 0%)
+    ),
+    radial-gradient(
+      farthest-side,
+      transparent calc(50% - 12px),
+      white calc(50% - 12px)
+    );
+
+  mask-composite: intersect;
+  -webkit-mask-composite: intersect;
+
+  transition: all 0.3s ease;
+  animation: splash-ripple 2s ease-in-out infinite;
+}
+
+/* Testo della percentuale */
+.progress-text {
+  position: relative;
+  z-index: 3;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== TESTO E ELEMENTI ===== */
+.loading-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Dots di caricamento */
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 0.5rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--text-color);
+  border-radius: 50%;
+  animation: bounce 1.4s ease-in-out infinite;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}

@@ -1,0 +1,186 @@
+/* SettingsDropdown.module.css - Following glassmorphism design */
+
+/* Aggiungi PRIMA del .dropdown esistente */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(99, 102, 241, 0.3);
+  backdrop-filter: blur(35px);
+  z-index: 9998;
+  animation: overlayFadeIn 0.3s ease-out;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(35px);
+  }
+}
+
+.dropdown {
+  /* Il tuo CSS esistente */
+  z-index: 9999; /* Assicurati che sia sopra l'overlay */
+}
+.dropdown {
+  position: fixed; /* invece di absolute */
+  /* top: auto; */
+  top: 270px;
+  right: 16px;
+  bottom: 80px; /* sopra la bottom navigation */
+  z-index: 9999;
+  min-width: 280px;
+}
+
+@keyframes dropdownAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dropdownContent {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(35px) saturate(150%);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+.menuItem {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  background: none;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  margin-bottom: 0.25rem;
+}
+
+.menuItem:last-child {
+  margin-bottom: 0;
+}
+
+.menuItem:hover {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.menuItem.danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.menuIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgb(55, 65, 81);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.menuItem.danger .menuIcon {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: rgb(153, 27, 27);
+}
+
+.menuText {
+  flex: 1;
+  min-width: 0;
+}
+
+.menuLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(17, 24, 39);
+  margin-bottom: 0.125rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
+}
+
+.menuItem.danger .menuLabel {
+  color: rgb(153, 27, 27);
+}
+
+.menuDescription {
+  font-size: 0.75rem;
+  color: rgb(75, 85, 99);
+  line-height: 1.3;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
+}
+
+.menuItem.danger .menuDescription {
+  color: rgb(185, 28, 28);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .dropdown {
+    min-width: 260px;
+    right: -8px;
+  }
+
+  .menuItem {
+    padding: 0.75rem;
+  }
+
+  .menuLabel {
+    font-size: 0.8rem;
+  }
+
+  .menuDescription {
+    font-size: 0.7rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .dropdownContent {
+    background: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .menuItem:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .menuIcon {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgb(229, 231, 235);
+  }
+
+  .menuLabel {
+    color: rgb(243, 244, 246);
+  }
+
+  .menuDescription {
+    color: rgb(156, 163, 175);
+  }
+}

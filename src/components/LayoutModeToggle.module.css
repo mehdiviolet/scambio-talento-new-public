@@ -1,0 +1,92 @@
+/* LayoutModeToggle.module.css */
+
+.toggleContainer {
+  position: fixed;
+  top: 30%;
+  left: 60px;
+  transform: translateY(-50%);
+  z-index: 9999;
+
+  /* Glassmorphism come gli altri toggle */
+  background: var(--glass-bg);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--glass-border);
+  padding: 8px;
+
+  /* Transizioni smooth */
+  transition: var(--transition-normal);
+}
+
+.toggleContainer:hover {
+  background: var(--glass-bg-light);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.toggleButton {
+  padding: 10px 14px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-small);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  min-width: 80px;
+  text-align: center;
+
+  /* Glassmorphism per i pulsanti */
+  background: transparent;
+  backdrop-filter: var(--backdrop-blur);
+  color: var(--text-secondary);
+
+  position: relative;
+}
+
+.toggleButton:hover {
+  background: var(--glass-bg-light);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--text-primary);
+}
+
+/* Single Mode - Viola */
+.singleMode {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%) !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(139, 92, 246, 0.6) !important;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+}
+
+.singleMode:hover {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+}
+
+/* Dual Mode - Indaco */
+.dualMode {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(99, 102, 241, 0.6) !important;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+}
+
+.dualMode:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
+}
+
+/* Effetto click */
+.toggleButton:active {
+  transform: scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .toggleContainer {
+    left: 10px;
+    padding: 6px;
+  }
+
+  .toggleButton {
+    padding: 8px 10px;
+    font-size: 11px;
+    min-width: 70px;
+  }
+}

@@ -1,0 +1,430 @@
+/* ViewSkillModal.module.css */
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --modal-primary-blue: #6366f1;
+  --modal-accent-blue: #3b82f6;
+  --modal-success-green: #22c55e;
+  --modal-error-red: #ef4444;
+  --modal-cancel-gray: #6b7280;
+
+  --modal-glass-bg: rgba(255, 255, 255, 0.25);
+  --modal-glass-bg-hover: rgba(255, 255, 255, 0.35);
+  --modal-glass-border: rgba(255, 255, 255, 0.3);
+  --modal-description-bg: rgba(255, 255, 255, 0.7);
+
+  --modal-text-primary: #111827;
+  --modal-text-secondary: #1f2937;
+  --modal-text-white: #ffffff;
+  --modal-text-muted: #6b7280;
+
+  --modal-shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --modal-shadow-medium: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --modal-shadow-strong: 0 25px 50px rgba(0, 0, 0, 0.25);
+
+  --modal-blur-light: blur(15px);
+  --modal-blur-strong: blur(35px);
+
+  --modal-transition: all 0.3s ease;
+  --modal-transition-fast: all 0.2s ease;
+}
+
+/* ===== OVERLAY ===== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(99, 102, 241, 0.3);
+  backdrop-filter: var(--modal-blur-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+  animation: overlayFadeIn 0.3s ease-out;
+}
+
+/* ===== CONTAINER PRINCIPALE ===== */
+.container {
+  background: var(--modal-primary-blue);
+  backdrop-filter: blur(20px) saturate(150%);
+  border-radius: 2rem;
+  max-width: 28rem;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.5rem 0;
+  color: var(--modal-text-white);
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--modal-text-white);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.closeButton {
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: none;
+  cursor: pointer;
+  transition: var(--modal-transition-fast);
+  color: var(--modal-text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.closeButton:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.closeButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* ===== CONTENT ===== */
+.content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== DESCRIPTION BOX ===== */
+.descriptionBox {
+  background-color: var(--modal-description-bg);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  transition: var(--modal-transition);
+}
+
+.descriptionBox:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.descriptionText {
+  color: var(--modal-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  cursor: pointer;
+  transition: var(--modal-transition);
+  min-height: 1.5rem;
+}
+
+.descriptionText:hover {
+  color: var(--modal-text-primary);
+}
+
+.descriptionText:focus {
+  outline: 2px solid var(--modal-accent-blue);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+.editTextarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--modal-text-secondary);
+  line-height: 1.6;
+  resize: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.editTextarea:focus {
+  color: var(--modal-text-primary);
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  border-top: 2px dashed rgba(156, 163, 175, 0.6);
+  margin-bottom: 1rem;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fed7aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--modal-shadow-soft);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarEmoji {
+  font-size: 1.5rem;
+}
+
+.userName {
+  font-weight: 700;
+  color: var(--modal-text-white);
+  font-size: 1.125rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.gems {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gemsContent {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+}
+
+.gemsIcon {
+  font-size: 1.25rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.gemsCount {
+  font-weight: 700;
+  color: var(--modal-text-white);
+  font-size: 1.125rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* ===== ACTIONS ===== */
+.actions {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.editActions,
+.viewActions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* ===== BUTTONS BASE ===== */
+.cancelButton,
+.saveButton,
+.editButton,
+.deleteButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--modal-transition);
+  font-weight: 600;
+  font-size: 0.875rem;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--modal-shadow-medium);
+}
+
+.cancelButton svg,
+.saveButton svg,
+.editButton svg,
+.deleteButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* ===== CANCEL BUTTON ===== */
+.cancelButton {
+  background-color: rgba(107, 114, 128, 0.8);
+  color: var(--modal-text-white);
+}
+
+.cancelButton:hover {
+  background-color: rgba(75, 85, 99, 0.9);
+  transform: translateY(-2px);
+  box-shadow: var(--modal-shadow-strong);
+}
+
+.cancelButton:focus {
+  outline: 2px solid rgba(107, 114, 128, 0.5);
+  outline-offset: 2px;
+}
+
+.cancelButton:active {
+  transform: translateY(0);
+}
+
+/* ===== SAVE BUTTON ===== */
+.saveButton {
+  background-color: var(--modal-success-green);
+  color: var(--modal-text-white);
+}
+
+.saveButton.enabled:hover {
+  background-color: #16a34a;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.3);
+}
+
+.saveButton.enabled:focus {
+  outline: 2px solid rgba(34, 197, 94, 0.5);
+  outline-offset: 2px;
+}
+
+.saveButton.disabled {
+  background-color: rgba(156, 163, 175, 0.5);
+  color: var(--modal-text-muted);
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ===== EDIT BUTTON ===== */
+.editButton {
+  background-color: var(--modal-accent-blue);
+  color: var(--modal-text-white);
+}
+
+.editButton:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.3);
+}
+
+.editButton:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}
+
+/* ===== DELETE BUTTON ===== */
+.deleteButton {
+  background-color: var(--modal-error-red);
+  color: var(--modal-text-white);
+}
+
+.deleteButton:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(239, 68, 68, 0.3);
+}
+
+.deleteButton:focus {
+  outline: 2px solid rgba(239, 68, 68, 0.5);
+  outline-offset: 2px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: var(--modal-blur-strong);
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .container,
+  .closeButton,
+  .descriptionBox,
+  .descriptionText,
+  .cancelButton,
+  .saveButton,
+  .editButton,
+  .deleteButton {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+@media (prefers-contrast: high) {
+  .container {
+    border: 2px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .descriptionBox {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  .closeButton,
+  .cancelButton,
+  .saveButton,
+  .editButton,
+  .deleteButton {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* ===== DARK MODE SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --modal-description-bg: rgba(0, 0, 0, 0.3);
+    --modal-text-primary: #f9fafb;
+    --modal-text-secondary: #e5e7eb;
+  }
+}

@@ -1,0 +1,424 @@
+/* Glassmorphism Experience Modal Styles */
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(99, 102, 241, 0.3);
+  backdrop-filter: blur(35px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+  flex-direction: column;
+}
+
+/* Modal Container (for no skills message) */
+.modal-container {
+  background: #6366f1;
+  backdrop-filter: blur(20px) saturate(150%);
+  border-radius: 2rem;
+  max-width: 28rem;
+  width: 100%;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.no-skills-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.no-skills-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  margin-bottom: 1rem;
+  margin-top: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.no-skills-text {
+  color: rgb(31, 41, 55);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.no-skills-button {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  color: rgb(17, 24, 39);
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.no-skills-button:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+/* Modal Content */
+.modal-content {
+  background: #6366f1;
+  backdrop-filter: blur(20px) saturate(150%);
+  border-radius: 2rem;
+  max-width: 28rem;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Modal Header */
+.modal-header {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  text-align: center;
+  letter-spacing: -0.025em;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  margin: 0;
+}
+
+.close-button {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.close-button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: rgb(55, 65, 81);
+}
+
+.close-button:hover svg {
+  color: rgb(17, 24, 39);
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  max-height: calc(90vh - 120px);
+  overflow-y: auto;
+}
+
+/* Step One */
+.step-one-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.step-one-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  margin: 0 0 0.5rem 0;
+}
+
+.step-one-subtitle {
+  font-size: 0.875rem;
+  color: rgb(55, 65, 81);
+  margin: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.skill-item:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+.skill-icon {
+  font-size: 1.875rem;
+  margin-right: 0.75rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.skill-content {
+  flex: 1;
+}
+
+.skill-name {
+  font-weight: 600;
+  color: rgb(17, 24, 39);
+  margin-bottom: 0.25rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.skill-gems {
+  font-size: 0.875rem;
+  color: rgb(55, 65, 81);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.skill-arrow {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: rgb(55, 65, 81);
+  transform: rotate(-90deg);
+}
+
+/* Step Two */
+.step-two {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.selected-skill {
+  text-align: center;
+  padding: 1.25rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.selected-skill-icon {
+  font-size: 2.25rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.selected-skill-name {
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  margin-bottom: 0.25rem;
+  margin-top: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.selected-skill-label {
+  font-size: 0.875rem;
+  color: rgb(55, 65, 81);
+  margin: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Form Elements */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(17, 24, 39);
+  display: block;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  color: rgb(17, 24, 39);
+  box-sizing: border-box;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgb(75, 85, 99);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.form-textarea {
+  resize: none;
+  font-family: inherit;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Buttons */
+.form-buttons {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 1rem;
+}
+
+.button {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  border: 1px solid;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.button-secondary {
+  background-color: rgba(107, 114, 128, 0.2);
+  backdrop-filter: blur(8px);
+  color: rgb(75, 85, 99);
+  border-color: rgba(156, 163, 175, 0.3);
+}
+
+.button-secondary:hover {
+  background-color: rgba(107, 114, 128, 0.3);
+}
+
+.button-primary {
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  color: rgb(17, 24, 39);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.button-primary:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+.button-primary:active {
+  transform: scale(0.98);
+}
+
+.button-disabled {
+  background-color: rgba(107, 114, 128, 0.2);
+  color: rgb(107, 114, 128);
+  border-color: rgba(156, 163, 175, 0.3);
+  cursor: not-allowed;
+}
+
+.button-disabled:hover {
+  background-color: rgba(107, 114, 128, 0.2);
+  transform: none;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    border-radius: 1.5rem;
+  }
+
+  .modal-header {
+    padding: 1rem;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+  }
+
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .skill-item {
+    padding: 0.75rem;
+  }
+
+  .skill-icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .selected-skill {
+    padding: 1rem;
+  }
+
+  .selected-skill-icon {
+    font-size: 2rem;
+  }
+}

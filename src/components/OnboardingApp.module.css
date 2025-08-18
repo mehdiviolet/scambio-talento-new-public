@@ -1,0 +1,16 @@
+.screenBg {
+  /* background: linear-gradient(135deg, #3b82f6, #6366f1); */
+  /* background: linear-gradient(135deg, #187599, #28f50d); */
+  /* background: linear-gradient(135deg, #3e82f0, #4b4dc7); */
+  background: var(--card-gradient);
+
+  /* min-height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Transizione smooth */
+  border-radius: var(--card-border-radius);
+  /* border: none; */
+}

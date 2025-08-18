@@ -1,0 +1,235 @@
+/* SplashScreen.module.css - CSS isolato solo per SplashScreen */
+
+/* Layout principale */
+.screen {
+  /* min-height: 100vh; */
+  background: var(--mole-primary-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--card-border-radius);
+  /* padding: 10px; */
+}
+
+/* Carta principale */
+.card {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow-y: hidden;
+  /* animation: float 6s ease-in-out infinite; */
+}
+
+/* Contenuto sovrapposto */
+.cardContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* SVG di sfondo */
+.backgroundMole {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+/* Contenitore icona con animazione di movimento */
+.iconContainer {
+  margin: 3.2rem;
+  position: relative;
+  animation: moveToTop 3s ease-out forwards;
+}
+
+.iconContainerCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+}
+
+.mainIcon {
+  width: 80px;
+  height: 80px;
+  color: var(--text-color);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  opacity: 0;
+  animation: fadeIn 0.01s ease-out 2.5s forwards,
+    bounce 2s ease-in-out 0.5s infinite;
+}
+
+.pingIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  color: var(--text-color);
+  opacity: 0;
+  animation: fadeIn 0.1s ease-out 2s forwards, ping 2s ease-out 0.5s infinite;
+}
+
+/* Titolo principale */
+.title {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease-out 1.2s forwards,
+    pulse 2s ease-in-out 3s infinite;
+  text-transform: uppercase;
+  /* font-family: "Montserrat ", Courier, monospaceMontserrat; */
+}
+
+/* Sottotitolo */
+.subtitleSplash {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  margin-bottom: 2.5rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease-out 3.2s forwards,
+    pulse 2s ease-in-out 3.5s infinite;
+  text-transform: uppercase;
+}
+
+/* Dots di caricamento */
+.loadingDots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out 0s forwards;
+  margin-bottom: 30px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: var(--text-color);
+  border-radius: 50%;
+  animation: bounce 1.4s ease-in-out 0s infinite;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Animazioni */
+@keyframes bounce {
+  0%,
+  20%,
+  53%,
+  80%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%,
+  43% {
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes moveToTop {
+  0% {
+    transform: translate(0%, 50vh) scale(0.2);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

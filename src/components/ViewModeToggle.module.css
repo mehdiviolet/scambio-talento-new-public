@@ -1,0 +1,187 @@
+/* ViewModeToggle.module.css */
+
+.toggleContainer {
+  position: fixed;
+  top: 30px;
+  right: 60px;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.3s ease;
+}
+
+.toggleButton {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 100px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ownerButton {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+}
+
+.ownerButton:hover {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  transform: translateY(-2px);
+}
+
+.ownerButton.active {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+}
+
+.viewerButton {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+}
+
+.viewerButton:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+}
+
+.viewerButton.active {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.4);
+}
+
+.statusIndicator {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.toggleContainer {
+  position: fixed;
+  /* top: 20px;
+  right: -140px; Fuori schermo mobile */
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.3s ease;
+
+  /* Glassmorphism come i pannelli principali */
+  background: var(--glass-bg);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--glass-border);
+  padding: 12px;
+
+  /* Ombra consistente con il design system */
+  box-shadow: var(--shadow-strong);
+}
+
+.toggleButton {
+  padding: 12px 16px;
+  border: 2px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  min-width: 100px;
+  white-space: nowrap;
+
+  /* Glassmorphism per i pulsanti */
+  background: var(--glass-bg);
+  backdrop-filter: var(--backdrop-blur);
+  color: var(--text-primary);
+
+  /* Ombra coerente */
+  box-shadow: var(--shadow-medium);
+}
+
+.toggleButton:hover {
+  background: var(--glass-bg-light);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+.ownerButton {
+  background: var(--gradient-warning); /* Usa i gradienti del design system */
+  color: var(--text-primary);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.ownerButton:hover {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+.ownerButton.active {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4);
+  border-color: rgba(251, 191, 36, 0.7);
+}
+
+.viewerButton {
+  background: var(--gradient-ocean); /* Usa i gradienti del design system */
+  color: var(--text-primary);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.viewerButton:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.viewerButton.active {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  box-shadow: 0 8px 25px rgba(29, 78, 216, 0.4);
+  border-color: rgba(59, 130, 246, 0.7);
+}
+
+.statusIndicator {
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--backdrop-blur);
+  color: var(--text-primary);
+  padding: 6px 10px;
+  border-radius: var(--radius-small);
+  font-size: 10px;
+  text-align: center;
+  margin-top: 8px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.toggleContainer::before:hover {
+  background: var(--glass-bg-light);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+/* Aggiungi queste regole al tuo ViewModeToggle.module.css */
+
+.ownerButton.inactive {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+}
+
+.viewerButton.inactive {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+}
+
+.toggleButton.inactive:hover {
+  transform: none !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}

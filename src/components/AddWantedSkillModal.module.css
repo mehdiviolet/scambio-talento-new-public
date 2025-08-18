@@ -1,0 +1,387 @@
+/* AddWantedSkillModal.module.css - Following AddSkillModal glassmorphism design */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(99, 102, 241, 0.3);
+  backdrop-filter: blur(35px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+  flex-direction: column;
+}
+
+.modal {
+  background: #e9be31;
+  backdrop-filter: blur(20px) saturate(150%);
+  border-radius: 2rem;
+  max-width: 28rem;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  overflow-y: auto;
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Hide scrollbar */
+  -webkit-scrollbar: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.modalSkill {
+  background: #d0b0b0;
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  text-align: center;
+  letter-spacing: -0.025em;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  margin: 0;
+}
+
+.closeButton {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.closeButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: rgb(55, 65, 81);
+}
+
+.content {
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  max-height: calc(90vh - 120px);
+  overflow-y: auto;
+}
+
+.centerAlign {
+  text-align: center;
+}
+
+.wheelContainer {
+  position: relative;
+  width: 100%;
+  max-width: 20rem;
+  margin: 0 auto 2rem;
+}
+
+.selectionHighlight {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  border-radius: 1rem;
+  transform: translateY(-50%);
+  z-index: 10;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.scrollContainer {
+  height: 20rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.scrollContent {
+  transition: transform 0.5s ease-out;
+  padding: 8rem 0;
+}
+
+.skillItem {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.skillItem.selected {
+  color: rgb(17, 24, 39);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.skillItem:not(.selected) {
+  color: rgb(55, 65, 81);
+}
+
+.skillContent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.skillIcon {
+  font-size: 1.875rem;
+  transition: all 0.5s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.skillItem.selected .skillIcon {
+  transform: scale(1.1);
+}
+
+.skillName {
+  font-weight: 500;
+  font-size: 1.125rem;
+  transition: all 0.5s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.skillItem.selected .skillName {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.controlButton {
+  padding: 0.5rem 1.25rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: rgb(31, 41, 55);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.controlButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.primaryButton {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  color: rgb(17, 24, 39);
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.primaryButton:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stepHeader {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.iconContainer {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1rem;
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.iconContainer span {
+  font-size: 2.25rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.stepTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  margin: 0;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(17, 24, 39);
+  display: block;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  color: rgb(17, 24, 39);
+  font-family: inherit;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.textarea::placeholder {
+  color: rgb(75, 85, 99);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.continueButton {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  border: 1px solid;
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  color: rgb(17, 24, 39);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.continueButton:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+/* SUMMARY STYLES - Step 3 */
+.summary {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.summaryHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  justify-content: center;
+}
+
+.summaryIcon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.summaryHeader h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  margin: 0;
+}
+
+.summaryDescription {
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.summaryDescription p {
+  color: rgb(31, 41, 55);
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.emptyTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: rgb(17, 24, 39);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.emptyDescription {
+  font-size: 0.95rem;
+  color: rgb(55, 65, 81);
+  line-height: 1.5;
+  margin: 0 0 1.5rem 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}

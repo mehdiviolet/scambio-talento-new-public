@@ -1,0 +1,245 @@
+/* SharedModal.module.css - Glassmorphism reusable */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(99, 102, 241, 0.3);
+  backdrop-filter: blur(35px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+}
+
+.modal {
+  background: #d0b0b0;
+  backdrop-filter: blur(20px) saturate(150%);
+  border-radius: 2rem;
+  max-width: 28rem;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  margin: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.header button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.header button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.content {
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cancelBtn,
+.blockBtn,
+.shareOption {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid;
+  backdrop-filter: blur(8px);
+}
+
+.cancelBtn {
+  background: rgba(107, 114, 128, 0.2);
+  color: rgb(55, 65, 81);
+  border-color: rgba(107, 114, 128, 0.4);
+}
+
+.cancelBtn:hover {
+  background: rgba(107, 114, 128, 0.3);
+  transform: translateY(-1px);
+}
+
+.blockBtn {
+  background: rgba(239, 68, 68, 0.2);
+  color: rgb(153, 27, 27);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.blockBtn:hover {
+  background: rgba(239, 68, 68, 0.3);
+  transform: translateY(-1px);
+}
+
+.shareOption {
+  background: rgba(255, 255, 255, 0.25);
+  color: rgb(17, 24, 39);
+  border-color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.shareOption:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.profilePreview {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #fed7aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+  font-weight: 600;
+  color: rgb(17, 24, 39);
+}
+
+.profilePreview h3 {
+  margin: 0;
+  font-weight: 600;
+  color: rgb(17, 24, 39);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.warning {
+  color: rgb(75, 85, 99);
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.shareOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.logoutModal {
+  max-width: 400px;
+}
+
+.headerIcon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.logoutIcon {
+  color: #ef4444;
+}
+
+.logoutContent {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logoutMessage {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.logoutSubtext {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.logoutActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.cancelButton {
+  padding: 0.75rem 1.5rem;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.logoutButton {
+  padding: 0.75rem 1.5rem;
+  background: #ef4444;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoutButton:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.logoutButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}

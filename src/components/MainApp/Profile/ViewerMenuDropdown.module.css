@@ -1,0 +1,142 @@
+/* ViewerMenuDropdown.module.css - Following ViewSkillModal glassmorphism style */
+/* In ViewerMenuDropdown.module.css, aggiungi PRIMA del .dropdown */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(99, 102, 241, 0.3);
+  backdrop-filter: blur(35px);
+  z-index: 9998; /* Uno meno del dropdown */
+  animation: overlayFadeIn 0.3s ease-out;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(35px);
+  }
+}
+
+.dropdown {
+  /* Il tuo CSS esistente */
+  z-index: 9999; /* Assicurati che sia sopra l'overlay */
+}
+
+.dropdown {
+  position: fixed; /* invece di absolute */
+  /* top: auto; */
+  top: 270px;
+  right: 16px;
+  bottom: 80px; /* sopra la bottom navigation */
+  z-index: 9999;
+  min-width: 280px;
+}
+
+@keyframes dropdownAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dropdownContent {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(35px) saturate(150%);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+.menuItem {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  background: none;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  margin-bottom: 0.25rem;
+}
+
+.menuItem:last-child {
+  margin-bottom: 0;
+}
+
+.menuItem:hover {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.menuItem.danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  box-shadow: 0 20px 25px -5px rgba(239, 68, 68, 0.3);
+}
+
+.menuIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #1f2937;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.menuItem.danger .menuIcon {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #991b1b;
+}
+
+.menuText {
+  flex: 1;
+  min-width: 0;
+}
+
+.menuLabel {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.125rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.menuItem.danger .menuLabel {
+  color: #991b1b;
+}
+
+.menuDescription {
+  font-size: 0.75rem;
+  color: #1f2937;
+  line-height: 1.3;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.menuItem.danger .menuDescription {
+  color: #b91c1c;
+}

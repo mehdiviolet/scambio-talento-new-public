@@ -1,0 +1,455 @@
+/* Login.module.css */
+
+.loginContainer {
+  /* min-height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #ec4899 100%); */
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  width: 390px;
+  height: 844px;
+}
+
+.loginContainer::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+      circle at 25% 25%,
+      rgba(168, 85, 247, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(59, 130, 246, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(236, 72, 153, 0.2) 0%,
+      transparent 70%
+    );
+  animation: bgFloat 8s ease-in-out infinite;
+}
+
+/* @keyframes bgFloat {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(-20px, -20px) rotate(1deg);
+  }
+  66% {
+    transform: translate(20px, 20px) rotate(-1deg);
+  }
+} */
+
+.loginCard {
+  position: relative;
+  z-index: 10;
+  /* width: 100%; */
+  /* max-width: 420px; */
+  /* background: rgba(255, 255, 255, 0.15); */
+  backdrop-filter: blur(25px);
+  border-radius: 24px;
+  /* border: 1px solid rgba(255, 255, 255, 0.3); */
+  /* box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4); */
+  padding: 3rem 2.5rem;
+  animation: cardFloat 6s ease-in-out infinite;
+}
+
+/* @keyframes cardFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+} */
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.inputWrapper:focus-within {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.formInput {
+  flex: 1;
+  padding: 1.125rem 1.25rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.formInput::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+}
+
+.formInput:-webkit-autofill,
+.formInput:-webkit-autofill:hover,
+.formInput:-webkit-autofill:focus,
+.formInput:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #ffffff !important;
+  background-color: transparent !important;
+}
+
+.inputIcon {
+  padding: 0 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+}
+
+.passwordToggle {
+  padding: 0 1.25rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.passwordToggle:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.formOptions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.checkbox:checked {
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.checkmark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.checkbox:checked + .checkmark::after {
+  content: "✓";
+  position: absolute;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.forgotPassword {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.forgotPassword:hover {
+  color: #22d3ee;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 1.125rem;
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  border: none;
+  border-radius: 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3b82f6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+  margin-top: 1rem;
+}
+
+.loginButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.loginButton:active {
+  transform: translateY(0);
+}
+
+.registerPrompt {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.registerLink {
+  background: none;
+  border: none;
+  color: #22d3ee;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: inherit;
+  transition: color 0.3s ease;
+}
+
+.registerLink:hover {
+  color: #60a5fa;
+}
+
+/* Responsive Design */
+/* @media (max-width: 480px) {
+  .loginContainer {
+    padding: 1rem;
+  }
+
+  .loginCard {
+    padding: 2rem 1.5rem;
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .formOptions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+} */
+
+/* Animazioni aggiuntive per microinterazioni */
+.inputWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.inputWrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.inputWrapper:focus-within::before {
+  left: 100%;
+}
+
+/* Nuovi stili per errori e loading */
+.errorMessage {
+  background: rgba(239, 68, 68, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  color: #fca5a5;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.inputWrapper.error {
+  border-color: rgba(239, 68, 68, 0.7);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.formInput:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.passwordToggle:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.checkbox:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.forgotPassword:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.registerLink:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loginButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  background: rgba(107, 114, 128, 0.3);
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.demoCredentials {
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 12px;
+}
+
+.demoCredentials small {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.demoCredentials strong {
+  color: #22d3ee;
+}
+
+.demoCredentials {
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 12px;
+  cursor: pointer; /* ✅ Aggiunto */
+  transition: all 0.3s ease; /* ✅ Aggiunto */
+}
+
+.demoCredentials:hover {
+  /* ✅ Aggiunto */
+  background: rgba(34, 211, 238, 0.15);
+  border-color: rgba(34, 211, 238, 0.3);
+  transform: translateY(-1px);
+}
+
+.clickHint {
+  /* ✅ Aggiunto */
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.7rem;
+  font-style: italic;
+}
