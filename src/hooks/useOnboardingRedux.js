@@ -19,7 +19,7 @@ import {
   resetFormData,
   completeOnboarding as completeOnboardingAction,
   resetOnboarding,
-} from "../store/slices/onBoardingSlice";
+} from "../store/slices/onboardingSlice";
 import { completeUserOnboarding } from "../services/userService";
 
 export const useOnboarding = () => {

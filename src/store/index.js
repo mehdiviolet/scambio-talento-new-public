@@ -48,3 +48,4 @@ export const store = configureStore({
     }),
   devTools: process.env.NODE_ENV !== "production",
 });
+console.log(onboardingReducer); // Dovrebbe stampare la funzione reducer
