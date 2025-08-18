@@ -207,7 +207,7 @@ const SearchPage = () => {
       <div className={searchStyles.searchInputContainer}>
         <input
           type="text"
-          placeholder="Cerca persone ..."
+          placeholder="Cerca persone (ex: Sara)..."
           value={searchQuery}
           onChange={handleSearchChange}
           className={searchStyles.searchInput}
