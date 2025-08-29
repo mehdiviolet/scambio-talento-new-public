@@ -69,13 +69,13 @@ const OnboardingApp = () => {
       {isLoading && <SplashScreen />}
 
       {/* LOGIN PAGE - Prima pagina dopo splash */}
-      {currentStep === "login" && !isLoading && (
+      {/* {currentStep === "login" && !isLoading && (
         <Login
           onLoginSuccess={handleLoginSuccess}
           onRegister={handleRegister}
           onForgotPassword={handleForgotPassword}
         />
-      )}
+      )} */}
 
       {/* REGISTER PAGE - Per nuovi utenti */}
       {currentStep === "register" && !isLoading && (
@@ -109,7 +109,7 @@ const OnboardingApp = () => {
       )}
 
       {/* MAIN APP - Destinazione finale per tutti */}
-      {currentStep === "main" && !isLoading && (
+      {currentStep === "login" && !isLoading && (
         <MainAppRouter
           role="owner"
           userType={userType}

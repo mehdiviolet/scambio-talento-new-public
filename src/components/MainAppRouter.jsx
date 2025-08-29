@@ -46,23 +46,12 @@ import CherryComp from "./CherryComp";
 import { selectCurrentUser } from "@/store/slices/sharedEventSlice";
 import MyExplorePage from "./ExplorePage";
 import EventSectionTest from "./EventSectionTest";
+import StaticEventShowcase from "./StaticEventShowcase";
+import MockupCard from "./MainApp/Shared/Modals/MockupCard";
+import EsperienzePage from "./EsperienzePage";
+import EventiPage from "./EventiPage";
 
-const HomePage = ({ currentUser }) => (
-  <>
-    {/* <div className={styles.homeContainer}> */}
-    {/* <DailySpin currentUser={currentUser} /> */}
-    {/* <CherryComp currentUser={currentUser} /> */}
-    <EventSectionTest />
-    {/* </div> */}
-  </>
-);
-
-const ExplorePage = () => (
-  <div className={styles.exploreContainer}>
-    <h1 className={styles.exploreTitle}>🏛️ Esplora</h1>
-    <MyExplorePage />
-  </div>
-);
+// Sostituisci ExplorePage con questo componente Esperienze
 
 const MainAppRouter = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -97,20 +86,18 @@ const MainAppRouter = () => {
     // console.log(currentUser);
 
     switch (activeTab) {
-      case "home":
-        return <HomePage addXP={addXP} currentUser={currentUser} />;
-      case "search":
+      case "Eventi":
+        return <EventiPage />;
+      case "Esperienze":
+        return <EsperienzePage />;
+      case "UserRoundSearch":
         return <SearchPage />;
-      case "explore":
-        return <ExplorePage />;
-      case "chat":
-        return <ChatComponentTest isOwner={false} />;
+
       case "profile":
         return <ProfilePage />;
-      // case "test":
-      //   return <XPServiceTest />;
+
       default:
-        return <HomePage addXP={addXP} currentUser={currentUser} />;
+        return <EventiPage />;
     }
   };
 
