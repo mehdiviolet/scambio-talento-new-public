@@ -45,12 +45,14 @@ import {
 import CherryComp from "./CherryComp";
 import { selectCurrentUser } from "@/store/slices/sharedEventSlice";
 import MyExplorePage from "./ExplorePage";
+import EventSectionTest from "./EventSectionTest";
 
 const HomePage = ({ currentUser }) => (
   <>
     {/* <div className={styles.homeContainer}> */}
     {/* <DailySpin currentUser={currentUser} /> */}
-    <CherryComp currentUser={currentUser} />
+    {/* <CherryComp currentUser={currentUser} /> */}
+    <EventSectionTest />
     {/* </div> */}
   </>
 );
