@@ -13,6 +13,7 @@ import {
   selectEventState,
   selectEventStats,
 } from "@/store/slices/sharedEventSlice";
+import SlideEventCard from "./SlideEventCard";
 
 const EventSectionTest = ({ isOwner, selectedPersonData }) => {
   // State per il modal eventi
@@ -132,7 +133,13 @@ const EventSectionTest = ({ isOwner, selectedPersonData }) => {
         {filteredEvents.map((event) => {
           if (event.type === "mock") {
             return (
-              <MockEventCard
+              // <MockEventCard
+              //   key={event.id}
+              //   isOwner={isOwner}
+              //   selectedPersonData={selectedPersonData}
+              // />
+
+              <SlideEventCard
                 key={event.id}
                 isOwner={isOwner}
                 selectedPersonData={selectedPersonData}
