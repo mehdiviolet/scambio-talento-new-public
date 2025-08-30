@@ -2,8 +2,9 @@
 import React from "react";
 import { Cherry, X } from "lucide-react";
 import styles from "./CherryModal.module.css"; // o riusa gli stili di altri modal
+import CherryComp from "@/components/CherryComp";
 
-const CherryModal = ({ isOpen, onClose }) => {
+const CherryModal = ({ isOpen, onClose, currentUser }) => {
   if (!isOpen) return null;
 
   return (
@@ -15,8 +16,9 @@ const CherryModal = ({ isOpen, onClose }) => {
             <X size={20} />
           </button>
         </div>
+        <CherryComp currentUser={currentUser} />
 
-        <div className={styles.content}>
+        {/* <div className={styles.content}>
           <div className={styles.cherryStats}>
             <Cherry size={24} className={styles.cherryIcon} />
             <p>
@@ -29,7 +31,7 @@ const CherryModal = ({ isOpen, onClose }) => {
               Prossimo premio a: <strong>50 Cherry</strong>
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

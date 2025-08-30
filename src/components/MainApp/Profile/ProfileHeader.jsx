@@ -410,6 +410,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
       <CherryModal
         isOpen={isCherryModalOpen}
         onClose={() => setIsCherryModalOpen(false)}
+        currentUser={currentUser}
       />
     </>
   );

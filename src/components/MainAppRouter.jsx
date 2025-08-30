@@ -50,6 +50,7 @@ import StaticEventShowcase from "./StaticEventShowcase";
 import MockupCard from "./MainApp/Shared/Modals/MockupCard";
 import EsperienzePage from "./EsperienzePage";
 import EventiPage from "./EventiPage";
+import ActivityModal from "./ActivityModal";
 
 // Sostituisci ExplorePage con questo componente Esperienze
 
@@ -57,6 +58,8 @@ const MainAppRouter = () => {
   const [activeTab, setActiveTab] = useState("profile");
   const [xpJustChanged, setXpJustChanged] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
+  const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
+
   // const chatNotifications = useUnreadMessages(role); // Viewer per pannello DX
   const lastSlotReward = useSelector(selectLastSlotReward);
   console.log(lastSlotReward);
@@ -106,24 +109,14 @@ const MainAppRouter = () => {
     return Math.round(percentuale); // Arrotonda per evitare decimali
   };
   const GIORNI_MASSIMI = 20; // Massimo per completare la progress bar
-  const giorniConsecutivi = 1;
+  const giorniConsecutivi = 10;
 
-  // ✅ AGGIORNATO: Usa totalDisplayXP invece di xp
-  // useEffect(() => {
-  //   if (isFirstRender) {
-  //     setIsFirstRender(false);
-  //     return;
-  //   }
-  //   setXpJustChanged(true);
-  //   const timer = setTimeout(() => setXpJustChanged(false), 600);
-  //   return () => clearTimeout(timer);
-  // }, [totalDisplayXP]);
+  const percentualeProgress = calcolaPercentualeProgressBar(
+    giorniConsecutivi,
+    GIORNI_MASSIMI
+  );
 
   const renderGameHUD = () => {
-    const percentualeProgress = calcolaPercentualeProgressBar(
-      giorniConsecutivi,
-      GIORNI_MASSIMI
-    );
     return (
       <div className={styles.gameHud}>
         <div className={styles.hudTop}>
@@ -163,12 +156,20 @@ const MainAppRouter = () => {
               <span>{currentUserEvent.trustScore} </span>
             </div> */}
           </div>
-          <div className={styles.hudAchievements}>
+          {/* <div className={styles.hudAchievements}>
+            <Activity className="icon-sm text-yellow-300" />
+            <span>0</span>
+          </div> */}
+          <div
+            className={`${styles.hudAchievements} ${styles.clickable}`}
+            onClick={() => setIsActivityModalOpen(true)}
+            style={{ cursor: "pointer" }}
+          >
             <Activity className="icon-sm text-yellow-300" />
             <span>0</span>
           </div>
         </div>
-
+        {/* 
         <div className={styles.progressSection}>
           <div className={styles.progressLabel}>
             <span>Giorni consecutivi attivi!</span>
@@ -183,10 +184,14 @@ const MainAppRouter = () => {
               }}
             />
           </div>
-        </div>
+        </div> */}
       </div>
     );
   };
+
+  {
+    /* Aggiungi questo prima della chiusura del component */
+  }
 
   return (
     <div className={styles.screen}>
@@ -197,6 +202,13 @@ const MainAppRouter = () => {
 
         <BottomNavigation activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
+      <ActivityModal
+        isOpen={isActivityModalOpen}
+        onClose={() => setIsActivityModalOpen(false)}
+        giorniConsecutivi={giorniConsecutivi}
+        percentualeProgress={percentualeProgress}
+      />
+      ;
     </div>
   );
 };
