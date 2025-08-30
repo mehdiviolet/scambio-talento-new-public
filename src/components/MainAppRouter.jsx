@@ -2,10 +2,12 @@ import {
   Activity,
   CalendarFoldIcon,
   Cherry,
+  ChevronLeft,
   Cookie,
   Crown,
   Gem,
   LucideDatabase,
+  MessageCircle,
   ShieldCheckIcon,
   Star,
   StarHalf,
@@ -51,7 +53,8 @@ import MockupCard from "./MainApp/Shared/Modals/MockupCard";
 import EsperienzePage from "./EsperienzePage";
 import EventiPage from "./EventiPage";
 import ActivityModal from "./ActivityModal";
-
+import ChatModal from "./ChatModal";
+// import useUnreadMessages from "src/hooks/useUnreadMessages.js";
 // Sostituisci ExplorePage con questo componente Esperienze
 
 const MainAppRouter = () => {
@@ -59,6 +62,7 @@ const MainAppRouter = () => {
   const [xpJustChanged, setXpJustChanged] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
+  const [isChatModalOpen, setIsChatModalOpen] = useState(false);
 
   // const chatNotifications = useUnreadMessages(role); // Viewer per pannello DX
   const lastSlotReward = useSelector(selectLastSlotReward);
@@ -115,6 +119,7 @@ const MainAppRouter = () => {
     giorniConsecutivi,
     GIORNI_MASSIMI
   );
+  const chatNotifications = useUnreadMessages("viewer"); // o "viewer" a seconda del ruolo
 
   const renderGameHUD = () => {
     return (
@@ -146,20 +151,8 @@ const MainAppRouter = () => {
               </div>
               <span>{lastSlotReward > 0 ? `+${lastSlotReward}` : 0}</span>
             </div>
-
-            {/* <div className={styles.hudLevel}>
-              <Star className="icon-md text-yellow-300" />
-              <span>{currentUserEvent.participationScore} </span>
-            </div>
-            <div className={styles.hudLevel}>
-              <ShieldCheckIcon className="icon-md text-yellow-300" />
-              <span>{currentUserEvent.trustScore} </span>
-            </div> */}
           </div>
-          {/* <div className={styles.hudAchievements}>
-            <Activity className="icon-sm text-yellow-300" />
-            <span>0</span>
-          </div> */}
+
           <div
             className={`${styles.hudAchievements} ${styles.clickable}`}
             onClick={() => setIsActivityModalOpen(true)}
@@ -168,47 +161,70 @@ const MainAppRouter = () => {
             <Activity className="icon-sm text-yellow-300" />
             <span>0</span>
           </div>
+          <div
+            className={`${styles.hudAchievements} ${styles.clickable}`}
+            onClick={() => setIsChatModalOpen(true)}
+            style={{ cursor: "pointer" }}
+          >
+            <MessageCircle className="icon-sm text-yellow-300" />
+            {/* <span>{chatNotifications.total}</span> */}
+            {/* Badge Instagram-style */}
+            {chatNotifications.hasUnread && (
+              <div
+                className={`${styles.notificationBadge} ${
+                  chatNotifications.total > 9 ? styles.large : ""
+                }`}
+              >
+                {chatNotifications.total > 99 ? "99+" : chatNotifications.total}
+              </div>
+            )}
+          </div>
         </div>
-        {/* 
-        <div className={styles.progressSection}>
-          <div className={styles.progressLabel}>
-            <span>Giorni consecutivi attivi!</span>
-            <span>1 giorno! 🌱</span>
-          </div>
-          <div className={styles.progressBar}>
-            <div
-              className={styles.progressFill}
-              style={{
-                width: `${percentualeProgress}%`,
-                background: "linear-gradient(to right, #2e9688, #aaebe2)",
-              }}
-            />
-          </div>
-        </div> */}
       </div>
     );
   };
-
-  {
-    /* Aggiungi questo prima della chiusura del component */
-  }
+  // Nel MainAppRouter.jsx, modifica la parte del return:
 
   return (
     <div className={styles.screen}>
       <div className={styles.cardApp}>
         {renderGameHUD()}
-
         <div className={styles.contentArea}>{renderCurrentPage()}</div>
-
         <BottomNavigation activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
+
+      {/* Activity Modal */}
       <ActivityModal
         isOpen={isActivityModalOpen}
         onClose={() => setIsActivityModalOpen(false)}
         giorniConsecutivi={giorniConsecutivi}
         percentualeProgress={percentualeProgress}
       />
-      ;
+
+      {/* Chat Slide Drawer */}
+      <div
+        className={`${styles.slideDrawer} ${
+          isChatModalOpen ? styles.open : ""
+        }`}
+      >
+        <div className={styles.drawerHeader}>
+          <button
+            className={styles.backButton}
+            onClick={() => setIsChatModalOpen(false)}
+          >
+            <ChevronLeft size={20} />
+            <span>Messaggi</span>
+          </button>
+        </div>
+        <div className={styles.drawerContent}>
+          {isChatModalOpen && (
+            <ChatComponentTest
+              isOwner={false}
+              onClose={() => setIsChatModalOpen(false)}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 };
