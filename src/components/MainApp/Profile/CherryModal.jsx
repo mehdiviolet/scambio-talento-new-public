@@ -6,7 +6,7 @@ import CherryComp from "@/components/CherryComp";
 
 const CherryModal = ({ isOpen, onClose, currentUser }) => {
   if (!isOpen) return null;
-
+  // NON USO QUESTO 10.08.2025
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -17,21 +17,6 @@ const CherryModal = ({ isOpen, onClose, currentUser }) => {
           </button>
         </div>
         <CherryComp currentUser={currentUser} />
-
-        {/* <div className={styles.content}>
-          <div className={styles.cherryStats}>
-            <Cherry size={24} className={styles.cherryIcon} />
-            <p>
-              Oggi hai raccolto <strong>10 Cherry</strong>!
-            </p>
-            <p>
-              Totale Cherry: <strong>47</strong>
-            </p>
-            <p>
-              Prossimo premio a: <strong>50 Cherry</strong>
-            </p>
-          </div>
-        </div> */}
       </div>
     </div>
   );

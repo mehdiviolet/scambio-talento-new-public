@@ -1,4 +1,9 @@
 /* MainAppRouter.module.css - CSS isolato */
+.screen {
+  /* background: #cab9b9; */
+  overflow: hidden;
+}
+
 .screenBg {
   /* background: linear-gradient(135deg, #3b82f6, #6366f1); */
   /* background: linear-gradient(135deg, #187599, #28f50d); */
@@ -45,7 +50,8 @@
   flex-direction: column;
   justify-content: space-evenly;
   /* animation: float 6s ease-in-out infinite; */
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
+  overflow: hidden;
 }
 
 .contentArea {
@@ -615,7 +621,7 @@
 
 /* Slide Drawer */
 .slideDrawer {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   width: 100%;
@@ -626,6 +632,7 @@
   transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   overflow-y: auto;
+  z-index: 9999; /* Aumenta questo valore */
 }
 
 .slideDrawer.open {
@@ -715,3 +722,33 @@
   border-radius: 10px;
   font-size: 0.7rem;
 } */
+
+.cherryContainer {
+  position: relative;
+}
+
+.cherryValue {
+  position: absolute;
+  bottom: 36px;
+  right: 96px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #92400e;
+  background: rgba(251, 191, 36, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 100%;
+  padding: 0.1rem;
+  min-width: 16px;
+  text-align: center;
+  z-index: -1;
+}
+.hudLevel.clickable {
+  transition: all 0.2s ease;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.hudLevel.clickable:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}

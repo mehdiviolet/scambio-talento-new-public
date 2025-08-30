@@ -54,6 +54,7 @@ import EsperienzePage from "./EsperienzePage";
 import EventiPage from "./EventiPage";
 import ActivityModal from "./ActivityModal";
 import ChatModal from "./ChatModal";
+import CookieModal from "./CookieModal";
 // import useUnreadMessages from "src/hooks/useUnreadMessages.js";
 // Sostituisci ExplorePage con questo componente Esperienze
 
@@ -63,6 +64,7 @@ const MainAppRouter = () => {
   const [isFirstRender, setIsFirstRender] = useState(true);
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
+  const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
 
   // const chatNotifications = useUnreadMessages(role); // Viewer per pannello DX
   const lastSlotReward = useSelector(selectLastSlotReward);
@@ -127,11 +129,25 @@ const MainAppRouter = () => {
         <div className={styles.hudTop}>
           <div className={styles.hudLeft}>
             <div className={styles.hudLevel}>
-              <Cookie className="icon-md text-yellow-300" />
-              {/* ✅ NUOVO: Usa totalDisplayXP (include demo bonus) */}
-              <span>{userXP} XP</span>
+              <div
+                className={`${styles.hudLevel} ${styles.clickable}`}
+                onClick={() => setIsCookieModalOpen(true)}
+                style={{ cursor: "pointer" }}
+              >
+                <Cookie className="icon-md text-yellow-300" />
+                <span>{userXP} XP</span>
+              </div>
             </div>
-            <div className={styles.hudXp}>
+            <div
+              className={`${styles.hudAchievements} ${styles.clickable}`}
+              onClick={() => setIsActivityModalOpen(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <Activity className="icon-sm text-yellow-300" />
+              <span>0</span>
+            </div>
+
+            {/* <div className={styles.hudXp}>
               <div className={styles.cherryContainer}>
                 <Cherry
                   className="icon-sm text-yellow-300"
@@ -150,17 +166,36 @@ const MainAppRouter = () => {
                 />
               </div>
               <span>{lastSlotReward > 0 ? `+${lastSlotReward}` : 0}</span>
-            </div>
+            </div> */}
           </div>
-
-          <div
+          {/* <div className={styles.hudXp}>
+            <div className={styles.cherryContainer}>
+              <Cherry
+                className="icon-sm text-yellow-300"
+                style={{
+                  color:
+                    lastSlotReward >= 30
+                      ? "#b81313"
+                      : lastSlotReward >= 10
+                      ? "#fde047"
+                      : "rgb(19, 200, 255)",
+                  transition: "all 0.3s ease",
+                  animation: xpJustChanged
+                    ? "cherry-shake-scale 0.4s ease-in-out"
+                    : "none",
+                }}
+              />
+            </div>
+            <span>{lastSlotReward > 0 ? `+${lastSlotReward}` : 0}</span>
+          </div> */}
+          {/* <div
             className={`${styles.hudAchievements} ${styles.clickable}`}
             onClick={() => setIsActivityModalOpen(true)}
             style={{ cursor: "pointer" }}
           >
             <Activity className="icon-sm text-yellow-300" />
             <span>0</span>
-          </div>
+          </div> */}
           <div
             className={`${styles.hudAchievements} ${styles.clickable}`}
             onClick={() => setIsChatModalOpen(true)}
@@ -199,6 +234,11 @@ const MainAppRouter = () => {
         onClose={() => setIsActivityModalOpen(false)}
         giorniConsecutivi={giorniConsecutivi}
         percentualeProgress={percentualeProgress}
+      />
+      <CookieModal
+        isOpen={isCookieModalOpen}
+        onClose={() => setIsCookieModalOpen(false)}
+        userXP={userXP}
       />
 
       {/* Chat Slide Drawer */}

@@ -15,6 +15,8 @@ import {
   Cherry,
   Heart,
   ShieldCheckIcon,
+  X,
+  ChevronLeft,
 } from "lucide-react";
 import styles from "./ProfileHeader.module.css";
 import { useQuickSetup } from "../../../hooks/useQuickSetup";
@@ -37,6 +39,7 @@ import ToastContainer from "@/components/notifications/ToastContainer";
 import InviteFriendModal from "./InviteFriendModal";
 import { selectFeedbacks } from "@/store/slices/sharedEventSlice";
 import CherryModal from "./CherryModal";
+import CherryComp from "@/components/CherryComp";
 
 const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const { profileData, level, achievements, updateProfileData } =
@@ -66,7 +69,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
-
+  const [isCherryDrawerOpen, setIsCherryDrawerOpen] = useState(false);
   const myFollowing = useSelector(
     (state) =>
       state.experienceSliceTest.socialConnections.currentUser?.following
@@ -201,9 +204,18 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   >
                     Edit profile
                   </button>
-                  <motion.button
+                  {/* <motion.button
                     className={`${styles.editProfileBtn} ${styles.liquidButton}`}
                     onClick={handleCherry}
+                    title="Ruota della fortuna! (da definire)"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Cherry size={16} />
+                  </motion.button> */}
+                  <motion.button
+                    className={`${styles.editProfileBtn} ${styles.liquidButton}`}
+                    onClick={() => setIsCherryDrawerOpen(true)} // Cambia questa riga
                     title="Ruota della fortuna! (da definire)"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -407,11 +419,37 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
         isOpen={isInviteModalOpen}
         onClose={() => setIsInviteModalOpen(false)}
       />
-      <CherryModal
+      {/* <CherryModal
         isOpen={isCherryModalOpen}
         onClose={() => setIsCherryModalOpen(false)}
         currentUser={currentUser}
-      />
+      /> */}
+
+      {/* Sostituisci il CherryModal esistente con questo */}
+      {/* Cherry Slide Drawer */}
+      <div
+        className={`${styles.slideDrawer} ${
+          isCherryDrawerOpen ? styles.open : ""
+        }`}
+      >
+        <div className={styles.drawerHeader}>
+          <button
+            className={styles.backButton}
+            onClick={() => setIsCherryDrawerOpen(false)}
+          >
+            <ChevronLeft size={20} />
+            <span>Cherry Slot</span>
+          </button>
+        </div>
+        <div className={styles.drawerContent}>
+          {isCherryDrawerOpen && (
+            <CherryComp
+              currentUser={currentUser}
+              onClose={() => setIsCherryDrawerOpen(false)}
+            />
+          )}
+        </div>
+      </div>
     </>
   );
 };

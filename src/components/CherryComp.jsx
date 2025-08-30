@@ -12,7 +12,11 @@ import {
   setCurrentUser,
 } from "@/services/xpService";
 
-const CherryComp = ({ currentUser = currentUser }) => {
+const CherryComp = ({
+  currentUser = currentUser,
+  lastSlotReward = 0,
+  xpJustChanged = false,
+}) => {
   const dispatch = useDispatch();
 
   // XP Service selectors
@@ -159,6 +163,28 @@ const CherryComp = ({ currentUser = currentUser }) => {
     <div className={styles.container}>
       {/* 🆕 HEADER CON BOTTONE INFO */}
       <div className={styles.slotHeader}>
+        {/* AGGIUNGI QUESTO QUI */}
+        {/* <div className={styles.hudXp}>
+          <div className={styles.cherryContainer}>
+            <Cherry
+              className="icon-sm text-yellow-300"
+              style={{
+                color:
+                  lastSlotReward >= 30
+                    ? "#b81313"
+                    : lastSlotReward >= 10
+                    ? "#fde047"
+                    : "rgb(19, 200, 255)",
+                transition: "all 0.3s ease",
+                animation: xpJustChanged
+                  ? "cherry-shake-scale 0.4s ease-in-out"
+                  : "none",
+              }}
+            />
+          </div>
+          <span>{xpRewarded > 0 ? `+${xpRewarded}` : 0}</span>
+        </div> */}
+
         <h3 className={styles.slotTitle}>
           Slot della Fortuna
           <button
@@ -177,7 +203,7 @@ const CherryComp = ({ currentUser = currentUser }) => {
             <>
               {xpRewarded > 0 ? (
                 <>
-                  <div className={styles.xpAmount}>
+                  {/* <div className={styles.xpAmount}>
                     <span className={styles.trophy}>
                       <Cookie size={60} />
                     </span>
@@ -185,18 +211,49 @@ const CherryComp = ({ currentUser = currentUser }) => {
                   </div>
                   <p className={styles.rewardText}>
                     {xpRewarded === 500 ? "WOW!" : "Vittoria!"}
-                  </p>
+                  </p> */}
+                  <div className={styles.hudXp}>
+                    <div className={styles.cherryContainer}>
+                      <Cherry
+                        className="icon-sm text-yellow-300"
+                        style={{
+                          color:
+                            lastSlotReward >= 30
+                              ? "#b81313"
+                              : lastSlotReward >= 10
+                              ? "#fde047"
+                              : "rgb(19, 200, 255)",
+                          transition: "all 0.3s ease",
+                          animation: xpJustChanged
+                            ? "cherry-shake-scale 0.4s ease-in-out"
+                            : "none",
+                        }}
+                      />
+                    </div>
+                    <span>{xpRewarded > 0 ? `+${xpRewarded}` : 0}</span>
+                  </div>
                 </>
               ) : (
                 <>
                   <>
-                    <p className={styles.failText}>Sfortuna!</p>
+                    {/* <p className={styles.failText}>Sfortuna!</p>
                     <div className={styles.xpAmount}>
                       <span className={styles.trophy}>
                         <Cookie size={60} />
                       </span>
                       +{xpRewarded} XP
-                    </div>
+                    </div> */}
+
+                    <Cherry
+                      style={{
+                        color: "rgb(19, 200, 255)",
+                        transition: "all 0.3s ease",
+                        animation: xpJustChanged
+                          ? "cherry-shake-scale 0.4s ease-in-out"
+                          : "none",
+                      }}
+                    />
+                    <p>0</p>
                   </>
 
                   {consecutiveFailures >= 3 && (
