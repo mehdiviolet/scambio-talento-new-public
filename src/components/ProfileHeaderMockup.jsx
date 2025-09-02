@@ -156,6 +156,8 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
   const dispatch = useDispatch();
   const isOwnProfile = isInstructorPanel; // Nel pannello instructor, Sara vede il suo profilo
 
+  console.log(selectedPerson);
+
   const socialFollowers = useSelector(
     (state) =>
       state.experienceSliceTest.selectedPersonData.social.followers || []

@@ -1,81 +1,197 @@
-/* Search Page */
+/* SearchPage.module.css */
+
 .searchContainer {
-  /* padding: var(--container-padding-app, 1.5rem); */
-  /* overflow: auto; */
-  /* background-color: #f9fafb; */
-  max-width: 42rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  /* padding-top: 1.5rem; */
-  padding-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  /* gap: 1.5rem; */
+  padding: 20px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-.searchTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+/* Barra di ricerca */
+.searchInputContainer {
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* NUOVO: Pulsante lista */
+.listButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.listButton:hover:not(:disabled) {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.listButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .searchInput {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
+  flex: 1;
+  padding: 16px 48px 16px 48px;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.searchDescription {
-  color: #4b5563;
+.searchInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  background: rgba(255, 255, 255, 1);
 }
 
-.searchInputContainer {
-  position: relative;
-  margin-bottom: 1rem;
+.searchIcon {
+  position: absolute;
+  left: 72px; /* Spostato per fare spazio al pulsante */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  pointer-events: none;
+  z-index: 1;
 }
 
+/* Dropdown suggerimenti */
 .suggestionsDropdown {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 56px; /* Allineato con l'input */
   right: 0;
-  background-color: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(20px) saturate(150%);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4);
-  z-index: 100;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
   max-height: 300px;
   overflow-y: auto;
+  margin-top: 8px;
 }
 
 .suggestionItem {
-  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
   cursor: pointer;
   transition: all 0.2s ease;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid #f3f4f6;
 }
 
 .suggestionItem:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background: #f8fafc;
+  transform: translateX(4px);
 }
 
 .suggestionItem:last-child {
   border-bottom: none;
 }
 
+.suggestionAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.suggestionInfo {
+  flex: 1;
+}
+
 .suggestionName {
   font-weight: 600;
-  color: rgb(17, 24, 39);
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  color: #1f2937;
+  margin-bottom: 2px;
 }
 
 .suggestionUsername {
-  font-size: 0.875rem;
-  color: rgb(75, 85, 99);
-  margin-top: 0.25rem;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* No results */
+.noResults {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.noResults p {
+  font-style: italic;
+  margin: 0;
+}
+
+/* NUOVO: Lista in pagina */
+.pageList {
+  margin-top: 24px;
+}
+
+.pageListHeader {
+  margin-bottom: 16px;
+}
+
+.pageListHeader h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.pageListContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pageListItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid transparent;
+}
+
+.pageListItem:hover {
+  background: rgba(59, 130, 246, 0.05);
+  border-color: rgba(59, 130, 246, 0.2);
+  transform: translateX(8px);
+}
+
+/* Loading state */
+.loadingState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  color: #6b7280;
 }
