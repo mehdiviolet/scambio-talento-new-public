@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styles from "./ResetPassword.module.css";
 import AnimatedLogo from "./AnimatedLogo";
+import { forwardRef } from "react";
+import { useImperativeHandle } from "react";
 
-const ResetPassword = ({ onBackToLogin }) => {
+const ResetPassword = forwardRef(({ onBackToLogin }, ref) => {
   const [formData, setFormData] = useState({
     newPassword: "",
     confirmPassword: "",
@@ -25,6 +27,18 @@ const ResetPassword = ({ onBackToLogin }) => {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
+
+  // ✅ AGGIUNGI funzione demo fill
+  const fillDemoData = () => {
+    setFormData({
+      newPassword: "newPassword123",
+      confirmPassword: "newPassword123",
+    });
+  };
+  // ✅ AGGIUNGI ref exposure
+  useImperativeHandle(ref, () => ({
+    fillDemoData: fillDemoData,
+  }));
 
   const getPasswordStrength = (password) => {
     if (password.length === 0) return { strength: 0, label: "" };
@@ -315,15 +329,17 @@ const ResetPassword = ({ onBackToLogin }) => {
             Torna al Login
           </button>
 
-          <div className={styles.demoHelper} onClick={handleDemoFill}>
+          {/* <div className={styles.demoHelper} onClick={handleDemoFill}>
             <small>
               <strong>🚀 Demo Veloce:</strong> Compila automaticamente
             </small>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
   );
-};
+});
+
+ResetPassword.displayName = "ResetPassword";
 
 export default ResetPassword;

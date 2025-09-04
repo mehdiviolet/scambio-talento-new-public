@@ -5,6 +5,7 @@ import DayModeToggle from "./components/DayModeToggle";
 // import LayoutModeToggle from "./components/LayoutModeToggle";
 import MainAppRouterTest from "./components/MainAppRouterTest";
 import LayoutModeToggle from "./components/LayoutModeToggle";
+import DemoHelper from "./components/Onboarding/DemoHelper";
 
 function App() {
   // const [layoutMode, setLayoutMode] = useState("");
@@ -38,6 +39,8 @@ function App() {
 
       <ViewModeToggle />
       <DayModeToggle />
+      {/* ✅ NUOVO: Demo Helper Widget */}
+      {/* <DemoHelper /> */}
       <LayoutModeToggle layoutMode={layoutMode} setLayoutMode={setLayoutMode} />
     </>
   );

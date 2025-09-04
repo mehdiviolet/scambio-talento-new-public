@@ -14,3 +14,130 @@
   border-radius: var(--card-border-radius);
   /* border: none; */
 }
+
+/* Aggiungere questi stili al file esistente */
+
+/* .widgetsArea {
+  position: fixed;
+  top: 0;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 10;
+} */
+
+.widgetsArea {
+  position: fixed;
+  top: 20px; /* ✅ Margine dal bordo */
+  right: 20px; /* ✅ Posizione destra */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 9999; /* ✅ Z-index alto */
+  pointer-events: auto;
+}
+.rolesArea {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+}
+
+.daySelector {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  min-width: 160px;
+}
+
+.currentLabel {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+}
+
+.dayOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dayOption {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dayOption.active {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.dayOption:not(.active):hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.modeWidget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 160px;
+}
+
+.modeWidget.single {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #a855f7;
+}
+
+.modeWidget.single:hover {
+  background: rgba(168, 85, 247, 0.2);
+  transform: translateY(-2px);
+}
+
+.roleWidget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.roleWidget.active {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.4);
+  color: #3b82f6;
+}
+
+.roleWidget:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.roleWidget.active:hover {
+  background: rgba(59, 130, 246, 0.25);
+}

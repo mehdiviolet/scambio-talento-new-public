@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styles from "./ForgotPassword.module.css";
 
-const ForgotPassword = ({ onBackToLogin, onResetPassword }) => {
+const ForgotPassword = ({ onBackToLogin, onResetPassword, onEmailSent }) => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const [error, setError] = useState("");
 
   const handleEmailChange = (e) => {
@@ -34,6 +35,10 @@ const ForgotPassword = ({ onBackToLogin, onResetPassword }) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       setIsSubmitted(true);
+      setEmailSent(true);
+      // Notifica il parent che l'email è stata "inviata"
+      if (onEmailSent) onEmailSent(); // ✅ AGGIUNGI questa riga
+      // setEmailSent(true); // ✅ AGGIUNGI questa riga
       console.log("Password reset email sent to:", email);
     } catch (err) {
       setError("Errore durante l'invio. Riprova più tardi.");
@@ -86,41 +91,6 @@ const ForgotPassword = ({ onBackToLogin, onResetPassword }) => {
             </p>
 
             <div className={styles.actionButtons}>
-              {/* <button onClick={handleBackToLogin} className={styles.backButton}>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <polyline points="15,18 9,12 15,6"></polyline>
-                </svg>
-                Torna al Login
-              </button> */}
-              <button
-                onClick={() => {
-                  console.log("Simulating email link click");
-                  // Simula click su link email
-                  onResetPassword && onResetPassword();
-                }}
-                className={styles.resetLinkButton}
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15,3 21,3 21,9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-                Click Email
-              </button>
               <button
                 onClick={handleResendEmail}
                 className={styles.resendButton}
@@ -138,15 +108,6 @@ const ForgotPassword = ({ onBackToLogin, onResetPassword }) => {
                 </svg>
                 Invia di Nuovo
               </button>
-            </div>
-
-            <div className={styles.helpSection}>
-              <p>Non hai ricevuto l'email?</p>
-              <ul>
-                <li>Controlla la cartella spam</li>
-                <li>Verifica che l'email sia corretta</li>
-                <li>Attendi fino a 5 minuti</li>
-              </ul>
             </div>
           </div>
         </div>
@@ -252,7 +213,7 @@ const ForgotPassword = ({ onBackToLogin, onResetPassword }) => {
           </button>
         </div>
 
-        <div className={styles.securityInfo}>
+        {/* <div className={styles.securityInfo}>
           <div className={styles.securityIcon}>
             <svg
               width="20"
@@ -273,7 +234,7 @@ const ForgotPassword = ({ onBackToLogin, onResetPassword }) => {
               15 minuti e può essere utilizzato una sola volta.
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
