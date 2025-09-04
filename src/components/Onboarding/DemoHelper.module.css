@@ -1,4 +1,4 @@
-.demoHelper {
+/* .demoHelper {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -16,8 +16,26 @@
   z-index: 9999;
   height: 50px;
   overflow: hidden;
+} */
+.demoHelper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(34, 211, 238, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: fixed;
+  top: 150px; /* ✅ Sotto i widget Owner/Viewer */
+  right: -200px; /* ✅ Lato destro */
+  width: 200px; /* ✅ Larghezza fissa */
+  height: 50px;
+  z-index: 9999;
+  overflow: hidden;
 }
-
 .demoHelper::before {
   content: "";
   position: absolute;

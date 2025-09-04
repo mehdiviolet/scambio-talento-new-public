@@ -1,9 +1,13 @@
 import React from "react";
 import styles from "./DemoHelper.module.css";
+import widgetStyles from "./WidgetPositions.module.css";
 
 const DemoHelper = ({ onDemoFill }) => {
   return (
-    <div className={styles.demoHelper} onClick={onDemoFill}>
+    <div
+      className={`${widgetStyles.baseWidget} ${widgetStyles.leftOfMobile} ${widgetStyles.demoStyle}`}
+      onClick={onDemoFill}
+    >
       {/* <div className={styles.demoIcon}>
         <svg
           width="20"

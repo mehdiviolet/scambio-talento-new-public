@@ -1,0 +1,157 @@
+/* === SISTEMA DI POSIZIONAMENTO WIDGET === */
+
+/* Base comune per tutti i widget */
+.baseWidget {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: fixed;
+  height: 50px;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* === POSIZIONI PREDEFINITE === */
+
+/* In basso al centro (default mobile) */
+.bottomCenter {
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
+
+/* Sotto widget Owner/Viewer a destra */
+.belowOwnerViewer {
+  top: 150px;
+  right: 20px;
+  width: 200px;
+}
+
+/* Sopra lo schermo mobile */
+.aboveMobile {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+}
+
+/* A sinistra dello schermo mobile */
+.leftOfMobile {
+  top: 50%;
+  left: -250px;
+  transform: translateY(-50%);
+  width: 200px;
+}
+
+/* A destra dello schermo mobile */
+.rightOfMobile {
+  top: 50%;
+  right: -250px;
+  transform: translateY(-50%);
+  width: 200px;
+}
+
+/* Sotto lo schermo mobile */
+.belowMobile {
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+}
+
+/* Nell'angolo in alto a sinistra */
+.topLeft {
+  top: 20px;
+  left: 20px;
+  width: 180px;
+}
+
+/* Nell'angolo in alto a destra */
+.topRight {
+  top: 20px;
+  right: 20px;
+  width: 180px;
+}
+
+/* Sidebar sinistra verticale */
+.leftSidebar {
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  width: 160px;
+  flex-direction: column;
+  height: auto;
+  padding: 12px;
+}
+
+/* Sidebar destra verticale */
+.rightSidebar {
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 160px;
+  flex-direction: column;
+  height: auto;
+  padding: 12px;
+}
+
+/* === VARIANTI COLORE === */
+
+.demoStyle {
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+.demoStyle:hover {
+  background: rgba(34, 211, 238, 0.15);
+  border-color: rgba(34, 211, 238, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(34, 211, 238, 0.2);
+}
+
+.emailStyle {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.emailStyle:hover {
+  background: rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(251, 191, 36, 0.2);
+}
+
+.resetStyle {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.resetStyle:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .leftOfMobile,
+  .rightOfMobile {
+    display: none; /* Nascondi sui dispositivi piccoli */
+  }
+
+  .belowOwnerViewer {
+    top: 120px;
+    width: 180px;
+  }
+
+  .aboveMobile,
+  .belowMobile {
+    width: 250px;
+  }
+}
