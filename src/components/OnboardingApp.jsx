@@ -13,10 +13,15 @@ import DemoHelper from "./Onboarding/DemoHelper";
 import EmailHelper from "./Onboarding/EmailHelper";
 import EmailNotification from "./Onboarding/EmailNotification";
 import ResetDemoHelper from "./Onboarding/ResetDemoHelper";
+import RegisterDemoHelper from "./Onboarding/RegisterDemoHelper";
 
 const OnboardingApp = () => {
-  const { showReadyToStart, showQuickSetup, setShowReadyToStart } =
-    useOnboarding();
+  const {
+    showReadyToStart,
+    showQuickSetup,
+    setShowReadyToStart,
+    setShowQuickSetup,
+  } = useOnboarding();
 
   const [isLoading, setIsLoading] = useState(true);
   const [currentStep, setCurrentStep] = useState("login");
@@ -27,6 +32,7 @@ const OnboardingApp = () => {
   const loginRef = useRef(null);
   const emailHelperRef = useRef(null); // ✅ AGGIUNGI questa riga
   const resetPasswordRef = useRef(null); // ✅ AGGIUNGI questa riga
+  const registerRef = useRef(null); // ✅ AGGIUNGI questa riga
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -60,6 +66,17 @@ const OnboardingApp = () => {
     }
   };
 
+  const handleRegisterDemoFill = () => {
+    console.log("Register demo fill clicked!");
+
+    if (registerRef.current && registerRef.current.fillDemoData) {
+      registerRef.current.fillDemoData();
+      console.log("Register demo data filled via ref!");
+    } else {
+      console.log("Register ref not available");
+    }
+  };
+
   // ✅ AGGIUNGI questa funzione dopo handleDemoFill
   const handleSimulateEmailClick = () => {
     console.log("Simulating email link click!");
@@ -82,8 +99,9 @@ const OnboardingApp = () => {
   const handleRegisterSuccess = (userData) => {
     console.log("Registration successful:", userData);
     setUserType("new");
-    setShowReadyToStart(true);
-    setCurrentStep("readyToStart");
+
+    setShowQuickSetup(true);
+    setCurrentStep("quickSetup"); // ✅ AGGIUNGI questa riga
   };
 
   const handleForgotPassword = () => {
@@ -126,10 +144,14 @@ const OnboardingApp = () => {
 
       {/* REGISTER PAGE */}
       {currentStep === "register" && !isLoading && (
-        <RegisterMinimal
-          onRegisterSuccess={handleRegisterSuccess}
-          onBackToLogin={handleBackToLogin}
-        />
+        <>
+          <RegisterDemoHelper onDemoFill={handleRegisterDemoFill} />
+          <RegisterMinimal
+            ref={registerRef}
+            onRegisterSuccess={handleRegisterSuccess}
+            onBackToLogin={handleBackToLogin}
+          />
+        </>
       )}
 
       {/* FORGOT PASSWORD PAGE */}
@@ -176,7 +198,10 @@ const OnboardingApp = () => {
       )}
 
       {/* QUICK SETUP */}
-      {showQuickSetup && !isLoading && userType === "new" && (
+      {/* {showQuickSetup && !isLoading && userType === "new" && (
+        <QuickSetupSlides onComplete={handleQuickSetupComplete} />
+      )} */}
+      {currentStep === "quickSetup" && !isLoading && (
         <QuickSetupSlides onComplete={handleQuickSetupComplete} />
       )}
 
