@@ -4,8 +4,9 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(99, 102, 241, 0.3);
-  backdrop-filter: blur(35px);
+  /* background-color: rgba(99, 102, 241, 0.3); */
+  background: var(--bg--overlay);
+  backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -377,7 +378,7 @@
 }
 
 /* Responsive */
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
   .modal-overlay {
     padding: 0.5rem;
   }
@@ -421,4 +422,4 @@
   .selected-skill-icon {
     font-size: 2rem;
   }
-}
+} */

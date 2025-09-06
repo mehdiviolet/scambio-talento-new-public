@@ -46,8 +46,11 @@
   --text-cherry: rgb(172, 17, 17);
 
   /* 🪟 GLASSMORPHISM */
-  --bg: #ececec;
-  --bg--skill: #cecec7;
+  --bg: #ffffff;
+  --bg--overlay: hsla(219, 66%, 46%, 0.345);
+  --bg-old: #ececec;
+  --bg--skill-01: #cecec7;
+  --bg--skill: #cecec758;
   --bg--esperienza: #d8cda3;
   --bg--evento: #d0d8a3;
   --bg--evento-one: #cfd3b9;
@@ -56,6 +59,11 @@
   --glass-bg-strong: rgba(255, 255, 255, 0.2);
   --glass-border: rgba(255, 255, 255, 0.2);
   --backdrop-blur: blur(20px);
+
+  --box-shadow-highlight: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --box-shadow-minimal: 0 6px 12px rgba(0, 0, 0, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 
   /* 📏 SPACING SYSTEM (8px base) */
   --space-xs: 4px;

@@ -3,8 +3,10 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(99, 102, 241, 0.3);
-  backdrop-filter: blur(35px);
+  /* background-color: rgba(99, 102, 241, 0.3); */
+  background: var(--bg--overlay);
+
+  backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +17,8 @@
 
 .modal {
   /* background: #e9be31; */
-  background: var(--bg--esperienza);
+  background: var(--bg-old);
+  /* background: var(--bg--esperienza); */
 
   backdrop-filter: blur(20px) saturate(150%);
   border-radius: 2rem;
