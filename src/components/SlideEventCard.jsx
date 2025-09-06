@@ -79,9 +79,9 @@ const SlideEventCard = ({
           </div>
         </div>
 
-        <div className={styles.cardActions}>
+        {/* <div className={styles.cardActions}>
           <span className={styles.viewMore}>Visualizza →</span>
-        </div>
+        </div> */}
       </div>
 
       {/* Event Slide Drawer */}

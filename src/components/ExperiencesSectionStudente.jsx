@@ -5,13 +5,7 @@ import TestCardRedux from "./MainApp/Shared/Modals/TestCardRedux";
 import { useStatusFilter } from "./useStatusFilter";
 import StatusFilterButtons from "./StatusFilterButtons";
 import { Flag } from "lucide-react";
-import {
-  CompactScrollableFilters,
-  DropdownFilters,
-  MinimalFilters,
-  SegmentedFilters,
-  WaveFilters,
-} from "./ui/SmartFilters";
+import { DropdownFilters } from "./ui/SmartFilters";
 import { Button } from "./ui/Button";
 
 const ExperiencesSectionStudente = () => {

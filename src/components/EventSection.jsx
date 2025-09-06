@@ -14,6 +14,7 @@ import {
 } from "@/store/slices/sharedEventSlice";
 import { AddEventButton, HeaderAddButton } from "./ui/AddButtons";
 import { DropdownFilters } from "./ui/SmartFilters";
+import RealEventSlideCard from "./RealEventSlideCard";
 
 const EventsSection = () => {
   // State per il modal eventi
@@ -157,7 +158,10 @@ const EventsSection = () => {
           // >
           //   +
           // </button>
-          <HeaderAddButton onClick={handleOpenCreateModal} />
+          <HeaderAddButton
+            onClick={handleOpenCreateModal}
+            title="Crea nuovo evento"
+          />
         )}
       </div>
       <div>
@@ -185,7 +189,7 @@ const EventsSection = () => {
       <div className={styles.content}>
         {events.length > 0 ? (
           <div className={styles.eventsGrid}>
-            {events.map((event) => {
+            {/* {events.map((event) => {
               const ownerPhoto = getOwnerPhoto();
 
               return (
@@ -202,6 +206,26 @@ const EventsSection = () => {
                   onDelete={
                     isOwner ? () => handleDeleteEvent(event.id) : undefined
                   }
+                />
+              );
+            })} */}
+
+            {filteredEvents.map((event) => {
+              const ownerPhoto = getOwnerPhoto();
+              return (
+                <RealEventSlideCard
+                  key={event.id}
+                  event={event}
+                  organizer={`${currentProfile?.firstName || "Tu"} ${
+                    currentProfile?.lastName || ""
+                  }`}
+                  organizerPhoto={ownerPhoto}
+                  isOwner={isOwner}
+                  onEdit={isOwner ? () => handleEditEvent(event) : undefined}
+                  onDelete={
+                    isOwner ? () => handleDeleteEvent(event.id) : undefined
+                  }
+                  currentUserEvent={currentUserEvent}
                 />
               );
             })}

@@ -22,6 +22,7 @@ import {
   GlassWaterIcon,
   GlobeIcon,
   Home,
+  User2,
 } from "lucide-react";
 import styles from "./TestCard.module.css";
 
@@ -795,18 +796,19 @@ function TestCard({
                   />
                 ) : (
                   // Fallback se non c'è foto
-                  <div className={styles.userAvatar}>👨‍🎤</div>
+                  // <div className={styles.userAvatar}>👨‍🎤</div>
+                  <User2 />
                 )}
               </li>
               <p>{istruttore}</p>
             </ul>
             <div className={styles.userGem}>
               {/* <Gem size={16} /> */}
-              <Gem size={16} />
+              <Gem size={20} />
               {/* ✅ GEM DALLA SKILL invece che dall'esperienza */}
               {/* <span>{getDisplayGems()}</span> */}
               <span>{skillGems}</span>
-              <div className={styles.iconclass}>{icon}</div>
+              {/* <div className={styles.iconclass}>{icon}</div> */}
             </div>
           </div>
 

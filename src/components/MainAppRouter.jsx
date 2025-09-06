@@ -134,8 +134,10 @@ const MainAppRouter = () => {
                 onClick={() => setIsCookieModalOpen(true)}
                 style={{ cursor: "pointer" }}
               >
-                <Cookie className="icon-md text-orange-500" />
-                <span>{userXP} XP</span>
+                <Cookie style={{ color: "var(--text-secondary)" }} />
+                <span style={{ color: "var(--text-secondary)" }}>
+                  {userXP} XP
+                </span>
               </div>
             </div>
             <div
@@ -143,8 +145,8 @@ const MainAppRouter = () => {
               onClick={() => setIsActivityModalOpen(true)}
               style={{ cursor: "pointer" }}
             >
-              <Activity className="icon-sm text-orange-500" />
-              <span>0</span>
+              <Activity style={{ color: "var(--text-secondary)" }} />
+              <span style={{ color: "var(--text-secondary)" }}>0</span>
             </div>
 
             {/* <div className={styles.hudXp}>
@@ -201,7 +203,7 @@ const MainAppRouter = () => {
             onClick={() => setIsChatModalOpen(true)}
             style={{ cursor: "pointer" }}
           >
-            <MessageCircle className="icon-sm text-orange-500" />
+            <MessageCircle style={{ color: "var(--text-four)" }} />
             {/* <span>{chatNotifications.total}</span> */}
             {/* Badge Instagram-style */}
             {chatNotifications.hasUnread && (

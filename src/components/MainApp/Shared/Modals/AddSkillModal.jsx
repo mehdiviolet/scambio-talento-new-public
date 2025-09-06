@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { X, ArrowLeft } from "lucide-react";
 import styles from "./AddSkillModal.module.css";
+import { SKILL_ICONS } from "@/components/ui/SkillIconsMap";
 
 const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -12,27 +13,50 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
 
   // ✅ Lista completa di skills disponibili
   const allSkillsData = [
-    { id: "writing", name: "Scrittura", icon: "✍️" },
-    { id: "cooking", name: "Cucina", icon: "🍳" },
-    { id: "photography", name: "Fotografia", icon: "📸" },
-    { id: "history", name: "Storia", icon: "📚" },
-    { id: "music", name: "Musica", icon: "🎵" },
-    { id: "dance", name: "Danza", icon: "💃" },
-    { id: "painting", name: "Pittura", icon: "🎨" },
-    { id: "video", name: "Video", icon: "🎬" },
-    { id: "programming", name: "Programmazione", icon: "💻" },
-    { id: "architecture", name: "Architettura", icon: "🏛️" },
-    { id: "graphics", name: "Grafica", icon: "🎭" },
-    { id: "theater", name: "Teatro", icon: "🎪" },
-    { id: "psychology", name: "Psicologia", icon: "🧠" },
-    { id: "fashion", name: "Fashion", icon: "👗" },
-    { id: "health", name: "Salute", icon: "💪" },
-    { id: "gardening", name: "Giardinaggio", icon: "🌱" },
-    { id: "languages", name: "Lingue", icon: "🗣️" },
-    { id: "videogames", name: "Videogiochi", icon: "🎮" },
-    { id: "podcast", name: "Podcast", icon: "🎙️" },
+    { id: "writing", name: "Scrittura", IconComponent: SKILL_ICONS.writing },
+    { id: "cooking", name: "Cucina", IconComponent: SKILL_ICONS.cooking },
+    {
+      id: "photography",
+      name: "Fotografia",
+      IconComponent: SKILL_ICONS.photography,
+    },
+    { id: "history", name: "Storia", IconComponent: SKILL_ICONS.history },
+    { id: "music", name: "Musica", IconComponent: SKILL_ICONS.music },
+    { id: "dance", name: "Danza", IconComponent: SKILL_ICONS.dance },
+    { id: "painting", name: "Pittura", IconComponent: SKILL_ICONS.painting },
+    { id: "video", name: "Video", IconComponent: SKILL_ICONS.video },
+    {
+      id: "programming",
+      name: "Programmazione",
+      IconComponent: SKILL_ICONS.programming,
+    },
+    {
+      id: "architecture",
+      name: "Architettura",
+      IconComponent: SKILL_ICONS.architecture,
+    },
+    { id: "graphics", name: "Grafica", IconComponent: SKILL_ICONS.graphics },
+    { id: "theater", name: "Teatro", IconComponent: SKILL_ICONS.theater },
+    {
+      id: "psychology",
+      name: "Psicologia",
+      IconComponent: SKILL_ICONS.psychology,
+    },
+    { id: "fashion", name: "Fashion", IconComponent: SKILL_ICONS.fashion },
+    { id: "health", name: "Salute", IconComponent: SKILL_ICONS.health },
+    {
+      id: "gardening",
+      name: "Giardinaggio",
+      IconComponent: SKILL_ICONS.gardening,
+    },
+    { id: "languages", name: "Lingue", IconComponent: SKILL_ICONS.languages },
+    {
+      id: "videogames",
+      name: "Videogiochi",
+      IconComponent: SKILL_ICONS.videogames,
+    },
+    { id: "podcast", name: "Podcast", IconComponent: SKILL_ICONS.podcast },
   ];
-
   // ✅ FILTRO: Mostra solo le skills NON ancora aggiunte
   const getAvailableSkills = () => {
     const existingSkillIds = (formData?.skills || []).map((skill) => skill.id);
@@ -201,7 +225,11 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
                                     isSelected ? styles.selected : ""
                                   }`}
                                 >
-                                  {skill.icon}
+                                  {skill.IconComponent ? (
+                                    <skill.IconComponent size={24} />
+                                  ) : (
+                                    skill.icon
+                                  )}
                                 </span>
                                 <span
                                   className={`${styles.skillName} ${

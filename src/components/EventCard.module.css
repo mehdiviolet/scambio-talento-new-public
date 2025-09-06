@@ -3,13 +3,15 @@
 .card {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px) saturate(150%);
-  border-radius: 1.5rem;
+  /* border-radius: 1.5rem; */
   border: 1px solid rgba(255, 255, 255, 0.2);
   /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); */
   transition: all 0.3s ease;
   overflow: hidden;
   position: relative;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  margin-top: 2px;
+  /* color: #22c55e; */
 }
 
 .card:hover {
@@ -106,10 +108,10 @@
 .eventTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  color: rgb(17, 24, 39);
+  /* color: rgb(17, 24, 39); */
   margin: 0 0 1rem 0;
   line-height: 1.3;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  /* filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)); */
 }
 
 .eventMeta {
@@ -293,7 +295,7 @@
   font-size: 0.875rem;
   color: rgb(17, 24, 39);
   font-weight: 600;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  /* filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)); */
 }
 
 .eventStatus {
@@ -703,10 +705,10 @@
 .eventTitleOverlay {
   font-size: 1.25rem;
   font-weight: 700;
-  color: white;
+  /* color: white; */
   margin: 0 0 0.75rem 0;
   line-height: 1.3;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); */
   /* Aggiungi queste proprietà per forzare il word wrap */
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -729,11 +731,11 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.9);
+  /* color: rgba(255, 255, 255, 0.9); */
 }
 
 .metaIconOverlay {
-  color: rgba(255, 255, 255, 0.8);
+  /* color: rgba(255, 255, 255, 0.8); */
   flex-shrink: 0;
 }
 
@@ -754,7 +756,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
-  color: white;
+  /* color: white; */
 }
 
 /* Icone in alto a destra */
@@ -772,7 +774,7 @@
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
+  /* color: white; */
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
@@ -786,9 +788,9 @@
 }
 
 /* Contenuto in basso */
-.bottomContent {
+/* .bottomContent {
   margin-top: auto;
-}
+} */
 
 .collaborationSection {
   margin: 0 1.25rem 1rem 1.25rem;
@@ -847,6 +849,7 @@
   justify-content: space-between;
   align-items: flex-end;
   gap: 1rem;
+  margin-bottom: 28px;
 }
 
 .titleAndMeta {
@@ -939,7 +942,7 @@
 
 .participantCount {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.9);
+  /* color: rgba(255, 255, 255, 0.9); */
   font-weight: 500;
 }
 
@@ -1362,7 +1365,8 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  /* background: rgba(255, 255, 255, 0.95); */
+  background: var(--bg);
   backdrop-filter: blur(20px);
   z-index: 1000;
   transform: translateX(100%);
@@ -1407,5 +1411,284 @@
 
 .drawerContent {
   flex: 1;
+  /* padding: 1rem; */
+}
+
+/* Aggiungi questi stili al tuo EventCard.module.css esistente */
+
+/* Azioni proprietario nella card preview */
+.ownerActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  background: rgba(59, 130, 246, 0.2);
+  transform: scale(1.05);
+}
+
+/* Contenuto dettagliato del drawer */
+.eventDetails {
+  max-width: 600px;
+  margin: 0 auto;
   padding: 1rem;
+}
+
+.eventHeader {
+  margin-bottom: 2rem;
+}
+
+.eventBanner {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.eventTitleSection {
+  text-align: center;
+}
+
+.eventMainTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.categoryBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Griglia informazioni */
+.eventInfo {
+  margin-bottom: 2rem;
+}
+
+.infoGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.infoIcon {
+  color: #3b82f6;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.infoLabel {
+  display: block;
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.infoValue {
+  display: block;
+  font-size: 0.95rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.address {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 400;
+  margin-top: 0.25rem;
+}
+
+/* Descrizione */
+.eventDescription {
+  margin-bottom: 2rem;
+}
+
+.eventDescription h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.75rem 0;
+}
+
+.eventDescription p {
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Sezione organizzatore */
+.organizerSection {
+  margin-bottom: 2rem;
+}
+
+.organizerSection h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.75rem 0;
+}
+
+.organizerInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.organizerAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.organizerName {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.ownerBadge {
+  padding: 0.25rem 0.5rem;
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+/* Azioni proprietario nel drawer */
+.ownerActionsSection {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.editButton,
+.deleteButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.editButton {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.editButton:hover {
+  background: rgba(59, 130, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+.deleteButton {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.deleteButton:hover {
+  background: rgba(239, 68, 68, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Stato evento */
+.eventStatus {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.statusBadge.active {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+.statusBadge.completed {
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+}
+
+.statusBadge.cancelled {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.statusBadge.waiting {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .eventDetails {
+    padding: 0.5rem;
+  }
+
+  .ownerActionsSection {
+    flex-direction: column;
+  }
+
+  .infoGrid {
+    gap: 0.75rem;
+  }
 }

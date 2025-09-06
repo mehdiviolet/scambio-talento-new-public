@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Book, ChevronDown, Edit, Gem, Save, Trash2, X } from "lucide-react";
+import {
+  Book,
+  ChevronDown,
+  Edit,
+  Gem,
+  Save,
+  Trash2,
+  User2,
+  X,
+} from "lucide-react";
 import styles from "./SkillsSection.module.css";
 import { useAppSelector, useAppDispatch } from "./../hooks/redux";
 import {
@@ -11,6 +20,8 @@ import {
 } from "@/services/userService";
 import AddSkillModal from "@/components/MainApp/Shared/Modals/AddSkillModal";
 import { AddSkillButton, HeaderAddButton } from "./ui/AddButtons";
+import { Button } from "./ui/Button";
+import { SKILL_ICONS } from "./ui/SkillIconsMap";
 
 const SkillsSection = () => {
   const [editingSkill, setEditingSkill] = useState(null);
@@ -133,6 +144,13 @@ const SkillsSection = () => {
     setIsAddModalOpen(false);
   };
 
+  // Funzione per convertire skill in IconComponent
+  const getSkillIconComponent = (skill) => {
+    // Prova prima con skill.id, poi con skill.name lowercase
+    const skillKey = skill.id || skill.name?.toLowerCase();
+    return SKILL_ICONS[skillKey] || null;
+  };
+
   return (
     <div className={styles.container}>
       {/* Header - conditional add button for owner only */}
@@ -163,6 +181,7 @@ const SkillsSection = () => {
             const isSkillExpanded = isExpanded(skill);
             const isEditing =
               editingSkill && editingSkill.createdAt === skill.createdAt;
+            const IconComponent = getSkillIconComponent(skill);
 
             return (
               <div
@@ -177,7 +196,13 @@ const SkillsSection = () => {
                   className={styles.skillCard}
                 >
                   <div className={styles.skillInfo}>
-                    <span className={styles.skillIcon}>{skill.icon}</span>
+                    {/* <span className={styles.skillIcon}>{skill.icon}</span> */}
+                    {/* {skill.IconComponent ? (
+                      <skill.IconComponent size={24} />
+                    ) : (
+                      skill.icon
+                    )} */}
+                    {IconComponent ? <IconComponent size={24} /> : skill.icon}
                     <div className={styles.skillName}>
                       {skill.detail || skill.name}
                     </div>
@@ -185,7 +210,7 @@ const SkillsSection = () => {
 
                   <div className={styles.skillMeta}>
                     <span className={styles.skillGems}>
-                      <Gem size={16} />
+                      <Gem size={20} />
                       <span className={styles.gemsCount}>
                         {skill.gems || 0}
                       </span>
@@ -218,32 +243,57 @@ const SkillsSection = () => {
                           {isOwner && (
                             <div className={styles.actions}>
                               <div className={styles.actionButtons}>
-                                <button
+                                {/* <button
                                   className={`${styles.actionButton} ${styles.actionButtonDelete}`}
                                   onClick={(e) => handleDeleteClick(skill, e)}
                                   title="Elimina esperienza"
                                 >
                                   <Trash2 size={16} />
                                   <span>Elimina</span>
-                                </button>
-                              </div>
-                            </div>
-                          )}
-                          <button
+                                </button> */}
+                                <Button
+                                  className={`${styles.actionButton} ${styles.actionButtonDelete}`}
+                                  onClick={(e) => handleDeleteClick(skill, e)}
+                                  title="Elimina esperienza"
+                                >
+                                  {" "}
+                                  <Trash2 size={16} />
+                                  <span>Elimina</span>
+                                </Button>
+
+                                {/* <button
                             onClick={handleEditCancel}
                             className={styles.editCancelButton}
                           >
                             <X size={14} />
                             Annulla
-                          </button>
-                          <button
+                          </button> */}
+                                <Button
+                                  onClick={handleEditCancel}
+                                  className={styles.editCancelButton}
+                                >
+                                  <X size={14} />
+                                  Annulla
+                                </Button>
+                                <Button
+                                  onClick={handleEditSave}
+                                  disabled={!editedDescription.trim()}
+                                  className={styles.editSaveButton}
+                                >
+                                  <Save size={14} />
+                                  Salva
+                                </Button>
+                                {/* <button
                             onClick={handleEditSave}
                             disabled={!editedDescription.trim()}
                             className={styles.editSaveButton}
                           >
                             <Save size={14} />
                             Salva
-                          </button>
+                          </button> */}
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ) : (
@@ -298,7 +348,8 @@ const SkillsSection = () => {
                               }`}
                             />
                           ) : (
-                            <div className={styles.avatarEmoji}>👩‍🎨</div>
+                            // <div className={styles.avatarEmoji}>👩‍🎨</div>
+                            <User2 />
                           )}
                         </div>
                         <span className={styles.userName}>

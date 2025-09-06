@@ -14,7 +14,9 @@
 }
 
 .modal {
-  background: #e9be31;
+  /* background: #e9be31; */
+  background: var(--bg--evento);
+
   backdrop-filter: blur(20px) saturate(150%);
   border-radius: 2rem;
   max-width: 32rem;

@@ -18,15 +18,7 @@ import {
   AddSkillFirstButton,
   HeaderAddButton,
 } from "./ui/AddButtons";
-import {
-  CompactScrollableFilters,
-  DropdownFilters,
-  MinimalFilters,
-  ScrollableFilters,
-  SegmentedFilters,
-  SmartFilters,
-  WaveFilters,
-} from "./ui/SmartFilters";
+import { DropdownFilters } from "./ui/SmartFilters";
 
 const ExperiencesSection = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -211,7 +203,6 @@ const ExperiencesSection = () => {
       {/* Header */}
       <div className={styles.header}>
         <h3 className={styles.title}>
-          {/* <span className={styles.experiencesIcon}>📚</span> */}
           Esperienze Offerte ({experiences.length})
         </h3>
 
@@ -225,7 +216,10 @@ const ExperiencesSection = () => {
               // >
               //   +
               // </button>
-              <HeaderAddButton />
+              <HeaderAddButton
+                onClick={handleAddExperience}
+                title="Crea nuova esperienza"
+              />
             )}
           </>
         )}

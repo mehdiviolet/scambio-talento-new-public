@@ -301,13 +301,22 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
 
               <div className={styles.hudLevel}>
                 <p className={styles.username}>@{user.username}</p>
-                <Star className="icon-md text-orange-500" />
+                <Star
+                  // className="icon-md text-orange-500"
+                  style={{ color: "var(--text-terzo)" }}
+                />
                 {/* <span>{myFeedback?.stars || 0} </span> */}
-                <span>{currentUser.participationScore || 0} </span>
+                <span style={{ color: "var(--text-primary)" }}>
+                  {currentUser.participationScore || 0}{" "}
+                </span>
 
-                <ShieldCheckIcon className="icon-md text-orange-500" />
+                <ShieldCheckIcon
+                  // className="icon-md text-orange-300"
+                  // style={{ color: "var(--text-secondary)" }}
+                  style={{ color: "var(--text-terzo)" }}
+                />
                 {/* ✅ NUOVO: Usa totalDisplayXP (include demo bonus) */}
-                <span>0 </span>
+                <span style={{ color: "var(--text-primary)" }}>0 </span>
               </div>
             </div>
 

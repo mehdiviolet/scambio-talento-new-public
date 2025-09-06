@@ -19,6 +19,7 @@ import {
   Star,
   ChevronDown,
   ChevronRight,
+  Map,
 } from "lucide-react";
 import styles from "./EventCard.module.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -318,8 +319,7 @@ const MockEventCard = ({
               )}
             </div>
 
-            {/* Contenuto in basso */}
-            <div className={styles.bottomContent}>
+            {/* <div className={styles.bottomContent}>
               <div className={styles.titleAndMeta}>
                 <h3 className={styles.eventTitleOverlay}>{mockEvent.title}</h3>
                 <div className={styles.eventMetaOverlay}>
@@ -343,7 +343,6 @@ const MockEventCard = ({
                           className={styles.pic}
                           title={participant.name}
                         >
-                          {/* {participant.initials} */}
                           <img
                             src={`/images/people/pic-${index}.jpg`}
                             alt="ax"
@@ -360,19 +359,63 @@ const MockEventCard = ({
                 </div>
               </div>
 
-              {/* QR Code dinamico */}
               {mockEvent.type === "presenza" && (
                 <QRCodeComponent isOwner={isOwner} size={80} />
               )}
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* Info aggiuntive quando espanso */}
         {isExpanded && (
           <div className={styles.cardHeader}>
+            <h3 className={styles.eventTitleOverlay}>{mockEvent.title}</h3>
+            <div className={styles.bottomContent}>
+              <div className={styles.titleAndMeta}>
+                <div className={styles.eventMetaOverlay}>
+                  <div className={styles.metaItemOverlay}>
+                    <Calendar size={16} className={styles.metaIconOverlay} />
+                    <span>{formatDate(mockEvent.startDate)}</span>
+                  </div>
+                  <div className={styles.metaItemOverlay}>
+                    <Clock size={16} className={styles.metaIconOverlay} />
+                    <span>
+                      {formatTime(mockEvent.startTime)} -{" "}
+                      {formatTime(mockEvent.endTime)}
+                    </span>
+                  </div>
+
+                  <div className={styles.participantsOverlay}>
+                    <div className={styles.participantAvatars}>
+                      {participants.slice(0, 3).map((participant, index) => (
+                        <div
+                          key={index}
+                          className={styles.pic}
+                          title={participant.name}
+                        >
+                          <img
+                            src={`/images/people/pic-${index}.jpg`}
+                            alt="ax"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <span className={styles.participantCount}>
+                      {eventStats.maxParticipants
+                        ? `${eventStats.participantsCount}/${eventStats.maxParticipants} partecipanti`
+                        : `${eventStats.participantsCount} partecipanti`}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {mockEvent.type === "presenza" && (
+                <QRCodeComponent isOwner={isOwner} size={80} />
+              )}
+            </div>
             <div className={styles.metaItem}>
               {location.icon}
+
               <span>{location.text}</span>
 
               {/* Toggle mappa per eventi in presenza */}
@@ -384,7 +427,7 @@ const MockEventCard = ({
                   }}
                   className={styles.mapToggle}
                 >
-                  📍 {showMap ? "Nascondi mappa" : "Vedi mappa"}
+                  {showMap ? "Nascondi mappa" : <Map />}
                 </button>
               )}
             </div>

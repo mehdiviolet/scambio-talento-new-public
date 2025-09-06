@@ -34,13 +34,23 @@
   --info: #22d3ee;
 
   /* 📝 COLORI TESTO */
-  --text-primary: #3b82f6;
-  --text-secondary: #ffb432;
+  --text-primary: #256679;
+  --text-secondary: #f59e0b;
+  --text-terzo: #17a3ce;
+  --text-four: #796625;
+  --text-five: #ce7817;
+  --text-six: #fff0b5;
+  --text-seven: #cecec7;
   --text-muted: rgba(255, 255, 255, 0.6);
   --text-disabled: rgba(255, 255, 255, 0.4);
   --text-cherry: rgb(172, 17, 17);
 
   /* 🪟 GLASSMORPHISM */
+  --bg: #ececec;
+  --bg--skill: #cecec7;
+  --bg--esperienza: #d8cda3;
+  --bg--evento: #d0d8a3;
+  --bg--evento-one: #cfd3b9;
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-bg-light: rgba(255, 255, 255, 0.15);
   --glass-bg-strong: rgba(255, 255, 255, 0.2);

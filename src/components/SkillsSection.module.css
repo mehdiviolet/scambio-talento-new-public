@@ -65,7 +65,8 @@
 .skillCard {
   width: 100%;
   background: none;
-  border: none;
+  /* border: none; */
+  /* border: 1px solid gray; */
   /* padding: 12px 20px; */
   padding: var(--space-sm) 0;
   display: flex;
@@ -79,10 +80,10 @@
   margin: 8px 0;
 }
 
-.skillCard:hover {
+/* .skillCard:hover {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-}
+} */
 
 .skillInfo {
   display: flex;
@@ -519,7 +520,7 @@
   /* border-bottom: 2px solid rgba(255, 255, 255, 0.8); */
   /* box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); */
   /* background: rgba(255, 255, 255, 0.05); */
-  background: #d0b0b0;
+  background: var(--bg--skill);
   margin: 8px 0;
 }
 
