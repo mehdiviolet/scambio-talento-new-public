@@ -18,6 +18,16 @@ const AddExperienceModal = ({
   const [description, setDescription] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
+  const MAX_DESCRIPTION_CHARS = 150;
+  const descriptionText = description || "Nessuna descrizione disponibile";
+  const needsTruncation = descriptionText.length > MAX_DESCRIPTION_CHARS;
+  const visibleText =
+    showFullDescription || !needsTruncation
+      ? description
+      : description.substring(0, MAX_DESCRIPTION_CHARS) + "...";
+
   const [lessonConfig, setLessonConfig] = useState({
     modalita: "online",
     lingua: "IT",
@@ -266,7 +276,7 @@ const AddExperienceModal = ({
   if (!isOpen) return null;
 
   const getStepTitle = () => {
-    const prefix = editMode ? "✏️ MODIFICA" : "✨ CREA";
+    const prefix = editMode ? "MODIFICA" : " CREA";
 
     switch (currentStep) {
       case 1:
@@ -278,14 +288,14 @@ const AddExperienceModal = ({
       case 4:
         return `${prefix} - configurazione`;
       case 5:
-        return editMode ? "📝 Rivedi" : "📋 Riepilogo";
+        return editMode ? "Rivedi" : "Riepilogo";
       default:
         return "";
     }
   };
 
   const getFinalButtonText = () => {
-    return editMode ? "💾 Salva Modifiche" : "🎉 Crea Skill Card";
+    return editMode ? " Salva Modifiche" : " Crea Skill Card";
   };
 
   return (
@@ -370,7 +380,7 @@ const AddExperienceModal = ({
                 onClick={handleSkillSelect}
                 className={styles.primaryButton}
               >
-                ✨ Seleziona {skills[selectedIndex]?.name}
+                Seleziona {skills[selectedIndex]?.name}
               </button>
             </div>
           )}
@@ -610,19 +620,19 @@ const AddExperienceModal = ({
                       onClick={() => setCurrentStep(1)}
                       className={styles.navButton}
                     >
-                      🎯 Skill
+                      Skill
                     </button>
                     <button
                       onClick={() => setCurrentStep(2)}
                       className={styles.navButton}
                     >
-                      ✏️ Dettaglio
+                      Dettaglio
                     </button>
                     <button
                       onClick={() => setCurrentStep(3)}
                       className={styles.navButton}
                     >
-                      📝 Descrizione
+                      Descrizione
                     </button>
                   </div>
                 </div>
@@ -638,9 +648,22 @@ const AddExperienceModal = ({
                     </div>
                     <div>
                       <h4 className={styles.previewTitle}>{skillDetail}</h4>
-                      <p className={styles.previewDescription}>
+                      {/* <p className={styles.previewDescription}>
                         {description.substring(0, 30)}...
-                      </p>
+                      </p> */}
+                      <div className={styles.descriptionContainer}>
+                        <p className={styles.aboutText}>{visibleText}</p>
+                        {needsTruncation && (
+                          <button
+                            onClick={() =>
+                              setShowFullDescription(!showFullDescription)
+                            }
+                            className={styles.expandTextButton}
+                          >
+                            {showFullDescription ? "Riduci" : "Leggi tutto"}
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
 

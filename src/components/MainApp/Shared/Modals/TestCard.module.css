@@ -225,7 +225,7 @@
 }
 
 /* Divisore */
-.dividere {
+/* .dividere {
   height: 1px;
   background: linear-gradient(
     90deg,
@@ -251,8 +251,11 @@
     rgba(255, 255, 255, 0.2),
     transparent
   );
+} */
+.divider {
+  border-top: 2px dashed rgba(248, 248, 248, 0.6);
+  /* margin: 1rem 0; */
 }
-
 /* Footer user */
 .footerUser {
   display: flex;

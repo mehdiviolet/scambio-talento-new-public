@@ -70,6 +70,9 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
 
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isCherryDrawerOpen, setIsCherryDrawerOpen] = useState(false);
+
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
   const myFollowing = useSelector(
     (state) =>
       state.experienceSliceTest.socialConnections.currentUser?.following
@@ -91,6 +94,14 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
     followers: profileData.social.followers.length,
     following: myFollowing,
   };
+
+  const MAX_DESCRIPTION_CHARS = 150;
+  const descriptionText = user?.aboutMe || "Nessuna descrizione disponibile";
+  const needsTruncation = descriptionText.length > MAX_DESCRIPTION_CHARS;
+  const visibleText =
+    showFullDescription || !needsTruncation
+      ? descriptionText
+      : descriptionText.substring(0, MAX_DESCRIPTION_CHARS) + "...";
 
   const feedbacks = useSelector(selectFeedbacks);
   const currentUser = useSelector((state) => state.sharedEvent.currentUser);
@@ -367,7 +378,20 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
           <div className={styles.aboutSection}>
             {isAboutExpanded && (
               <div className={styles.aboutContent}>
-                <p>{user.aboutMe}</p>
+                {/* <p>{user.aboutMe}</p> */}
+                <div className={styles.descriptionContainer}>
+                  <p className={styles.aboutText}>{visibleText}</p>
+                  {needsTruncation && (
+                    <button
+                      onClick={() =>
+                        setShowFullDescription(!showFullDescription)
+                      }
+                      className={styles.expandTextButton}
+                    >
+                      {showFullDescription ? "Riduci" : "Leggi tutto"}
+                    </button>
+                  )}
+                </div>
               </div>
             )}
           </div>

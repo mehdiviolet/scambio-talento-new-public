@@ -8,54 +8,77 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
   const [selectedSkill, setSelectedSkill] = useState(null);
   const [description, setDescription] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
   const descriptionRef = useRef(null);
 
   // ✅ Lista completa di skills disponibili
   const allSkillsData = [
-    { id: "writing", name: "Scrittura", IconComponent: SKILL_ICONS.writing },
-    { id: "cooking", name: "Cucina", IconComponent: SKILL_ICONS.cooking },
-    {
-      id: "photography",
-      name: "Fotografia",
-      IconComponent: SKILL_ICONS.photography,
-    },
-    { id: "history", name: "Storia", IconComponent: SKILL_ICONS.history },
-    { id: "music", name: "Musica", IconComponent: SKILL_ICONS.music },
-    { id: "dance", name: "Danza", IconComponent: SKILL_ICONS.dance },
-    { id: "painting", name: "Pittura", IconComponent: SKILL_ICONS.painting },
-    { id: "video", name: "Video", IconComponent: SKILL_ICONS.video },
-    {
-      id: "programming",
-      name: "Programmazione",
-      IconComponent: SKILL_ICONS.programming,
-    },
-    {
-      id: "architecture",
-      name: "Architettura",
-      IconComponent: SKILL_ICONS.architecture,
-    },
-    { id: "graphics", name: "Grafica", IconComponent: SKILL_ICONS.graphics },
-    { id: "theater", name: "Teatro", IconComponent: SKILL_ICONS.theater },
-    {
-      id: "psychology",
-      name: "Psicologia",
-      IconComponent: SKILL_ICONS.psychology,
-    },
-    { id: "fashion", name: "Fashion", IconComponent: SKILL_ICONS.fashion },
-    { id: "health", name: "Salute", IconComponent: SKILL_ICONS.health },
-    {
-      id: "gardening",
-      name: "Giardinaggio",
-      IconComponent: SKILL_ICONS.gardening,
-    },
-    { id: "languages", name: "Lingue", IconComponent: SKILL_ICONS.languages },
-    {
-      id: "videogames",
-      name: "Videogiochi",
-      IconComponent: SKILL_ICONS.videogames,
-    },
-    { id: "podcast", name: "Podcast", IconComponent: SKILL_ICONS.podcast },
+    // { id: "writing", name: "Scrittura", IconComponent: SKILL_ICONS.writing },
+    // { id: "cooking", name: "Cucina", IconComponent: SKILL_ICONS.cooking },
+    // {
+    //   id: "photography",
+    //   name: "Fotografia",
+    //   IconComponent: SKILL_ICONS.photography,
+    // },
+    // { id: "writing", name: "Scrittura", icon: "✍️" },
+    // { id: "cooking", name: "Cucina", icon: "🍳" },
+    // { id: "photography", name: "Fotografia", icon: "📸" },
+    // { id: "history", name: "Storia", IconComponent: SKILL_ICONS.history },
+    // { id: "music", name: "Musica", IconComponent: SKILL_ICONS.music },
+    // { id: "dance", name: "Danza", IconComponent: SKILL_ICONS.dance },
+    // { id: "painting", name: "Pittura", IconComponent: SKILL_ICONS.painting },
+    // { id: "video", name: "Video", IconComponent: SKILL_ICONS.video },
+    // {
+    //   id: "programming",
+    //   name: "Programmazione",
+    //   IconComponent: SKILL_ICONS.programming,
+    // },
+    // {
+    //   id: "architecture",
+    //   name: "Architettura",
+    //   IconComponent: SKILL_ICONS.architecture,
+    // },
+    // { id: "graphics", name: "Grafica", IconComponent: SKILL_ICONS.graphics },
+    // { id: "theater", name: "Teatro", IconComponent: SKILL_ICONS.theater },
+    // {
+    //   id: "psychology",
+    //   name: "Psicologia",
+    //   IconComponent: SKILL_ICONS.psychology,
+    // },
+    // { id: "fashion", name: "Fashion", IconComponent: SKILL_ICONS.fashion },
+    // { id: "health", name: "Salute", IconComponent: SKILL_ICONS.health },
+    // {
+    //   id: "gardening",
+    //   name: "Giardinaggio",
+    //   IconComponent: SKILL_ICONS.gardening,
+    // },
+    // { id: "languages", name: "Lingue", IconComponent: SKILL_ICONS.languages },
+    // {
+    //   id: "videogames",
+    //   name: "Videogiochi",
+    //   IconComponent: SKILL_ICONS.videogames,
+    // },
+    // { id: "podcast", name: "Podcast", IconComponent: SKILL_ICONS.podcast },
+    { id: "writing", name: "Scrittura", icon: "✍️" },
+    { id: "cooking", name: "Cucina", icon: "🍳" },
+    { id: "photography", name: "Fotografia", icon: "📸" },
+    { id: "history", name: "Storia", icon: "📚" },
+    { id: "music", name: "Musica", icon: "🎵" },
+    { id: "dance", name: "Danza", icon: "💃" },
+    { id: "painting", name: "Pittura", icon: "🎨" },
+    { id: "video", name: "Video", icon: "🎬" },
+    { id: "architecture", name: "Architettura", icon: "🏛️" },
+    { id: "graphics", name: "Grafica", icon: "🎭" },
+    { id: "theater", name: "Teatro", icon: "🎪" },
+    { id: "psychology", name: "Psicologia", icon: "🧠" },
+    { id: "programming", name: "coding", icon: "💻" },
+    { id: "fashion", name: "Fashion", icon: "👗" },
+    { id: "health", name: "Salute", icon: "💪" },
+    { id: "gardening", name: "Giardinaggio", icon: "🌱" },
+    { id: "languages", name: "Lingue", icon: "🗣️" },
+    { id: "videogames", name: "Videogiochi", icon: "🎮" },
+    { id: "podcast", name: "Podcast", icon: "🎙️" },
   ];
   // ✅ FILTRO: Mostra solo le skills NON ancora aggiunte
   const getAvailableSkills = () => {
@@ -166,16 +189,23 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
     switch (currentStep) {
       case 1:
         return hasAvailableSkills
-          ? "✨ Scegli una competenza"
-          : "🎉 Tutte le skills aggiunte!";
+          ? " Scegli una competenza"
+          : "Tutte le skills aggiunte!";
       case 2:
-        return "💫 Descrivi la tua skill";
+        return "Descrivi la tua skill";
       case 3:
-        return "📋 Riassunto finale";
+        return "Riassunto finale";
       default:
         return "";
     }
   };
+
+  const MAX_PREVIEW_LENGTH = 120; // caratteri
+  const shouldTruncate = description.length > MAX_PREVIEW_LENGTH;
+  const displayText =
+    isDescriptionExpanded || !shouldTruncate
+      ? description
+      : description.substring(0, MAX_PREVIEW_LENGTH) + "...";
 
   return (
     <div className={styles.overlay} onClick={handleOverlayClick}>
@@ -225,11 +255,12 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
                                     isSelected ? styles.selected : ""
                                   }`}
                                 >
-                                  {skill.IconComponent ? (
+                                  {/* {skill.IconComponent ? (
                                     <skill.IconComponent size={24} />
                                   ) : (
                                     skill.icon
-                                  )}
+                                  )} */}
+                                  {skill.icon}
                                 </span>
                                 <span
                                   className={`${styles.skillName} ${
@@ -265,7 +296,7 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
                     onClick={handleSkillSelect}
                     className={styles.primaryButton}
                   >
-                    ✨ Seleziona {skillsData[selectedIndex]?.name}
+                    Seleziona {skillsData[selectedIndex]?.name}
                   </button>
                 </>
               ) : (
@@ -290,6 +321,12 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
                 <div className={styles.iconContainer}>
+                  {/* <span>{selectedSkill.icon}</span> */}
+                  {/* {selectedSkill.IconComponent ? (
+                    <selectedSkill.IconComponent size={24} />
+                  ) : (
+                    "⚡"
+                  )} */}
                   <span>{selectedSkill.icon}</span>
                 </div>
                 <h3 className={styles.stepTitle}>{selectedSkill.name}</h3>
@@ -335,7 +372,19 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
                 </div>
 
                 <div className={styles.summaryDescription}>
-                  <p>{description}</p>
+                  {/* <p>{description}</p> */}
+
+                  <p>{displayText}</p>
+                  {shouldTruncate && (
+                    <button
+                      onClick={() =>
+                        setIsDescriptionExpanded(!isDescriptionExpanded)
+                      }
+                      className={styles.expandButton}
+                    >
+                      {isDescriptionExpanded ? "Mostra meno" : "Leggi tutto"}
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -347,7 +396,7 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
                   onClick={handleFinalSubmit}
                   className={styles.primaryButton}
                 >
-                  ✨ Aggiungi Skill
+                  Aggiungi Skill
                 </button>
               </div>
             </div>

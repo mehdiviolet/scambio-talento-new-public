@@ -573,3 +573,19 @@
   border-color: rgba(156, 163, 175, 0.3);
   cursor: not-allowed;
 }
+.expandTextButton {
+  color: #3b82f6;
+  font-size: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.descriptionContainer {
+  line-height: 1.4;
+  margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}

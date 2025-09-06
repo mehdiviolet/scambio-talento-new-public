@@ -202,7 +202,8 @@ const SkillsSection = () => {
                     ) : (
                       skill.icon
                     )} */}
-                    {IconComponent ? <IconComponent size={24} /> : skill.icon}
+                    {skill.icon}
+                    {/* {IconComponent ? <IconComponent size={24} /> : skill.icon} */}
                     <div className={styles.skillName}>
                       {skill.detail || skill.name}
                     </div>

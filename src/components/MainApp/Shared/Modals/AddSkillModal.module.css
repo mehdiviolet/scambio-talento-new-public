@@ -34,7 +34,8 @@
 }
 
 .modalSkill {
-  background: #d0b0b0;
+  /* background: #d0b0b0; */
+  background: var(--bg--skill);
 }
 
 .header {
@@ -394,6 +395,7 @@
   border-radius: 0.75rem;
   padding: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  word-wrap: break-word;
 }
 
 .summaryDescription p {
@@ -401,4 +403,13 @@
   line-height: 1.6;
   margin: 0;
   font-size: 0.95rem;
+}
+
+.expandButton {
+  color: #3b82f6;
+  font-size: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
 }
