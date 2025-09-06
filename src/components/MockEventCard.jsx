@@ -790,7 +790,7 @@ const MockEventCard = ({
                 }}
                 className={styles.commentsToggle}
               >
-                💬 Commenti ({comments.length}) {showComments ? "▼" : "▶"}
+                Commenti ({comments.length}) {showComments ? "▼" : "▶"}
               </button>
             </div>
 
@@ -843,20 +843,6 @@ const MockEventCard = ({
         {/* Footer con organizzatore */}
         <div className={styles.cardFooter}>
           <div className={styles.organizerInfo}>
-            {/* <div className={styles.organizerAvatar}>
-              <img
-                src={organizer.photo}
-                alt={organizer.name}
-                className={styles.avatarImage}
-                onError={(e) => {
-                  e.target.style.display = "none";
-                  e.target.nextSibling.style.display = "inline-flex";
-                }}
-              />
-              <span className={styles.avatarIcon} style={{ display: "none" }}>
-                👤
-              </span>
-            </div> */}
             <div className={styles.avatar}>
               {selectedPersonData?.profile?.profilePhoto ? (
                 <img
