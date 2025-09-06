@@ -247,18 +247,11 @@ const SearchPage = () => {
       {/* Barra di ricerca principale con pulsante */}
       <div className={searchStyles.searchInputContainer}>
         {/* NUOVO: Pulsante per mostrare lista */}
-        <button
-          className={searchStyles.listButton}
-          onClick={handleListButtonClick}
-          disabled={suggestions.length === 0}
-        >
-          <List size={20} />
-        </button>
 
-        <Search className={searchStyles.searchIcon} size={20} />
+        {/* <Search className={searchStyles.searchIcon} size={20} /> */}
         <input
           type="text"
-          placeholder="Cerca persone, competenze, eventi..."
+          placeholder="Cerca persone..."
           value={searchQuery}
           onChange={handleSearchChange}
           className={searchStyles.searchInput}
@@ -266,11 +259,19 @@ const SearchPage = () => {
             searchQuery && !showPageList && setShowSuggestions(true)
           }
         />
+        <button
+          className={searchStyles.listButton}
+          onClick={handleListButtonClick}
+          disabled={suggestions.length === 0}
+        >
+          <Search size={20} />
+        </button>
       </div>
 
       {/* Dropdown suggerimenti (solo se NON in modalità lista) */}
       {showSuggestions && !showPageList && suggestions.length > 0 && (
-        <div className={searchStyles.suggestionsDropdown}>
+        // <div className={searchStyles.suggestionsDropdown}>
+        <div>
           {suggestions.map((person, index) => (
             <div
               key={index}

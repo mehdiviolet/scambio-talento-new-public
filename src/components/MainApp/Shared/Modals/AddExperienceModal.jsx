@@ -573,7 +573,7 @@ const AddExperienceModal = ({
                   </select>
                 </div>
 
-                <div className={styles.formGroup}>
+                {/* <div className={styles.formGroup}>
                   <label>Costo:</label>
                   <select
                     value={lessonConfig.costo}
@@ -588,6 +588,32 @@ const AddExperienceModal = ({
                       </option>
                     ))}
                   </select>
+                </div> */}
+                <div
+                  className={styles.formGroup}
+                  style={{ gridColumn: "1 / -1" }}
+                >
+                  <label>Costo:</label>
+                  <div className={styles.xpProgressContainer}>
+                    <div className={styles.xpProgressBar}>
+                      {[20, 30, 40, 50, 60, 70, 80, 90].map((value) => (
+                        <div
+                          key={value}
+                          className={`${styles.xpStep} ${
+                            parseInt(lessonConfig.costo) === value
+                              ? styles.xpStepActive
+                              : ""
+                          }`}
+                          onClick={() =>
+                            handleConfigChange("costo", value.toString())
+                          }
+                        >
+                          <div className={styles.xpStepNumber}>{value}</div>
+                          <div className={styles.xpStepLabel}>XP</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
 

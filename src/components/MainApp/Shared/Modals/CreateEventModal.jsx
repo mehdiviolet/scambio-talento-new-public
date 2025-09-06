@@ -47,12 +47,12 @@ const CreateEventModal = ({
 
   // 6 categorie semplificate
   const categories = [
-    "🎨 Hobby e passioni",
-    "🏃‍♂️ Sport e fitness",
-    "💻 Tecnologia",
-    "🎵 Musica e Arte",
-    "🗣️ Lingua e identità",
-    "👥 Attività sociali",
+    "Hobby e passioni",
+    "Sport e fitness",
+    "Tecnologia",
+    "Musica e Arte",
+    "Lingua e identità",
+    "Attività sociali",
   ];
 
   const languages = [
@@ -231,7 +231,7 @@ const CreateEventModal = ({
   if (!isOpen) return null;
 
   const getStepTitle = () => {
-    const prefix = editMode ? "✏️ MODIFICA EVENTO" : "✨ CREA EVENTO";
+    const prefix = editMode ? "MODIFICA EVENTO" : "CREA EVENTO";
 
     if (editMode) {
       return "📝 Modifica evento";
@@ -239,7 +239,7 @@ const CreateEventModal = ({
 
     switch (currentStep) {
       case 1:
-        return `${prefix} - Scegli la Categoria`;
+        return `${prefix} - Categoria`;
       case 2:
         return `${prefix} - Titolo e Descrizione`;
       case 3:
@@ -591,7 +591,7 @@ const CreateEventModal = ({
                     checked={eventType === "presenza"}
                     onChange={(e) => setEventType(e.target.value)}
                   />
-                  <span>🏢 In presenza</span>
+                  <span> In presenza</span>
                 </label>
                 <label className={styles.radioLabel}>
                   <input
@@ -601,7 +601,7 @@ const CreateEventModal = ({
                     checked={eventType === "online"}
                     onChange={(e) => setEventType(e.target.value)}
                   />
-                  <span>💻 Online</span>
+                  <span> Online</span>
                 </label>
               </div>
 

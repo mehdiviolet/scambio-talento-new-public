@@ -1,9 +1,12 @@
-/* SearchPage.module.css */
+/* SearchPage.module.css - VERSIONE FINALE PULITA */
 
 .searchContainer {
   padding: 20px;
   max-width: 100%;
   margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+  width: 100vw;
 }
 
 /* Barra di ricerca */
@@ -13,15 +16,21 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* NUOVO: Pulsante lista */
+/* Pulsante lista */
 .listButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  padding: 16px 8px 16px 8px;
+  /* width: 48px; */
+  /* height: 48px; */
+  /* padding: 16px 8px 16px 8px; */
+
   border: 2px solid #e5e7eb;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.9);
@@ -45,7 +54,9 @@
 
 .searchInput {
   flex: 1;
-  padding: 16px 48px 16px 48px;
+  /* padding: 16px 8px 16px 8px; */
+  /* padding: 16px 48px 16px 48px; */
+  padding: 16px 8px 16px 8px;
   border: 2px solid #e5e7eb;
   border-radius: 16px;
   font-size: 16px;
@@ -64,28 +75,29 @@
 
 .searchIcon {
   position: absolute;
-  left: 72px; /* Spostato per fare spazio al pulsante */
+  left: 72px;
   top: 50%;
   transform: translateY(-50%);
   color: #9ca3af;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Dropdown suggerimenti */
 .suggestionsDropdown {
   position: absolute;
-  top: 100%;
-  left: 56px; /* Allineato con l'input */
+  top: calc(100% + 8px);
+  left: 56px;
   right: 0;
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 50;
   max-height: 300px;
   overflow-y: auto;
-  margin-top: 8px;
+  min-width: 280px;
+  width: calc(100% - 56px);
 }
 
 .suggestionItem {
@@ -139,6 +151,15 @@
   text-align: center;
   padding: 40px 20px;
   color: #6b7280;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 56px;
+  right: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  z-index: 50;
 }
 
 .noResults p {
@@ -146,7 +167,7 @@
   margin: 0;
 }
 
-/* NUOVO: Lista in pagina */
+/* Lista in pagina */
 .pageList {
   margin-top: 24px;
 }

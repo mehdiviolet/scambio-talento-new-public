@@ -208,28 +208,27 @@ const EsperienzePage = () => {
               Reset filtri
             </button>
           </div>
-        </div>
-
-        {/* Filtro Icone - Scroll orizzontale */}
-        <div className={styles.verticalIconScroll}>
-          {iconeDisponibili.map((icon) => {
-            const count = tuttiElementi.filter(
-              (e) => e.categoria === icon
-            ).length;
-            return (
-              <button
-                key={icon}
-                onClick={() => handleIconToggle(icon)}
-                disabled={count === 0}
-                className={`${styles.verticalIconButton} ${
-                  filtroIcone.includes(icon) ? styles.selected : ""
-                } ${count === 0 ? styles.disabled : ""}`}
-              >
-                <span className={styles.iconEmoji}>{icon}</span>
-                <span className={styles.iconCount}>({count})</span>
-              </button>
-            );
-          })}
+          {/* Filtro Icone - Scroll orizzontale */}
+          <div className={styles.verticalIconScroll}>
+            {iconeDisponibili.map((icon) => {
+              const count = tuttiElementi.filter(
+                (e) => e.categoria === icon
+              ).length;
+              return (
+                <button
+                  key={icon}
+                  onClick={() => handleIconToggle(icon)}
+                  disabled={count === 0}
+                  className={`${styles.verticalIconButton} ${
+                    filtroIcone.includes(icon) ? styles.selected : ""
+                  } ${count === 0 ? styles.disabled : ""}`}
+                >
+                  <span className={styles.iconEmoji}>{icon}</span>
+                  <span className={styles.iconCount}>({count})</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 

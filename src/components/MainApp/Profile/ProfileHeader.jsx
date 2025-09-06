@@ -261,6 +261,21 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
             <div className={styles.nameSection}>
               <h1 className={styles.displayName}>
                 {user.firstName} {user.lastName}
+                <div>
+                  <div className={styles.statsContainer}>
+                    <div className={styles.statItem}>
+                      <Star size={18} className={styles.statIcon} />
+                      <span className={styles.statValue}>
+                        {currentUser.participationScore || 0}
+                      </span>
+                    </div>
+
+                    <div className={styles.statItem}>
+                      <ShieldCheckIcon size={18} className={styles.statIcon} />
+                      <span className={styles.statValue}>0</span>
+                    </div>
+                  </div>
+                </div>
                 {!isOwner && (
                   <div style={{ position: "relative" }}>
                     <button
@@ -287,6 +302,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       onClick={handleSettings}
                       style={{ cursor: "pointer" }}
                     />
+
                     {/* <div className="panel-header">
                       <RoleSpecificNotificationDropdown
                         role="student"
@@ -312,27 +328,11 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
 
               <div className={styles.hudLevel}>
                 <p className={styles.username}>@{user.username}</p>
-                <Star
-                  // className="icon-md text-orange-500"
-                  style={{ color: "var(--text-terzo)" }}
-                />
-                {/* <span>{myFeedback?.stars || 0} </span> */}
-                <span style={{ color: "var(--text-primary)" }}>
-                  {currentUser.participationScore || 0}{" "}
-                </span>
-
-                <ShieldCheckIcon
-                  // className="icon-md text-orange-300"
-                  // style={{ color: "var(--text-secondary)" }}
-                  style={{ color: "var(--text-terzo)" }}
-                />
-                {/* ✅ NUOVO: Usa totalDisplayXP (include demo bonus) */}
-                <span style={{ color: "var(--text-primary)" }}>0 </span>
               </div>
             </div>
 
             {/* Bio */}
-            <p className={styles.bio}>{user.bio}</p>
+            {/* <p className={styles.bio}>{user.bio}</p> */}
 
             {/* Meta Info */}
             <div className={styles.metaInfo}>
@@ -372,6 +372,19 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                 )}
               </button>
             </div>
+            {/* <div className={styles.statsContainer}>
+              <div className={styles.statItem}>
+                <Star size={18} className={styles.statIcon} />
+                <span className={styles.statValue}>
+                  {currentUser.participationScore || 0}
+                </span>
+              </div>
+
+              <div className={styles.statItem}>
+                <ShieldCheckIcon size={18} className={styles.statIcon} />
+                <span className={styles.statValue}>0</span>
+              </div>
+            </div> */}
           </div>
 
           {/* About Me Section */}

@@ -240,6 +240,8 @@
 }
 
 .followStat {
+  display: flex;
+  flex-direction: column;
   background: none;
   border: none;
   font-size: 15px;
@@ -455,6 +457,7 @@
   align-items: center;
   gap: 0.5rem;
   font-weight: 400;
+  justify-content: space-between;
   /* font-size: 16px; */
 }
 
@@ -521,4 +524,33 @@
   cursor: pointer;
   margin-top: 4px;
   font-weight: 500;
+}
+
+/* Aggiungi questo CSS al ProfileHeader.module.css */
+
+.statsContainer {
+  display: flex;
+  gap: 20px;
+  margin: 16px 0;
+  align-items: center;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.statIcon {
+  color: var(--text-terzo);
+  flex-shrink: 0;
+}
+
+.statValue {
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 20px; /* Assicura allineamento anche con numeri diversi */
 }
