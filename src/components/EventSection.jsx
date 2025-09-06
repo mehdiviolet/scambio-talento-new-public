@@ -12,6 +12,8 @@ import {
   selectEventStats,
   selectOrganizer,
 } from "@/store/slices/sharedEventSlice";
+import { AddEventButton, HeaderAddButton } from "./ui/AddButtons";
+import { DropdownFilters } from "./ui/SmartFilters";
 
 const EventsSection = () => {
   // State per il modal eventi
@@ -147,22 +149,32 @@ const EventsSection = () => {
           Eventi Creati ({events.length})
         </h3>
 
-        {isOwner && (
-          <button
-            onClick={handleOpenCreateModal}
-            className={styles.addButton}
-            title="Crea nuovo evento"
-          >
-            +
-          </button>
+        {isOwner && events.length !== 0 && (
+          // <button
+          //   onClick={handleOpenCreateModal}
+          //   className={styles.addButton}
+          //   title="Crea nuovo evento"
+          // >
+          //   +
+          // </button>
+          <HeaderAddButton onClick={handleOpenCreateModal} />
         )}
       </div>
       <div>
-        <StatusFilterButtons
+        {/* <StatusFilterButtons
           activeFilter={statusFilter}
           onFilterChange={setStatusFilter}
           filterCounts={filterCounts}
           filterConfig={filterConfig}
+        /> */}
+        <DropdownFilters
+          filters={Object.entries(filterConfig).map(([key, config]) => ({
+            key,
+            label: config.label,
+            count: filterCounts[key] || 0,
+          }))}
+          activeFilter={statusFilter}
+          onFilterChange={setStatusFilter}
         />
       </div>
       {/* <div>
@@ -199,20 +211,22 @@ const EventsSection = () => {
             {isOwner ? (
               // Owner Mode - Empty State
               <>
-                <div className={styles.emptyIcon}>🎪</div>
+                {/* <div className={styles.emptyIcon}>🎪</div>
                 <h4 className={styles.emptyTitle}>Nessun evento creato</h4>
                 <p className={styles.emptyDescription}>
                   Clicca + per creare il tuo primo evento
-                </p>
+                </p> */}
+                <AddEventButton onClick={handleOpenCreateModal} />
               </>
             ) : (
               // Viewer Mode - Empty State
               <>
-                <div className={styles.emptyIcon}>👀</div>
+                {/* <div className={styles.emptyIcon}>👀</div>
                 <h4 className={styles.emptyTitle}>Nessun evento disponibile</h4>
                 <p className={styles.emptyDescription}>
                   Questo utente non ha ancora creato eventi
-                </p>
+                </p> */}
+                <p className={styles.emptyTitle}>Nessun evento disponibile</p>
               </>
             )}
           </div>

@@ -13,6 +13,20 @@ import AddExperienceModal from "@/components/MainApp/Shared/Modals/AddExperience
 import ExperiencesSectionStudente from "./ExperiencesSectionStudente";
 import { useStatusFilter } from "./useStatusFilter";
 import StatusFilterButtons from "./StatusFilterButtons";
+import {
+  AddExperienceButton,
+  AddSkillFirstButton,
+  HeaderAddButton,
+} from "./ui/AddButtons";
+import {
+  CompactScrollableFilters,
+  DropdownFilters,
+  MinimalFilters,
+  ScrollableFilters,
+  SegmentedFilters,
+  SmartFilters,
+  WaveFilters,
+} from "./ui/SmartFilters";
 
 const ExperiencesSection = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -203,24 +217,34 @@ const ExperiencesSection = () => {
 
         {isOwner && (
           <>
-            {skills && skills.length > 0 && (
-              <button
-                onClick={handleAddExperience}
-                className={styles.addButton}
-                title="Crea nuova esperienza"
-              >
-                +
-              </button>
+            {skills && experiences.length > 0 && (
+              // <button
+              //   onClick={handleAddExperience}
+              //   className={styles.addButton}
+              //   title="Crea nuova esperienza"
+              // >
+              //   +
+              // </button>
+              <HeaderAddButton />
             )}
           </>
         )}
       </div>
       <div>
-        <StatusFilterButtons
+        {/* <StatusFilterButtons
           activeFilter={statusFilter}
           onFilterChange={setStatusFilter}
           filterCounts={filterCounts}
           filterConfig={filterConfig}
+        /> */}
+        <DropdownFilters
+          filters={Object.entries(filterConfig).map(([key, config]) => ({
+            key,
+            label: config.label,
+            count: filterCounts[key] || 0,
+          }))}
+          activeFilter={statusFilter}
+          onFilterChange={setStatusFilter}
         />
       </div>
 
@@ -270,36 +294,41 @@ const ExperiencesSection = () => {
             {isOwner ? (
               // Owner Mode - Empty State
               skills && skills.length > 0 ? (
-                <>
-                  <div className={styles.emptyIcon}>🎓</div>
-                  <h4 className={styles.emptyTitle}>
-                    Nessuna esperienza creata
-                  </h4>
-                  <p className={styles.emptyDescription}>
-                    Clicca + per creare la tua prima esperienza
-                  </p>
-                </>
+                // (
+                //   <>
+                //     <div className={styles.emptyIcon}>🎓</div>
+                //     <h4 className={styles.emptyTitle}>
+                //       Nessuna esperienza creata
+                //     </h4>
+                //     <p className={styles.emptyDescription}>
+                //       Clicca + per creare la tua prima esperienza
+                //     </p>
+                //   </>
+                // )
+                <AddExperienceButton onClick={handleAddExperience} />
               ) : (
                 <>
-                  <div className={styles.emptyIcon}>🎯</div>
+                  {/* <div className={styles.emptyIcon}>🎯</div>
                   <h4 className={styles.emptyTitle}>
                     Aggiungi prima una skill
                   </h4>
                   <p className={styles.emptyDescription}>
                     Le esperienze si basano sulle tue competenze
-                  </p>
+                  </p> */}
+                  <AddSkillFirstButton />
                 </>
               )
             ) : (
               // Viewer Mode - Empty State
               <>
-                <div className={styles.emptyIcon}>👀</div>
+                {/* <div className={styles.emptyIcon}>👀</div>
                 <h4 className={styles.emptyTitle}>
                   Nessuna esperienza disponibile
                 </h4>
                 <p className={styles.emptyDescription}>
                   Questo utente non ha ancora pubblicato esperienze
-                </p>
+                </p> */}
+                <p>Nessuna esperienza</p>
               </>
             )}
           </div>

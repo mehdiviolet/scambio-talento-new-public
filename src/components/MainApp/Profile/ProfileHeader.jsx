@@ -301,11 +301,11 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
 
               <div className={styles.hudLevel}>
                 <p className={styles.username}>@{user.username}</p>
-                <Star className="icon-md text-yellow-300" />
+                <Star className="icon-md text-orange-500" />
                 {/* <span>{myFeedback?.stars || 0} </span> */}
                 <span>{currentUser.participationScore || 0} </span>
 
-                <ShieldCheckIcon className="icon-md text-yellow-300" />
+                <ShieldCheckIcon className="icon-md text-orange-500" />
                 {/* ✅ NUOVO: Usa totalDisplayXP (include demo bonus) */}
                 <span>0 </span>
               </div>

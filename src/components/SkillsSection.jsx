@@ -10,6 +10,7 @@ import {
   addUserSkill,
 } from "@/services/userService";
 import AddSkillModal from "@/components/MainApp/Shared/Modals/AddSkillModal";
+import { AddSkillButton, HeaderAddButton } from "./ui/AddButtons";
 
 const SkillsSection = () => {
   const [editingSkill, setEditingSkill] = useState(null);
@@ -137,14 +138,21 @@ const SkillsSection = () => {
       {/* Header - conditional add button for owner only */}
       <div className={styles.header}>
         <h2 className={styles.title}>Skills ({skills.length})</h2>
-        {isOwner && (
-          <button
+        {isOwner && skills.length !== 0 && (
+          // (
+          //   <button
+          //     onClick={handleAddSkill}
+          //     className={styles.addButton}
+          //     title="Aggiungi nuova skill"
+          //   >
+          //     +
+          //   </button>
+          // )
+
+          <HeaderAddButton
             onClick={handleAddSkill}
-            className={styles.addButton}
             title="Aggiungi nuova skill"
-          >
-            +
-          </button>
+          />
         )}
       </div>
 
@@ -313,11 +321,16 @@ const SkillsSection = () => {
           })
         ) : (
           <div className={styles.emptyState}>
-            <div className={styles.emptyIcon}>🎯</div>
+            {/* <div className={styles.emptyIcon}>🎯</div>
             <p className={styles.emptyTitle}>Nessuna skill aggiunta ancora</p>
             <p className={styles.emptyDescription}>
-              Clicca il pulsante + per aggiungere la tua prima competenza
-            </p>
+            Clicca il pulsante + per aggiungere la tua prima competenza
+            </p> */}
+            {isOwner ? (
+              <AddSkillButton onClick={handleAddSkill} />
+            ) : (
+              <p className={styles.emptyDescription}> nessun skill aggiunto</p>
+            )}
           </div>
         )}
       </div>

@@ -5,6 +5,14 @@ import TestCardRedux from "./MainApp/Shared/Modals/TestCardRedux";
 import { useStatusFilter } from "./useStatusFilter";
 import StatusFilterButtons from "./StatusFilterButtons";
 import { Flag } from "lucide-react";
+import {
+  CompactScrollableFilters,
+  DropdownFilters,
+  MinimalFilters,
+  SegmentedFilters,
+  WaveFilters,
+} from "./ui/SmartFilters";
+import { Button } from "./ui/Button";
 
 const ExperiencesSectionStudente = () => {
   const [visibleCount, setVisibleCount] = useState(3);
@@ -184,11 +192,21 @@ const ExperiencesSectionStudente = () => {
       </div>
 
       {/* Filtri */}
-      <StatusFilterButtons
+      {/* <StatusFilterButtons
         activeFilter={statusFilter}
         onFilterChange={setStatusFilter}
         filterCounts={filterCounts}
         filterConfig={filterConfig}
+      /> */}
+
+      <DropdownFilters
+        filters={Object.entries(filterConfig).map(([key, config]) => ({
+          key,
+          label: config.label,
+          count: filterCounts[key] || 0,
+        }))}
+        activeFilter={statusFilter}
+        onFilterChange={setStatusFilter}
       />
 
       {/* Contenuto */}
@@ -211,7 +229,7 @@ const ExperiencesSectionStudente = () => {
         {/* Paginazione */}
         {totalCount > 3 && hasMore && (
           <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <button
+            {/* <button
               onClick={() => setVisibleCount((prev) => prev + 3)}
               style={{
                 padding: "10px 20px",
@@ -223,7 +241,13 @@ const ExperiencesSectionStudente = () => {
               }}
             >
               Mostra altre {Math.min(3, remaining)} carte
-            </button>
+            </button> */}
+            <Button
+              variant="secondary"
+              onClick={() => setVisibleCount((prev) => prev + 3)}
+            >
+              Mostra altre {Math.min(3, remaining)} carte
+            </Button>
           </div>
         )}
       </div>

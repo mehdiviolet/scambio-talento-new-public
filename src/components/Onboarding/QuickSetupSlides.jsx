@@ -337,7 +337,7 @@ const QuickSetupSlides = ({ onComplete }) => {
             }
             className={styles.formInput}
           />
-          <span className={styles.requiredAsterisk}>*</span>
+          {/* <span className={styles.requiredAsterisk}>*</span> */}
         </div>
       </div>
     </div>

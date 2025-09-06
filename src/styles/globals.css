@@ -1,3 +1,5 @@
+@import "./DesignSystem.css";
+
 /* globals.css */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
@@ -20,6 +22,7 @@
 /* BODY */
 body {
   font-family: "Inter", sans-serif;
+  color: var(--text-primary);
 }
 
 /* .onBoarding-test {
@@ -609,10 +612,10 @@ body {
   --glass-bg-light: rgba(255, 255, 255, 0.15);
   --glass-border: rgba(255, 255, 255, 0.2);
 
-  --text-primary: #ffffff;
+  /* --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.9);
   --text-tertiary: rgba(255, 255, 255, 0.7);
-  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-muted: rgba(255, 255, 255, 0.5); */
 
   --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.1);
   --shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.15);

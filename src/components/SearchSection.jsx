@@ -9,6 +9,7 @@ import {
   updateWantedSkillDescription,
   removeWantedSkill,
 } from "../store/slices/onboardingSlice";
+import { HeaderAddButton } from "./ui/AddButtons";
 
 const SearchSection = () => {
   const [localExpandedSkillId, setLocalExpandedSkillId] = useState(null);
@@ -134,13 +135,14 @@ const SearchSection = () => {
           Alla Ricerca
         </h3>
         {isOwner && (
-          <button
-            onClick={handleAddSkill}
-            className={styles.addButton}
-            title="Aggiungi skill da cercare"
-          >
-            +
-          </button>
+          // <button
+          //   onClick={handleAddSkill}
+          //   className={styles.addButton}
+          //   title="Aggiungi skill da cercare"
+          // >
+          //   +
+          // </button>
+          <HeaderAddButton onClick={handleAddSkill} />
         )}
       </div>
 
@@ -263,13 +265,14 @@ const SearchSection = () => {
             );
           })
         ) : (
-          <div className={styles.emptyState}>
-            <div className={styles.emptyIcon}>🎪</div>
-            <p className={styles.emptyTitle}>Nessuna skill selezionata</p>
-            <p className={styles.emptyDescription}>
-              Seleziona le skill che stai cercando di imparare
-            </p>
-          </div>
+          // <div className={styles.emptyState}>
+          //   <div className={styles.emptyIcon}>🎪</div>
+          //   <p className={styles.emptyTitle}>Nessuna skill selezionata</p>
+          //   <p className={styles.emptyDescription}>
+          //     Seleziona le skill che stai cercando di imparare
+          //   </p>
+          // </div>
+          <p>Nessuna skill selezionata </p>
         )}
       </div>
 
