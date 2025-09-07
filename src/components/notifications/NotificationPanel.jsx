@@ -1,4 +1,4 @@
-// components/notifications/NotificationPanel.jsx
+// components/notifications/NotificationPanel.jsx - Con stile chat
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -18,7 +18,7 @@ import {
   X,
   Trash2,
 } from "lucide-react";
-import styles from "./NotificationBell.module.css";
+import styles from "./ChatComponent.module.css"; // USA LO STESSO CSS DEL CHAT!
 
 const NotificationPanel = () => {
   const dispatch = useDispatch();
@@ -55,16 +55,13 @@ const NotificationPanel = () => {
   };
 
   const handleNotificationClick = (notification) => {
-    // Marca come letta se non lo è già
     if (!notification.read) {
       dispatch(markAsRead(notification.id));
     }
 
-    // Gestisci navigazione basata su actionData
+    // Gestisci navigazione
     if (notification.actionData) {
       console.log(`Navigating based on notification:`, notification);
-      // Qui potresti aggiungere logica di navigazione
-      // es: navigate(`/course/${notification.actionData.experienceId}`)
     }
   };
 
@@ -82,93 +79,185 @@ const NotificationPanel = () => {
     dispatch(markAllAsRead({ role: currentRole }));
   };
 
-  return (
-    <div className={styles.panel}>
-      {/* Header */}
-      <div className={styles.header}>
-        <h3>Notifiche {currentRole === "owner" ? "👩‍🏫" : "👨‍🎓"}</h3>
-        {unreadNotifications.length > 0 && (
-          <button
-            className={styles.markAllButton}
-            onClick={handleMarkAllAsRead}
-          >
-            <Check size={14} />
-            Segna tutte
-          </button>
-        )}
-      </div>
+  // Render avatar per notifica (simile alle chat)
+  const renderNotificationAvatar = (notification) => {
+    const iconColor =
+      notification.category === "course"
+        ? "#3b82f6"
+        : notification.category === "event"
+        ? "#10b981"
+        : notification.category === "social"
+        ? "#f59e0b"
+        : "#6b7280";
 
-      {/* Lista notifiche */}
-      <div className={styles.notificationList}>
-        {notifications.length === 0 ? (
-          <div className={styles.emptyState}>
-            <p>Nessuna notifica</p>
-          </div>
-        ) : (
-          notifications.map((notification) => (
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          borderRadius: "50%",
+          background: iconColor + "20", // 20% opacity
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: iconColor,
+        }}
+      >
+        {getCategoryIcon(notification.category)}
+      </div>
+    );
+  };
+
+  // Ottieni il titolo "esperienza" basato sulla categoria
+  const getExperienceTitle = (notification) => {
+    const titles = {
+      course: "Corso",
+      event: "Evento",
+      social: "Sociale",
+      message: "Messaggio",
+    };
+    return titles[notification.category] || "Notifica";
+  };
+
+  return (
+    <div className={styles.conversationsList}>
+      {notifications.length === 0 ? (
+        <div className={styles.emptyState}>
+          <Users size={40} className={styles.emptyIcon} />
+          <p>Nessuna notifica</p>
+          <span>Le tue notifiche appariranno qui</span>
+        </div>
+      ) : (
+        <>
+          {/* Header "Segna tutte" - solo se ci sono notifiche non lette */}
+          {unreadNotifications.length > 0 && (
+            <div
+              style={{
+                padding: "10px 20px",
+                borderBottom: "1px solid #f3f4f6",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <span
+                style={{ fontSize: "0.9rem", color: "var(--text-secondary)" }}
+              >
+                {unreadNotifications.length} non lette
+              </span>
+              <button
+                onClick={handleMarkAllAsRead}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#3b82f6",
+                  fontSize: "0.8rem",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px",
+                }}
+              >
+                <Check size={12} />
+                Segna tutte
+              </button>
+            </div>
+          )}
+
+          {/* Lista notifiche - STESSO STILE DELLE CHAT */}
+          {notifications.map((notification) => (
             <div
               key={notification.id}
-              className={`${styles.notificationItem} ${
+              className={`${styles.conversationItem} ${
                 !notification.read ? styles.unread : ""
               }`}
               onClick={() => handleNotificationClick(notification)}
             >
-              {/* Icona categoria */}
-              <div className={styles.icon}>
-                {getCategoryIcon(notification.category)}
+              {/* Avatar - stesso della chat */}
+              <div className={styles.conversationAvatar}>
+                {renderNotificationAvatar(notification)}
               </div>
 
-              {/* Contenuto */}
-              <div className={styles.content}>
-                <div className={styles.title}>{notification.title}</div>
-                <div className={styles.message}>{notification.message}</div>
-                <div className={styles.meta}>
-                  <span className={styles.time}>
+              {/* Content - stesso layout della chat */}
+              <div className={styles.conversationContent}>
+                {/* Top row: nome + tempo */}
+                <div className={styles.conversationTop}>
+                  <span className={styles.conversationName}>
+                    {notification.title}
+                  </span>
+                  <span className={styles.conversationTime}>
                     {formatTime(notification.timestamp)}
                   </span>
-                  {notification.fromRole && (
-                    <span className={styles.fromRole}>
-                      da{" "}
-                      {notification.fromRole === "owner"
-                        ? "istruttore"
-                        : "studente"}
-                    </span>
-                  )}
+                </div>
+
+                {/* Bottom row: categoria come "esperienza" */}
+                <div className={styles.conversationBottom}>
+                  <span className={styles.experienceTitle}>
+                    {getCategoryIcon(notification.category)}{" "}
+                    {getExperienceTitle(notification)}
+                  </span>
+                </div>
+
+                {/* Message preview - il messaggio della notifica */}
+                <div className={styles.messagePreview}>
+                  {notification.message}
                 </div>
               </div>
 
-              {/* Azioni */}
-              <div className={styles.actions}>
+              {/* Badge unread - stesso stile chat + azioni hover */}
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "4px" }}
+              >
                 {!notification.read && (
-                  <button
-                    className={styles.readButton}
-                    onClick={(e) => handleMarkAsRead(notification.id, e)}
-                    title="Segna come letto"
-                  >
-                    <Check size={12} />
-                  </button>
+                  <div className={styles.messageUnreadBadge}>•</div>
                 )}
-                <button
-                  className={styles.removeButton}
-                  onClick={(e) => handleRemove(notification.id, e)}
-                  title="Rimuovi"
+
+                {/* Azioni hover - piccole e discrete */}
+                <div
+                  style={{
+                    opacity: 0,
+                    transition: "opacity 0.2s",
+                    display: "flex",
+                    gap: "2px",
+                  }}
+                  onMouseEnter={(e) => (e.target.style.opacity = 1)}
+                  onMouseLeave={(e) => (e.target.style.opacity = 0)}
                 >
-                  <Trash2 size={12} />
-                </button>
+                  {!notification.read && (
+                    <button
+                      onClick={(e) => handleMarkAsRead(notification.id, e)}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        padding: "2px",
+                        borderRadius: "4px",
+                        color: "#059669",
+                      }}
+                      title="Segna come letto"
+                    >
+                      <Check size={10} />
+                    </button>
+                  )}
+                  <button
+                    onClick={(e) => handleRemove(notification.id, e)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: "2px",
+                      borderRadius: "4px",
+                      color: "#dc2626",
+                    }}
+                    title="Rimuovi"
+                  >
+                    <Trash2 size={10} />
+                  </button>
+                </div>
               </div>
             </div>
-          ))
-        )}
-      </div>
-
-      {/* Footer con stats */}
-      {notifications.length > 0 && (
-        <div className={styles.footer}>
-          <small>
-            {notifications.length} totali • {unreadNotifications.length} non
-            lette
-          </small>
-        </div>
+          ))}
+        </>
       )}
     </div>
   );

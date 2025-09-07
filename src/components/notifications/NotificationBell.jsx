@@ -13,7 +13,7 @@ import {
 } from "@/store/slices/notificationSlice";
 import { Bell } from "lucide-react";
 import NotificationDropdown from "./NotificationDropdown";
-import styles from "./NotificationBell.module.css";
+import styles from "../../components/ChatComponent.module.css";
 
 const NotificationBell = ({ currentRole }) => {
   const dispatch = useDispatch();
