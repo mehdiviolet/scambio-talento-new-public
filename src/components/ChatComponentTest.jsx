@@ -12,6 +12,7 @@ import {
   ChevronLeft,
   BookOpen,
   FileText,
+  Bell,
 } from "lucide-react";
 import styles from "./ChatComponent.module.css";
 
@@ -76,6 +77,7 @@ const ChatComponentTest = ({ isOwner = true }) => {
   const allUnreadCounts = useSelector((state) => state.chat.unreadCounts);
   const selectedOwner = useSelector((state) => state.chat.selectedOwner);
   const userProfile = useSelector((state) => state.onboarding?.userProfile);
+  const [activeFilter, setActiveFilter] = useState("chats"); // "chats" o "notifications"
 
   console.log("USERRRRRRRRRRRRRRRRRR-----viewerData", userProfile);
 
@@ -289,93 +291,120 @@ const ChatComponentTest = ({ isOwner = true }) => {
   if (showChatList || !localActiveConversation) {
     return (
       <div className={styles.chatContainer}>
-        <div className={styles.chatHeader}>
-          <div className={styles.headerTitle}>
-            <MessageCircle size={20} />
-            <span>
-              Chats
-              {/* Chat con {getSelectedOwnerName()} ({sortedConversations.length}) */}
-            </span>
-            {totalUnread > 0 && (
-              <div className={styles.unreadBadge}>{totalUnread}</div>
-            )}
+        <div>
+          <div className={styles.chatHeader}>
+            <div
+              className={`${styles.headerTitle} ${
+                activeFilter === "chats" ? styles.active : ""
+              }`}
+              onClick={() => setActiveFilter("chats")}
+            >
+              <MessageCircle size={20} />
+              <span>Chats</span>
+              {activeFilter === "chats" && totalUnread > 0 && (
+                <div className={styles.unreadBadge}>{totalUnread}</div>
+              )}
+            </div>
+
+            <div
+              className={`${styles.headerTitle} ${
+                activeFilter === "notifications" ? styles.active : ""
+              }`}
+              onClick={() => setActiveFilter("notifications")}
+            >
+              <Bell size={20} />
+              <span>Notifications</span>
+            </div>
           </div>
         </div>
 
         <div className={styles.conversationsList}>
-          {sortedConversations.length === 0 ? (
-            <div className={styles.emptyState}>
-              <MessageCircle size={40} className={styles.emptyIcon} />
-              <p>Nessun messaggio ancora</p>
-              <span>
-                Invia una richiesta di esperienza per iniziare a chattare
-              </span>
-            </div>
-          ) : (
-            sortedConversations.map((conversation) => (
-              <div
-                key={conversation.id}
-                className={`${styles.conversationItem} ${
-                  unreadCounts[conversation.id] > 0 ? styles.unread : ""
-                }`}
-                onClick={() => openConversation(conversation.id)}
-              >
-                <div className={styles.conversationAvatar}>
-                  {/* {renderAvatar(ownerData)} */}
-                  {/* {renderAvatar({
+          {activeFilter === "chats" ? (
+            sortedConversations.length === 0 ? (
+              <div className={styles.emptyState}>
+                <MessageCircle size={40} className={styles.emptyIcon} />
+                <p>Nessun messaggio ancora</p>
+                <span>
+                  Invia una richiesta di esperienza per iniziare a chattare
+                </span>
+              </div>
+            ) : (
+              sortedConversations.map((conversation) => (
+                <div
+                  key={conversation.id}
+                  className={`${styles.conversationItem} ${
+                    unreadCounts[conversation.id] > 0 ? styles.unread : ""
+                  }`}
+                  onClick={() => openConversation(conversation.id)}
+                >
+                  <div className={styles.conversationAvatar}>
+                    {/* {renderAvatar(ownerData)} */}
+                    {/* {renderAvatar({
                     profilePhoto: getConversationOwnerAvatar(conversation),
                     firstName:
                       getConversationOwnerName(conversation).split(" ")[0],
                     lastName:
                       getConversationOwnerName(conversation).split(" ")[1],
                   })} */}
-                  {isOwner
-                    ? // Pannello sinistro: mostra sempre il viewer (te stesso)
-                      renderAvatar({
-                        profilePhoto: viewerData.profilePhoto,
-                        firstName: viewerData.firstName,
-                        lastName: viewerData.lastName,
-                      })
-                    : // Pannello destro: mostra l'owner della conversazione
-                      renderAvatar({
-                        profilePhoto: getConversationOwnerAvatar(conversation),
-                        firstName:
-                          getConversationOwnerName(conversation).split(" ")[0],
-                        lastName:
-                          getConversationOwnerName(conversation).split(" ")[1],
-                      })}
+                    {isOwner
+                      ? // Pannello sinistro: mostra sempre il viewer (te stesso)
+                        renderAvatar({
+                          profilePhoto: viewerData.profilePhoto,
+                          firstName: viewerData.firstName,
+                          lastName: viewerData.lastName,
+                        })
+                      : // Pannello destro: mostra l'owner della conversazione
+                        renderAvatar({
+                          profilePhoto:
+                            getConversationOwnerAvatar(conversation),
+                          firstName:
+                            getConversationOwnerName(conversation).split(
+                              " "
+                            )[0],
+                          lastName:
+                            getConversationOwnerName(conversation).split(
+                              " "
+                            )[1],
+                        })}
+                  </div>
+                  <div className={styles.conversationContent}>
+                    <div className={styles.conversationTop}>
+                      <span className={styles.conversationName}>
+                        {/* {getSelectedOwnerName()} */}
+                        {/* {getConversationOwnerName(conversation)} */}
+                        {
+                          isOwner
+                            ? `${viewerData.firstName} ${viewerData.lastName}` // I tuoi dati
+                            : getConversationOwnerName(conversation) // Dati owner conversazione
+                        }
+                      </span>
+                      <span className={styles.conversationTime}>
+                        {formatTime(conversation.lastActivity)}
+                      </span>
+                    </div>
+                    <div className={styles.conversationBottom}>
+                      <span className={styles.experienceTitle}>
+                        <BookOpen size={16} /> {conversation.experienceTitle}
+                      </span>
+                    </div>
+                    <div className={styles.messagePreview}>
+                      {getMessagePreview(conversation)}
+                    </div>
+                  </div>
+                  {unreadCounts[conversation.id] > 0 && (
+                    <div className={styles.messageUnreadBadge}>
+                      {unreadCounts[conversation.id]}
+                    </div>
+                  )}
                 </div>
-                <div className={styles.conversationContent}>
-                  <div className={styles.conversationTop}>
-                    <span className={styles.conversationName}>
-                      {/* {getSelectedOwnerName()} */}
-                      {/* {getConversationOwnerName(conversation)} */}
-                      {
-                        isOwner
-                          ? `${viewerData.firstName} ${viewerData.lastName}` // I tuoi dati
-                          : getConversationOwnerName(conversation) // Dati owner conversazione
-                      }
-                    </span>
-                    <span className={styles.conversationTime}>
-                      {formatTime(conversation.lastActivity)}
-                    </span>
-                  </div>
-                  <div className={styles.conversationBottom}>
-                    <span className={styles.experienceTitle}>
-                      <BookOpen size={16} /> {conversation.experienceTitle}
-                    </span>
-                  </div>
-                  <div className={styles.messagePreview}>
-                    {getMessagePreview(conversation)}
-                  </div>
-                </div>
-                {unreadCounts[conversation.id] > 0 && (
-                  <div className={styles.messageUnreadBadge}>
-                    {unreadCounts[conversation.id]}
-                  </div>
-                )}
-              </div>
-            ))
+              ))
+            )
+          ) : (
+            // Placeholder per notifications
+            <div className={styles.emptyState}>
+              <Bell size={40} className={styles.emptyIcon} />
+              <p>Nessuna notifica</p>
+            </div>
           )}
         </div>
       </div>

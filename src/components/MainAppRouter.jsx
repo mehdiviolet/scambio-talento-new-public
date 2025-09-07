@@ -1,5 +1,6 @@
 import {
   Activity,
+  Bell,
   CalendarFoldIcon,
   Cherry,
   ChevronLeft,
@@ -147,6 +148,7 @@ const MainAppRouter = () => {
             >
               <Activity style={{ color: "var(--text-secondary)" }} />
               <span style={{ color: "var(--text-secondary)" }}>0</span>
+              {/* <Bell size={24} /> */}
             </div>
 
             {/* <div className={styles.hudXp}>
@@ -203,7 +205,7 @@ const MainAppRouter = () => {
             onClick={() => setIsChatModalOpen(true)}
             style={{ cursor: "pointer" }}
           >
-            <MessageCircle style={{ color: "var(--text-four)" }} />
+            <Bell style={{ color: "var(--text-four)" }} />
             {/* <span>{chatNotifications.total}</span> */}
             {/* Badge Instagram-style */}
             {chatNotifications.hasUnread && (
