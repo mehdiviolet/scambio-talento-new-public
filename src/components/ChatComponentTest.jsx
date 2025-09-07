@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import styles from "./ChatComponent.module.css";
 import NotificationBell from "./notifications/NotificationBell";
+import { selectUnreadCountByRole } from "@/store/slices/notificationSlice";
 
 // ✅ HELPER per generare ID persona (stesso del chatSlice)
 const generatePersonId = (firstName, lastName) => {
@@ -81,6 +82,9 @@ const ChatComponentTest = ({ isOwner = true }) => {
   const [activeFilter, setActiveFilter] = useState("chats"); // "chats" o "notifications"
 
   console.log("USERRRRRRRRRRRRRRRRRR-----viewerData", userProfile);
+
+  //  const activeRole = currentRole || roleFromStore;
+  const unreadCount = useSelector(selectUnreadCountByRole("viewer"));
 
   // State locale
   const [localActiveConversation, setLocalActiveConversation] = useState(null);
@@ -302,7 +306,7 @@ const ChatComponentTest = ({ isOwner = true }) => {
             >
               <MessageCircle size={20} />
               <span>Chats</span>
-              {activeFilter === "chats" && totalUnread > 0 && (
+              {totalUnread > 0 && (
                 <div className={styles.unreadBadge}>{totalUnread}</div>
               )}
             </div>
@@ -315,6 +319,9 @@ const ChatComponentTest = ({ isOwner = true }) => {
             >
               <Bell size={20} />
               <span>Notifications</span>
+              {unreadCount > 0 && (
+                <div className={styles.unreadBadge}>{unreadCount}</div>
+              )}
             </div>
           </div>
         </div>

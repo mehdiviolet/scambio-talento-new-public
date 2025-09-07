@@ -56,6 +56,7 @@ import EventiPage from "./EventiPage";
 import ActivityModal from "./ActivityModal";
 import ChatModal from "./ChatModal";
 import CookieModal from "./CookieModal";
+import { useAllNotifications } from "@/hooks/useAllNotifications";
 // import useUnreadMessages from "src/hooks/useUnreadMessages.js";
 // Sostituisci ExplorePage con questo componente Esperienze
 
@@ -66,6 +67,8 @@ const MainAppRouter = () => {
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
+
+  const allNotifications = useAllNotifications("viewer");
 
   // const chatNotifications = useUnreadMessages(role); // Viewer per pannello DX
   const lastSlotReward = useSelector(selectLastSlotReward);
@@ -208,13 +211,13 @@ const MainAppRouter = () => {
             <Bell style={{ color: "var(--text-four)" }} />
             {/* <span>{chatNotifications.total}</span> */}
             {/* Badge Instagram-style */}
-            {chatNotifications.hasUnread && (
+            {allNotifications.hasUnread && (
               <div
                 className={`${styles.notificationBadge} ${
-                  chatNotifications.total > 9 ? styles.large : ""
+                  allNotifications.total > 9 ? styles.large : ""
                 }`}
               >
-                {chatNotifications.total > 99 ? "99+" : chatNotifications.total}
+                {allNotifications.total > 99 ? "99+" : allNotifications.total}
               </div>
             )}
           </div>
