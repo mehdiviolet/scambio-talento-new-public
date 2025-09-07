@@ -77,6 +77,8 @@ const ChatComponentTest = ({ isOwner = true }) => {
   const selectedOwner = useSelector((state) => state.chat.selectedOwner);
   const userProfile = useSelector((state) => state.onboarding?.userProfile);
 
+  console.log("USERRRRRRRRRRRRRRRRRR-----viewerData", userProfile);
+
   // State locale
   const [localActiveConversation, setLocalActiveConversation] = useState(null);
   const [newMessage, setNewMessage] = useState("");
@@ -320,19 +322,39 @@ const ChatComponentTest = ({ isOwner = true }) => {
               >
                 <div className={styles.conversationAvatar}>
                   {/* {renderAvatar(ownerData)} */}
-                  {renderAvatar({
+                  {/* {renderAvatar({
                     profilePhoto: getConversationOwnerAvatar(conversation),
                     firstName:
                       getConversationOwnerName(conversation).split(" ")[0],
                     lastName:
                       getConversationOwnerName(conversation).split(" ")[1],
-                  })}
+                  })} */}
+                  {isOwner
+                    ? // Pannello sinistro: mostra sempre il viewer (te stesso)
+                      renderAvatar({
+                        profilePhoto: viewerData.profilePhoto,
+                        firstName: viewerData.firstName,
+                        lastName: viewerData.lastName,
+                      })
+                    : // Pannello destro: mostra l'owner della conversazione
+                      renderAvatar({
+                        profilePhoto: getConversationOwnerAvatar(conversation),
+                        firstName:
+                          getConversationOwnerName(conversation).split(" ")[0],
+                        lastName:
+                          getConversationOwnerName(conversation).split(" ")[1],
+                      })}
                 </div>
                 <div className={styles.conversationContent}>
                   <div className={styles.conversationTop}>
                     <span className={styles.conversationName}>
                       {/* {getSelectedOwnerName()} */}
-                      {getConversationOwnerName(conversation)}
+                      {/* {getConversationOwnerName(conversation)} */}
+                      {
+                        isOwner
+                          ? `${viewerData.firstName} ${viewerData.lastName}` // I tuoi dati
+                          : getConversationOwnerName(conversation) // Dati owner conversazione
+                      }
                     </span>
                     <span className={styles.conversationTime}>
                       {formatTime(conversation.lastActivity)}
@@ -383,19 +405,37 @@ const ChatComponentTest = ({ isOwner = true }) => {
         </button>
         <div className={styles.conversationInfo}>
           <div className={styles.conversationAvatar}>
-            {/* {renderAvatar(ownerData)} */}
-            {renderAvatar({
-              profilePhoto: currentConversation?.participants?.owner?.avatar,
-              firstName:
-                currentConversation?.participants?.owner?.name?.split(" ")[0],
-              lastName:
-                currentConversation?.participants?.owner?.name?.split(" ")[1],
-            })}
+            {isOwner
+              ? // Pannello sinistro: mostra sempre il viewer (te stesso)
+                renderAvatar({
+                  profilePhoto: viewerData.profilePhoto,
+                  firstName: viewerData.firstName,
+                  lastName: viewerData.lastName,
+                })
+              : // Pannello destro: mostra l'owner della conversazione corrente
+                renderAvatar({
+                  profilePhoto:
+                    currentConversation?.participants?.owner?.avatar,
+                  firstName:
+                    currentConversation?.participants?.owner?.name?.split(
+                      " "
+                    )[0],
+                  lastName:
+                    currentConversation?.participants?.owner?.name?.split(
+                      " "
+                    )[1],
+                })}
           </div>
           <div className={styles.conversationDetails}>
             <span className={styles.conversationName}>
               {/* {getSelectedOwnerName()} */}
-              {getConversationOwnerName(currentConversation)}
+              {/* {getConversationOwnerName(currentConversation)} */}
+              {
+                isOwner
+                  ? `${viewerData.firstName} ${viewerData.lastName}` // I tuoi dati
+                  : currentConversation?.participants?.owner?.name ||
+                    "Utente sconosciuto" // Owner conversazione corrente
+              }
             </span>
             <span className={styles.experienceSubtitle}>
               <BookOpen size={16} /> {currentConversation.experienceTitle}
@@ -419,21 +459,29 @@ const ChatComponentTest = ({ isOwner = true }) => {
           >
             {message.senderId !== userRole && message.senderId !== "system" && (
               <div className={styles.messageAvatar}>
-                {/* {renderAvatar(
-                  message.senderId === "owner" ? ownerData : viewerData
-                )} */}
-                {renderAvatar({
-                  profilePhoto:
-                    currentConversation?.participants?.owner?.avatar,
-                  firstName:
-                    currentConversation?.participants?.owner?.name?.split(
-                      " "
-                    )[0],
-                  lastName:
-                    currentConversation?.participants?.owner?.name?.split(
-                      " "
-                    )[1],
-                })}
+                {/* {message.senderId === "owner" ? ownerData : viewerData} */}
+                <div className={styles.messageAvatar}>
+                  {renderAvatar(
+                    message.senderId === "owner"
+                      ? {
+                          profilePhoto:
+                            currentConversation?.participants?.owner?.avatar,
+                          firstName:
+                            currentConversation?.participants?.owner?.name?.split(
+                              " "
+                            )[0],
+                          lastName:
+                            currentConversation?.participants?.owner?.name?.split(
+                              " "
+                            )[1],
+                        }
+                      : {
+                          profilePhoto: viewerData.profilePhoto,
+                          firstName: viewerData.firstName?.split(" ")[0],
+                          lastName: viewerData.lastName?.split(" ")[1],
+                        }
+                  )}
+                </div>
               </div>
             )}
             <div className={styles.messageContent}>
