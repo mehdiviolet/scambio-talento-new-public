@@ -25,7 +25,7 @@ import ProfilePageTest from "./MainApp/Profile/ProfilePageTest";
 import ChatComponentTest from "./ChatComponentTest";
 import { useUnreadMessages } from "@/hooks/useUnreadMessages"; // Aggiusta il path se necessario
 import BottomNavigationTest from "./MainApp/Shared/BottomNavigationTest";
-import ToastContainer from "./notifications/ToastContainer";
+// import ToastContainer from "./notifications/ToastContainer";
 import NotificationBell from "./notifications/NotificationBell";
 import RoleSpecificNotificationDropdown from "./notifications/RoleSpecificNotificationDropdown";
 import {
@@ -170,7 +170,7 @@ const MainAppRouter = () => {
           role="owner"
           title="Notifiche Istruttore"
         /> */}
-        <ToastContainer role="owner" />
+        {/* <ToastContainer role="owner" /> */}
 
         <div className={styles.hudTop}>
           <div className={styles.hudLeft}>

@@ -15,6 +15,7 @@ import {
   Bell,
 } from "lucide-react";
 import styles from "./ChatComponent.module.css";
+import NotificationBell from "./notifications/NotificationBell";
 
 // ✅ HELPER per generare ID persona (stesso del chatSlice)
 const generatePersonId = (firstName, lastName) => {
@@ -401,10 +402,14 @@ const ChatComponentTest = ({ isOwner = true }) => {
             )
           ) : (
             // Placeholder per notifications
-            <div className={styles.emptyState}>
-              <Bell size={40} className={styles.emptyIcon} />
-              <p>Nessuna notifica</p>
-            </div>
+            // <div className={styles.emptyState}>
+            //   <Bell size={40} className={styles.emptyIcon} />
+            //   <p>Nessuna notificaaa</p>
+            // </div>
+            <>
+              <NotificationBell currentRole="viewer" />
+              {/* <NotificationBell currentRole="viewer" /> */}
+            </>
           )}
         </div>
       </div>

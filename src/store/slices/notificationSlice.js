@@ -1,331 +1,156 @@
+// store/slices/notificationSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const notificationSlice = createSlice({
   name: "notifications",
   initialState: {
-    // Toast immediate (temporanee)
-    toasts: {
-      instructor: [],
-      student: [],
-      // system: [],     // 🚀 Facilmente estendibile
-      // admin: [],      // 🚀 Scalabile
-    },
-    toastIdCounter: 0,
+    // Array unico con tutte le notifiche
+    items: [],
 
-    // Notifiche asincrone (persistenti)
-    asyncNotifications: [],
-    asyncIdCounter: 0,
+    // Ruolo attuale per filtraggio
+    currentRole: "owner", // "owner" | "viewer"
 
     // UI state
-    isDropdownOpen: false,
+    ui: {
+      isOpen: false,
+    },
 
-    // 🆕 NUOVO: Ruolo attivo per filtering
-    currentUserRole: "instructor", // "instructor" | "student"
+    // Counter per ID unici
+    idCounter: 0,
   },
+
   reducers: {
-    // =============== TOAST IMMEDIATE ===============
-    showToast: (state, action) => {
+    // =============== CORE ACTIONS ===============
+
+    addNotification: (state, action) => {
       const {
+        type,
+        title,
         message,
-        type = "info",
-        duration = 3000,
-        role = "both",
+        targetRole,
+        fromRole = null,
+        actionData = null,
+        category = "general",
       } = action.payload;
 
-      const toast = {
-        id: state.toastIdCounter++,
-        message,
+      const notification = {
+        id: state.idCounter++,
         type,
-        duration,
+        title,
+        message,
+        targetRole, // "owner" | "viewer"
+        fromRole, // "owner" | "viewer" | "system"
+        category, // "course" | "event" | "message" | "social"
+        actionData,
+        read: false,
         timestamp: Date.now(),
       };
 
-      // 🚀 SMART ROUTING - Una sola operazione
-      if (role === "both") {
-        state.toasts.instructor.push({ ...toast });
-        state.toasts.student.push({ ...toast });
-      } else if (role === "instructor" || role === "student") {
-        state.toasts[role].push(toast);
+      // Aggiungi in cima alla lista
+      state.items.unshift(notification);
+
+      // Mantieni solo ultime 50 notifiche per performance
+      if (state.items.length > 50) {
+        state.items = state.items.slice(0, 50);
       }
-    },
-    hideToast: (state, action) => {
-      const { id, role } = action.payload;
-
-      if (role && state.toasts[role]) {
-        // 🚀 Rimozione mirata
-        state.toasts[role] = state.toasts[role].filter(
-          (toast) => toast.id !== id
-        );
-      } else {
-        // 🔄 Fallback: rimuovi da tutti
-        Object.keys(state.toasts).forEach((roleKey) => {
-          state.toasts[roleKey] = state.toasts[roleKey].filter(
-            (toast) => toast.id !== id
-          );
-        });
-      }
-    },
-
-    clearToastsForRole: (state, action) => {
-      const { role } = action.payload;
-      if (state.toasts[role]) {
-        state.toasts[role] = [];
-      }
-    },
-
-    clearAllToasts: (state) => {
-      Object.keys(state.toasts).forEach((role) => {
-        state.toasts[role] = [];
-      });
-    },
-
-    // =============== ASYNC NOTIFICATIONS ===============
-    addAsyncNotification: (state, action) => {
-      const {
-        title,
-        message,
-        type = "info",
-        category = "general", // 'course', 'chat', 'system', 'event'
-        actionData = null, // dati per azioni (es: courseId, chatId)
-        requiresAction = false,
-        // 🆕 NUOVO: Specifica chi deve vedere la notifica
-        targetRole = "both", // "instructor" | "student" | "both"
-
-        // 🆕 NUOVO: Chi ha generato l'azione (opzionale per context)
-        fromRole = null, // "instructor" | "student" | "system"
-
-        // 🆕 NUOVO: ID conversazione/esperienza per linking
-        experienceId = null,
-        conversationId = null,
-      } = action.payload;
-
-      state.asyncNotifications.unshift({
-        id: state.asyncIdCounter++,
-        title,
-        message,
-        type,
-        category,
-        actionData,
-        requiresAction,
-        // 🆕 Metadati per filtering
-        targetRole,
-        fromRole,
-        experienceId,
-        conversationId,
-        read: false,
-        timestamp: Date.now(),
-      });
-
-      // Salva in localStorage
-      localStorage.setItem(
-        "asyncNotifications",
-        JSON.stringify(state.asyncNotifications)
-      );
-    },
-
-    // 🆕 NUOVO: Set current user role
-    setCurrentUserRole: (state, action) => {
-      state.currentUserRole = action.payload;
-    },
-
-    addNotificationForBothRoles: (state, action) => {
-      const {
-        instructorNotification,
-        studentNotification,
-        sharedData = {},
-      } = action.payload;
-
-      // Notifica per Instructor
-      if (instructorNotification) {
-        state.asyncNotifications.unshift({
-          id: state.asyncIdCounter++,
-          ...sharedData,
-          ...instructorNotification,
-          targetRole: "instructor",
-          read: false,
-          timestamp: Date.now(),
-        });
-      }
-
-      // Notifica per Student
-      if (studentNotification) {
-        state.asyncNotifications.unshift({
-          id: state.asyncIdCounter++,
-          ...sharedData,
-          ...studentNotification,
-          targetRole: "student",
-          read: false,
-          timestamp: Date.now(),
-        });
-      }
-
-      localStorage.setItem(
-        "asyncNotifications",
-        JSON.stringify(state.asyncNotifications)
-      );
     },
 
     markAsRead: (state, action) => {
-      const notification = state.asyncNotifications.find(
-        (n) => n.id === action.payload
-      );
+      const notificationId = action.payload;
+      const notification = state.items.find((n) => n.id === notificationId);
       if (notification) {
         notification.read = true;
-        localStorage.setItem(
-          "asyncNotifications",
-          JSON.stringify(state.asyncNotifications)
-        );
       }
     },
 
     markAllAsRead: (state, action) => {
       const { role } = action.payload || {};
 
-      state.asyncNotifications.forEach((n) => {
-        // Se non specifico ruolo, marca tutto come letto
-        if (!role) {
-          n.read = true;
-        }
-        // Altrimenti marca solo per il ruolo specifico
-        else if (n.targetRole === role || n.targetRole === "both") {
-          n.read = true;
+      state.items.forEach((notification) => {
+        if (!role || notification.targetRole === role) {
+          notification.read = true;
         }
       });
-
-      localStorage.setItem(
-        "asyncNotifications",
-        JSON.stringify(state.asyncNotifications)
-      );
     },
 
-    removeAsyncNotification: (state, action) => {
-      state.asyncNotifications = state.asyncNotifications.filter(
-        (n) => n.id !== action.payload
-      );
-      localStorage.setItem(
-        "asyncNotifications",
-        JSON.stringify(state.asyncNotifications)
-      );
+    removeNotification: (state, action) => {
+      const notificationId = action.payload;
+      state.items = state.items.filter((n) => n.id !== notificationId);
     },
 
-    clearAllAsyncNotifications: (state) => {
-      state.asyncNotifications = [];
-      localStorage.removeItem("asyncNotifications");
+    clearAllNotifications: (state) => {
+      state.items = [];
+    },
+
+    // =============== ROLE MANAGEMENT ===============
+
+    setCurrentRole: (state, action) => {
+      state.currentRole = action.payload;
     },
 
     // =============== UI CONTROLS ===============
+
     toggleDropdown: (state) => {
-      state.isDropdownOpen = !state.isDropdownOpen;
+      state.ui.isOpen = !state.ui.isOpen;
     },
 
     closeDropdown: (state) => {
-      state.isDropdownOpen = false;
-    },
-
-    // =============== PERSISTENCE ===============
-    loadAsyncNotifications: (state) => {
-      try {
-        const saved = localStorage.getItem("asyncNotifications");
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          state.asyncNotifications = parsed;
-          // Aggiorna il counter per evitare conflitti
-          if (parsed.length > 0) {
-            state.asyncIdCounter = Math.max(...parsed.map((n) => n.id)) + 1;
-          }
-        }
-      } catch (error) {
-        console.error("Error loading notifications:", error);
-      }
-    },
-
-    // =============== CROSS-WINDOW SYNC ===============
-    syncFromStorage: (state, action) => {
-      state.asyncNotifications = action.payload;
+      state.ui.isOpen = false;
     },
   },
 });
 
-// =============== ENHANCED SELECTORS ===============
+// =============== SELECTORS ===============
 
-export const selectToastsByRole = (role) => (state) =>
-  state.notifications.toasts[role] || [];
-
-export const selectToastCountByRole = (role) => (state) =>
-  state.notifications.toasts[role]?.length || 0;
-
-export const selectAllToastsCount = (state) =>
-  Object.values(state.notifications.toasts).reduce(
-    (total, roleToasts) => total + roleToasts.length,
-    0
-  );
-
-export const selectAsyncNotifications = (state) =>
-  state.notifications.asyncNotifications;
-
-export const selectCurrentUserRole = (state) =>
-  state.notifications.currentUserRole;
-
-// 🆕 NUOVO: Filtra notifiche per ruolo corrente
+// Notifiche per il ruolo corrente
 export const selectNotificationsForCurrentRole = (state) => {
-  const role = state.notifications.currentUserRole;
-  return state.notifications.asyncNotifications.filter(
+  return state.notifications.items.filter(
     (notification) =>
-      notification.targetRole === role || notification.targetRole === "both"
+      notification.targetRole === state.notifications.currentRole
   );
 };
 
-// 🆕 NUOVO: Conta non lette per ruolo corrente
-export const selectUnreadCountForRole = (state) => {
-  const role = state.notifications.currentUserRole;
-  return state.notifications.asyncNotifications.filter(
+// Notifiche per ruolo specifico
+export const selectNotificationsByRole = (role) => (state) => {
+  return state.notifications.items.filter(
+    (notification) => notification.targetRole === role
+  );
+};
+
+// Conteggio non lette per ruolo corrente
+export const selectUnreadCountForCurrentRole = (state) => {
+  return state.notifications.items.filter(
     (notification) =>
-      !notification.read &&
-      (notification.targetRole === role || notification.targetRole === "both")
+      notification.targetRole === state.notifications.currentRole &&
+      !notification.read
   ).length;
 };
 
-// 🆕 NUOVO: Filtra per ruolo specifico
-export const selectNotificationsByRole = (role) => (state) =>
-  state.notifications.asyncNotifications.filter(
-    (notification) =>
-      notification.targetRole === role || notification.targetRole === "both"
-  );
+// Conteggio non lette per ruolo specifico
+export const selectUnreadCountByRole = (role) => (state) => {
+  return state.notifications.items.filter(
+    (notification) => notification.targetRole === role && !notification.read
+  ).length;
+};
 
-// 🆕 NUOVO: Filtra per categoria E ruolo
-export const selectNotificationsByCategoryAndRole =
-  (category, role) => (state) =>
-    state.notifications.asyncNotifications.filter(
-      (notification) =>
-        notification.category === category &&
-        (notification.targetRole === role || notification.targetRole === "both")
-    );
+// Ruolo corrente
+export const selectCurrentRole = (state) => state.notifications.currentRole;
 
-// 🆕 NUOVO: Notifiche per esperienza specifica
-export const selectNotificationsByExperience = (experienceId) => (state) =>
-  state.notifications.asyncNotifications.filter(
-    (notification) => notification.experienceId === experienceId
-  );
+// UI state
+export const selectIsDropdownOpen = (state) => state.notifications.ui.isOpen;
 
-export const selectIsDropdownOpen = (state) =>
-  state.notifications.isDropdownOpen;
+// Tutte le notifiche (per debug)
+export const selectAllNotifications = (state) => state.notifications.items;
 
 export const {
-  showToast,
-  hideToast,
-  clearToastsForRole, // ← AGGIUNGI QUESTO
-  clearAllToasts, // ← AGGIUNGI QUESTO
-  addAsyncNotification,
-  addNotificationForBothRoles, // ← AGGIUNGI QUESTO
-  setCurrentUserRole, // ← AGGIUNGI QUESTO
+  addNotification,
   markAsRead,
   markAllAsRead,
-  removeAsyncNotification,
-  clearAllAsyncNotifications,
+  removeNotification,
+  clearAllNotifications,
+  setCurrentRole,
   toggleDropdown,
   closeDropdown,
-  loadAsyncNotifications,
-  syncFromStorage,
 } = notificationSlice.actions;
 
 export default notificationSlice.reducer;

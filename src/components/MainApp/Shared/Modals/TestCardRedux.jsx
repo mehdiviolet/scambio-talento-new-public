@@ -51,12 +51,12 @@ import {
   createConversationFromRequest,
   addSystemMessage,
 } from "@/store/slices/chatSlice";
-import { useNotifications } from "@/hooks/useNotifications";
+// import { useNotifications } from "@/hooks/useNotifications";
 
-import {
-  addAsyncNotification,
-  selectNotificationsByRole,
-} from "@/store/slices/notificationSlice";
+// import {
+//   addAsyncNotification,
+//   selectNotificationsByRole,
+// } from "@/store/slices/notificationSlice";
 
 import {
   selectCurrentUserXP,
@@ -90,7 +90,7 @@ function TestCardRedux({
   istruttore = "Serj Tankian",
   skillGems,
   instructorPhoto,
-  partecipanti = 3,
+  // partecipanti = 3,
   icon = "_",
   lingua,
   modalita,
@@ -146,31 +146,31 @@ function TestCardRedux({
       }
   );
 
-  const { showSuccessToast, showErrorToast, addCourseNotification } =
-    useNotifications();
+  // const { showSuccessToast, showErrorToast, addCourseNotification } =
+  //   useNotifications();
 
   // 🎯 MEMOIZZA I SELECTORS PROBLEMATICI
-  const instructorNotifications = useSelector(
-    useMemo(
-      () =>
-        createSelector(
-          [selectNotificationsByRole("instructor")],
-          (notifications) => notifications
-        ),
-      []
-    )
-  );
+  // const instructorNotifications = useSelector(
+  //   useMemo(
+  //     () =>
+  //       createSelector(
+  //         [selectNotificationsByRole("instructor")],
+  //         (notifications) => notifications
+  //       ),
+  //     []
+  //   )
+  // );
 
-  const studentNotifications = useSelector(
-    useMemo(
-      () =>
-        createSelector(
-          [selectNotificationsByRole("student")],
-          (notifications) => notifications
-        ),
-      []
-    )
-  );
+  // const studentNotifications = useSelector(
+  //   useMemo(
+  //     () =>
+  //       createSelector(
+  //         [selectNotificationsByRole("student")],
+  //         (notifications) => notifications
+  //       ),
+  //     []
+  //   )
+  // );
 
   const instructorNotification = useSelector(
     (state) => state.experienceSliceTest.instructorNotifications[experienceId]
@@ -424,7 +424,7 @@ function TestCardRedux({
       );
 
       // 🎯 2. Toast immediato per feedback locale
-      showSuccessToast("Richiesta inviata con successo!", 3000, "student");
+      // showSuccessToast("Richiesta inviata con successo!", 3000, "student");
 
       dispatch(
         bookmarkCourse({
@@ -438,11 +438,11 @@ function TestCardRedux({
         })
       );
 
-      showSuccessToast(
-        "Richiesta inviata e corso salvato nei bookmark! 📩💾",
-        4000,
-        "student"
-      );
+      // showSuccessToast(
+      //   "Richiesta inviata e corso salvato nei bookmark! 📩💾",
+      //   4000,
+      //   "student"
+      // );
 
       // 🎯 3. ✅ CREA CONVERSAZIONE CON NUOVA STRUTTURA
       dispatch(
@@ -474,20 +474,20 @@ function TestCardRedux({
           .replace(/\s+/g, "_")
           .replace(/[^a-z0-9_]/g, "");
 
-      dispatch(
-        addAsyncNotification({
-          title: "Nuova richiesta ricevuta! 📩",
-          message: `${currentUser.name} vuole partecipare a "${title}"`,
-          type: "info",
-          category: "course",
-          targetRole: "instructor",
-          fromRole: "student",
-          experienceId: experienceId,
-          conversationId: conversationId, // ✅ ID CORRETTO
-          actionData: { experienceId, action: "review_request" },
-          requiresAction: true,
-        })
-      );
+      // dispatch(
+      //   addAsyncNotification({
+      //     title: "Nuova richiesta ricevuta! 📩",
+      //     message: `${currentUser.name} vuole partecipare a "${title}"`,
+      //     type: "info",
+      //     category: "course",
+      //     targetRole: "instructor",
+      //     fromRole: "student",
+      //     experienceId: experienceId,
+      //     conversationId: conversationId, // ✅ ID CORRETTO
+      //     actionData: { experienceId, action: "review_request" },
+      //     requiresAction: true,
+      //   })
+      // );
 
       // 🎯 5. Cleanup UI
       setIsRequestOpen(false);
@@ -503,7 +503,7 @@ function TestCardRedux({
     dispatch(instructorAcceptRequest({ experienceId }));
 
     // Toast per instructor
-    showSuccessToast("Richiesta accettata!", 3000, "instructor");
+    // showSuccessToast("Richiesta accettata!", 3000, "instructor");
 
     // 🎯 Aggiungi messaggio di sistema alla chat
     dispatch(
@@ -565,16 +565,16 @@ function TestCardRedux({
     console.log(`student ha accettato e pagato ${firstPayment} XP`);
 
     // ✅ NOTIFICA ASYNC per instructor (apparirà nel panel sinistro)
-    dispatch(
-      addAsyncNotification({
-        title: "✅ Corso accettato!",
-        message: `${currentUser.name} ha accettato il corso "${title}"`,
-        type: "info",
-        category: "course",
-        targetRole: "instructor", // ← Solo instructor la vedrà
-        experienceId: experienceId,
-      })
-    );
+    // dispatch(
+    //   addAsyncNotification({
+    //     title: "✅ Corso accettato!",
+    //     message: `${currentUser.name} ha accettato il corso "${title}"`,
+    //     type: "info",
+    //     category: "course",
+    //     targetRole: "instructor", // ← Solo instructor la vedrà
+    //     experienceId: experienceId,
+    //   })
+    // );
   };
 
   // Nel TestCardRedux, aggiungi questo useEffect:

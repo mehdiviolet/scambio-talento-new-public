@@ -6,16 +6,33 @@ import {
   selectIsDropdownOpen,
   toggleDropdown,
   closeDropdown,
+  selectUnreadCountByRole,
+  selectNotificationsForCurrentRole,
+  selectCurrentRole,
+  setCurrentRole,
 } from "@/store/slices/notificationSlice";
 import { Bell } from "lucide-react";
 import NotificationDropdown from "./NotificationDropdown";
 import styles from "./NotificationBell.module.css";
 
-const NotificationBell = () => {
+const NotificationBell = ({ currentRole }) => {
   const dispatch = useDispatch();
-  // const unreadCount = useSelector(selectUnreadCount);
+
+  // Se passa una prop, usala, altrimenti usa lo store
+  const roleFromStore = useSelector(selectCurrentRole);
+  const activeRole = currentRole || roleFromStore;
+
   const isOpen = useSelector(selectIsDropdownOpen);
+  // const unreadCount = useSelector(selectUnreadCount);
   const bellRef = useRef(null);
+
+  useEffect(() => {
+    if (currentRole && currentRole !== roleFromStore) {
+      dispatch(setCurrentRole(currentRole));
+    }
+  }, [currentRole, roleFromStore, dispatch]);
+
+  const unreadCount = useSelector(selectUnreadCountByRole(activeRole));
 
   // Chiudi dropdown se click fuori
   useEffect(() => {
@@ -37,21 +54,25 @@ const NotificationBell = () => {
   };
 
   return (
-    <div className={styles.bellContainer} ref={bellRef}>
-      <button
+    <>
+      <NotificationDropdown currentRole={activeRole} />
+      <div className={styles.bellContainer} ref={bellRef}>
+        {/* <button
         className={`${styles.bellButton} ${isOpen ? styles.active : ""}`}
         onClick={handleToggle}
-      >
-        <Bell size={20} />
+        > */}
+        {/* <Bell size={20} /> */}
         {/* {unreadCount > 0 && (
           <span className={styles.badge}>
-            {unreadCount > 99 ? "99+" : unreadCount}
+          {unreadCount > 99 ? "99+" : unreadCount}
           </span>
-        )} */}
-      </button>
+          )} */}
 
-      {isOpen && <NotificationDropdown />}
-    </div>
+        {/* </button> */}
+
+        {/* {isOpen && <NotificationDropdown currentRole={currentRole} />} */}
+      </div>
+    </>
   );
 };
 

@@ -3,11 +3,11 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectNotificationsByRole,
-  selectUnreadCountForRole,
+  // selectUnreadCountForRole,
   markAsRead,
   markAllAsRead,
-  removeAsyncNotification,
-  showToast,
+  // removeAsyncNotification,
+  // showToast,
 } from "@/store/slices/notificationSlice";
 import {
   MessageCircle,
@@ -75,7 +75,7 @@ const RoleSpecificNotificationDropdown = ({ role, title }) => {
 
   const handleRemove = (id, e) => {
     e.stopPropagation();
-    dispatch(removeAsyncNotification(id));
+    // dispatch(removeAsyncNotification(id));
   };
 
   const handleMarkAllAsRead = () => {
@@ -133,18 +133,18 @@ const RoleSpecificNotificationDropdown = ({ role, title }) => {
       );
 
       // Toast conferma (se hai showToast disponibile)
-      dispatch(
-        showToast({
-          message: "Corso salvato nei bookmark!",
-          type: "success",
-          role: "student",
-          duration: 2000,
-        })
-      );
+      // dispatch(
+      //   showToast({
+      //     message: "Corso salvato nei bookmark!",
+      //     type: "success",
+      //     role: "student",
+      //     duration: 2000,
+      //   })
+      // );
     }
 
     // Rimuovi notifica in entrambi i casi
-    dispatch(removeAsyncNotification(notification.id));
+    // dispatch(removeAsyncNotification(notification.id));
   };
 
   const getRoleColor = () => {

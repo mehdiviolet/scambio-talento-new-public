@@ -27,9 +27,9 @@ import SearchPage from "./SearchPage";
 import ChatComponentTest from "./ChatComponentTest";
 import { useUnreadMessages } from "@/hooks/useUnreadMessages";
 import BottomNavigationTest from "./MainApp/Shared/BottomNavigationTest";
-import ToastContainer from "./notifications/ToastContainer";
-import NotificationBell from "./notifications/NotificationBell";
-import RoleSpecificNotificationDropdown from "@/components/notifications/RoleSpecificNotificationDropdown";
+// import ToastContainer from "./notifications/ToastContainer";
+// import NotificationBell from "./notifications/NotificationBell";
+// import RoleSpecificNotificationDropdown from "@/components/notifications/RoleSpecificNotificationDropdown";
 
 // ✨ NUOVO: Import XP Service selectors
 import {

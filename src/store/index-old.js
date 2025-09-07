@@ -1,22 +1,21 @@
-// src/store/index.js - AGGIORNATO con notification middleware
+// src/store/index.js - AGGIORNATO con xpService
 import { configureStore } from "@reduxjs/toolkit";
 import onboardingReducer from "./slices/onboardingSlice";
 import quickSetupReducer from "./slices/quickSetupSlice";
 import experiencesReducer from "./slices/experiencesSlice";
 import eventsReducer from "./slices/eventsSlice";
-import experienceSliceTest from "../store/slices/experienceSliceTest";
-import chatReducer from "../store/slices/chatSlice";
-import notificationReducer from "../store/slices/notificationSlice"; // Il nuovo slice semplificato
-import searchReducer from "../store/slices/searchSlice";
+// import demoSlice from "../store/slices/demoSlice";
+// import personReducer from "../store/slices/personSlice";
+import experienceSliceTest from "./slices/experienceSliceTest";
+import chatReducer from "./slices/chatSlice";
+import notificationReducer from "./slices/notificationSlice";
+import searchReducer from "./slices/searchSlice";
 import userReducer from "../services/userService";
 import sharedEventReducer from "./slices/sharedEventSlice";
 import galleryReducer from "./slices/gallerySlice";
 
-// XP Service unificato
+// ✨ NUOVO: XP Service unificato
 import xpReducer from "../services/xpService";
-
-// NUOVO: Notification middleware
-import { notificationMiddleware } from "./middleware/notificationMiddleware";
 
 export const store = configureStore({
   reducer: {
@@ -24,36 +23,29 @@ export const store = configureStore({
     quickSetup: quickSetupReducer,
     experiences: experiencesReducer,
     events: eventsReducer,
+    // demo: demoSlice, // 🚨 MANTERREMO per ora, poi migreremo
+    // person: personReducer,
     experienceSliceTest: experienceSliceTest,
     chat: chatReducer,
-    notifications: notificationReducer, // Nuovo slice semplificato
+    notifications: notificationReducer,
     search: searchReducer,
     users: userReducer,
-    sharedEvent: sharedEventReducer,
-    xp: xpReducer, // XP system unificato
+    sharedEvent: sharedEventReducer, // 👈 AGGIUNGERE QUESTA RIGA
+
+    // ✨ NUOVO REDUCER
+    xp: xpReducer, // 👈 XP system unificato
     gallery: galleryReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [
-          "quickSetup/setProfilePhoto",
-          "events/addEvent",
-          // Aggiungi azioni notifiche se necessario
-          "notifications/addNotification",
-        ],
+        ignoredActions: ["quickSetup/setProfilePhoto", "events/addEvent"],
         ignoredPaths: [
           "quickSetup.profileData.profilePhoto",
           "events.events.coverImage",
-          // Ignora timestamp nelle notifiche per serializzazione
-          "notifications.items.timestamp",
         ],
       },
-    })
-      // AGGIUNTA CRUCIALE: Il middleware per notifiche automatiche
-      .concat(notificationMiddleware),
-
+    }),
   devTools: process.env.NODE_ENV !== "production",
 });
-
-console.log(onboardingReducer); // Debug check
+console.log(onboardingReducer); // Dovrebbe stampare la funzione reducer
