@@ -86,39 +86,60 @@ const ChatComponentTest = ({ isOwner = true }) => {
   const userRole = isOwner ? "owner" : "viewer";
 
   // ✅ FUNZIONE ROBUSTA per filtrare conversazioni
+  // const getConversationsForSelectedOwner = () => {
+
+  //   if (!selectedOwner) {
+  //     console.log("No selectedOwner found");
+  //     return [];
+  //   }
+
+  //   // ✅ Genera ID della persona selezionata
+  //   const selectedPersonId = generatePersonId(
+  //     selectedOwner.firstName,
+  //     selectedOwner.lastName
+  //   );
+
+  //   console.log("Looking for conversations with personId:", selectedPersonId);
+  //   console.log("Available conversations:", Object.keys(conversations));
+
+  //   // ✅ Filtra per ID invece di nome
+  //   const filteredConversations = Object.values(conversations).filter(
+  //     (conversation) => {
+  //       const ownerParticipantId = conversation.participants?.owner?.id;
+  //       const match = ownerParticipantId === selectedPersonId;
+
+  //       if (match) {
+  //         console.log("Found matching conversation:", conversation.id);
+  //       }
+
+  //       return match;
+  //     }
+  //   );
+
+  //   console.log("Filtered conversations count:", filteredConversations.length);
+  //   return filteredConversations;
+  // };
   const getConversationsForSelectedOwner = () => {
+    // Se sei un viewer, mostra TUTTE le conversazioni
+    if (!isOwner) {
+      return Object.values(conversations);
+    }
+
+    // Se sei un owner, filtra solo per selectedOwner
     if (!selectedOwner) {
-      console.log("No selectedOwner found");
       return [];
     }
 
-    // ✅ Genera ID della persona selezionata
     const selectedPersonId = generatePersonId(
       selectedOwner.firstName,
       selectedOwner.lastName
     );
 
-    console.log("Looking for conversations with personId:", selectedPersonId);
-    console.log("Available conversations:", Object.keys(conversations));
-
-    // ✅ Filtra per ID invece di nome
-    const filteredConversations = Object.values(conversations).filter(
-      (conversation) => {
-        const ownerParticipantId = conversation.participants?.owner?.id;
-        const match = ownerParticipantId === selectedPersonId;
-
-        if (match) {
-          console.log("Found matching conversation:", conversation.id);
-        }
-
-        return match;
-      }
-    );
-
-    console.log("Filtered conversations count:", filteredConversations.length);
-    return filteredConversations;
+    return Object.values(conversations).filter((conversation) => {
+      const ownerParticipantId = conversation.participants?.owner?.id;
+      return ownerParticipantId === selectedPersonId;
+    });
   };
-
   // ✅ Conversazioni filtrate e ordinate
   const sortedConversations = getConversationsForSelectedOwner().sort(
     (a, b) => new Date(b.lastActivity) - new Date(a.lastActivity)
@@ -252,6 +273,16 @@ const ChatComponentTest = ({ isOwner = true }) => {
     return "Nessuna persona selezionata";
   };
 
+  // ✅ CORRETTO - estrae nome owner dalla conversazione specifica
+  const getConversationOwnerName = (conversation) => {
+    return conversation.participants?.owner?.name || "Utente sconosciuto";
+  };
+
+  // ✅ CORRETTO - estrae avatar owner dalla conversazione specifica
+  const getConversationOwnerAvatar = (conversation) => {
+    return conversation.participants?.owner?.avatar || null;
+  };
+
   // ✅ VISTA LISTA CONVERSAZIONI
   if (showChatList || !localActiveConversation) {
     return (
@@ -260,7 +291,8 @@ const ChatComponentTest = ({ isOwner = true }) => {
           <div className={styles.headerTitle}>
             <MessageCircle size={20} />
             <span>
-              Chat con {getSelectedOwnerName()} ({sortedConversations.length})
+              Chats
+              {/* Chat con {getSelectedOwnerName()} ({sortedConversations.length}) */}
             </span>
             {totalUnread > 0 && (
               <div className={styles.unreadBadge}>{totalUnread}</div>
@@ -272,8 +304,10 @@ const ChatComponentTest = ({ isOwner = true }) => {
           {sortedConversations.length === 0 ? (
             <div className={styles.emptyState}>
               <MessageCircle size={40} className={styles.emptyIcon} />
-              <p>Nessuna conversazione con questa persona</p>
-              <span>Le richieste di esperienza appariranno qui</span>
+              <p>Nessun messaggio ancora</p>
+              <span>
+                Invia una richiesta di esperienza per iniziare a chattare
+              </span>
             </div>
           ) : (
             sortedConversations.map((conversation) => (
@@ -285,12 +319,20 @@ const ChatComponentTest = ({ isOwner = true }) => {
                 onClick={() => openConversation(conversation.id)}
               >
                 <div className={styles.conversationAvatar}>
-                  {renderAvatar(ownerData)}
+                  {/* {renderAvatar(ownerData)} */}
+                  {renderAvatar({
+                    profilePhoto: getConversationOwnerAvatar(conversation),
+                    firstName:
+                      getConversationOwnerName(conversation).split(" ")[0],
+                    lastName:
+                      getConversationOwnerName(conversation).split(" ")[1],
+                  })}
                 </div>
                 <div className={styles.conversationContent}>
                   <div className={styles.conversationTop}>
                     <span className={styles.conversationName}>
-                      {getSelectedOwnerName()}
+                      {/* {getSelectedOwnerName()} */}
+                      {getConversationOwnerName(conversation)}
                     </span>
                     <span className={styles.conversationTime}>
                       {formatTime(conversation.lastActivity)}
@@ -341,11 +383,19 @@ const ChatComponentTest = ({ isOwner = true }) => {
         </button>
         <div className={styles.conversationInfo}>
           <div className={styles.conversationAvatar}>
-            {renderAvatar(ownerData)}
+            {/* {renderAvatar(ownerData)} */}
+            {renderAvatar({
+              profilePhoto: currentConversation?.participants?.owner?.avatar,
+              firstName:
+                currentConversation?.participants?.owner?.name?.split(" ")[0],
+              lastName:
+                currentConversation?.participants?.owner?.name?.split(" ")[1],
+            })}
           </div>
           <div className={styles.conversationDetails}>
             <span className={styles.conversationName}>
-              {getSelectedOwnerName()}
+              {/* {getSelectedOwnerName()} */}
+              {getConversationOwnerName(currentConversation)}
             </span>
             <span className={styles.experienceSubtitle}>
               <BookOpen size={16} /> {currentConversation.experienceTitle}
@@ -369,9 +419,21 @@ const ChatComponentTest = ({ isOwner = true }) => {
           >
             {message.senderId !== userRole && message.senderId !== "system" && (
               <div className={styles.messageAvatar}>
-                {renderAvatar(
+                {/* {renderAvatar(
                   message.senderId === "owner" ? ownerData : viewerData
-                )}
+                )} */}
+                {renderAvatar({
+                  profilePhoto:
+                    currentConversation?.participants?.owner?.avatar,
+                  firstName:
+                    currentConversation?.participants?.owner?.name?.split(
+                      " "
+                    )[0],
+                  lastName:
+                    currentConversation?.participants?.owner?.name?.split(
+                      " "
+                    )[1],
+                })}
               </div>
             )}
             <div className={styles.messageContent}>
