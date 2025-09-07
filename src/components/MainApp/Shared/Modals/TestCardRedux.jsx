@@ -332,8 +332,75 @@ function TestCardRedux({
     setIsRequestOpen(true);
   };
 
+  // const handleSendRequest = () => {
+  //   console.log("SEND REqUest", currentUser);
+
+  //   if (requestMessage.trim()) {
+  //     // 🎯 1. Invia richiesta (tuo slice esistente)
+  //     dispatch(
+  //       sendRequest({
+  //         experienceId,
+  //         message: requestMessage,
+  //       })
+  //     );
+
+  //     // 🎯 2. Toast immediato per feedback locale
+  //     showSuccessToast("Richiesta inviata con successo!", 3000, "student");
+
+  //     dispatch(
+  //       bookmarkCourse({
+  //         experienceId,
+  //         userId: currentUser.id,
+  //         experienceData: experienceData,
+  //         istruttore: istruttore,
+  //         instructorPhoto: instructorPhoto,
+  //         skillGems: skillGems,
+  //         selectedPersonData: selectedPersonData, // 🆕 PASSA TUTTI I DATI PERSONA
+  //       })
+  //     );
+
+  //     showSuccessToast(
+  //       "Richiesta inviata e corso salvato nei bookmark! 📩💾",
+  //       4000,
+  //       "student"
+  //     );
+
+  //     // 🎯 3. Crea conversazione in chat automaticamente
+  //     dispatch(
+  //       createConversationFromRequest({
+  //         experienceId,
+  //         experienceTitle: title,
+  //         studentName: currentUser.name,
+  //         studentAvatar: currentUser.avatar,
+  //         message: requestMessage,
+  //       })
+  //     );
+
+  //     // 🎯 4. Crea notifica asincrona per instructor usando il NUOVO sistema
+  //     dispatch(
+  //       addAsyncNotification({
+  //         title: "Nuova richiesta ricevuta! 📩",
+  //         message: `${currentUser.name} vuole partecipare a "${title}"`,
+  //         type: "info",
+  //         category: "course",
+  //         targetRole: "instructor", // 👈 SOLO instructor VEDRÀ QUESTA
+  //         fromRole: "student",
+  //         experienceId: experienceId,
+  //         conversationId: `exp-${experienceId}`, // 🆕 AGGIUNGI QUESTO
+  //         actionData: { experienceId, action: "review_request" },
+  //         requiresAction: true,
+  //       })
+  //     );
+
+  //     // 🎯 5. Cleanup UI
+  //     setIsRequestOpen(false);
+  //     setRequestMessage("");
+
+  //     console.log("Richiesta inviata via Redux:", requestMessage);
+  //   }
+  // };
   const handleSendRequest = () => {
-    console.log("SEND REqUest", currentUser);
+    console.log("SEND Request", currentUser);
 
     if (requestMessage.trim()) {
       // 🎯 1. Invia richiesta (tuo slice esistente)
@@ -341,6 +408,18 @@ function TestCardRedux({
         sendRequest({
           experienceId,
           message: requestMessage,
+          // 🆕 AGGIUNGI DATI STUDENTE per la chat
+          studentData: {
+            name: currentUser.name,
+            avatar: currentUser.avatar,
+            id: currentUser.id,
+          },
+          // 🆕 AGGIUNGI DATI ESPERIENZA per la chat
+          experienceData: {
+            title: title,
+            icon: experienceData.icon,
+            skillId: experienceData.skillId,
+          },
         })
       );
 
@@ -355,7 +434,7 @@ function TestCardRedux({
           istruttore: istruttore,
           instructorPhoto: instructorPhoto,
           skillGems: skillGems,
-          selectedPersonData: selectedPersonData, // 🆕 PASSA TUTTI I DATI PERSONA
+          selectedPersonData: selectedPersonData, // PASSA TUTTI I DATI PERSONA
         })
       );
 
@@ -365,28 +444,46 @@ function TestCardRedux({
         "student"
       );
 
-      // 🎯 3. Crea conversazione in chat automaticamente
+      // 🎯 3. ✅ CREA CONVERSAZIONE CON NUOVA STRUTTURA
       dispatch(
         createConversationFromRequest({
           experienceId,
           experienceTitle: title,
-          studentName: currentUser.name,
-          studentAvatar: currentUser.avatar,
+
+          // ✅ DATI VIEWER (studente)
+          viewerName: currentUser.name,
+          viewerAvatar: currentUser.avatar,
+
+          // ✅ DATI OWNER (istruttore) - OGGETTO COMPLETO
+          ownerData: {
+            firstName: selectedPersonData?.profile?.firstName || "Owner",
+            lastName: selectedPersonData?.profile?.lastName || "User",
+            profilePhoto:
+              selectedPersonData?.profile?.profilePhoto || instructorPhoto,
+            avatar: instructorPhoto, // fallback
+          },
+
           message: requestMessage,
         })
       );
 
-      // 🎯 4. Crea notifica asincrona per instructor usando il NUOVO sistema
+      // 🎯 4. ✅ CREA NOTIFICA con conversationId CORRETTO
+      const conversationId =
+        `exp-${experienceId}-${selectedPersonData?.profile?.firstName}_${selectedPersonData?.profile?.lastName}`
+          .toLowerCase()
+          .replace(/\s+/g, "_")
+          .replace(/[^a-z0-9_]/g, "");
+
       dispatch(
         addAsyncNotification({
           title: "Nuova richiesta ricevuta! 📩",
           message: `${currentUser.name} vuole partecipare a "${title}"`,
           type: "info",
           category: "course",
-          targetRole: "instructor", // 👈 SOLO instructor VEDRÀ QUESTA
+          targetRole: "instructor",
           fromRole: "student",
           experienceId: experienceId,
-          conversationId: `exp-${experienceId}`, // 🆕 AGGIUNGI QUESTO
+          conversationId: conversationId, // ✅ ID CORRETTO
           actionData: { experienceId, action: "review_request" },
           requiresAction: true,
         })
@@ -397,9 +494,9 @@ function TestCardRedux({
       setRequestMessage("");
 
       console.log("Richiesta inviata via Redux:", requestMessage);
+      console.log("Conversation created with ID:", conversationId);
     }
   };
-
   const handleInstructorAcceptRequest = () => {
     console.log("panello sin??", currentUser);
 

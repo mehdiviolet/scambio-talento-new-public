@@ -1,4 +1,4 @@
-// SearchPage.jsx - Implementazione del pattern slide drawer reale
+// SearchPage.jsx - VERSIONE CORRETTA CON SELEZIONE UNIFICATA
 import React, { useState } from "react";
 import { Search, User, List } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import ExperiencesMockupRedux from "./ExperiencesMockupRedux";
 import ExperiencesSectionStudenteTest from "./ExperiencesSectionStudenteTest";
 import EventSectionTest from "./EventSectionTest";
 import { setSelectedPersonData } from "@/store/slices/experienceSliceTest";
+import { setSelectedOwner } from "@/store/slices/chatSlice";
 import searchStyles from "./SearchPage.module.css";
 
 // Lista di persone (come nel codice originale)
@@ -125,7 +126,7 @@ const SearchPage = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedPersonForDrawer, setSelectedPersonForDrawer] = useState(null);
 
-  // NUOVO: State per la modalità lista in pagina
+  // State per la modalità lista in pagina
   const [showPageList, setShowPageList] = useState(false);
   const [frozenSuggestions, setFrozenSuggestions] = useState([]);
 
@@ -133,13 +134,6 @@ const SearchPage = () => {
   const { isOpen, openDrawer, closeDrawer } = useSlideDrawer();
 
   // Selettori Redux
-  // const selectedPersonId = useSelector(
-  //   (state) => state.users.demo.selectedPersonId
-  // );
-  // const selectedPersonData = useSelector((state) =>
-  //   selectedPersonId ? state.users.users[selectedPersonId] : null
-  // );
-
   const skillGemBonus = useSelector(
     (state) => state.experienceSliceTest.skillGemBonus || {}
   );
@@ -148,7 +142,7 @@ const SearchPage = () => {
     (state) => state.experienceSliceTest.selectedPersonData
   );
 
-  // Calcola skills con GEM aggiornati:
+  // Calcola skills con GEM aggiornati
   const updatedSkills = selectedPersonData.skills.map((skill) => ({
     ...skill,
     gems: skill.gems + (skillGemBonus[skill.id] || 0),
@@ -159,7 +153,7 @@ const SearchPage = () => {
     const query = e.target.value;
     setSearchQuery(query);
 
-    // NUOVO: Se digiti una nuova lettera, esci dalla modalità lista
+    // Se digiti una nuova lettera, esci dalla modalità lista
     if (showPageList) {
       setShowPageList(false);
       setFrozenSuggestions([]);
@@ -177,17 +171,11 @@ const SearchPage = () => {
       setSuggestions([]);
       setShowSuggestions(false);
       // Reset Redux state quando la ricerca è vuota
-      dispatch(
-        setSelectedPersonData({
-          firstName: "",
-          lastName: "",
-          photo: null,
-        })
-      );
+      handleClearSelection();
     }
   };
 
-  // NUOVO: Handler per il pulsante lista
+  // Handler per il pulsante lista
   const handleListButtonClick = () => {
     if (suggestions.length > 0) {
       // Congela i suggerimenti attuali
@@ -199,15 +187,35 @@ const SearchPage = () => {
     }
   };
 
-  // Handler per click su suggerimento - QUESTO È IL PATTERN CORRETTO
+  // Handler per click su suggerimento - VERSIONE UNIFICATA
   const handleSuggestionClick = (person) => {
+    console.log("Selecting person:", person);
+
     // 1. Salva la persona selezionata per il drawer
     setSelectedPersonForDrawer(person);
 
-    // 2. Aggiorna Redux per i dati completi
-    // dispatch(setSelectedPerson(person.id));
+    // 2. UNIFICA LE DUE DISPATCH IN UNA FUNZIONE
+    handlePersonSelection(person);
 
-    // 🔥 AGGIUNGI QUESTA RIGA MANCANTE:
+    // 3. Pulisci ricerca e suggerimenti
+    setSearchQuery(`${person.firstName} ${person.lastName}`);
+    setShowSuggestions(false);
+    setShowPageList(false);
+    setFrozenSuggestions([]);
+
+    // 4. Apri il slide drawer con animazione
+    openDrawer();
+  };
+
+  // NUOVA FUNZIONE UNIFICATA per selezione persona
+  const handlePersonSelection = (person) => {
+    // Validazione input
+    if (!person?.firstName || !person?.lastName) {
+      console.error("Invalid person data:", person);
+      return;
+    }
+
+    // 1. Aggiorna experienceSliceTest (per skills e experiences)
     dispatch(
       setSelectedPersonData({
         firstName: person.firstName,
@@ -216,29 +224,52 @@ const SearchPage = () => {
       })
     );
 
-    // 3. Pulisci ricerca e suggerimenti
-    setSearchQuery(`${person.firstName} ${person.lastName}`);
-    setShowSuggestions(false);
+    // 2. Aggiorna chatSlice (per conversazioni)
+    dispatch(
+      setSelectedOwner({
+        firstName: person.firstName,
+        lastName: person.lastName,
+        profilePhoto: person.photo,
+      })
+    );
 
-    // 4. Apri il slide drawer con animazione
-    openDrawer();
+    console.log("Person selection updated in both slices");
+  };
+
+  // NUOVA FUNZIONE per pulire selezione
+  const handleClearSelection = () => {
+    dispatch(
+      setSelectedPersonData({
+        firstName: "",
+        lastName: "",
+        photo: null,
+      })
+    );
+
+    dispatch(
+      setSelectedOwner({
+        firstName: "",
+        lastName: "",
+        profilePhoto: null,
+      })
+    );
+
+    console.log("Selection cleared from both slices");
   };
 
   // Handler per chiudere il drawer
   const handleCloseDrawer = () => {
     closeDrawer();
-    // Opzionale: pulisci la selezione dopo un delay per evitare flickering
+
+    // Pulisci UI state dopo un delay per evitare flickering
     setTimeout(() => {
       setSelectedPersonForDrawer(null);
       setSearchQuery("");
-      // Reset anche Redux state
-      dispatch(
-        setSelectedPersonData({
-          firstName: "",
-          lastName: "",
-          photo: null,
-        })
-      );
+      setShowPageList(false);
+      setFrozenSuggestions([]);
+
+      // OPZIONALE: Pulisci anche Redux state
+      // handleClearSelection();
     }, 300);
   };
 
@@ -246,9 +277,6 @@ const SearchPage = () => {
     <div className={searchStyles.searchContainer}>
       {/* Barra di ricerca principale con pulsante */}
       <div className={searchStyles.searchInputContainer}>
-        {/* NUOVO: Pulsante per mostrare lista */}
-
-        {/* <Search className={searchStyles.searchIcon} size={20} /> */}
         <input
           type="text"
           placeholder="Cerca persone..."
@@ -270,7 +298,6 @@ const SearchPage = () => {
 
       {/* Dropdown suggerimenti (solo se NON in modalità lista) */}
       {showSuggestions && !showPageList && suggestions.length > 0 && (
-        // <div className={searchStyles.suggestionsDropdown}>
         <div>
           {suggestions.map((person, index) => (
             <div
@@ -295,7 +322,7 @@ const SearchPage = () => {
         </div>
       )}
 
-      {/* NUOVO: Lista in pagina (modalità congelata) */}
+      {/* Lista in pagina (modalità congelata) */}
       {showPageList && frozenSuggestions.length > 0 && (
         <div className={searchStyles.pageList}>
           <div className={searchStyles.pageListHeader}>
@@ -353,7 +380,6 @@ const SearchPage = () => {
               selectedPerson={selectedPersonData.profile}
               isInstructorPanel={false}
             />
-            {/* <SkillMockup /> */} {/* AGGIUNGI bottone follow */}
             <SkillMockup
               mockSkills={updatedSkills}
               selectedPersonData={selectedPersonData}
@@ -372,7 +398,7 @@ const SearchPage = () => {
         )}
 
         {/* Loading state */}
-        {isOpen && !selectedPersonData && (
+        {isOpen && !selectedPersonData.profile.firstName && (
           <div className={searchStyles.loadingState}>
             <p>Caricamento profilo...</p>
           </div>

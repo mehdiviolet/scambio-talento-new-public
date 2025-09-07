@@ -1,25 +1,24 @@
-/* Chat.module.css - Stili aggiornati con design MyExplorePage */
+/* ChatComponent.module.css - VERSIONE FINALE PULITA */
 
 .chatContainer {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  max-height: 640px;
-  /* background: rgba(255, 255, 255, 0.1); */
-  /* backdrop-filter: blur(20px); */
-  /* border-radius: 16px; */
-  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  height: 600px; /* ✅ ALTEZZA FISSA */
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
   overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .chatHeader {
   display: flex;
   align-items: center;
   padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-old, #f9fafb);
+  border-bottom: 1px solid #e5e7eb;
   gap: 10px;
+  min-height: 70px;
 }
 
 .headerTitle {
@@ -28,7 +27,7 @@
   gap: 8px;
   font-weight: 600;
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary, #1f2937);
 }
 
 .unreadBadge {
@@ -46,23 +45,21 @@
 }
 
 .backButton {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--bg--skill, #cecec758);
+  border: 1px solid #e5e7eb;
   cursor: pointer;
   padding: 8px;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  color: var(--text-primary, #6b7280);
+  transition: all 0.2s ease;
 }
 
 .backButton:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
+  background: var(--bg--skill-01, #cecec7);
+  border-color: #d1d5db;
 }
 
 .conversationInfo {
@@ -72,17 +69,23 @@
   flex: 1;
 }
 
-.conversationAvatar {
-  font-size: 1.5rem;
+.conversationAvatar,
+.messageAvatar {
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--bg--skill, #cecec758);
+  border: 1px solid #e5e7eb;
   border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.messageAvatar {
+  width: 32px;
+  height: 32px;
 }
 
 .conversationDetails {
@@ -92,15 +95,17 @@
 
 .conversationName {
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary, #1f2937);
 }
 
 .experienceSubtitle {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-secondary, #6b7280);
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-/* Lista conversazioni */
 .conversationsList {
   flex: 1;
   overflow-y: auto;
@@ -119,13 +124,13 @@
   align-items: center;
   justify-content: center;
   height: 300px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary, #6b7280);
   text-align: center;
   gap: 10px;
 }
 
 .emptyIcon {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-secondary, #9ca3af);
 }
 
 .conversationItem {
@@ -134,20 +139,19 @@
   gap: 12px;
   padding: 15px 20px;
   cursor: pointer;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease;
+  border-bottom: 1px solid #f3f4f6;
+  transition: all 0.2s ease;
   position: relative;
 }
 
 .conversationItem:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-old, #f9fafb);
   transform: translateX(4px);
 }
 
 .conversationItem.unread {
-  background: rgba(251, 191, 36, 0.1);
-  border-left: 3px solid #fbbf24;
-  backdrop-filter: blur(10px);
+  background: var(--bg--esperienza, #d8cda3);
+  border-left: 3px solid #f59e0b;
 }
 
 .conversationContent {
@@ -164,7 +168,7 @@
 
 .conversationTime {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary, #9ca3af);
 }
 
 .conversationBottom {
@@ -173,13 +177,16 @@
 
 .experienceTitle {
   font-size: 0.8rem;
-  color: #60a5fa;
+  color: var(--text-primary, #1f2937);
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .messagePreview {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-secondary, #6b7280);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -200,7 +207,6 @@
   box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
 }
 
-/* Messaggi */
 .messagesContainer {
   flex: 1;
   overflow-y: auto;
@@ -208,6 +214,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background: #fafafa;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -236,54 +243,39 @@
   max-width: 90%;
 }
 
-.messageAvatar {
-  font-size: 1.2rem;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
 .messageContent {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--bg--skill, #cecec758);
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 10px 12px;
   position: relative;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary, #1f2937);
 }
 
 .messageOwn .messageContent {
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
-  color: white;
-  border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  background: var(--bg--evento-one, #cfd3b9);
+  color: var(--text-primary, #1f2937);
+  border-color: #d1d5db;
 }
 
 .messageSystem .messageContent {
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.7);
+  background: var(--bg-old, #ececec);
+  color: var(--text-secondary, #6b7280);
   text-align: center;
   font-style: italic;
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: #e5e7eb;
 }
 
 .experienceRequestBadge {
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
-  color: white;
+  background: var(--bg--esperienza, #d8cda3);
+  color: var(--text-primary, #1f2937);
   padding: 4px 8px;
   border-radius: 8px;
   font-size: 0.75rem;
   margin-bottom: 6px;
-  display: inline-block;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .messageText {
@@ -295,71 +287,64 @@
   font-size: 0.7rem;
   opacity: 0.7;
   margin-top: 4px;
+  color: var(--text-secondary, #9ca3af);
 }
 
-/* Input messaggio */
 .messageInput {
   display: flex;
   align-items: flex-end;
   gap: 10px;
   padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-old, #f9fafb);
+  border-top: 1px solid #e5e7eb;
+  min-height: 70px;
 }
 
 .messageTextarea {
   flex: 1;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  border: 1px solid #d1d5db;
+  background: white;
   border-radius: 12px;
   padding: 10px 12px;
   resize: none;
-  /* font-family: inherit; */
   font-size: 0.9rem;
   min-height: 20px;
   max-height: 80px;
-  color: rgba(255, 255, 255, 0.9);
-  transition: all 0.3s ease;
+  color: var(--text-primary, #1f2937);
+  transition: all 0.2s ease;
 }
 
 .messageTextarea::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary, #9ca3af);
 }
 
 .messageTextarea:focus {
   outline: none;
-  border-color: rgba(59, 130, 246, 0.5);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+  border-color: #6b7280;
+  background: white;
 }
 
 .sendButton {
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
-  color: white;
-  border: 1px solid rgba(59, 130, 246, 0.5);
+  background: var(--bg--evento-one, #cfd3b9);
+  color: var(--text-primary, #1f2937);
+  border: 1px solid #d1d5db;
   border-radius: 12px;
   padding: 10px 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  transition: all 0.2s ease;
 }
 
 .sendButton:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  background: var(--bg--evento, #d0d8a3);
+  border-color: #6b7280;
 }
 
 .sendButton:disabled {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--bg-old, #ececec);
+  border-color: #e5e7eb;
   cursor: not-allowed;
   opacity: 0.6;
-  box-shadow: none;
-  transform: none;
 }

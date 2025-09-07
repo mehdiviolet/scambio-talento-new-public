@@ -63,7 +63,7 @@ const getPeopleMockData = (personName) => {
     "Marco Rossi": {
       skills: [
         {
-          id: "programming-marko",
+          id: "programming-marco",
           name: "Coding",
           icon: "💻",
           detail: "React & Node.js",
@@ -74,7 +74,7 @@ const getPeopleMockData = (personName) => {
           updatedAt: "2024-01-20T15:30:00Z",
         },
         {
-          id: "design-marko",
+          id: "design-marco",
           name: "Design",
           icon: "🎨",
           detail: "UI/UX Design",
@@ -87,8 +87,8 @@ const getPeopleMockData = (personName) => {
       ],
       experiences: [
         {
-          id: "exp-programming-marko-001",
-          skillId: "programming-marko",
+          id: "exp-programming-marco-001",
+          skillId: "programming-marco",
           icon: "💻",
           title: "React / Full-Stack",
           modalita: "online",
@@ -101,8 +101,8 @@ const getPeopleMockData = (personName) => {
             "Corso completo React + Node.js per diventare full-stack developer.",
         },
         {
-          id: "exp-design-marko-002",
-          skillId: "design-marko",
+          id: "exp-design-marco-002",
+          skillId: "design-marco",
           icon: "🎨",
           title: "Design / Modern UI",
           modalita: "online",
@@ -175,7 +175,7 @@ const getPeopleMockData = (personName) => {
     "Sara Bianchi": {
       skills: [
         {
-          id: "programming-marco",
+          id: "programming-sara",
           name: "Coding",
           icon: "💻",
           detail: "React & Node.js",
@@ -186,7 +186,7 @@ const getPeopleMockData = (personName) => {
           updatedAt: "2024-01-20T15:30:00Z",
         },
         {
-          id: "design-marco",
+          id: "design-sara",
           name: "Design",
           icon: "🎨",
           detail: "UI/UX Design",
@@ -199,8 +199,8 @@ const getPeopleMockData = (personName) => {
       ],
       experiences: [
         {
-          id: "exp-programming-marco-001",
-          skillId: "programming-marco",
+          id: "exp-programming-sara-001",
+          skillId: "programming-sara",
           icon: "💻",
           title: "React / Full-Stack",
           modalita: "online",
@@ -213,8 +213,8 @@ const getPeopleMockData = (personName) => {
             "Corso completo React + Node.js per diventare full-stack developer.",
         },
         {
-          id: "exp-design-marco-002",
-          skillId: "design-marco",
+          id: "exp-design-sara-002",
+          skillId: "design-sara",
           icon: "🎨",
           title: "Design / Modern UI",
           modalita: "online",
