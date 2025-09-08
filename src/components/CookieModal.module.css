@@ -1,4 +1,17 @@
-/* ActivityModal.module.css - Glassmorphism design with CSS variables */
+/* CookieModal.module.css - Following ActivityModal design pattern */
+
+:root {
+  --black: #000;
+  --white: #fff;
+  --text-primary: #256679;
+  --text-secondary: #f59e0b;
+  --text-primary-light: #3a8ba3;
+  --text-primary-dark: #1a4d5c;
+  --text-secondary-light: #fbbf24;
+  --text-secondary-dark: #d97706;
+  --progress-blue: #3b82f6;
+  --progress-blue-dark: #1d4ed8;
+}
 
 .overlay {
   position: fixed;
@@ -38,7 +51,7 @@
 .header h3 {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--text-primary, rgb(17, 24, 39));
+  color: var(--text-primary);
   text-align: center;
   letter-spacing: -0.025em;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
@@ -65,11 +78,11 @@
 .closeButton svg {
   width: 1.25rem;
   height: 1.25rem;
-  color: var(--text-secondary, rgb(55, 65, 81));
+  color: var(--text-primary-light);
 }
 
 .closeButton:hover svg {
-  color: var(--text-primary, rgb(17, 24, 39));
+  color: var(--text-primary);
 }
 
 .content {
@@ -78,8 +91,8 @@
   backdrop-filter: blur(8px);
 }
 
-/* Main Activity Display */
-.activityDisplay {
+/* Main XP Display */
+.xpDisplay {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -87,7 +100,7 @@
   text-align: center;
 }
 
-.activityValue {
+.xpValue {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -95,22 +108,21 @@
 }
 
 .valueNumber {
-  /* font-size: 3rem; */
-  font-size: 1.5rem;
+  font-size: 3rem;
   font-weight: 700;
   color: var(--text-secondary);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
-.activityIcon {
+.xpIcon {
   color: var(--text-secondary);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
-.statsTitle {
+.xpTitle {
   font-size: 1.125rem;
   font-weight: 600;
-  color: rgb(17, 24, 39);
+  color: var(--text-primary);
   margin: 0;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
@@ -136,78 +148,85 @@
   border-radius: 12px;
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.progressTeal {
-  background: linear-gradient(90deg, #2e9688, #22d3ee);
-}
-
-.progressGold {
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  background: linear-gradient(
+    90deg,
+    var(--progress-blue),
+    var(--progress-blue-dark)
+  );
 }
 
 .progressText {
   text-align: center;
   margin: 0;
-  color: rgb(55, 65, 81);
+  color: var(--text-primary-light);
   font-size: 0.9rem;
 }
 
 .progressText strong {
-  color: rgb(31, 41, 55);
-}
-
-/* Goal Info */
-.goalInfo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
-  /* background: var(--bg); */
-  /* padding: 1rem; */
-  /* border-radius: 50px; */
-}
-
-.goalHeader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.targetIcon {
-  color: #f59e0b;
-}
-
-.goalTitle {
-  font-size: 1rem;
-  font-weight: 600;
-  color: rgb(31, 41, 55);
   color: var(--text-primary);
 }
 
-.progressBadge {
-  display: flex;
-  align-items: center;
-  /* justify-content: center; */
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
   width: 100%;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
-  padding: 0.4rem 0.8rem;
-  /* background: var(--bg--old); */
-  border-radius: 20px;
-  /* border: 1px solid rgba(251, 191, 36, 0.3); */
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(8px);
-  align-self: center;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.badgeIcon {
-  color: #f59e0b;
-}
-
-.badgeNumber {
+.todayIcon {
   color: var(--text-secondary);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
 
+.weekIcon {
+  color: var(--text-primary);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: var(--text-primary-light);
+  margin: 0;
+}
+
+.statValue {
+  font-size: 1.2rem;
   font-weight: 700;
-  font-size: 1rem;
+  color: var(--text-primary-dark);
+  margin: 0;
+}
+
+/* Info Guide */
+.infoGuide {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  /* border: 3px solid var(--text-primary); */
+}
+
+.guideText {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-style: italic;
+  font-weight: 500;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
+  line-height: 1.4;
 }

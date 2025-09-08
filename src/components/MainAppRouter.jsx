@@ -208,7 +208,7 @@ const MainAppRouter = () => {
             onClick={() => setIsChatModalOpen(true)}
             style={{ cursor: "pointer" }}
           >
-            <Bell style={{ color: "var(--text-four)" }} />
+            <Bell style={{ color: "var(--text-secondary)" }} />
             {/* <span>{chatNotifications.total}</span> */}
             {/* Badge Instagram-style */}
             {allNotifications.hasUnread && (
