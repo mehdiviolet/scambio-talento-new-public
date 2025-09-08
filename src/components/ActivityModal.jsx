@@ -70,7 +70,7 @@ const ActivityModal = ({
                 <div className={styles.goalHeader}>
                   <span className={styles.badgeNumber}>1</span>
                   <Activity size={20} className={styles.badgeIcon} />
-                  <span className={styles.badgeNumber}> = 10</span>
+                  <span className={styles.badgeNumber}> = 50</span>
                   <Cookie size={20} className={styles.badgeIcon} />
                 </div>
               </div>

@@ -1,5 +1,14 @@
 import React from "react";
-import { Cookie, X, Star, TrendingUp } from "lucide-react";
+import {
+  Cookie,
+  X,
+  Star,
+  TrendingUp,
+  Cherry,
+  Telescope,
+  Book,
+  Activity,
+} from "lucide-react";
 import styles from "./CookieModal.module.css";
 
 const CookieModal = ({ isOpen, onClose, userXP }) => {
@@ -15,7 +24,8 @@ const CookieModal = ({ isOpen, onClose, userXP }) => {
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
-          <h3>Experience Points</h3>
+          {/* <h3>Experience Points</h3> */}
+          <h3>XP Totali</h3>
           <button className={styles.closeButton} onClick={onClose}>
             <X size={20} />
           </button>
@@ -56,6 +66,39 @@ const CookieModal = ({ isOpen, onClose, userXP }) => {
                 <TrendingUp size={20} className={styles.weekIcon} />
                 <span className={styles.statLabel}>Questa settimana</span>
                 <span className={styles.statValue}>+120 XP</span>
+              </div>
+            </div>
+
+            {/* Stats Grid--uno */}
+            <div className={styles.statsGridUno}>
+              {/* <span>Oggi:</span> */}
+              <div className={styles.statItemUno}>
+                <Cherry size={20} className={styles.weekIcon} />
+                <span className={styles.statLabel}>Slot Machine:</span>
+                <span className={styles.statValueUno}>+10 XP</span>
+              </div>
+
+              <div className={styles.statItemUno}>
+                <Telescope size={20} className={styles.weekIcon} />
+                <span className={styles.statLabel}>Feedback Positivi:</span>
+                <span className={styles.statValueUno}>+10 XP </span>
+              </div>
+              <div className={styles.statItemUno}>
+                <Activity size={20} className={styles.weekIcon} />
+                <span className={styles.statLabel}>
+                  21 Giorni Consecutivi Attivi:
+                </span>
+                <span className={styles.statValueUno}>+50 XP </span>
+              </div>
+              <div className={styles.statItemUno}>
+                <Book size={20} className={styles.weekIcon} />
+                <span className={styles.statLabel}>Esperienza:</span>
+                <span className={styles.statValueUno}>+80 XP </span>
+              </div>
+              <div className={styles.statItemUno}>
+                <TrendingUp size={20} className={styles.weekIcon} />
+                <span className={styles.statLabel}>Completamento Profilo:</span>
+                <span className={styles.statValueUno}>+200 XP</span>
               </div>
             </div>
 

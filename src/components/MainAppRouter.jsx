@@ -57,6 +57,7 @@ import ActivityModal from "./ActivityModal";
 import ChatModal from "./ChatModal";
 import CookieModal from "./CookieModal";
 import { useAllNotifications } from "@/hooks/useAllNotifications";
+import StarModal from "./StarModal";
 // import useUnreadMessages from "src/hooks/useUnreadMessages.js";
 // Sostituisci ExplorePage con questo componente Esperienze
 
@@ -67,6 +68,7 @@ const MainAppRouter = () => {
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
+  const [isStarteModalOpen, setsStarteModalOpen] = useState(false);
 
   const allNotifications = useAllNotifications("viewer");
 
@@ -139,10 +141,18 @@ const MainAppRouter = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Cookie style={{ color: "var(--text-secondary)" }} />
-                <span style={{ color: "var(--text-secondary)" }}>
+                {/* <span style={{ color: "var(--text-secondary)" }}>
                   {userXP} XP
-                </span>
+                </span> */}
               </div>
+            </div>
+
+            <div
+              className={`${styles.hudAchievements} ${styles.clickable}`}
+              onClick={() => setsStarteModalOpen(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <Star style={{ color: "var(--text-secondary)" }} />
             </div>
             <div
               className={`${styles.hudAchievements} ${styles.clickable}`}
@@ -150,7 +160,7 @@ const MainAppRouter = () => {
               style={{ cursor: "pointer" }}
             >
               <Activity style={{ color: "var(--text-secondary)" }} />
-              <span style={{ color: "var(--text-secondary)" }}>0</span>
+              {/* <span style={{ color: "var(--text-secondary)" }}>0</span> */}
               {/* <Bell size={24} /> */}
             </div>
 
@@ -246,6 +256,11 @@ const MainAppRouter = () => {
         isOpen={isCookieModalOpen}
         onClose={() => setIsCookieModalOpen(false)}
         userXP={userXP}
+      />
+      <StarModal
+        isOpen={isStarteModalOpen}
+        onClose={() => setsStarteModalOpen(false)}
+        userStars={userXP}
       />
 
       {/* Chat Slide Drawer */}
