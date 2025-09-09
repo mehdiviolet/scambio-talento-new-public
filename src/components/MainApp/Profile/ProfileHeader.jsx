@@ -28,6 +28,10 @@ import {
   Lock,
   Eye,
   EyeOff,
+  Book,
+  Mail,
+  ExternalLink,
+  Phone,
 } from "lucide-react";
 import styles from "./ProfileHeader.module.css";
 import { useQuickSetup } from "../../../hooks/useQuickSetup";
@@ -69,6 +73,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isCherryDrawerOpen, setIsCherryDrawerOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   // Privacy settings states
   const [profileVisibility, setProfileVisibility] = useState("public");
@@ -112,6 +117,48 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const myFeedback = feedbacks.find(
     (feedback) => feedback.fromUserId === currentUser.id
   );
+
+  const helpCategories = [
+    {
+      id: "account",
+      title: "Account e Profilo",
+      description: "Gestione account, password, impostazioni",
+      icon: <Book size={16} />,
+    },
+    {
+      id: "events",
+      title: "Eventi e Partecipazione",
+      description: "Come creare e partecipare agli eventi",
+      icon: <MessageCircle size={16} />,
+    },
+    {
+      id: "xp",
+      title: "XP e Livelli",
+      description: "Come guadagnare punti esperienza",
+      icon: <HelpCircle size={16} />,
+    },
+  ];
+
+  const contactOptions = [
+    {
+      label: "Email Support",
+      description: "Rispondiamo entro 24 ore",
+      icon: <Mail size={16} />,
+      action: () => window.open("mailto:support@myapp.com"),
+    },
+    {
+      label: "Chat dal vivo",
+      description: "Disponibile 9:00-18:00",
+      icon: <MessageCircle size={16} />,
+      action: () => console.log("Opening chat..."),
+    },
+    {
+      label: "FAQ Complete",
+      description: "Tutte le domande frequenti",
+      icon: <ExternalLink size={16} />,
+      action: () => window.open("https://help.myapp.com"),
+    },
+  ];
 
   // Privacy options
   const visibilityOptions = [
@@ -218,6 +265,77 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
 
   const handleFollowingClick = () => console.log("Following list clicked");
   const handleFollowersClick = () => console.log("Followers list clicked");
+  const handleHelpSettings = () => {
+    setCurrentSubmenu("help");
+    setIsInSubmenu(true);
+  };
+
+  const renderHelpSubmenu = () => (
+    <div className={styles.submenuContent}>
+      {/* Help Icon Section */}
+      <div className={styles.submenuHeader}>
+        <div className={styles.submenuIconContainer}>
+          <HelpCircle size={32} className={styles.submenuIcon} />
+        </div>
+        <h4 className={styles.submenuTitle}>Come possiamo aiutarti?</h4>
+      </div>
+
+      {/* Help Categories Section */}
+      <div className={styles.submenuSection}>
+        <h3 className={styles.submenuSectionTitle}>Argomenti di aiuto</h3>
+        <div className={styles.submenuOptions}>
+          {helpCategories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
+              className={`${styles.drawerMenuItem} ${
+                selectedCategory === category.id ? styles.selected : ""
+              }`}
+            >
+              <div className={styles.drawerMenuIcon}>{category.icon}</div>
+              <div className={styles.drawerMenuText}>
+                <div className={styles.drawerMenuLabel}>{category.title}</div>
+                <div className={styles.drawerMenuDescription}>
+                  {category.description}
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Contact Support Section */}
+      <div className={styles.submenuSection}>
+        <h3 className={styles.submenuSectionTitle}>Contatta il supporto</h3>
+        <div className={styles.submenuOptions}>
+          {contactOptions.map((option, index) => (
+            <button
+              key={index}
+              onClick={option.action}
+              className={styles.drawerMenuItem}
+            >
+              <div className={styles.drawerMenuIcon}>{option.icon}</div>
+              <div className={styles.drawerMenuText}>
+                <div className={styles.drawerMenuLabel}>{option.label}</div>
+                <div className={styles.drawerMenuDescription}>
+                  {option.description}
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Info */}
+      <div className={styles.submenuInfo}>
+        <Phone size={20} className={styles.submenuInfoIcon} />
+        <p className={styles.submenuInfoText}>
+          Il nostro team di supporto è sempre pronto ad aiutarti. Scegli il
+          metodo di contatto che preferisci.
+        </p>
+      </div>
+    </div>
+  );
 
   // Itens do menu settings
   const settingsMenuItems = [
@@ -239,7 +357,8 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
       icon: <HelpCircle size={16} />,
       label: "Aiuto e supporto",
       description: "Ottieni aiuto o contatta il supporto",
-      action: handleHelp,
+      // action: handleHelp,
+      action: handleHelpSettings, // che imposta il submenu
     },
     {
       icon: <LogOut size={16} />,
@@ -538,7 +657,14 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
             }
           >
             <ChevronLeft size={20} />
-            <span>{isInSubmenu ? "Privacy del profilo" : "Impostazioni"}</span>
+            {/* <span>{isInSubmenu ? "Privacy del profilo" : "Impostazioni"}</span> */}
+            <span>
+              {isInSubmenu
+                ? currentSubmenu === "privacy"
+                  ? "Privacy del profilo"
+                  : "Aiuto e supporto"
+                : "Impostazioni"}
+            </span>
           </button>
         </div>
         <div className={styles.drawerContent}>
@@ -563,7 +689,8 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
               ))}
             </div>
           ) : (
-            currentSubmenu === "privacy" && renderPrivacySubmenu()
+            (currentSubmenu === "privacy" && renderPrivacySubmenu()) ||
+            (currentSubmenu === "help" && renderHelpSubmenu()) // <-- nuovo
           )}
         </div>
       </div>
