@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Share, AlertTriangle, UserX, Link } from "lucide-react";
-import styles from "./ViewerMenuDropdown.module.css";
+// import styles from "./ViewerMenuDropdown.module.css";
+import styles from "./SettingsDropdown.module.css";
+
 import ConfirmBlockModal from "./ConfirmBlockModal";
 import ShareProfileModal from "./ShareProfileModal";
 

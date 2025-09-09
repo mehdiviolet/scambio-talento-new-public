@@ -17,33 +17,36 @@ import {
   ShieldCheckIcon,
   X,
   ChevronLeft,
+  UserPlus2Icon,
+  Shield,
+  HelpCircle,
+  LogOut,
+  Flag,
+  Ban,
+  Globe,
+  Users,
+  Lock,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import styles from "./ProfileHeader.module.css";
 import { useQuickSetup } from "../../../hooks/useQuickSetup";
 import { useOnboarding } from "../../../hooks/useOnboardingRedux";
 import { useAppSelector } from "../../../hooks/redux";
 
-import ShareModal from "../Shared/Modals/ShareModal";
+import ShareModal from "./ShareModal";
 import MessageModal from "../Shared/Modals/MessageModal";
-import PhotoUploadModal from "./PhotoUploadModal"; // ✅ NUOVO IMPORT
+import PhotoUploadModal from "./PhotoUploadModal";
 import { useSelector } from "react-redux";
-import SettingsDropdown from "./SettingsDropdown";
-import ViewerMenuDropdown from "./ViewerMenuDropdown";
-import ShareProfileModal from "./ShareProfileModal";
-import ConfirmBlockModal from "./ConfirmBlockModal";
-import PrivacyModal from "./PrivacyModal";
 import HelpModal from "./HelpModal";
 import LogoutModal from "./LogoutModal";
-// import RoleSpecificNotificationDropdown from "@/components/notifications/RoleSpecificNotificationDropdown";
-// import ToastContainer from "@/components/notifications/ToastContainer";
 import InviteFriendModal from "./InviteFriendModal";
 import { selectFeedbacks } from "@/store/slices/sharedEventSlice";
-import CherryModal from "./CherryModal";
 import CherryComp from "@/components/CherryComp";
 
 const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const { profileData, level, achievements, updateProfileData } =
-    useQuickSetup(); // ✅ Aggiungi updateProfileData
+    useQuickSetup();
   const { setShowQuickSetup, setShowDashboard } = useOnboarding();
   const { setCurrentStep, currentStep, resetForEdit } = useQuickSetup();
 
@@ -51,25 +54,26 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
 
   const [isAboutExpanded, setIsAboutExpanded] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
-  const [isViewerMenuOpen, setIsViewerMenuOpen] = useState(false);
 
-  // Stati per i modali
+  // Estados para os drawers
+  const [isSettingsDrawerOpen, setIsSettingsDrawerOpen] = useState(false);
+  const [isViewerDrawerOpen, setIsViewerDrawerOpen] = useState(false);
+  const [currentSubmenu, setCurrentSubmenu] = useState(null);
+  const [isInSubmenu, setIsInSubmenu] = useState(false);
+
+  // Estados para os modais
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false); // ✅ NUOVO STATO // ✅ NUOVO STATO
-  const [isCherryModalOpen, setIsCherryModalOpen] = useState(false); // ✅ NUOVO STATO // ✅ NUOVO STATO
-
-  // Aggiungi questi stati nel ProfileHeader
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
-  const [isBlockModalOpen, setIsBlockModalOpen] = useState(false);
-
-  // Aggiungi questi stati (accanto agli altri)
-  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isCherryDrawerOpen, setIsCherryDrawerOpen] = useState(false);
+
+  // Privacy settings states
+  const [profileVisibility, setProfileVisibility] = useState("public");
+  const [activityVisible, setActivityVisible] = useState(true);
+  const [contactVisible, setContactVisible] = useState(false);
 
   const [showFullDescription, setShowFullDescription] = useState(false);
 
@@ -108,13 +112,82 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const myFeedback = feedbacks.find(
     (feedback) => feedback.fromUserId === currentUser.id
   );
-  // console.log(myFeedback);
 
+  // Privacy options
+  const visibilityOptions = [
+    {
+      id: "public",
+      label: "Pubblico",
+      description: "Tutti possono vedere il tuo profilo",
+      icon: <Globe size={16} />,
+    },
+    {
+      id: "friends",
+      label: "Solo amici",
+      description: "Solo i tuoi amici possono vedere il profilo",
+      icon: <Users size={16} />,
+    },
+    {
+      id: "private",
+      label: "Privato",
+      description: "Solo tu puoi vedere il tuo profilo",
+      icon: <Lock size={16} />,
+    },
+  ];
+
+  // Funções dos drawers
   const handleInviteFriend = () => {
     setIsInviteModalOpen(true);
-    setIsSettingsOpen(false);
+    setIsSettingsDrawerOpen(false);
   };
-  // ✅ FUNZIONE MODIFICATA
+
+  const handlePrivacySettings = () => {
+    setCurrentSubmenu("privacy");
+    setIsInSubmenu(true);
+  };
+
+  const handleHelp = () => {
+    setIsHelpModalOpen(true);
+    setIsSettingsDrawerOpen(false);
+  };
+
+  const handleLogout = () => {
+    setIsLogoutModalOpen(true);
+    setIsSettingsDrawerOpen(false);
+  };
+
+  const handleBackToMainMenu = () => {
+    setIsInSubmenu(false);
+    setCurrentSubmenu(null);
+  };
+
+  const handleCloseSettingsDrawer = () => {
+    setIsSettingsDrawerOpen(false);
+    setIsInSubmenu(false);
+    setCurrentSubmenu(null);
+  };
+
+  const handleShareProfile = () => {
+    setIsShareModalOpen(true);
+    setIsViewerDrawerOpen(false);
+  };
+
+  const handleReportUser = () => {
+    console.log("Segnala utente");
+    setIsViewerDrawerOpen(false);
+  };
+
+  const handleBlockUser = () => {
+    console.log("Blocca utente");
+    setIsViewerDrawerOpen(false);
+  };
+
+  // Privacy handlers
+  const handleVisibilityChange = (value) => {
+    setProfileVisibility(value);
+  };
+
+  // Outras funções existentes
   const handleAvatarClick = () => {
     if (isOwner) {
       setIsPhotoModalOpen(true);
@@ -129,54 +202,165 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
     }, 50);
   };
 
-  const handleSettings = () => {
-    setIsSettingsOpen(!isSettingsOpen);
-  };
-
-  // Sostituisci le funzioni esistenti con queste:
-  const handlePrivacySettings = () => {
-    setIsPrivacyModalOpen(true);
-    setIsSettingsOpen(false);
-  };
-
-  const handleHelp = () => {
-    setIsHelpModalOpen(true);
-    setIsSettingsOpen(false);
-  };
-
-  const handleLogout = () => {
-    setIsLogoutModalOpen(true);
-    setIsSettingsOpen(false);
-  };
-
-  const handleSpecialAction = () => console.log("Special action clicked");
-
   const handleFollow = () => {
     setIsFollowing(!isFollowing);
     console.log(isFollowing ? "Unfollowed" : "Followed");
-  };
-
-  const handleShare = () => {
-    setIsShareModalOpen(true);
   };
 
   const handleMessage = () => {
     setIsMessageModalOpen(true);
   };
 
-  // ✅ NUOVA FUNZIONE
   const handlePhotoUpdate = (newPhotoUrl) => {
-    // Usa updateProfileData dal hook Redux
     updateProfileData({ profilePhoto: newPhotoUrl });
     console.log("Photo updated successfully:", newPhotoUrl);
   };
 
-  const handleMoreOptions = () => console.log("More options clicked");
   const handleFollowingClick = () => console.log("Following list clicked");
   const handleFollowersClick = () => console.log("Followers list clicked");
-  const handleCherry = () => {
-    setIsCherryModalOpen(true);
-  };
+
+  // Itens do menu settings
+  const settingsMenuItems = [
+    {
+      icon: <UserPlus2Icon size={16} />,
+      label: "Invita un amico",
+      description: "Invita qualcuno e ottiene 10XP!",
+      action: handleInviteFriend,
+      positive: true,
+    },
+    {
+      icon: <Shield size={16} />,
+      label: "Privacy del profilo",
+      description: "Controlla chi può vedere il tuo profilo",
+      action: handlePrivacySettings,
+      hasSubmenu: true,
+    },
+    {
+      icon: <HelpCircle size={16} />,
+      label: "Aiuto e supporto",
+      description: "Ottieni aiuto o contatta il supporto",
+      action: handleHelp,
+    },
+    {
+      icon: <LogOut size={16} />,
+      label: "Esci",
+      description: "Disconnettiti dal tuo account",
+      action: handleLogout,
+      danger: true,
+    },
+  ];
+
+  // Itens do menu viewer
+  const viewerMenuItems = [
+    {
+      icon: <Share size={16} />,
+      label: "Condividi profilo",
+      description: "Condividi questo profilo",
+      action: handleShareProfile,
+    },
+    {
+      icon: <Flag size={16} />,
+      label: "Segnala",
+      description: "Segnala questo utente",
+      action: handleReportUser,
+      warning: true,
+    },
+    {
+      icon: <Ban size={16} />,
+      label: "Blocca",
+      description: "Blocca questo utente",
+      action: handleBlockUser,
+      danger: true,
+    },
+  ];
+
+  const renderPrivacySubmenu = () => (
+    <div className={styles.submenuContent}>
+      {/* Privacy Icon Section */}
+      <div className={styles.submenuHeader}>
+        <div className={styles.submenuIconContainer}>
+          <Shield size={32} className={styles.submenuIcon} />
+        </div>
+        <h4 className={styles.submenuTitle}>Controlla la tua privacy</h4>
+      </div>
+
+      {/* Profile Visibility Section */}
+      <div className={styles.submenuSection}>
+        <h3 className={styles.submenuSectionTitle}>Visibilità profilo</h3>
+        <div className={styles.submenuOptions}>
+          {visibilityOptions.map((option) => (
+            <button
+              key={option.id}
+              onClick={() => handleVisibilityChange(option.id)}
+              className={`${styles.drawerMenuItem} ${
+                profileVisibility === option.id ? styles.selected : ""
+              }`}
+            >
+              <div className={styles.drawerMenuIcon}>{option.icon}</div>
+              <div className={styles.drawerMenuText}>
+                <div className={styles.drawerMenuLabel}>{option.label}</div>
+                <div className={styles.drawerMenuDescription}>
+                  {option.description}
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Activity Settings */}
+      <div className={styles.submenuSection}>
+        <h3 className={styles.submenuSectionTitle}>Impostazioni attività</h3>
+        <div className={styles.submenuOptions}>
+          <button
+            onClick={() => setActivityVisible(!activityVisible)}
+            className={`${styles.drawerMenuItem} ${
+              activityVisible ? styles.selected : ""
+            }`}
+          >
+            <div className={styles.drawerMenuIcon}>
+              {activityVisible ? <Eye size={16} /> : <EyeOff size={16} />}
+            </div>
+            <div className={styles.drawerMenuText}>
+              <div className={styles.drawerMenuLabel}>
+                Mostra attività recente
+              </div>
+              <div className={styles.drawerMenuDescription}>
+                {activityVisible ? "Visibile" : "Nascosta"}
+              </div>
+            </div>
+          </button>
+
+          <button
+            onClick={() => setContactVisible(!contactVisible)}
+            className={`${styles.drawerMenuItem} ${
+              contactVisible ? styles.selected : ""
+            }`}
+          >
+            <div className={styles.drawerMenuIcon}>
+              <Users size={16} />
+            </div>
+            <div className={styles.drawerMenuText}>
+              <div className={styles.drawerMenuLabel}>Mostra info contatto</div>
+              <div className={styles.drawerMenuDescription}>
+                {contactVisible ? "Visibile" : "Nascosta"}
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      {/* Info */}
+      <div className={styles.submenuInfo}>
+        <Shield size={20} className={styles.submenuInfoIcon} />
+        <p className={styles.submenuInfoText}>
+          Le tue impostazioni privacy vengono applicate immediatamente e
+          controllano chi può vedere il tuo profilo e le tue attività.
+        </p>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <div className={styles.container}>
@@ -218,7 +402,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
 
                   <motion.button
                     className={`${styles.editProfileBtn} ${styles.liquidButton}`}
-                    onClick={() => setIsCherryDrawerOpen(true)} // Cambia questa riga
+                    onClick={() => setIsCherryDrawerOpen(true)}
                     title="Ruota della fortuna! (da definire)"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -236,7 +420,6 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   </button>
 
                   <button
-                    // className={styles.messageBtn}
                     className={`${styles.editProfileBtn} ${styles.msgButton}`}
                     onClick={handleMessage}
                     title="Send message"
@@ -255,41 +438,21 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                 {user.firstName} {user.lastName}
                 <div></div>
                 {!isOwner && (
-                  <div style={{ position: "relative" }}>
-                    <button
-                      className={styles.moreOptionsBtn}
-                      onClick={() => setIsViewerMenuOpen(!isViewerMenuOpen)}
-                      title="More options"
-                    >
-                      <MoreHorizontal size={20} />
-                    </button>
-                    <ViewerMenuDropdown
-                      isOpen={isViewerMenuOpen}
-                      onClose={() => setIsViewerMenuOpen(false)}
-                      userProfile={user}
-                      onOpenShare={() => setIsShareModalOpen(true)} // ✅ AGGIUNGI
-                      onOpenBlock={() => setIsBlockModalOpen(true)} // ✅ AGGIUNGI
-                    />
-                  </div>
+                  <button
+                    className={styles.moreOptionsBtn}
+                    onClick={() => setIsViewerDrawerOpen(true)}
+                    title="More options"
+                  >
+                    <MoreHorizontal size={20} />
+                  </button>
                 )}
                 {isOwner && (
-                  <div style={{ position: "relative" }}>
-                    <Settings
-                      className={styles.settingsIcon}
-                      size={20}
-                      onClick={handleSettings}
-                      style={{ cursor: "pointer" }}
-                    />
-
-                    <SettingsDropdown
-                      isOpen={isSettingsOpen}
-                      onClose={() => setIsSettingsOpen(false)}
-                      onOpenPrivacy={handlePrivacySettings}
-                      onOpenHelp={handleHelp}
-                      onLogout={handleLogout}
-                      onInviteFriend={handleInviteFriend} // ✅ AGGIUNGI QUESTA RIGA
-                    />
-                  </div>
+                  <Settings
+                    className={styles.settingsIcon}
+                    size={20}
+                    onClick={() => setIsSettingsDrawerOpen(true)}
+                    style={{ cursor: "pointer" }}
+                  />
                 )}
               </h1>
 
@@ -297,9 +460,6 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                 <p className={styles.username}>@{user.username}</p>
               </div>
             </div>
-
-            {/* Bio */}
-            {/* <p className={styles.bio}>{user.bio}</p> */}
 
             {/* Meta Info */}
             <div className={styles.metaInfo}>
@@ -339,26 +499,12 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                 )}
               </button>
             </div>
-            {/* <div className={styles.statsContainer}>
-              <div className={styles.statItem}>
-                <Star size={18} className={styles.statIcon} />
-                <span className={styles.statValue}>
-                  {currentUser.participationScore || 0}
-                </span>
-              </div>
-
-              <div className={styles.statItem}>
-                <ShieldCheckIcon size={18} className={styles.statIcon} />
-                <span className={styles.statValue}>0</span>
-              </div>
-            </div> */}
           </div>
 
           {/* About Me Section */}
           <div className={styles.aboutSection}>
             {isAboutExpanded && (
               <div className={styles.aboutContent}>
-                {/* <p>{user.aboutMe}</p> */}
                 <div className={styles.descriptionContainer}>
                   <p className={styles.aboutText}>{visibleText}</p>
                   {needsTruncation && (
@@ -377,68 +523,89 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
           </div>
         </div>
       </div>
-      {/* Modali */}
-      <ShareModal
-        isOpen={isShareModalOpen}
-        onClose={() => setIsShareModalOpen(false)}
-        userProfile={user}
-      />
-      <MessageModal
-        isOpen={isMessageModalOpen}
-        onClose={() => setIsMessageModalOpen(false)}
-        userProfile={user}
-      />
-      {/* ✅ NUOVO MODAL */}
-      <PhotoUploadModal
-        isOpen={isPhotoModalOpen}
-        onClose={() => setIsPhotoModalOpen(false)}
-        currentPhoto={user.profilePhoto}
-        onPhotoUpdate={handlePhotoUpdate}
-      />
-      {/* Nel ProfileHeader, dopo PhotoUploadModal */}
-      <ShareProfileModal
-        isOpen={isShareModalOpen}
-        onClose={() => setIsShareModalOpen(false)}
-        userProfile={user}
-      />
-      <ConfirmBlockModal
-        isOpen={isBlockModalOpen}
-        onClose={() => setIsBlockModalOpen(false)}
-        userProfile={user}
-        onConfirm={() => {
-          console.log("Utente bloccato!");
-          setIsBlockModalOpen(false);
-        }}
-      />
-      {/* Dopo gli altri modal */}
-      <PrivacyModal
-        isOpen={isPrivacyModalOpen}
-        onClose={() => setIsPrivacyModalOpen(false)}
-      />
-      <HelpModal
-        isOpen={isHelpModalOpen}
-        onClose={() => setIsHelpModalOpen(false)}
-      />
-      <LogoutModal
-        isOpen={isLogoutModalOpen}
-        onClose={() => setIsLogoutModalOpen(false)}
-        onConfirm={() => {
-          console.log("Logout confermato!");
-          setIsLogoutModalOpen(false);
-          window.location.reload(); // Simula restart app
-        }}
-      />
-      <InviteFriendModal
-        isOpen={isInviteModalOpen}
-        onClose={() => setIsInviteModalOpen(false)}
-      />
-      {/* <CherryModal
-        isOpen={isCherryModalOpen}
-        onClose={() => setIsCherryModalOpen(false)}
-        currentUser={currentUser}
-      /> */}
 
-      {/* Sostituisci il CherryModal esistente con questo */}
+      {/* Settings Slide Drawer */}
+      <div
+        className={`${styles.slideDrawer} ${
+          isSettingsDrawerOpen ? styles.open : ""
+        }`}
+      >
+        <div className={styles.drawerHeader}>
+          <button
+            className={styles.backButton}
+            onClick={
+              isInSubmenu ? handleBackToMainMenu : handleCloseSettingsDrawer
+            }
+          >
+            <ChevronLeft size={20} />
+            <span>{isInSubmenu ? "Privacy del profilo" : "Impostazioni"}</span>
+          </button>
+        </div>
+        <div className={styles.drawerContent}>
+          {!isInSubmenu ? (
+            <div className={styles.drawerMenuList}>
+              {settingsMenuItems.map((item, index) => (
+                <button
+                  key={index}
+                  onClick={item.action}
+                  className={`${styles.drawerMenuItem} ${
+                    item.danger ? styles.danger : ""
+                  } ${item.positive ? styles.positive : ""}`}
+                >
+                  <div className={styles.drawerMenuIcon}>{item.icon}</div>
+                  <div className={styles.drawerMenuText}>
+                    <div className={styles.drawerMenuLabel}>{item.label}</div>
+                    <div className={styles.drawerMenuDescription}>
+                      {item.description}
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            currentSubmenu === "privacy" && renderPrivacySubmenu()
+          )}
+        </div>
+      </div>
+
+      {/* Viewer Menu Slide Drawer */}
+      <div
+        className={`${styles.slideDrawer} ${
+          isViewerDrawerOpen ? styles.open : ""
+        }`}
+      >
+        <div className={styles.drawerHeader}>
+          <button
+            className={styles.backButton}
+            onClick={() => setIsViewerDrawerOpen(false)}
+          >
+            <ChevronLeft size={20} />
+            <span>Opzioni utente</span>
+          </button>
+        </div>
+        <div className={styles.drawerContent}>
+          <div className={styles.drawerMenuList}>
+            {viewerMenuItems.map((item, index) => (
+              <button
+                key={index}
+                onClick={item.action}
+                className={`${styles.drawerMenuItem} ${
+                  item.danger ? styles.danger : ""
+                } ${item.warning ? styles.warning : ""}`}
+              >
+                <div className={styles.drawerMenuIcon}>{item.icon}</div>
+                <div className={styles.drawerMenuText}>
+                  <div className={styles.drawerMenuLabel}>{item.label}</div>
+                  <div className={styles.drawerMenuDescription}>
+                    {item.description}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Cherry Slide Drawer */}
       <div
         className={`${styles.slideDrawer} ${
@@ -463,6 +630,45 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
           )}
         </div>
       </div>
+
+      {/* Modals */}
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        userProfile={user}
+        onBack={() => {
+          setIsShareModalOpen(false);
+          setIsViewerDrawerOpen(true);
+        }}
+      />
+      <MessageModal
+        isOpen={isMessageModalOpen}
+        onClose={() => setIsMessageModalOpen(false)}
+        userProfile={user}
+      />
+      <PhotoUploadModal
+        isOpen={isPhotoModalOpen}
+        onClose={() => setIsPhotoModalOpen(false)}
+        currentPhoto={user.profilePhoto}
+        onPhotoUpdate={handlePhotoUpdate}
+      />
+      <HelpModal
+        isOpen={isHelpModalOpen}
+        onClose={() => setIsHelpModalOpen(false)}
+      />
+      <LogoutModal
+        isOpen={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
+        onConfirm={() => {
+          console.log("Logout confermato!");
+          setIsLogoutModalOpen(false);
+          window.location.reload();
+        }}
+      />
+      <InviteFriendModal
+        isOpen={isInviteModalOpen}
+        onClose={() => setIsInviteModalOpen(false)}
+      />
     </>
   );
 };
