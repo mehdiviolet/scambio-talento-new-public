@@ -7,6 +7,7 @@ import {
   MessageCircle,
   UserPlus2Icon,
   CheckCircle,
+  Star,
 } from "lucide-react";
 import styles from "./InviteFriendModal.module.css";
 
@@ -81,112 +82,117 @@ const InviteFriendModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.overlay}>
-      <div ref={modalRef} className={styles.modal}>
+    <div className={styles.overlay} onClick={onClose}>
+      <div
+        ref={modalRef}
+        className={styles.modal}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={styles.header}>
-          <div className={styles.headerIcon}>
-            <UserPlus2Icon size={24} />
-          </div>
-          <div className={styles.headerText}>
-            <h2 className={styles.title}>Invita un amico</h2>
-            <p className={styles.subtitle}>
-              Condividi il link e ottieni <strong>10 XP</strong> quando si
-              iscrive!
-            </p>
-          </div>
-          <button className={styles.closeBtn} onClick={onClose}>
+          <h3>Invita un amico</h3>
+          <button className={styles.closeButton} onClick={onClose}>
             <X size={20} />
           </button>
         </div>
 
         <div className={styles.content}>
-          {/* Link di invito */}
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Link di invito</h3>
-            <div className={styles.linkContainer}>
-              <input
-                type="text"
-                value={inviteLink}
-                readOnly
-                className={styles.linkInput}
-              />
-              <button
-                onClick={handleCopyLink}
-                className={`${styles.copyBtn} ${isCopied ? styles.copied : ""}`}
-              >
-                {isCopied ? <CheckCircle size={16} /> : <Copy size={16} />}
-                {isCopied ? "Copiato!" : "Copia"}
-              </button>
+          <div className={styles.inviteDisplay}>
+            <div className={styles.inviteValue}>
+              <span className={styles.valueNumber}>10</span>
+              <UserPlus2Icon size={32} className={styles.inviteIcon} />
             </div>
-          </div>
 
-          {/* Invito via email */}
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Invita via email</h3>
-            <div className={styles.emailContainer}>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="email@esempio.com"
-                className={styles.emailInput}
-              />
-              <button
-                onClick={handleEmailInvite}
-                disabled={!email || isEmailSent}
-                className={`${styles.sendBtn} ${
-                  isEmailSent ? styles.sent : ""
-                }`}
-              >
-                {isEmailSent ? (
-                  <>
-                    <CheckCircle size={16} />
-                    Inviato!
-                  </>
-                ) : (
-                  <>
-                    <Mail size={16} />
-                    Invia
-                  </>
-                )}
-              </button>
+            <h4 className={styles.inviteTitle}>XP per ogni amico invitato</h4>
+
+            {/* Link Section */}
+            {/* <div className={styles.section}>
+              <h3 className={styles.sectionTitle}>Link di invito</h3>
+              <div className={styles.linkContainer}>
+                <input
+                  type="text"
+                  value={inviteLink}
+                  readOnly
+                  className={styles.linkInput}
+                />
+                <button
+                  onClick={handleCopyLink}
+                  className={`${styles.actionBtn} ${
+                    isCopied ? styles.success : ""
+                  }`}
+                >
+                  {isCopied ? <CheckCircle size={16} /> : <Copy size={16} />}
+                  {isCopied ? "Copiato!" : "Copia"}
+                </button>
+              </div>
+            </div> */}
+
+            {/* Email Section */}
+            {/* <div className={styles.section}>
+              <h3 className={styles.sectionTitle}>Invita via email</h3>
+              <div className={styles.emailContainer}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="email@esempio.com"
+                  className={styles.emailInput}
+                />
+                <button
+                  onClick={handleEmailInvite}
+                  disabled={!email || isEmailSent}
+                  className={`${styles.actionBtn} ${
+                    isEmailSent ? styles.success : ""
+                  }`}
+                >
+                  {isEmailSent ? (
+                    <>
+                      <CheckCircle size={16} />
+                      Inviato!
+                    </>
+                  ) : (
+                    <>
+                      <Mail size={16} />
+                      Invia
+                    </>
+                  )}
+                </button>
+              </div>
+            </div> */}
+
+            {/* Share Section */}
+            <div className={styles.section}>
+              <h3 className={styles.sectionTitle}>Condividi rapidamente</h3>
+              <div className={styles.shareButtons}>
+                <button onClick={handleShareNative} className={styles.shareBtn}>
+                  <Share size={16} />
+                  Condividi
+                </button>
+                <button onClick={handleCopyLink} className={styles.shareBtn}>
+                  <Copy size={16} />
+                  Copia link
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      `https://wa.me/?text=${encodeURIComponent(
+                        "Ti invito a unirti! " + inviteLink
+                      )}`
+                    )
+                  }
+                  className={styles.shareBtn}
+                >
+                  <MessageCircle size={16} />
+                  WhatsApp
+                </button>
+              </div>
             </div>
-          </div>
 
-          {/* Condivisione rapida */}
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Condividi rapidamente</h3>
-            <div className={styles.shareButtons}>
-              <button onClick={handleShareNative} className={styles.shareBtn}>
-                <Share size={16} />
-                Condividi
-              </button>
-              <button onClick={handleCopyLink} className={styles.shareBtn}>
-                <Copy size={16} />
-                Copia link
-              </button>
-              <button
-                onClick={() =>
-                  window.open(
-                    `https://wa.me/?text=${encodeURIComponent(
-                      "Ti invito a unirti! " + inviteLink
-                    )}`
-                  )
-                }
-                className={styles.shareBtn}
-              >
-                <MessageCircle size={16} />
-                WhatsApp
-              </button>
-            </div>
-          </div>
-
-          {/* Info reward */}
-          <div className={styles.rewardInfo}>
-            <div className={styles.rewardIcon}>🎉</div>
-            <div className={styles.rewardText}>
-              <strong>Ottieni 10 XP</strong> per ogni amico che si iscrive
-              tramite il tuo link!
+            {/* Reward Info */}
+            <div className={styles.rewardInfo}>
+              {/* <Star size={20} className={styles.rewardIcon} /> */}
+              <p className={styles.rewardText}>
+                Ottieni 10 XP per ogni amico che si iscrive tramite il tuo link
+              </p>
             </div>
           </div>
         </div>

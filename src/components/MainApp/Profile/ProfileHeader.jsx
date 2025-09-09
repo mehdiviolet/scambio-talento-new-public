@@ -215,15 +215,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   >
                     Edit profile
                   </button>
-                  {/* <motion.button
-                    className={`${styles.editProfileBtn} ${styles.liquidButton}`}
-                    onClick={handleCherry}
-                    title="Ruota della fortuna! (da definire)"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Cherry size={16} />
-                  </motion.button> */}
+
                   <motion.button
                     className={`${styles.editProfileBtn} ${styles.liquidButton}`}
                     onClick={() => setIsCherryDrawerOpen(true)} // Cambia questa riga
@@ -261,21 +253,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
             <div className={styles.nameSection}>
               <h1 className={styles.displayName}>
                 {user.firstName} {user.lastName}
-                <div>
-                  <div className={styles.statsContainer}>
-                    <div className={styles.statItem}>
-                      <Star size={18} className={styles.statIcon} />
-                      <span className={styles.statValue}>
-                        {currentUser.participationScore || 0}
-                      </span>
-                    </div>
-
-                    <div className={styles.statItem}>
-                      <ShieldCheckIcon size={18} className={styles.statIcon} />
-                      <span className={styles.statValue}>0</span>
-                    </div>
-                  </div>
-                </div>
+                <div></div>
                 {!isOwner && (
                   <div style={{ position: "relative" }}>
                     <button
@@ -303,17 +281,6 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       style={{ cursor: "pointer" }}
                     />
 
-                    {/* <div className="panel-header">
-                      <RoleSpecificNotificationDropdown
-                        role="student"
-                        title={
-                          role === "owner"
-                            ? "Notifiche Istruttore"
-                            : "Notifiche Studente"
-                        }
-                      />
-                      <ToastContainer role={role} />
-                    </div> */}
                     <SettingsDropdown
                       isOpen={isSettingsOpen}
                       onClose={() => setIsSettingsOpen(false)}

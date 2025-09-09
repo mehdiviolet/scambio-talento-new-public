@@ -41,17 +41,6 @@ const ViewerMenuDropdown = ({
     onClose();
   };
 
-  const handleCopyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      // Mostra toast di successo
-      console.log("Link copiato!");
-    } catch (err) {
-      console.error("Errore nella copia:", err);
-    }
-    onClose();
-  };
-
   const handleReport = () => {
     console.log("Segnala profilo:", userProfile);
     // TODO: Apri modal di segnalazione
@@ -67,12 +56,7 @@ const ViewerMenuDropdown = ({
       action: handleShareProfile,
       description: "Condividi questo profilo con altri",
     },
-    {
-      icon: <Link size={16} />,
-      label: "Copia link",
-      action: handleCopyLink,
-      description: "Copia il link di questo profilo",
-    },
+
     {
       icon: <AlertTriangle size={16} />,
       label: "Segnala",

@@ -43,6 +43,7 @@ const SettingsDropdown = ({
       label: "Invita un amico",
       action: onInviteFriend,
       description: "Invita qualcuno e ottiene 10XP!",
+      positive: true,
     },
     {
       icon: <Shield size={16} />,
@@ -67,7 +68,6 @@ const SettingsDropdown = ({
 
   return (
     <>
-      {/* ✅ AGGIUNGI OVERLAY SFOCATO IDENTICO */}
       <div className={styles.overlay} onClick={onClose} />
 
       <div ref={dropdownRef} className={styles.dropdown}>
@@ -78,7 +78,7 @@ const SettingsDropdown = ({
               onClick={item.action}
               className={`${styles.menuItem} ${
                 item.danger ? styles.danger : ""
-              }`}
+              } ${item.positive ? styles.positive : ""}`}
             >
               <div className={styles.menuIcon}>{item.icon}</div>
               <div className={styles.menuText}>
