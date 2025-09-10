@@ -32,6 +32,10 @@ import {
   Mail,
   ExternalLink,
   Phone,
+  CheckCircle,
+  Instagram,
+  Copy,
+  Facebook,
 } from "lucide-react";
 import styles from "./ProfileHeader.module.css";
 import { useQuickSetup } from "../../../hooks/useQuickSetup";
@@ -64,6 +68,8 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const [isViewerDrawerOpen, setIsViewerDrawerOpen] = useState(false);
   const [currentSubmenu, setCurrentSubmenu] = useState(null);
   const [isInSubmenu, setIsInSubmenu] = useState(false);
+  const [showReportConfirm, setShowReportConfirm] = useState(null); // 'spam', 'inappropriate', etc.
+  const [showBlockConfirm, setShowBlockConfirm] = useState(null); // 'temp', 'permanent'
 
   // Estados para os modais
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
@@ -74,11 +80,17 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isCherryDrawerOpen, setIsCherryDrawerOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isShareSubmenuOpen, setIsShareSubmenuOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [isReportSubmenuOpen, setIsReportSubmenuOpen] = useState(false);
+  const [isBlockSubmenuOpen, setIsBlockSubmenuOpen] = useState(false);
 
   // Privacy settings states
   const [profileVisibility, setProfileVisibility] = useState("public");
   const [activityVisible, setActivityVisible] = useState(true);
   const [contactVisible, setContactVisible] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(null); // 'reported', 'blocked'
+  const [reportMessage, setReportMessage] = useState("");
 
   const [showFullDescription, setShowFullDescription] = useState(false);
 
@@ -103,6 +115,8 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
     followers: profileData.social.followers.length,
     following: myFollowing,
   };
+
+  const profileUrl = `${window.location.origin}/profile/${user.username}`;
 
   const MAX_DESCRIPTION_CHARS = 150;
   const descriptionText = user?.aboutMe || "Nessuna descrizione disponibile";
@@ -221,11 +235,13 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
 
   const handleReportUser = () => {
     console.log("Segnala utente");
+    setIsShareSubmenuOpen(false); // Chiudi il submenu
     setIsViewerDrawerOpen(false);
   };
 
   const handleBlockUser = () => {
     console.log("Blocca utente");
+    setIsShareSubmenuOpen(false); // Chiudi il submenu
     setIsViewerDrawerOpen(false);
   };
 
@@ -375,23 +391,70 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
       icon: <Share size={16} />,
       label: "Condividi profilo",
       description: "Condividi questo profilo",
-      action: handleShareProfile,
+      // action: handleShareProfile,
+      action: () => setIsShareSubmenuOpen(!isShareSubmenuOpen), // Toggle submenu
+      hasSubmenu: true, // Per indicare che ha un submenu
     },
     {
       icon: <Flag size={16} />,
       label: "Segnala",
       description: "Segnala questo utente",
-      action: handleReportUser,
+      action: () => setIsReportSubmenuOpen(!isReportSubmenuOpen),
       warning: true,
+      hasSubmenu: true,
     },
     {
       icon: <Ban size={16} />,
       label: "Blocca",
       description: "Blocca questo utente",
-      action: handleBlockUser,
+      action: () => setIsBlockSubmenuOpen(!isBlockSubmenuOpen),
       danger: true,
+      hasSubmenu: true,
     },
   ];
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(profileUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy link:", err);
+    }
+  };
+
+  const handleShareTo = (platform) => {
+    const shareText = `Guarda il profilo di ${user?.firstName} ${user?.lastName}!`;
+    const shareUrls = {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+        profileUrl
+      )}`,
+      instagram: profileUrl,
+    };
+
+    if (platform === "instagram") {
+      handleCopyLink();
+      console.log("Link copiato per Instagram!");
+    } else {
+      window.open(shareUrls[platform], "_blank", "width=600,height=400");
+    }
+  };
+
+  const handleShareNative = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Profilo di ${user?.firstName} ${user?.lastName}`,
+          text: `Guarda il profilo di ${user?.firstName} ${user?.lastName}!`,
+          url: profileUrl,
+        });
+      } catch (err) {
+        console.log("Share cancelled or failed");
+      }
+    } else {
+      handleCopyLink();
+    }
+  };
 
   const renderPrivacySubmenu = () => (
     <div className={styles.submenuContent}>
@@ -711,23 +774,166 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
           </button>
         </div>
         <div className={styles.drawerContent}>
+          {/* <div className={styles.drawerMenuList}>
+              {viewerMenuItems.map((item, index) => (
+                <button
+                  key={index}
+                  onClick={item.action}
+                  className={`${styles.drawerMenuItem} ${
+                    item.danger ? styles.danger : ""
+                  } ${item.warning ? styles.warning : ""}`}
+                >
+                  <div className={styles.drawerMenuIcon}>{item.icon}</div>
+                  <div className={styles.drawerMenuText}>
+                    <div className={styles.drawerMenuLabel}>{item.label}</div>
+                    <div className={styles.drawerMenuDescription}>
+                      {item.description}
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div> */}
           <div className={styles.drawerMenuList}>
             {viewerMenuItems.map((item, index) => (
-              <button
-                key={index}
-                onClick={item.action}
-                className={`${styles.drawerMenuItem} ${
-                  item.danger ? styles.danger : ""
-                } ${item.warning ? styles.warning : ""}`}
-              >
-                <div className={styles.drawerMenuIcon}>{item.icon}</div>
-                <div className={styles.drawerMenuText}>
-                  <div className={styles.drawerMenuLabel}>{item.label}</div>
-                  <div className={styles.drawerMenuDescription}>
-                    {item.description}
+              <div key={index}>
+                <button
+                  onClick={item.action}
+                  className={`${styles.drawerMenuItem} ${
+                    item.danger ? styles.danger : ""
+                  } ${item.warning ? styles.warning : ""}`}
+                >
+                  <div className={styles.drawerMenuIcon}>{item.icon}</div>
+                  <div className={styles.drawerMenuText}>
+                    <div className={styles.drawerMenuLabel}>{item.label}</div>
+                    <div className={styles.drawerMenuDescription}>
+                      {item.description}
+                    </div>
                   </div>
-                </div>
-              </button>
+                  {item.hasSubmenu && (
+                    <ChevronDown
+                      size={16}
+                      style={{
+                        transform: isShareSubmenuOpen
+                          ? "rotate(180deg)"
+                          : "rotate(0deg)",
+                        transition: "transform 0.2s ease",
+                      }}
+                    />
+                  )}
+                </button>
+
+                {/* Submenu condizionale */}
+                {item.label === "Condividi profilo" && isShareSubmenuOpen && (
+                  <div className={styles.submenuDropdown}>
+                    <button
+                      className={styles.submenuItem}
+                      onClick={handleShareNative}
+                    >
+                      <Share size={16} />
+                      <span>Condividi</span>
+                    </button>
+
+                    <button
+                      className={styles.submenuItem}
+                      onClick={handleCopyLink}
+                    >
+                      {copied ? <CheckCircle size={16} /> : <Copy size={16} />}
+                      <span>{copied ? "Copiato!" : "Copia link"}</span>
+                    </button>
+
+                    <button
+                      className={styles.submenuItem}
+                      onClick={() => handleShareTo("facebook")}
+                    >
+                      <Facebook size={16} />
+                      <span>Facebook</span>
+                    </button>
+
+                    <button
+                      className={styles.submenuItem}
+                      onClick={() => handleShareTo("instagram")}
+                    >
+                      <Instagram size={16} />
+                      <span>Instagram</span>
+                    </button>
+                  </div>
+                )}
+
+                {/* Submenu Segnala */}
+                {item.label === "Segnala" && isReportSubmenuOpen && (
+                  <div className={styles.submenuDropdown}>
+                    {showSuccessMessage === "reported" ? (
+                      // Mostra messaggio di successo al posto delle opzioni
+                      <div className={styles.successMessage}>
+                        <Flag
+                          size={16}
+                          style={{ color: "var(--success-green)" }}
+                        />
+                        <span>Utente segnalato con successo</span>
+                      </div>
+                    ) : (
+                      // Mostra le normali opzioni di segnalazione
+                      <>
+                        <button
+                          className={styles.submenuItem}
+                          onClick={() => setShowReportConfirm("spam")}
+                        >
+                          <Flag size={16} />
+                          <span>Spam</span>
+                        </button>
+                        <button
+                          className={styles.submenuItem}
+                          onClick={() => setShowReportConfirm("inappropriate")}
+                        >
+                          <Flag size={16} />
+                          <span>Contenuto inappropriato</span>
+                        </button>
+                        <button
+                          className={styles.submenuItem}
+                          onClick={() => setShowReportConfirm("fake")}
+                        >
+                          <Flag size={16} />
+                          <span>Account falso</span>
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
+
+                {/* Submenu Blocca */}
+                {item.label === "Blocca" && isBlockSubmenuOpen && (
+                  <div className={styles.submenuDropdown}>
+                    {showSuccessMessage === "blocked" ? (
+                      // Mostra messaggio di successo
+                      <div className={styles.successMessage}>
+                        <Ban
+                          size={16}
+                          style={{ color: "var(--success-green)" }}
+                        />
+                        <span>Utente bloccato con successo</span>
+                      </div>
+                    ) : (
+                      // Mostra le normali opzioni di blocco
+                      <>
+                        <button
+                          className={styles.submenuItem}
+                          onClick={() => setShowBlockConfirm("temp")}
+                        >
+                          <Ban size={16} />
+                          <span>Blocca temporaneamente</span>
+                        </button>
+                        <button
+                          className={styles.submenuItem}
+                          onClick={() => setShowBlockConfirm("permanent")}
+                        >
+                          <Ban size={16} />
+                          <span>Blocca definitivamente</span>
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
@@ -758,8 +964,168 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
         </div>
       </div>
 
+      {/* Mini-modal Conferma Segnalazione */}
+      {/* Mini-modal Conferma Segnalazione */}
+      {/* Mini-modal Conferma Segnalazione */}
+      {showReportConfirm && (
+        <div className={styles.miniModalOverlay}>
+          <div className={styles.miniModal}>
+            {showSuccessMessage === "reported" ? (
+              // Stato di successo - sostituisce tutto il contenuto del modal
+              <div className={styles.successContent}>
+                <div className={styles.successIcon}>
+                  <Flag size={32} style={{ color: "var(--success-green)" }} />
+                </div>
+                <h4 className={styles.successTitle}>Segnalazione inviata!</h4>
+                <p className={styles.successText}>
+                  Grazie per aver contribuito a mantenere la community sicura.
+                </p>
+              </div>
+            ) : (
+              // Contenuto normale del modal
+              <>
+                <div className={styles.miniModalHeader}>
+                  <Flag size={20} style={{ color: "var(--text-secondary)" }} />
+                  <h4>Segnala utente</h4>
+                </div>
+                <p className={styles.miniModalText}>
+                  Motivo:{" "}
+                  {showReportConfirm === "spam"
+                    ? "Spam"
+                    : showReportConfirm === "inappropriate"
+                    ? "Contenuto inappropriato"
+                    : "Account falso"}
+                </p>
+
+                <div className={styles.miniModalInputGroup}>
+                  <label className={styles.miniModalLabel}>
+                    Dettagli aggiuntivi (opzionale):
+                  </label>
+                  <textarea
+                    value={reportMessage}
+                    onChange={(e) => setReportMessage(e.target.value)}
+                    placeholder="Descrivi brevemente il problema..."
+                    className={styles.miniModalTextarea}
+                    rows={3}
+                  />
+                </div>
+
+                <div className={styles.miniModalButtons}>
+                  <button
+                    onClick={() => {
+                      setShowReportConfirm(null);
+                      setReportMessage("");
+                    }}
+                    className={styles.miniModalCancel}
+                  >
+                    Annulla
+                  </button>
+                  <button
+                    onClick={() => {
+                      console.log(
+                        `Segnalato per: ${showReportConfirm}`,
+                        reportMessage
+                      );
+                      setReportMessage("");
+                      setShowSuccessMessage("reported");
+                      // Dopo 3 secondi chiudi tutto
+                      setTimeout(() => {
+                        setShowSuccessMessage(null);
+                        setShowReportConfirm(null);
+                        setIsReportSubmenuOpen(false);
+                      }, 3000);
+                    }}
+                    className={styles.miniModalConfirm}
+                  >
+                    Invia segnalazione
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+      {/* Mini-modal Conferma Blocco */}
+      {/* Mini-modal Conferma Blocco */}
+      {showBlockConfirm && (
+        <div className={styles.miniModalOverlay}>
+          <div className={styles.miniModal}>
+            {showSuccessMessage === "blocked" ? (
+              // Stato di successo - sostituisce tutto il contenuto del modal
+              <div className={styles.successContent}>
+                <div className={styles.successIcon}>
+                  <Ban size={32} style={{ color: "var(--success-green)" }} />
+                </div>
+                <h4 className={styles.successTitle}>Utente bloccato!</h4>
+                <p className={styles.successText}>
+                  {showBlockConfirm === "temp"
+                    ? "L'utente è stato bloccato temporaneamente."
+                    : "L'utente è stato bloccato definitivamente."}
+                </p>
+              </div>
+            ) : (
+              // Contenuto normale del modal
+              <>
+                <div className={styles.miniModalHeader}>
+                  <Ban size={20} style={{ color: "var(--danger-red)" }} />
+                  <h4>Conferma blocco</h4>
+                </div>
+                <p className={styles.miniModalText}>
+                  {showBlockConfirm === "temp"
+                    ? "Bloccare temporaneamente"
+                    : "Bloccare definitivamente"}{" "}
+                  questo utente?
+                </p>
+                <div className={styles.miniModalButtons}>
+                  <button
+                    onClick={() => setShowBlockConfirm(null)}
+                    className={styles.miniModalCancel}
+                  >
+                    Annulla
+                  </button>
+                  <button
+                    onClick={() => {
+                      console.log(`Bloccato: ${showBlockConfirm}`);
+                      setShowSuccessMessage("blocked");
+                      // Dopo 3 secondi chiudi tutto
+                      setTimeout(() => {
+                        setShowSuccessMessage(null);
+                        setShowBlockConfirm(null);
+                        setIsBlockSubmenuOpen(false);
+                      }, 3000);
+                    }}
+                    className={styles.miniModalConfirm}
+                    style={{ background: "var(--danger-red)", color: "white" }}
+                  >
+                    Blocca
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+      {/* Messaggio di successo */}
+      {showSuccessMessage && (
+        <div className={styles.successToast}>
+          <div className={styles.successToastContent}>
+            {showSuccessMessage === "reported" ? (
+              <>
+                <Flag size={16} />
+                <span>Utente segnalato con successo</span>
+              </>
+            ) : (
+              <>
+                <Ban size={16} />
+                <span>Utente bloccato con successo</span>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Modals */}
-      <ShareModal
+      {/* <ShareModal
         isOpen={isShareModalOpen}
         onClose={() => setIsShareModalOpen(false)}
         userProfile={user}
@@ -767,7 +1133,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
           setIsShareModalOpen(false);
           setIsViewerDrawerOpen(true);
         }}
-      />
+      /> */}
       <MessageModal
         isOpen={isMessageModalOpen}
         onClose={() => setIsMessageModalOpen(false)}
@@ -779,10 +1145,10 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
         currentPhoto={user.profilePhoto}
         onPhotoUpdate={handlePhotoUpdate}
       />
-      <HelpModal
+      {/* <HelpModal
         isOpen={isHelpModalOpen}
         onClose={() => setIsHelpModalOpen(false)}
-      />
+      /> */}
       <LogoutModal
         isOpen={isLogoutModalOpen}
         onClose={() => setIsLogoutModalOpen(false)}
