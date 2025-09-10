@@ -24,6 +24,7 @@ const ExperiencesSection = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [experienceToEdit, setExperienceToEdit] = useState(null);
+  const [showFilters, setShowFilters] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -178,11 +179,11 @@ const ExperiencesSection = () => {
       icon: "Flame",
       statuses: ["completed"],
     },
-    all: {
-      label: "Tutti",
-      icon: null,
-      statuses: null,
-    },
+    // all: {
+    //   label: "Tutti",
+    //   icon: null,
+    //   statuses: null,
+    // },
   };
 
   // 🎯 USA IL CUSTOM HOOK
@@ -225,13 +226,34 @@ const ExperiencesSection = () => {
         )}
       </div>
       <div>
+        <div className={styles.filtersContainer}>
+          <button
+            className={styles.toggleFiltersBtn}
+            onClick={() => setShowFilters(!showFilters)}
+          >
+            Filtri {showFilters ? "↑" : "↓"}
+          </button>
+
+          <div
+            className={`${styles.filterContent} ${
+              showFilters ? styles.open : ""
+            }`}
+          >
+            <StatusFilterButtons
+              activeFilter={statusFilter}
+              onFilterChange={setStatusFilter}
+              filterCounts={filterCounts}
+              filterConfig={filterConfig}
+            />
+          </div>
+        </div>
         {/* <StatusFilterButtons
           activeFilter={statusFilter}
           onFilterChange={setStatusFilter}
           filterCounts={filterCounts}
           filterConfig={filterConfig}
         /> */}
-        <DropdownFilters
+        {/* <DropdownFilters
           filters={Object.entries(filterConfig).map(([key, config]) => ({
             key,
             label: config.label,
@@ -239,7 +261,7 @@ const ExperiencesSection = () => {
           }))}
           activeFilter={statusFilter}
           onFilterChange={setStatusFilter}
-        />
+        /> */}
       </div>
 
       {/* Content */}

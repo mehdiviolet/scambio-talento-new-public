@@ -398,3 +398,41 @@
   border: 1px solid var(--glass-border);
   margin-bottom: 24px;
 } */
+
+.filtersContainer {
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+/* Animazione tendina */
+.filterContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.filterContent.open {
+  max-height: 200px; /* Abbastanza per contenere i filtri */
+}
+.filterButtons {
+  display: flex;
+  gap: 0.5rem; /* riduci gap */
+  flex-wrap: nowrap; /* FORZA una sola riga */
+  overflow-x: auto; /* scroll orizzontale se non entrano */
+  padding: 0.75rem; /* riduci padding */
+}
+
+.filterButton {
+  padding: 0.5rem 0.75rem; /* riduci padding */
+  min-width: auto; /* rimuovi min-width fisso */
+  font-size: 0.625rem; /* riduci font */
+  flex-shrink: 0; /* impedisci shrink */
+}
+
+.filterLabel {
+  font-size: 0.625rem; /* riduci */
+}
+
+.filterCount {
+  font-size: 0.5rem; /* riduci */
+}
