@@ -43,6 +43,18 @@ const OnboardingApp = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const handleGoToQuickSetup = () => {
+      setCurrentStep("quickSetup");
+    };
+
+    window.addEventListener("goToQuickSetup", handleGoToQuickSetup);
+
+    return () => {
+      window.removeEventListener("goToQuickSetup", handleGoToQuickSetup);
+    };
+  }, []);
+
   // ✅ Funzione che chiama il metodo del Login tramite ref
   const handleDemoFill = () => {
     console.log("Demo fill clicked!");

@@ -36,6 +36,7 @@ import {
   Instagram,
   Copy,
   Facebook,
+  Key,
 } from "lucide-react";
 import styles from "./ProfileHeader.module.css";
 import { useQuickSetup } from "../../../hooks/useQuickSetup";
@@ -53,7 +54,7 @@ import { selectFeedbacks } from "@/store/slices/sharedEventSlice";
 import CherryComp from "@/components/CherryComp";
 
 const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
-  const { profileData, level, achievements, updateProfileData } =
+  const { profileData, level, achievements, updateProfileData, languagesData } =
     useQuickSetup();
   const { setShowQuickSetup, setShowDashboard } = useOnboarding();
   const { setCurrentStep, currentStep, resetForEdit } = useQuickSetup();
@@ -93,6 +94,13 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const [reportMessage, setReportMessage] = useState("");
 
   const [showFullDescription, setShowFullDescription] = useState(false);
+
+  const [isFollowersDrawerOpen, setIsFollowersDrawerOpen] = useState(false);
+  const [isFollowingDrawerOpen, setIsFollowingDrawerOpen] = useState(false);
+
+  const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
+  const [editFormData, setEditFormData] = useState({});
+  const [showEditSuccess, setShowEditSuccess] = useState(false);
 
   const myFollowing = useSelector(
     (state) =>
@@ -257,12 +265,17 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
     }
   };
 
+  // const handleEditProfile = () => {
+  //   resetForEdit();
+  //   setShowDashboard(false);
+  //   setTimeout(() => {
+  //     setShowQuickSetup(true);
+  //   }, 50);
+  // };
+
   const handleEditProfile = () => {
-    resetForEdit();
-    setShowDashboard(false);
-    setTimeout(() => {
-      setShowQuickSetup(true);
-    }, 50);
+    setEditFormData({ ...profileData }); // Pre-popola il form
+    setIsEditDrawerOpen(true);
   };
 
   const handleFollow = () => {
@@ -279,8 +292,46 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
     console.log("Photo updated successfully:", newPhotoUrl);
   };
 
-  const handleFollowingClick = () => console.log("Following list clicked");
-  const handleFollowersClick = () => console.log("Followers list clicked");
+  const handleFollowersClick = () => setIsFollowersDrawerOpen(true);
+  const handleFollowingClick = () => setIsFollowingDrawerOpen(true);
+
+  const mockFollowers = [
+    {
+      id: 1,
+      name: "Mario Rossi",
+      username: "mariorossi",
+      avatar: null,
+      isFollowingBack: true,
+    },
+    {
+      id: 2,
+      name: "Anna Verdi",
+      username: "annaverdi",
+      avatar: null,
+      isFollowingBack: false,
+    },
+    {
+      id: 3,
+      name: "Luca Bianchi",
+      username: "lucabianchi",
+      avatar: null,
+      isFollowingBack: true,
+    },
+    {
+      id: 4,
+      name: "Sofia Neri",
+      username: "sofianeri",
+      avatar: null,
+      isFollowingBack: false,
+    },
+  ];
+
+  const mockFollowing = [
+    { id: 5, name: "Marco Blu", username: "marcoblu", avatar: null },
+    { id: 6, name: "Elena Rosa", username: "elenarosa", avatar: null },
+    { id: 7, name: "Paolo Giallo", username: "paologiallo", avatar: null },
+  ];
+
   const handleHelpSettings = () => {
     setCurrentSubmenu("help");
     setIsInSubmenu(true);
@@ -369,6 +420,13 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
       action: handlePrivacySettings,
       hasSubmenu: true,
     },
+    // {
+    //   icon: <Key size={16} />,
+    //   label: "Cambia password",
+    //   description: "Cambia password .... ",
+    //   action: handlePrivacySettings,
+    //   hasSubmenu: true,
+    // },
     {
       icon: <HelpCircle size={16} />,
       label: "Aiuto e supporto",
@@ -964,6 +1022,599 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
         </div>
       </div>
 
+      {/* Followers Drawer */}
+      <div
+        className={`${styles.slideDrawer} ${
+          isFollowersDrawerOpen ? styles.open : ""
+        }`}
+      >
+        <div className={styles.drawerHeader}>
+          <button
+            className={styles.backButton}
+            onClick={() => setIsFollowersDrawerOpen(false)}
+          >
+            <ChevronLeft size={20} />
+            <span>Followers ({user.followers})</span>
+          </button>
+        </div>
+        <div className={styles.drawerContent}>
+          <div style={{ padding: "0 1rem" }}>
+            {mockFollowers.map((follower) => (
+              <div
+                key={follower.id}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  padding: "1rem 0",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                }}
+              >
+                {/* Avatar */}
+                <div
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "var(--text-primary)",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    flexShrink: 0,
+                  }}
+                >
+                  {follower.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </div>
+
+                {/* Info */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div
+                    style={{
+                      fontWeight: "600",
+                      fontSize: "0.875rem",
+                      color: "var(--text-primary)",
+                      marginBottom: "2px",
+                    }}
+                  >
+                    {follower.name}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.75rem",
+                      color: "var(--text-primary-light)",
+                    }}
+                  >
+                    @{follower.username}
+                  </div>
+                </div>
+
+                {/* Follow Button */}
+                <button
+                  style={{
+                    padding: "0.5rem 1rem",
+                    fontSize: "0.75rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: follower.isFollowingBack
+                      ? "rgba(16, 185, 129, 0.15)"
+                      : "rgba(255, 255, 255, 0.1)",
+                    color: follower.isFollowingBack
+                      ? "var(--success-green-dark)"
+                      : "var(--text-primary)",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                    flexShrink: 0,
+                  }}
+                  onClick={() => console.log(`Toggle follow ${follower.name}`)}
+                >
+                  {follower.isFollowingBack ? "Following" : "Follow"}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Following Drawer */}
+      <div
+        className={`${styles.slideDrawer} ${
+          isFollowingDrawerOpen ? styles.open : ""
+        }`}
+      >
+        <div className={styles.drawerHeader}>
+          <button
+            className={styles.backButton}
+            onClick={() => setIsFollowingDrawerOpen(false)}
+          >
+            <ChevronLeft size={20} />
+            <span>Following ({user.following})</span>
+          </button>
+        </div>
+        <div className={styles.drawerContent}>
+          <div style={{ padding: "0 1rem" }}>
+            {mockFollowing.map((following) => (
+              <div
+                key={following.id}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  padding: "1rem 0",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                }}
+              >
+                {/* Avatar */}
+                <div
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "var(--text-primary)",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    flexShrink: 0,
+                  }}
+                >
+                  {following.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </div>
+
+                {/* Info */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div
+                    style={{
+                      fontWeight: "600",
+                      fontSize: "0.875rem",
+                      color: "var(--text-primary)",
+                      marginBottom: "2px",
+                    }}
+                  >
+                    {following.name}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.75rem",
+                      color: "var(--text-primary-light)",
+                    }}
+                  >
+                    @{following.username}
+                  </div>
+                </div>
+
+                {/* Following Button */}
+                <button
+                  style={{
+                    padding: "0.5rem 1rem",
+                    fontSize: "0.75rem",
+                    borderRadius: "1rem",
+                    border: "1px solid var(--success-green)",
+                    background: "rgba(16, 185, 129, 0.15)",
+                    color: "var(--success-green-dark)",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                    flexShrink: 0,
+                  }}
+                  onClick={() => console.log(`Unfollow ${following.name}`)}
+                >
+                  Following
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Edit Profile Drawer */}
+      <div
+        className={`${styles.slideDrawer} ${
+          isEditDrawerOpen ? styles.open : ""
+        }`}
+      >
+        <div className={styles.drawerHeader}>
+          <button
+            className={styles.backButton}
+            onClick={() => setIsEditDrawerOpen(false)}
+          >
+            <ChevronLeft size={20} />
+            <span>Modifica Profilo</span>
+          </button>
+        </div>
+        <div className={styles.drawerContent}>
+          {showEditSuccess ? (
+            // Messaggio di successo
+            <div className={styles.submenuContent}>
+              <div className={styles.submenuHeader}>
+                <div className={styles.submenuIconContainer}>
+                  <Settings
+                    size={32}
+                    className={styles.submenuIcon}
+                    style={{ color: "var(--success-green)" }}
+                  />
+                </div>
+                <h4
+                  className={styles.submenuTitle}
+                  style={{ color: "var(--success-green-dark)" }}
+                >
+                  Profilo aggiornato!
+                </h4>
+              </div>
+              <div className={styles.submenuInfo}>
+                <Settings size={20} className={styles.submenuInfoIcon} />
+                <p className={styles.submenuInfoText}>
+                  Le modifiche al tuo profilo sono state salvate con successo.
+                </p>
+              </div>
+            </div>
+          ) : (
+            // Form di modifica
+            <div style={{ padding: "1rem" }}>
+              {/* Nome e Cognome */}
+              <div
+                style={{
+                  display: "flex",
+                  gap: "0.75rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                <div style={{ flex: 1 }}>
+                  <label
+                    style={{
+                      display: "block",
+                      marginBottom: "0.5rem",
+                      fontSize: "0.875rem",
+                      fontWeight: "600",
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    Nome
+                  </label>
+                  <input
+                    type="text"
+                    value={editFormData.firstName || ""}
+                    onChange={(e) =>
+                      setEditFormData({
+                        ...editFormData,
+                        firstName: e.target.value,
+                      })
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem",
+                      borderRadius: "0.75rem",
+                      border: "1px solid rgba(255, 255, 255, 0.2)",
+                      background: "rgba(255, 255, 255, 0.1)",
+                      color: "var(--text-primary)",
+                      fontSize: "0.875rem",
+                    }}
+                  />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label
+                    style={{
+                      display: "block",
+                      marginBottom: "0.5rem",
+                      fontSize: "0.875rem",
+                      fontWeight: "600",
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    Cognome
+                  </label>
+                  <input
+                    type="text"
+                    value={editFormData.lastName || ""}
+                    onChange={(e) =>
+                      setEditFormData({
+                        ...editFormData,
+                        lastName: e.target.value,
+                      })
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem",
+                      borderRadius: "0.75rem",
+                      border: "1px solid rgba(255, 255, 255, 0.2)",
+                      background: "rgba(255, 255, 255, 0.1)",
+                      color: "var(--text-primary)",
+                      fontSize: "0.875rem",
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Email */}
+              <div style={{ marginBottom: "1rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: "0.5rem",
+                    fontSize: "0.875rem",
+                    fontWeight: "600",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={editFormData.email || ""}
+                  onChange={(e) =>
+                    setEditFormData({ ...editFormData, email: e.target.value })
+                  }
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    borderRadius: "0.75rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.875rem",
+                  }}
+                />
+              </div>
+
+              {/* Telefono */}
+              <div style={{ marginBottom: "1rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: "0.5rem",
+                    fontSize: "0.875rem",
+                    fontWeight: "600",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  Telefono
+                </label>
+                <input
+                  type="tel"
+                  value={editFormData.phone || ""}
+                  onChange={(e) =>
+                    setEditFormData({ ...editFormData, phone: e.target.value })
+                  }
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    borderRadius: "0.75rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.875rem",
+                  }}
+                />
+              </div>
+
+              {/* Data di nascita */}
+              <div style={{ marginBottom: "1rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: "0.5rem",
+                    fontSize: "0.875rem",
+                    fontWeight: "600",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  Data di nascita
+                </label>
+                <input
+                  type="date"
+                  value={editFormData.birthDate || ""}
+                  onChange={(e) =>
+                    setEditFormData({
+                      ...editFormData,
+                      birthDate: e.target.value,
+                    })
+                  }
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    borderRadius: "0.75rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.875rem",
+                  }}
+                />
+              </div>
+
+              {/* Location */}
+              <div style={{ marginBottom: "1rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: "0.5rem",
+                    fontSize: "0.875rem",
+                    fontWeight: "600",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  Posizione
+                </label>
+                <input
+                  type="text"
+                  value={editFormData.location || ""}
+                  onChange={(e) =>
+                    setEditFormData({
+                      ...editFormData,
+                      location: e.target.value,
+                    })
+                  }
+                  placeholder="Città, Paese"
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    borderRadius: "0.75rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.875rem",
+                  }}
+                />
+              </div>
+
+              {/* Lingue */}
+              <div style={{ marginBottom: "2rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: "0.5rem",
+                    fontSize: "0.875rem",
+                    fontWeight: "600",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  Lingue parlate
+                </label>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "0.5rem",
+                    marginBottom: "0.75rem",
+                  }}
+                >
+                  {(editFormData.languages || []).map((lang, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                        padding: "0.5rem 0.75rem",
+                        background: "rgba(16, 185, 129, 0.15)",
+                        border: "1px solid var(--success-green)",
+                        borderRadius: "1rem",
+                        fontSize: "0.75rem",
+                      }}
+                    >
+                      <span>
+                        {lang.flag} {lang.name}
+                      </span>
+                      <button
+                        onClick={() => {
+                          const newLanguages = editFormData.languages.filter(
+                            (_, i) => i !== index
+                          );
+                          setEditFormData({
+                            ...editFormData,
+                            languages: newLanguages,
+                          });
+                        }}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          color: "var(--success-green-dark)",
+                          cursor: "pointer",
+                          padding: "0",
+                          fontSize: "0.875rem",
+                        }}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <select
+                  onChange={(e) => {
+                    const selectedLang = languagesData.find(
+                      (lang) => lang.name === e.target.value
+                    );
+                    if (
+                      selectedLang &&
+                      !editFormData.languages?.find(
+                        (l) => l.name === selectedLang.name
+                      )
+                    ) {
+                      setEditFormData({
+                        ...editFormData,
+                        languages: [
+                          ...(editFormData.languages || []),
+                          { ...selectedLang, level: "Intermedio" },
+                        ],
+                      });
+                    }
+                    e.target.value = "";
+                  }}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    borderRadius: "0.75rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.875rem",
+                  }}
+                >
+                  <option value="">Aggiungi una lingua...</option>
+                  {languagesData.map((lang) => (
+                    <option key={lang.name} value={lang.name}>
+                      {lang.flag} {lang.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Pulsanti */}
+              <div style={{ display: "flex", gap: "0.75rem" }}>
+                <button
+                  onClick={() => {
+                    setEditFormData({});
+                    setIsEditDrawerOpen(false);
+                  }}
+                  style={{
+                    flex: 1,
+                    padding: "0.75rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.875rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  Annulla
+                </button>
+                <button
+                  onClick={() => {
+                    updateProfileData(editFormData);
+                    setShowEditSuccess(true);
+                    setTimeout(() => {
+                      setShowEditSuccess(false);
+                      setIsEditDrawerOpen(false);
+                    }, 3000);
+                  }}
+                  style={{
+                    flex: 1,
+                    padding: "0.75rem",
+                    borderRadius: "1rem",
+                    border: "1px solid var(--success-green)",
+                    background: "rgba(16, 185, 129, 0.2)",
+                    color: "var(--success-green-dark)",
+                    fontSize: "0.875rem",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                  }}
+                >
+                  Salva modifiche
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
       {/* Mini-modal Conferma Segnalazione */}
       {/* Mini-modal Conferma Segnalazione */}
       {/* Mini-modal Conferma Segnalazione */}

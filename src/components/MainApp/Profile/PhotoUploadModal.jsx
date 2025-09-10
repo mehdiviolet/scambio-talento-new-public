@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Upload, Camera, Trash2 } from "lucide-react";
 import styles from "./PhotoUploadModal.module.css";
+// import styles from "./InviteFriendModal.module.css";
 
 const PhotoUploadModal = ({ isOpen, onClose, currentPhoto, onPhotoUpdate }) => {
   const [selectedFile, setSelectedFile] = useState(null);
