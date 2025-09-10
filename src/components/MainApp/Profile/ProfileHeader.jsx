@@ -295,6 +295,23 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const handleFollowersClick = () => setIsFollowersDrawerOpen(true);
   const handleFollowingClick = () => setIsFollowingDrawerOpen(true);
 
+  const handleToggleFollow = (person) => {
+    const isCurrentlyFollowing = followingList.has(person.id);
+
+    if (isCurrentlyFollowing) {
+      // Unfollow
+      setFollowingList((prev) => {
+        const newSet = new Set(prev);
+        newSet.delete(person.id);
+        return newSet;
+      });
+    } else {
+      // Follow
+      setFollowingList((prev) => new Set([...prev, person.id]));
+    }
+    console.log(isCurrentlyFollowing);
+  };
+
   const mockFollowers = [
     {
       id: 1,
@@ -332,6 +349,12 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
     { id: 7, name: "Paolo Giallo", username: "paologiallo", avatar: null },
   ];
 
+  const [followingList, setFollowingList] = useState(
+    new Set(mockFollowing.map((f) => f.id))
+  );
+  const [followersList, setFollowersList] = useState(
+    new Set(mockFollowers.map((f) => f.id))
+  );
   const handleHelpSettings = () => {
     setCurrentSubmenu("help");
     setIsInSubmenu(true);
@@ -1100,20 +1123,24 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     padding: "0.5rem 1rem",
                     fontSize: "0.75rem",
                     borderRadius: "1rem",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    background: follower.isFollowingBack
+                    border: `1px solid ${
+                      followingList.has(follower.id)
+                        ? "var(--success-green)"
+                        : "rgba(255, 255, 255, 0.2)"
+                    }`,
+                    background: followingList.has(follower.id)
                       ? "rgba(16, 185, 129, 0.15)"
                       : "rgba(255, 255, 255, 0.1)",
-                    color: follower.isFollowingBack
+                    color: followingList.has(follower.id)
                       ? "var(--success-green-dark)"
                       : "var(--text-primary)",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
                     flexShrink: 0,
                   }}
-                  onClick={() => console.log(`Toggle follow ${follower.name}`)}
+                  onClick={() => handleToggleFollow(follower)}
                 >
-                  {follower.isFollowingBack ? "Following" : "Follow"}
+                  {followingList.has(follower.id) ? "Following" : "Follow"}
                 </button>
               </div>
             ))}
@@ -1199,16 +1226,28 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     padding: "0.5rem 1rem",
                     fontSize: "0.75rem",
                     borderRadius: "1rem",
-                    border: "1px solid var(--success-green)",
-                    background: "rgba(16, 185, 129, 0.15)",
-                    color: "var(--success-green-dark)",
+                    border: `1px solid ${
+                      followingList.has(following.id)
+                        ? "var(--success-green)"
+                        : "rgba(255, 255, 255, 0.2)"
+                    }`,
+
+                    background: followingList.has(following.id)
+                      ? "rgba(16, 185, 129, 0.15)"
+                      : "rgba(255, 255, 255, 0.1)",
+                    color: followingList.has(following.id)
+                      ? "var(--success-green-dark)"
+                      : "var(--text-primary)",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
                     flexShrink: 0,
                   }}
-                  onClick={() => console.log(`Unfollow ${following.name}`)}
+                  // onClick={() => console.log(`Unfollow ${following.name}`)}
+                  onClick={() => handleToggleFollow(following)}
                 >
-                  Following
+                  {followingList.has(following.id) ? "Following" : "Follow"}
+
+                  {/* Following */}
                 </button>
               </div>
             ))}
@@ -1465,6 +1504,42 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                 />
               </div>
 
+              {/* About Me */}
+              <div style={{ marginBottom: "1rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: "0.5rem",
+                    fontSize: "0.875rem",
+                    fontWeight: "600",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  Descrizione
+                </label>
+                <textarea
+                  value={editFormData.aboutMe || ""}
+                  onChange={(e) =>
+                    setEditFormData({
+                      ...editFormData,
+                      aboutMe: e.target.value,
+                    })
+                  }
+                  placeholder="Raccontaci qualcosa di te..."
+                  rows={3}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    borderRadius: "0.75rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.875rem",
+                    resize: "vertical",
+                    fontFamily: "inherit",
+                  }}
+                />
+              </div>
               {/* Lingue */}
               <div style={{ marginBottom: "2rem" }}>
                 <label
