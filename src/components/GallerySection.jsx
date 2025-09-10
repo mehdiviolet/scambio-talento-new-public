@@ -29,7 +29,7 @@ function GallerySection({ isOwner = true }) {
         {/* Header */}
         <div className={styles.galleryHeader}>
           <h3 className={styles.galleryTitle}>
-            <span className={styles.galleryIcon}>🖼️</span>
+            {/* <span className={styles.galleryIcon}>🖼️</span> */}
             Gallery
           </h3>
 

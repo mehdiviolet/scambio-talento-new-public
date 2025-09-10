@@ -1,31 +1,33 @@
 /* GallerySection.module.css */
-
 .gallerySection {
-  background: white;
-  border-radius: 16px;
-  padding: 24px;
-  border: 1px solid #e2e8f0;
+  /* background: rgba(255, 255, 255, 0.2); */
+  background: var(--bg-old);
+  /* background: var(--text-primaryLight); */
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
 }
 
 .galleryHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  /* margin-bottom: 24px; */
-  margin-bottom: 8px;
-  gap: 16px;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
 }
 
 .galleryTitle {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
   margin: 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-primary);
   flex: 1;
 }
 
@@ -35,21 +37,22 @@
 }
 
 .gallerySubtitle {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 400;
-  color: #64748b;
-  margin-left: 4px;
+  color: var(--text-primary-light);
+  margin-left: 0.25rem;
 }
 
 .addPhotosBtn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: #000;
-  color: white;
-  border: none;
-  border-radius: 10px;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  color: var(--text-secondary);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 1rem;
   cursor: pointer;
   font-weight: 500;
   font-size: 0.875rem;
@@ -58,13 +61,14 @@
 }
 
 .addPhotosBtn:hover {
-  background: #1e293b;
+  background: rgba(245, 158, 11, 0.1);
   transform: translateY(-1px);
+  border-color: var(--text-secondary);
 }
 
 .galleryContent {
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 /* Placeholder Styles */
@@ -73,34 +77,35 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 48px 24px;
+  padding: 3rem 1.5rem;
   text-align: center;
-  border: 2px dashed #cbd5e1;
-  border-radius: 16px;
-  background: #f8fafc;
+  border: 2px dashed var(--text-primary-light);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
   min-height: 200px;
 }
 
 .placeholderIcon {
-  color: #94a3b8;
-  margin-bottom: 16px;
+  color: var(--text-primary-light);
+  margin-bottom: 1rem;
 }
 
 .placeholderText {
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 
 .placeholderText h4 {
-  margin: 0 0 8px 0;
+  margin: 0 0 0.5rem 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-primary);
 }
 
 .placeholderText p {
   margin: 0;
-  font-size: 0.875rem;
-  color: #64748b;
+  font-size: 0.75rem;
+  color: var(--text-primary-light);
   line-height: 1.5;
   max-width: 300px;
 }
@@ -108,12 +113,13 @@
 .placeholderBtn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: #000;
-  color: white;
-  border: none;
-  border-radius: 12px;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  color: var(--text-secondary);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 1rem;
   cursor: pointer;
   font-weight: 500;
   font-size: 0.875rem;
@@ -121,8 +127,9 @@
 }
 
 .placeholderBtn:hover {
-  background: #1e293b;
+  background: rgba(245, 158, 11, 0.1);
   transform: translateY(-1px);
+  border-color: var(--text-secondary);
 }
 
 /* Gallery Info */
@@ -130,97 +137,364 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 0.875rem;
+  gap: 0.75rem;
 }
 
 .photoCount {
-  color: #64748b;
+  color: var(--text-primary-light);
   font-weight: 500;
 }
 
 .addMoreBtn {
-  color: #000;
+  color: var(--text-primary);
   background: none;
   border: none;
   cursor: pointer;
   font-weight: 500;
   font-size: 0.875rem;
   text-decoration: underline;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .addMoreBtn:hover {
-  color: #1e293b;
+  color: var(--text-secondary);
 }
 
-/* Responsive */
-/* @media (max-width: 768px) {
-  .gallerySection {
-    padding: 20px;
-  }
-
-  .galleryHeader {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-  }
-
-  .galleryTitle {
-    font-size: 1.1rem;
-  }
-
-  .gallerySubtitle {
-    display: block;
-    margin-left: 0;
-    margin-top: 4px;
-  }
-
-  .addPhotosBtn {
-    align-self: flex-start;
-  }
-
-  .galleryPlaceholder {
-    padding: 32px 16px;
-    min-height: 160px;
-  }
-
-  .placeholderText h4 {
-    font-size: 1rem;
-  }
-
-  .placeholderText p {
-    font-size: 0.8rem;
-  }
-
-  .galleryInfo {
-    flex-direction: column;
-    gap: 8px;
-    align-items: stretch;
-    text-align: center;
-  }
+/* Add Skill Button Styles */
+.addSkillButton {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+  /* padding: 0.5rem; */
+  border-radius: 1rem;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-@media (max-width: 480px) {
-  .gallerySection {
-    padding: 16px;
-  }
-
-  .galleryTitle {
-    font-size: 1rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .galleryIcon {
-    font-size: 1.25rem;
-  }
-
-  .addPhotosBtn,
-  .placeholderBtn {
-    width: 100%;
-    justify-content: center;
-  }
+/* .addSkillButton:hover {
+  border-color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.2);
 } */
+
+.addSkillButtonContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.addSkillIcon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background: linear-gradient(135deg, var(--text-secondary), #fbbf24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.addSkillButton:hover .addSkillIcon {
+  transform: scale(1.1);
+}
+
+.addSkillTextContent {
+  text-align: center;
+}
+
+.addSkillTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.addSkillSubtitle {
+  font-size: 0.75rem;
+  color: var(--text-primary-light);
+  margin: 0;
+}
+
+/* ****************** */
+/* Header Add Button Styles */
+.headerAddButton {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.headerAddButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--text-primary);
+  transform: scale(1.1);
+}
+
+.headerAddButton:active {
+  transform: scale(0.95);
+}
+
+.headerAddButtonIcon {
+  color: var(--text-primary-light);
+  transition: all 0.2s ease;
+}
+
+.headerAddButton:hover .headerAddButtonIcon {
+  color: var(--text-primary);
+}
+
+/* Add Experience Button Styles */
+.addExperienceButton {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.addExperienceButton:hover {
+  border-color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.addExperienceButtonContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.addExperienceIcon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background: linear-gradient(
+    135deg,
+    var(--text-primary),
+    var(--text-primary-dark)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.addExperienceButton:hover .addExperienceIcon {
+  transform: scale(1.1);
+}
+
+.addExperienceTextContent {
+  text-align: center;
+}
+
+.addExperienceTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.addExperienceSubtitle {
+  font-size: 0.75rem;
+  color: var(--text-primary-light);
+  margin: 0;
+}
+
+/* Add Skill First Button Styles */
+.addSkillFirstButton {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  cursor: not-allowed; /* invece di cursor: pointer */
+  opacity: 0.6; /* aggiungi questa */
+}
+
+.addSkillFirstButton:hover {
+  border-color: rgba(255, 255, 255, 0.3); /* stesso del normale, no cambio */
+  background: rgba(255, 255, 255, 0.15); /* stesso del normale */
+}
+
+.addSkillFirstButtonContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.addSkillFirstIcon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  /* background: linear-gradient(135deg, var(--text-secondary), #fbbf24); */
+  background: linear-gradient(
+    135deg,
+    var(--text-primary-light),
+    #94a3b8
+  ); /* grigio invece di arancione */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+/* .addSkillFirstButton:hover .addSkillFirstIcon {
+  transform: scale(1.1);
+} */
+
+.addSkillFirstTextContent {
+  text-align: center;
+}
+
+.addSkillFirstTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.addSkillFirstSubtitle {
+  font-size: 0.75rem;
+  color: var(--text-primary-light);
+  margin: 0;
+}
+
+/* Add Event Button Styles */
+.addEventButton {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.addEventButton:hover {
+  border-color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.addEventButtonContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.addEventIcon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background: linear-gradient(
+    135deg,
+    var(--danger-red),
+    var(--danger-red-dark)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.addEventButton:hover .addEventIcon {
+  transform: scale(1.1);
+}
+
+.addEventTextContent {
+  text-align: center;
+}
+
+.addEventTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.addEventSubtitle {
+  font-size: 0.75rem;
+  color: var(--text-primary-light);
+  margin: 0;
+}
+
+/* Add Photos Button Styles */
+.addPhotosButton {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.addPhotosButton:hover {
+  border-color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.addPhotosButtonContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.addPhotosIcon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
+  background: linear-gradient(
+    135deg,
+    var(--success-green),
+    var(--success-green-dark)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.addPhotosButton:hover .addPhotosIcon {
+  transform: scale(1.1);
+}
+
+.addPhotosTextContent {
+  text-align: center;
+}
+
+.addPhotosTitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.addPhotosSubtitle {
+  font-size: 0.875rem;
+  color: var(--text-primary-light);
+  margin: 0;
+}
