@@ -20,6 +20,7 @@ const EventsSection = () => {
   // State per il modal eventi
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const [editingEvent, setEditingEvent] = useState(null);
+  const [showFilters, setShowFilters] = useState(false);
 
   // ✅ Leggi direttamente da Redux
   const currentProfile = useAppSelector(selectCurrentUserProfile);
@@ -118,11 +119,11 @@ const EventsSection = () => {
       icon: "Flame",
       statuses: ["completed"],
     },
-    all: {
-      label: "Tutti",
-      icon: null,
-      statuses: null,
-    },
+    // all: {
+    //   label: "Tutti",
+    //   icon: null,
+    //   statuses: null,
+    // },
   };
 
   // 🎯 USA IL CUSTOM HOOK
@@ -145,10 +146,7 @@ const EventsSection = () => {
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        <h3 className={styles.title}>
-          {/* <span className={styles.eventsIcon}>🎉</span> */}
-          Eventi Creati ({events.length})
-        </h3>
+        <h3 className={styles.title}>Eventi Creati ({events.length})</h3>
 
         {isOwner && events.length !== 0 && (
           // <button
@@ -164,22 +162,26 @@ const EventsSection = () => {
           />
         )}
       </div>
-      <div>
-        {/* <StatusFilterButtons
-          activeFilter={statusFilter}
-          onFilterChange={setStatusFilter}
-          filterCounts={filterCounts}
-          filterConfig={filterConfig}
-        /> */}
-        <DropdownFilters
-          filters={Object.entries(filterConfig).map(([key, config]) => ({
-            key,
-            label: config.label,
-            count: filterCounts[key] || 0,
-          }))}
-          activeFilter={statusFilter}
-          onFilterChange={setStatusFilter}
-        />
+      <div className={styles.filtersContainer}>
+        <button
+          className={styles.toggleFiltersBtn}
+          onClick={() => setShowFilters(!showFilters)}
+        >
+          Filtri {showFilters ? "↑" : "↓"}
+        </button>
+
+        <div
+          className={`${styles.filterContent} ${
+            showFilters ? styles.open : ""
+          }`}
+        >
+          <StatusFilterButtons
+            activeFilter={statusFilter}
+            onFilterChange={setStatusFilter}
+            filterCounts={filterCounts}
+            filterConfig={filterConfig}
+          />
+        </div>
       </div>
       {/* <div>
         <span>Now/</span>

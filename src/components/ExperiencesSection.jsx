@@ -206,6 +206,12 @@ const ExperiencesSection = () => {
         <h3 className={styles.title}>
           Esperienze Offerte ({experiences.length})
         </h3>
+        <button
+          className={styles.toggleFiltersBtn}
+          onClick={() => setShowFilters(!showFilters)}
+        >
+          Filtri {showFilters ? "↑" : "↓"}
+        </button>
 
         {isOwner && (
           <>
@@ -227,12 +233,12 @@ const ExperiencesSection = () => {
       </div>
       <div>
         <div className={styles.filtersContainer}>
-          <button
+          {/* <button
             className={styles.toggleFiltersBtn}
             onClick={() => setShowFilters(!showFilters)}
           >
             Filtri {showFilters ? "↑" : "↓"}
-          </button>
+          </button> */}
 
           <div
             className={`${styles.filterContent} ${
