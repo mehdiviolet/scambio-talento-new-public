@@ -156,19 +156,27 @@ const EventsSection = () => {
           // >
           //   +
           // </button>
-          <HeaderAddButton
-            onClick={handleOpenCreateModal}
-            title="Crea nuovo evento"
-          />
+          <>
+            <button
+              className={styles.toggleFiltersBtn}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              Filtri {showFilters ? "↑" : "↓"}
+            </button>
+            <HeaderAddButton
+              onClick={handleOpenCreateModal}
+              title="Crea nuovo evento"
+            />
+          </>
         )}
       </div>
       <div className={styles.filtersContainer}>
-        <button
+        {/* <button
           className={styles.toggleFiltersBtn}
           onClick={() => setShowFilters(!showFilters)}
         >
           Filtri {showFilters ? "↑" : "↓"}
-        </button>
+        </button> */}
 
         <div
           className={`${styles.filterContent} ${

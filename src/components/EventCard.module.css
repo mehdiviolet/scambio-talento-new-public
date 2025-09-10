@@ -295,6 +295,14 @@
   flex-direction: column;
 }
 
+.bookShareLayout {
+  display: flex;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .organizerLabel {
   font-size: 0.75rem;
   color: rgb(107, 114, 128);

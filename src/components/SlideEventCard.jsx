@@ -104,6 +104,8 @@ const SlideEventCard = ({
             </div>
           </div>
         </div>
+        {/* <hr /> */}
+
         {/* Footer con organizzatore */}
         <div className={styles.cardFooterPiccolo}>
           <div className={styles.organizerInfoPiccolo}>
@@ -146,36 +148,9 @@ const SlideEventCard = ({
           </div>
 
           <div className={styles.actionButtons}>
-            {isOwner ? (
-              <>
+            {!isOwner && (
+              <div className={styles.bookShareLayout}>
                 {/* <button
-                  className={`${styles.actionButton} ${styles.actionButtonEdit}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onEdit && onEdit(mockEvent);
-                    console.log("🔧 DEMO: Modifica evento", mockEvent.title);
-                  }}
-                  title="Modifica evento"
-                >
-                  <Edit size={16} />
-                  <span>Modifica</span>
-                </button>
-                <button
-                  className={`${styles.actionButton} ${styles.actionButtonDelete}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onDelete && onDelete(mockEvent.id);
-                    console.log("🗑️ DEMO: Elimina evento", mockEvent.title);
-                  }}
-                  title="Elimina evento"
-                >
-                  <Trash2 size={16} />
-                  <span>Elimina</span>
-                </button> */}
-              </>
-            ) : (
-              <>
-                <button
                   className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -184,7 +159,7 @@ const SlideEventCard = ({
                   title="Condividi"
                 >
                   <Share size={16} />
-                </button>
+                </button> */}
 
                 <button
                   className={`${styles.actionButton} ${
@@ -201,7 +176,7 @@ const SlideEventCard = ({
                 >
                   <Bookmark size={16} />
                 </button>
-              </>
+              </div>
             )}
           </div>
         </div>
