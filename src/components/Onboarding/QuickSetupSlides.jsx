@@ -309,7 +309,7 @@ const QuickSetupSlides = ({ onComplete }) => {
           <span className={styles.requiredAsterisk}>*</span>
         </div> */}
 
-        <div className={styles.orDivider}>oppure</div>
+        {/* <div className={styles.orDivider}>oppure</div> */}
 
         <div className={`${styles.inputGroup} ${styles.withIcon}`}>
           <Phone className={`${styles.iconSm} ${styles.textPurple400}`} />
@@ -324,6 +324,7 @@ const QuickSetupSlides = ({ onComplete }) => {
             className={styles.formInput}
             placeholder="Numero di telefono"
           />
+          <span className={styles.requiredAsterisk}>*</span>
         </div>
 
         <div className={styles.inputGroup}>

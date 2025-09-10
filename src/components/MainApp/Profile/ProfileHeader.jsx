@@ -443,13 +443,13 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
       action: handlePrivacySettings,
       hasSubmenu: true,
     },
-    // {
-    //   icon: <Key size={16} />,
-    //   label: "Cambia password",
-    //   description: "Cambia password .... ",
-    //   action: handlePrivacySettings,
-    //   hasSubmenu: true,
-    // },
+    {
+      icon: <Key size={16} />,
+      label: "Cambia password",
+      description: "Cambia password .... ",
+      action: handlePrivacySettings,
+      hasSubmenu: true,
+    },
     {
       icon: <HelpCircle size={16} />,
       label: "Aiuto e supporto",

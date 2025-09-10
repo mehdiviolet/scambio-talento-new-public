@@ -156,7 +156,7 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .gallerySection {
     padding: 20px;
   }
@@ -223,4 +223,4 @@
     width: 100%;
     justify-content: center;
   }
-}
+} */
