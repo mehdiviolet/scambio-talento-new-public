@@ -20,6 +20,7 @@ import {
   ChevronDown,
   ChevronRight,
   Map,
+  Languages,
 } from "lucide-react";
 import styles from "./EventCard.module.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -317,6 +318,39 @@ const MockEventCard = ({
           </div>
         </div>
 
+        {/* {!isOwner && isExpanded && (
+          <>
+            <div className={styles.actionButtonsMe}>
+              <button
+                className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  console.log("📤 DEMO: Condividi evento");
+                }}
+                title="Condividi"
+              >
+                <Share size={16} />
+              </button>
+
+              <button
+                className={`${styles.actionButton} ${
+                  isSaved
+                    ? styles.actionButtonSaved
+                    : styles.actionButtonSecondary
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsSaved(!isSaved);
+                  console.log("🔖 DEMO: Bookmark evento");
+                }}
+                title="Salva evento"
+              >
+                <Bookmark size={16} />
+              </button>
+            </div>
+          </>
+        )} */}
+
         {/* Info aggiuntive quando espanso */}
         {isExpanded && (
           <div className={styles.cardHeader}>
@@ -335,6 +369,18 @@ const MockEventCard = ({
                         {formatTime(mockEvent.startTime)} -{" "}
                         {formatTime(mockEvent.endTime)}
                       </span>
+                    </div>
+                    <div className={styles.metaItemOverlay}>
+                      {/* Lingua */}
+                      {mockEvent.language && (
+                        <>
+                          <Languages
+                            size={16}
+                            className={styles.metaIconOverlay}
+                          />
+                          <span>{mockEvent.language}</span>
+                        </>
+                      )}
                     </div>
                   </div>
 
@@ -616,11 +662,11 @@ const MockEventCard = ({
               </div>
 
               {/* Lingua */}
-              {mockEvent.language && (
+              {/* {mockEvent.language && (
                 <div className={styles.extraItem}>
                   <strong>Lingua:</strong> {mockEvent.language}
                 </div>
-              )}
+              )} */}
             </div>
           )}
         </div>
@@ -835,7 +881,7 @@ const MockEventCard = ({
           </div>
 
           {/* <div className={styles.actionButtons}> */}
-          {isOwner ? (
+          {isOwner && (
             <>
               <div className={styles.actionButtons}>
                 <button
@@ -864,98 +910,7 @@ const MockEventCard = ({
                 </button>
               </div>
             </>
-          ) : (
-            <>
-              <div className={styles.actionButtonsMe}>
-                <button
-                  className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("📤 DEMO: Condividi evento");
-                  }}
-                  title="Condividi"
-                >
-                  <Share size={16} />
-                </button>
-
-                <button
-                  className={`${styles.actionButton} ${
-                    isSaved
-                      ? styles.actionButtonSaved
-                      : styles.actionButtonSecondary
-                  }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsSaved(!isSaved);
-                    console.log("🔖 DEMO: Bookmark evento");
-                  }}
-                  title="Salva evento"
-                >
-                  <Bookmark size={16} />
-                </button>
-              </div>
-            </>
           )}
-          {/* </div> */}
-          {/* <div className={styles.actionButtons}>
-            {isOwner ? (
-              <>
-                <button
-                  className={`${styles.actionButton} ${styles.actionButtonEdit}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onEdit && onEdit(mockEvent);
-                    console.log("🔧 DEMO: Modifica evento", mockEvent.title);
-                  }}
-                  title="Modifica evento"
-                >
-                  <Edit size={16} />
-                  <span>Modifica</span>
-                </button>
-                <button
-                  className={`${styles.actionButton} ${styles.actionButtonDelete}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onDelete && onDelete(mockEvent.id);
-                    console.log("🗑️ DEMO: Elimina evento", mockEvent.title);
-                  }}
-                  title="Elimina evento"
-                >
-                  <Trash2 size={16} />
-                  <span>Elimina</span>
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("📤 DEMO: Condividi evento");
-                  }}
-                  title="Condividi"
-                >
-                  <Share size={16} />
-                </button>
-
-                <button
-                  className={`${styles.actionButton} ${
-                    isSaved
-                      ? styles.actionButtonSaved
-                      : styles.actionButtonSecondary
-                  }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsSaved(!isSaved);
-                    console.log("🔖 DEMO: Bookmark evento");
-                  }}
-                  title="Salva evento"
-                >
-                  <Bookmark size={16} />
-                </button>
-              </>
-            )}
-          </div> */}
         </div>
       </div>
 

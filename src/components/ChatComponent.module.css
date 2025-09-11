@@ -3,7 +3,8 @@
 .chatContainer {
   display: flex;
   flex-direction: column;
-  height: 600px; /* ✅ ALTEZZA FISSA */
+  /* height: 600px;  */
+  height: 100%;
   background: white;
   border-radius: 16px;
   border: 1px solid #e5e7eb;

@@ -39,7 +39,7 @@ const SlideEventCard = ({
     id: "demo_event_001",
     title: "Boardgame Night a San Salvario",
     description:
-      "Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare...",
+      "Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare.Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare.Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare...",
     category: "Hobby e passioni",
     language: "italiano",
     startDate: "2024-12-20",

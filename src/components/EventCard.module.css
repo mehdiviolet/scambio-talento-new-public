@@ -10,6 +10,9 @@
   overflow: hidden;
   position: relative;
   margin-top: 2px;
+  min-height: 400px; /* o altra altezza minima ragionevole */
+  display: flex; /* AGGIUNGI QUESTA RIGA */
+  flex-direction: column; /* AGGIUNGI QUESTA RIGA */
 }
 
 .card:hover {
@@ -72,14 +75,16 @@
 .actionButtons {
   display: flex;
   gap: var(--space-sm);
+  padding: 0 var(--space-lg);
+  /* margin-bottom: 80px; */
 }
 
 .actionButtonsMe {
   display: flex;
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: var(--space-sm);
+  /* position: absolute; */
+  /* top: 0;
+  right: 0; */
+  /* padding: var(--space-sm); */
   gap: var(--space-xs);
 }
 
@@ -172,6 +177,8 @@
 
 .cardContent {
   /* padding viene gestito dai contenitori figli */
+  flex: 1; /* Prende tutto lo spazio disponibile */
+  border: 2px solid red; /* TEMPORANEO per debug */
 }
 
 .eventTitle {
@@ -215,7 +222,7 @@
   line-height: 1.5;
   margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  /* -webkit-line-clamp: 3; */
   -webkit-box-orient: vertical;
   overflow: hidden;
   word-wrap: break-word;
@@ -245,10 +252,10 @@
 }
 
 .extraDetails {
-  background: var(--glass-bg-light);
-  border-radius: var(--radius-md);
+  /* background: var(--glass-bg-light); */
+  /* border-radius: var(--radius-md); */
   padding: var(--space-lg);
-  border: 1px solid var(--glass-border);
+  /* border: 1px solid var(--glass-border); */
 }
 
 .extraItem {
@@ -408,7 +415,8 @@
 .eventMetaOverlayMe {
   display: flex;
   /* flex-direction: column; */
-  gap: var(--space-sm);
+  /* gap: var(--space-sm); */
+  gap: var(--space-lg);
 }
 .metaItemOverlay {
   display: flex;
@@ -431,7 +439,7 @@
 
 .participantAvatars {
   display: flex;
-  margin-left: -5px;
+  /* margin-left: -5px; */
 }
 
 .participantAvatar {
@@ -753,7 +761,7 @@
 
 /* === COMMENTS === */
 .commentsSection {
-  border-top: 1px solid var(--glass-border);
+  /* border-top: 1px solid var(--glass-border); */
   padding: var(--space-lg);
 }
 
@@ -844,7 +852,12 @@
   justify-content: space-between;
   flex-direction: column;
   /* margin-bottom: 90px; */
-  margin-bottom: 180px;
+  /* margin-bottom: 180px; */
+  padding: var(--space-lg);
+  /* gap: var(--space-lg); */
+  /* height: 200px; */
+  margin-top: auto; /* Si posiziona automaticamente in fondo */
+  border: 2px solid blue; /* TEMPORANEO per debug */
 }
 
 .cardFooterPiccolo {

@@ -233,13 +233,16 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border-color: var(--text-primary);
   transition: all 0.2s ease;
 }
 
 .headerAddButton:hover {
-  background: rgba(255, 255, 255, 0.2);
   border-color: var(--text-primary);
+  /* border-color: var(--text-secondary); */
+  background: rgba(255, 255, 255, 0.2);
   transform: scale(1.1);
+  /* color: var(--text-secondary); */
 }
 
 .headerAddButton:active {
@@ -247,12 +250,15 @@
 }
 
 .headerAddButtonIcon {
-  color: var(--text-primary-light);
+  border-color: var(--text-primary);
+  /* color: var(--text-primary-light); */
   transition: all 0.2s ease;
 }
 
-.headerAddButton:hover .headerAddButtonIcon {
-  color: var(--text-primary);
+.headerAddButton:hover,
+.headerAddButtonIcon:hover {
+  /* color: var(--text-primary); */
+  color: var(--text-secondary);
 }
 
 /* Add Experience Button Styles */

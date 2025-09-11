@@ -1,5 +1,28 @@
 /* SearchPage.module.css - VERSIONE FINALE PULITA */
+.profilePage {
+  min-height: 100vh;
+  margin-bottom: 80px;
+  margin: 0px auto 50px auto;
+  /* border: 1px solid red; */
+  /* background-color: #f9fafb; */
+}
 
+.profileContainer {
+  /* background-color: #f9fafb; */
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  /* padding-top: 1.5rem; */
+  padding-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  /* gap: 1.5rem; */
+  min-height: 100vh; /* AGGIUNGI QUESTA */
+}
+
+/* --------------------------------- */
 .searchContainer {
   padding: 20px;
   max-width: 100%;

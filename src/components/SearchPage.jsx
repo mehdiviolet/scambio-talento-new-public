@@ -376,24 +376,28 @@ const SearchPage = () => {
         {/* Content del drawer - caricato solo quando drawer è aperto */}
         {isOpen && selectedPersonData.profile.firstName && (
           <>
-            <ProfileHeaderMockup
-              selectedPerson={selectedPersonData.profile}
-              isInstructorPanel={false}
-            />
-            <SkillMockup
-              mockSkills={updatedSkills}
-              selectedPersonData={selectedPersonData}
-            />
-            <ExperiencesMockupRedux
-              isInstructorPanel={false}
-              mockSkills={updatedSkills}
-              mockExperiencesNew={selectedPersonData.experiences}
-            />
-            <ExperiencesSectionStudenteTest />
-            <EventSectionTest
-              isOwner={false}
-              selectedPersonData={selectedPersonData}
-            />
+            <div className={searchStyles.profilePage}>
+              <div className={searchStyles.profileContainer}>
+                <ProfileHeaderMockup
+                  selectedPerson={selectedPersonData.profile}
+                  isInstructorPanel={false}
+                />
+                <SkillMockup
+                  mockSkills={updatedSkills}
+                  selectedPersonData={selectedPersonData}
+                />
+                <ExperiencesMockupRedux
+                  isInstructorPanel={false}
+                  mockSkills={updatedSkills}
+                  mockExperiencesNew={selectedPersonData.experiences}
+                />
+                <ExperiencesSectionStudenteTest />
+                <EventSectionTest
+                  isOwner={false}
+                  selectedPersonData={selectedPersonData}
+                />
+              </div>
+            </div>
           </>
         )}
 
