@@ -15,6 +15,11 @@ import {
 } from "lucide-react";
 import styles from "./EventCard.module.css";
 import MockEventCard from "./MockEventCard";
+import {
+  selectParticipants,
+  selectEventStats,
+} from "../store/slices/sharedEventSlice";
+import { useSelector } from "react-redux";
 
 const SlideEventCard = ({
   isOwner = false,
@@ -24,22 +29,33 @@ const SlideEventCard = ({
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const participants = useSelector(selectParticipants);
+  const eventStats = useSelector(selectEventStats);
+
+  console.log(eventStats);
 
   // Dati mock dell'evento per la card preview
   const mockEvent = {
     id: "demo_event_001",
-    title: "Boardgame Night a San Salvarios",
+    title: "Boardgame Night a San Salvario",
     description:
       "Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare...",
     category: "Hobby e passioni",
+    language: "italiano",
     startDate: "2024-12-20",
     startTime: "19:30",
     endTime: "22:30",
     placeName: "Café Central",
     placeAddress: "Via Madama Cristina 45, Torino",
     coverImage: "/images/evento/azul-01.png",
-    participants: 12,
-    maxParticipants: 20,
+    // participants: 11,
+    participants: eventStats.participantsCount,
+    type: eventStats.type,
+    // maxParticipants: 20,
+    maxParticipants: eventStats.maxParticipants,
+    views: 24,
+    likes: 7,
+    shares: 3,
   };
 
   const handleCardClick = () => {
@@ -66,21 +82,22 @@ const SlideEventCard = ({
         style={{ cursor: "pointer" }}
       >
         <div className={styles.flexCard}>
-          <div className={styles.cardImage}>
-            {mockEvent.coverImage ? (
-              <img
-                src={mockEvent.coverImage}
-                alt={mockEvent.title}
-                className={styles.eventImage}
-              />
-            ) : (
-              <div className={styles.imagePlaceholder}>📅</div>
-            )}
+          <div className={styles.flexCardMe}>
+            <div className={styles.cardImage}>
+              {mockEvent.coverImage ? (
+                <img
+                  src={mockEvent.coverImage}
+                  alt={mockEvent.title}
+                  className={styles.eventImage}
+                />
+              ) : (
+                <div className={styles.imagePlaceholder}>📅</div>
+              )}
+            </div>
+            <h4 className={styles.eventTitle}>{mockEvent.title}</h4>
           </div>
 
           <div className={styles.cardPreviewContent}>
-            <h4 className={styles.eventTitle}>{mockEvent.title}</h4>
-
             <div className={styles.eventMeta}>
               <div className={styles.metaItem}>
                 <Calendar size={14} />
@@ -161,7 +178,7 @@ const SlideEventCard = ({
                   <Share size={16} />
                 </button> */}
 
-                <button
+                {/* <button
                   className={`${styles.actionButton} ${
                     isSaved
                       ? styles.actionButtonSaved
@@ -175,7 +192,7 @@ const SlideEventCard = ({
                   title="Salva evento"
                 >
                   <Bookmark size={16} />
-                </button>
+                </button> */}
               </div>
             )}
           </div>
@@ -204,6 +221,7 @@ const SlideEventCard = ({
               onEdit={onEdit}
               onDelete={onDelete}
               showExtended={true}
+              mockEvent={mockEvent}
             />
           )}
         </div>

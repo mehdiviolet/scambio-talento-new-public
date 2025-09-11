@@ -50,25 +50,25 @@ import SimpleImageModal from "./SimpleImageModal";
 import LoadingSpinner from "./LoadingSpinner";
 
 // DATI MOCK COMPLETI
-const mockEvent = {
-  id: "demo_event_001",
-  title: "Boardgame Night a San Salvarios",
-  description:
-    "Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare e divertirsi insieme. Porteremo una selezione di giochi moderni e classici adatti a tutti i livelli.",
-  category: "Hobby e passioni",
-  language: "italiano",
-  startDate: "2024-12-20",
-  startTime: "19:30",
-  endTime: "22:30",
-  type: "presenza",
-  placeName: "Café Central",
-  placeAddress: "Via Madama Cristina 45, Torino",
-  views: 24,
-  likes: 7,
-  shares: 3,
-  createdAt: "2024-12-18T15:30:00Z",
-  coverImage: "/images/evento/azul-01.png",
-};
+// const mockEvent = {
+//   id: "demo_event_001",
+//   title: "Boardgame Night a San Salvario",
+//   description:
+//     "Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare e divertirsi insieme. Porteremo una selezione di giochi moderni e classici adatti a tutti i livelli.",
+//   category: "Hobby e passioni",
+//   language: "italiano",
+//   startDate: "2024-12-20",
+//   startTime: "19:30",
+//   endTime: "22:30",
+//   type: "presenza",
+//   placeName: "Café Central",
+//   placeAddress: "Via Madama Cristina 45, Torino",
+//   views: 24,
+//   likes: 7,
+//   shares: 3,
+//   createdAt: "2024-12-18T15:30:00Z",
+//   coverImage: "/images/evento/azul-01.png",
+// };
 
 const MockEventCard = ({
   onEdit,
@@ -76,6 +76,7 @@ const MockEventCard = ({
   isOwner = false,
   showExtended = false,
   selectedPersonData,
+  mockEvent,
 }) => {
   const [isExpanded, setIsExpanded] = useState(showExtended);
   const [newComment, setNewComment] = useState("");
@@ -210,19 +211,30 @@ const MockEventCard = ({
   };
 
   // Helper per get stato display
+  // const getEventStateDisplay = () => {
+  //   const stateLabels = {
+  //     idle: { label: "🟢 Aperto", color: "#28a745" },
+  //     waiting: { label: "🟡 In attesa conferma", color: "#ffc107" },
+  //     confirmed: { label: "🔵 Confermato", color: "#007bff" },
+  //     "in svolgimento": { label: "🟠 In corso", color: "#fd7e14" },
+  //     fatto: { label: "✅ Completato", color: "#6c757d" },
+  //   };
+  //   return (
+  //     stateLabels[eventState] || { label: "❓ Sconosciuto", color: "#6c757d" }
+  //   );
+  // };
   const getEventStateDisplay = () => {
     const stateLabels = {
-      idle: { label: "🟢 Aperto", color: "#28a745" },
-      waiting: { label: "🟡 In attesa conferma", color: "#ffc107" },
-      confirmed: { label: "🔵 Confermato", color: "#007bff" },
-      "in svolgimento": { label: "🟠 In corso", color: "#fd7e14" },
+      idle: { label: " Aperto", color: "#28a745" },
+      waiting: { label: " In attesa conferma", color: "#ffc107" },
+      confirmed: { label: " Confermato", color: "#007bff" },
+      "in svolgimento": { label: " In corso", color: "#fd7e14" },
       fatto: { label: "✅ Completato", color: "#6c757d" },
     };
     return (
       stateLabels[eventState] || { label: "❓ Sconosciuto", color: "#6c757d" }
     );
   };
-
   // ✅ HANDLER CLICK NOME IN NOTIFICA
   const handleNameClick = (userId, userName) => {
     // TODO: [SOSTITUIRE CON COMPONENTE PROFILO]
@@ -232,16 +244,6 @@ const MockEventCard = ({
     );
   };
 
-  // Handler per espandere/comprimere la card
-  // const handleCardClick = (e) => {
-  //   if (
-  //     e.target.closest(`.${styles.actionButton}`) ||
-  //     e.target.closest(`.${styles.expandButton}`)
-  //   ) {
-  //     return;
-  //   }
-  //   setIsExpanded(!isExpanded);
-  // };
   const handleCardClick = (e) => {
     // ✅ NUOVO: Solo overlayContent può chiudere la carta quando espansa
     if (isExpanded) {
@@ -270,7 +272,7 @@ const MockEventCard = ({
     <>
       <div
         className={`${styles.card} ${isExpanded ? styles.expanded : ""}`}
-        onClick={handleCardClick}
+        // onClick={handleCardClick}
       >
         {/* Notifiche per Owner */}
         {isOwner && notifications.length > 0 && (
@@ -291,20 +293,9 @@ const MockEventCard = ({
             src={mockEvent.coverImage}
             alt={mockEvent.title}
             className={styles.coverImg}
-            // onError={(e) => {
-            //   e.target.style.display = "none";
-            //   e.target.nextSibling.style.background =
-            //     "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
-            //   e.target.nextSibling.style.display = "flex";
-            //   e.target.nextSibling.style.alignItems = "center";
-            //   e.target.nextSibling.style.justifyContent = "center";
-            //   e.target.nextSibling.innerHTML =
-            //     '<span style="font-size: 3rem;">🎲</span>';
-            // }}
           />
           <div className={styles.overlayContent}>
-            {/* Icone in alto a destra */}
-            <div className={styles.topRightIcons}>
+            {/* <div className={styles.topRightIcons}>
               <button className={styles.overlayIcon} title="partecipo">
                 <UserCheck size={16} />
               </button>
@@ -317,52 +308,12 @@ const MockEventCard = ({
                   <MapPin size={16} />
                 </button>
               )}
-            </div>
-
-            {/* <div className={styles.bottomContent}>
-              <div className={styles.titleAndMeta}>
-                <h3 className={styles.eventTitleOverlay}>{mockEvent.title}</h3>
-                <div className={styles.eventMetaOverlay}>
-                  <div className={styles.metaItemOverlay}>
-                    <Calendar size={16} className={styles.metaIconOverlay} />
-                    <span>{formatDate(mockEvent.startDate)}</span>
-                  </div>
-                  <div className={styles.metaItemOverlay}>
-                    <Clock size={16} className={styles.metaIconOverlay} />
-                    <span>
-                      {formatTime(mockEvent.startTime)} -{" "}
-                      {formatTime(mockEvent.endTime)}
-                    </span>
-                  </div>
-
-                  <div className={styles.participantsOverlay}>
-                    <div className={styles.participantAvatars}>
-                      {participants.slice(0, 3).map((participant, index) => (
-                        <div
-                          key={index}
-                          className={styles.pic}
-                          title={participant.name}
-                        >
-                          <img
-                            src={`/images/people/pic-${index}.jpg`}
-                            alt="ax"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <span className={styles.participantCount}>
-                      {eventStats.maxParticipants
-                        ? `${eventStats.participantsCount}/${eventStats.maxParticipants} partecipanti`
-                        : `${eventStats.participantsCount} partecipanti`}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
+            </div> */}
+            <div className={styles.bottomRightIcons}>
               {mockEvent.type === "presenza" && (
                 <QRCodeComponent isOwner={isOwner} size={80} />
               )}
-            </div> */}
+            </div>
           </div>
         </div>
 
@@ -373,16 +324,18 @@ const MockEventCard = ({
             <div className={styles.bottomContent}>
               <div className={styles.titleAndMeta}>
                 <div className={styles.eventMetaOverlay}>
-                  <div className={styles.metaItemOverlay}>
-                    <Calendar size={16} className={styles.metaIconOverlay} />
-                    <span>{formatDate(mockEvent.startDate)}</span>
-                  </div>
-                  <div className={styles.metaItemOverlay}>
-                    <Clock size={16} className={styles.metaIconOverlay} />
-                    <span>
-                      {formatTime(mockEvent.startTime)} -{" "}
-                      {formatTime(mockEvent.endTime)}
-                    </span>
+                  <div className={styles.eventMetaOverlayMe}>
+                    <div className={styles.metaItemOverlay}>
+                      <Calendar size={16} className={styles.metaIconOverlay} />
+                      <span>{formatDate(mockEvent.startDate)}</span>
+                    </div>
+                    <div className={styles.metaItemOverlay}>
+                      <Clock size={16} className={styles.metaIconOverlay} />
+                      <span>
+                        {formatTime(mockEvent.startTime)} -{" "}
+                        {formatTime(mockEvent.endTime)}
+                      </span>
+                    </div>
                   </div>
 
                   <div className={styles.participantsOverlay}>
@@ -409,9 +362,9 @@ const MockEventCard = ({
                 </div>
               </div>
 
-              {mockEvent.type === "presenza" && (
+              {/* {mockEvent.type === "presenza" && (
                 <QRCodeComponent isOwner={isOwner} size={80} />
-              )}
+              )} */}
             </div>
             <div className={styles.metaItem}>
               {location.icon}
@@ -881,7 +834,70 @@ const MockEventCard = ({
             </span> */}
           </div>
 
-          <div className={styles.actionButtons}>
+          {/* <div className={styles.actionButtons}> */}
+          {isOwner ? (
+            <>
+              <div className={styles.actionButtons}>
+                <button
+                  className={`${styles.actionButton} ${styles.actionButtonEdit}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onEdit && onEdit(mockEvent);
+                    console.log("🔧 DEMO: Modifica evento", mockEvent.title);
+                  }}
+                  title="Modifica evento"
+                >
+                  <Edit size={16} />
+                  <span>Modifica</span>
+                </button>
+                <button
+                  className={`${styles.actionButton} ${styles.actionButtonDelete}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete && onDelete(mockEvent.id);
+                    console.log("🗑️ DEMO: Elimina evento", mockEvent.title);
+                  }}
+                  title="Elimina evento"
+                >
+                  <Trash2 size={16} />
+                  <span>Elimina</span>
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={styles.actionButtonsMe}>
+                <button
+                  className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log("📤 DEMO: Condividi evento");
+                  }}
+                  title="Condividi"
+                >
+                  <Share size={16} />
+                </button>
+
+                <button
+                  className={`${styles.actionButton} ${
+                    isSaved
+                      ? styles.actionButtonSaved
+                      : styles.actionButtonSecondary
+                  }`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsSaved(!isSaved);
+                    console.log("🔖 DEMO: Bookmark evento");
+                  }}
+                  title="Salva evento"
+                >
+                  <Bookmark size={16} />
+                </button>
+              </div>
+            </>
+          )}
+          {/* </div> */}
+          {/* <div className={styles.actionButtons}>
             {isOwner ? (
               <>
                 <button
@@ -939,7 +955,7 @@ const MockEventCard = ({
                 </button>
               </>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
 

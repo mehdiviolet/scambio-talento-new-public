@@ -1,4 +1,4 @@
-// src/store/slices/sharedEventSlice.js - OTTIMIZZATO
+// src/store/slices/sharedEventSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 // Dati iniziali mockati
@@ -44,22 +44,21 @@ const initialParticipants = [
   { id: "p4", name: "Sara Neri", initials: "SN" },
   { id: "p5", name: "Paolo Ferrari", initials: "PF" },
   { id: "p6", name: "Giulia Romano", initials: "GR" },
-  { id: "p7", name: "Luigi Rosa", initials: "LR" },
+  { id: "p7", name: "Luigi Rosa", initials: "GR" },
 ];
 
 const mockOrganizer = {
   id: "sara_dormand",
   name: "Sara Dormand",
   photo: "/images/sara-avatar.jpg",
-  trustScore: 47, // Per organizzatori - da feedback ricevuti
-  participationScore: 126, // Non usato per organizzatori
+  trustScore: 47, // ⭐ Punteggi fiducia
+  participationScore: 126, // 🎯 Punteggi partecipazione
 };
 
 const initialState = {
   // === EVENTO ===
   eventState: "idle",
   maxParticipants: 8,
-  type: "presenza",
 
   // === COMMENTI ===
   comments: initialComments,
@@ -75,13 +74,13 @@ const initialState = {
   // === UTENTE CORRENTE ===
   currentUser: {
     id: "mim",
-    name: "", // Verrà popolato dinamicamente da firstName
-    trustScore: 0, // Per quando organizza eventi
-    participationScore: 0, // Per quando partecipa
+    name: "", // ✅ VUOTO: verrà popolato dinamicamente da firstName
+    trustScore: 0,
+    participationScore: 0,
   },
   isParticipating: false,
 
-  // === NOTIFICHE (RIDOTTE DEL 50%) ===
+  // === NOTIFICHE ===
   notifications: [],
 
   // === FEEDBACK SISTEMA ===
@@ -105,7 +104,7 @@ const initialState = {
       timestamp: "2024-12-19T20:15:00Z",
     },
   ],
-  showFeedbackModal: false, // Ora completamente opzionale
+  showFeedbackModal: false,
 
   // === GALLERY ===
   galleryPhotos: [],
@@ -121,6 +120,12 @@ const initialState = {
     uploadGallery: false,
     confirmEvent: false,
     endEvent: false,
+  },
+
+  // === PUNTEGGI TRACKING ===
+  pendingScoreUpdates: {
+    trustScore: 0,
+    participationScore: 0,
   },
 
   // === META ===
@@ -189,13 +194,13 @@ const sharedEventSlice = createSlice({
       );
 
       if (existingParticipant) {
-        // RIMUOVI PARTECIPAZIONE
+        // ✅ RIMUOVI PARTECIPAZIONE
         state.participants = state.participants.filter(
           (p) => p.id !== currentUserId
         );
         state.isParticipating = false;
 
-        // PENALITÀ SOLO SE ABBANDONA DOPO CONFERMA (Notifica ridotta)
+        // ✅ PENALITÀ SE ABBANDONA DOPO CONFERMA
         if (
           state.eventState === "confirmed" ||
           state.eventState === "in svolgimento"
@@ -205,7 +210,6 @@ const sharedEventSlice = createSlice({
             state.currentUser.participationScore - 3
           );
 
-          // SOLO notifica penalità - rimossa notifica normale abbandono
           state.notifications.push({
             id: `notif_${Date.now()}`,
             type: "penalty_applied",
@@ -217,10 +221,17 @@ const sharedEventSlice = createSlice({
               action: "leave_penalty",
             },
           });
+        } else {
+          // Normale uscita senza penalità
+          state.notifications.push({
+            id: `notif_${Date.now()}`,
+            type: "participant_left",
+            message: `👋 ${userDisplayName} non partecipa più all'evento.`,
+            timestamp: new Date().toISOString(),
+          });
         }
-        // Rimossa notifica per uscita normale
       } else {
-        // AGGIUNGI PARTECIPAZIONE
+        // ✅ AGGIUNGI PARTECIPAZIONE
         const newParticipant = {
           id: currentUserId,
           name: userDisplayName,
@@ -234,7 +245,7 @@ const sharedEventSlice = createSlice({
         state.participants.push(newParticipant);
         state.isParticipating = true;
 
-        // NOTIFICA CLICKABLE PER OWNER (mantenuta - importante)
+        // ✅ NOTIFICA CLICKABLE PER OWNER
         state.notifications.push({
           id: `notif_${Date.now()}`,
           type: "new_participant",
@@ -248,7 +259,7 @@ const sharedEventSlice = createSlice({
           },
         });
 
-        // CHECK: Evento pieno - notifica importante
+        // CHECK: Se raggiunge limite max → auto waiting
         if (
           state.participants.length >= state.maxParticipants &&
           state.eventState === "idle"
@@ -273,7 +284,6 @@ const sharedEventSlice = createSlice({
         state.qrState = "active";
         state.qrCodeUrl = `https://app.boardgamenight.com/events/demo_event_001/checkin`;
 
-        // Notifica importante - mantenuta
         state.notifications.push({
           id: `notif_${Date.now()}`,
           type: "event_confirmed",
@@ -292,16 +302,16 @@ const sharedEventSlice = createSlice({
         state.eventState === "confirmed" ||
         state.eventState === "in svolgimento"
       ) {
-        // CHECK: Non superare numero partecipanti
+        // ✅ CHECK: Non superare numero partecipanti
         if (state.checkInList.length >= state.participants.length) {
-          return;
+          return; // Tutti già presenti
         }
 
-        // CHECK: Non scansionare stesso nome due volte
+        // ✅ CHECK: Non scansionare stesso nome due volte
         if (
           state.checkInList.some((c) => c.participantName === participantName)
         ) {
-          return;
+          return; // Già scansionato
         }
 
         // Crea entry check-in
@@ -317,7 +327,7 @@ const sharedEventSlice = createSlice({
 
         state.checkInList.push(checkInEntry);
 
-        // CONTROLLA SE È IL MIO SCAN
+        // ✅ CONTROLLA SE È IL MIO SCAN
         const isMyCheckIn =
           participantName === myFirstName ||
           participantName === state.currentUser.name ||
@@ -325,17 +335,17 @@ const sharedEventSlice = createSlice({
 
         if (isMyCheckIn) {
           state.currentUser.participationScore += 2;
+          state.pendingScoreUpdates.participationScore += 2;
 
-          // Notifica solo per il proprio check-in
           state.notifications.push({
             id: `notif_${Date.now()}`,
             type: "participation_score",
-            message: `✅ Check-in completato! +2 punti partecipazione.`,
+            message: `✅ ${participantName} check-in completato! +2 punti partecipazione.`,
             timestamp: new Date().toISOString(),
           });
         }
 
-        // Se primo scan → evento in svolgimento (importante)
+        // Se primo scan → evento in svolgimento
         if (
           state.eventState === "confirmed" &&
           state.checkInList.length === 1
@@ -344,11 +354,18 @@ const sharedEventSlice = createSlice({
           state.notifications.push({
             id: `notif_${Date.now()}`,
             type: "event_started",
-            message: "🚀 Evento iniziato!",
+            message: "🚀 Evento iniziato! Primo partecipante presente.",
+            timestamp: new Date().toISOString(),
+          });
+        } else {
+          // Notifica check-in normale
+          state.notifications.push({
+            id: `notif_${Date.now()}`,
+            type: "checkin_update",
+            message: `📍 ${participantName} ha fatto check-in.`,
             timestamp: new Date().toISOString(),
           });
         }
-        // Rimossa notifica per ogni check-in normale
       }
 
       state.lastUpdate = new Date().toISOString();
@@ -361,26 +378,22 @@ const sharedEventSlice = createSlice({
         state.qrState = "disabled";
         state.qrCodeUrl = null;
 
-        // FEEDBACK COMPLETAMENTE OPZIONALE - non auto-show modal
-        // L'utente può decidere se lasciare feedback tramite UI
+        // Mostra modal feedback per partecipanti
+        if (state.isParticipating) {
+          state.showFeedbackModal = true;
+        }
 
-        // Notifica importante - mantenuta
         state.notifications.push({
           id: `notif_${Date.now()}`,
           type: "event_ended",
-          message: "🏁 Evento terminato!",
+          message: "🏁 Evento terminato! Sistema feedback attivo.",
           timestamp: new Date().toISOString(),
         });
       }
       state.lastUpdate = new Date().toISOString();
     },
 
-    // === FEEDBACK OPZIONALE ===
-    openFeedbackModal: (state) => {
-      // Utente può aprire manualmente il feedback
-      state.showFeedbackModal = true;
-    },
-
+    // === GESTIONE FEEDBACK ===
     submitFeedback: (state, action) => {
       const { stars, comment } = action.payload;
 
@@ -396,24 +409,23 @@ const sharedEventSlice = createSlice({
 
       state.feedbacks.push(feedback);
 
-      // CALCOLO TRUST SCORE ORGANIZZATORE
+      // ✅ FIX CALCOLO TRUST SCORE
       const allStars = state.feedbacks.map((f) => f.stars);
       const avgStars =
         allStars.reduce((sum, stars) => sum + stars, 0) / allStars.length;
       state.organizer.trustScore = Math.round(avgStars * 10);
 
-      // PUNTEGGIO PARTECIPAZIONE per chi lascia feedback
+      // Assegna punteggio partecipazione
       if (
         state.checkInList.some(
           (c) => c.participantName === state.currentUser.name
         )
       ) {
-        state.currentUser.participationScore += 3; // Era presente
+        state.currentUser.participationScore += 3;
       } else {
-        state.currentUser.participationScore += 1; // Non era presente ma dà feedback
+        state.currentUser.participationScore += 1;
       }
 
-      // Notifica solo per conferma invio
       state.notifications.push({
         id: `notif_${Date.now()}`,
         type: "feedback_sent",
@@ -468,7 +480,7 @@ const sharedEventSlice = createSlice({
       );
       state.galleryPhotos.push(...photosToAdd);
 
-      // Notifica importante - mantenuta
+      // Notifica caricamento completato
       state.notifications.push({
         id: `notif_${Date.now()}`,
         type: "gallery_uploaded",
@@ -489,16 +501,16 @@ const sharedEventSlice = createSlice({
       state.notifications = state.notifications.filter((n) => n.id !== notifId);
     },
 
-    // Handler click su nome in notifica
+    // ✅ NUOVO: Handler click su nome in notifica
     handleNotificationClick: (state, action) => {
-      const { userId, userName } = action.payload;
+      const { notificationId, userId } = action.payload;
 
       // TODO: Qui implementerai la logica per aprire profilo
       // Per ora aggiungi solo una notifica di conferma
       state.notifications.push({
         id: `notif_${Date.now()}`,
         type: "profile_view",
-        message: `👀 Visualizzando profilo di ${userName}... [SOSTITUIRE CON COMPONENTE PROFILO]`,
+        message: `👀 Visualizzando profilo utente... [SOSTITUIRE CON COMPONENTE PROFILO]`,
         timestamp: new Date().toISOString(),
       });
     },
@@ -538,7 +550,6 @@ export const selectEventStats = (state) => ({
   checkInsCount: state.sharedEvent.checkInList.length,
   feedbacksCount: state.sharedEvent.feedbacks.length,
   eventState: state.sharedEvent.eventState,
-  type: state.sharedEvent.type,
 });
 
 export const selectIsParticipating = (state) =>
@@ -557,7 +568,6 @@ export const {
   confirmEvent,
   simulateQRScan,
   endEvent,
-  openFeedbackModal, // NUOVO: per feedback opzionale
   submitFeedback,
   closeFeedbackModal,
   autoUploadPhotos,
