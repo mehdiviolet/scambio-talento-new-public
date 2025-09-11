@@ -18,6 +18,7 @@ import MockEventCard from "./MockEventCard";
 import {
   selectParticipants,
   selectEventStats,
+  selectCurrentUser,
 } from "../store/slices/sharedEventSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useAppSelector } from "@/hooks/redux";
@@ -34,11 +35,13 @@ const SlideEventCard = ({
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   // const [isSaved, setIsSaved] = useState(false);
   // const participants = useSelector(selectParticipants);
-  const eventStats = useSelector(selectEventStats);
-  const dispatch = useDispatch();
+  // const eventStats = useSelector(selectEventStats);
+  // const dispatch = useDispatch();
   const event = useAppSelector((state) => selectEventById(state, eventId));
   const myProfile = useSelector((state) => state.quickSetup.profileData);
-  console.log(event, myProfile);
+  const myCurrentUser = useSelector(selectCurrentUser);
+
+  console.log(event, myProfile, myCurrentUser);
   console.log(event.coverImage.name);
 
   const {
@@ -71,8 +74,8 @@ const SlideEventCard = ({
       `${myProfile.firstName || ""} ${myProfile.lastName || ""}`.trim() ||
       "Organizzatore",
     photo: myProfile.profilePhoto,
-    trustScore: 47, // Mantieni valore di default o calcolalo
-    participationScore: 126, // Mantieni valore di default o calcolalo
+    trustScore: Number(myCurrentUser.trustScore), // Mantieni valore di default o calcolalo
+    participationScore: Number(myCurrentUser.participationScore), // Mantieni valore di default o calcolalo
   };
 
   return (
@@ -115,9 +118,7 @@ const SlideEventCard = ({
               </div>
               <div className={styles.metaItem}>
                 <Users size={14} />
-                <span>
-                  {participants}/{maxParticipants}
-                </span>
+                <span>0/{maxParticipants}</span>
               </div>
             </div>
 

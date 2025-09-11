@@ -49,11 +49,12 @@ import FeedbackModal from "./FeedbackModal";
 import MapComponent from "./MapComponent";
 import SimpleImageModal from "./SimpleImageModal";
 import LoadingSpinner from "./LoadingSpinner";
+import { useAppSelector } from "@/hooks/redux";
 
 const MyEventCardDetails = ({
   onEdit,
   onDelete,
-  isOwner = false,
+  // isOwner = false,
   showExtended = false,
   // selectedPersonData,
   myProfile,
@@ -84,6 +85,10 @@ const MyEventCardDetails = ({
   const feedbacks = useSelector(selectFeedbacks);
   const galleryPhotos = useSelector(selectGalleryPhotos);
 
+  const { isOwner } = useAppSelector((state) => state.onboarding);
+  console.log(isOwner);
+
+  //Non servono funzionante comments
   const comments = useSelector((state) => state.sharedEvent.comments);
   const isParticipating = useSelector(
     (state) => state.sharedEvent.isParticipating
@@ -92,7 +97,7 @@ const MyEventCardDetails = ({
     (state) => state.quickSetup.profileData.firstName
   );
 
-  // const currentUserEvent = useSelector(selectCurrentUser);
+  const myCurrentUser = useSelector(selectCurrentUser);
 
   // ✅ LOADING SELECTORS
   const isConfirmingEvent = useSelector(selectIsLoading("confirmEvent"));
@@ -105,8 +110,8 @@ const MyEventCardDetails = ({
       `${myProfile.firstName || ""} ${myProfile.lastName || ""}`.trim() ||
       "Organizzatore",
     photo: myProfile.profilePhoto,
-    trustScore: 47, // Mantieni valore di default o calcolalo
-    participationScore: 126, // Mantieni valore di default o calcolalo
+    trustScore: Number(myCurrentUser.trustScore), // Mantieni valore di default o calcolalo
+    participationScore: Number(myCurrentUser.participationScore),
   };
   // console.log(currentUserEvent, checkInList);
   console.log(myProfile);
@@ -372,7 +377,7 @@ const MyEventCardDetails = ({
                   </div>
 
                   <div className={styles.participantsOverlay}>
-                    <div className={styles.participantAvatars}>
+                    {/* <div className={styles.participantAvatars}>
                       {participants.slice(0, 3).map((participant, index) => (
                         <div
                           key={index}
@@ -385,12 +390,14 @@ const MyEventCardDetails = ({
                           />
                         </div>
                       ))}
-                    </div>
-                    <span className={styles.participantCount}>
+                    </div> */}
+                    {/* <span className={styles.participantCount}>
                       {eventStats.maxParticipants
                         ? `${eventStats.participantsCount}/${eventStats.maxParticipants} partecipanti`
                         : `${eventStats.participantsCount} partecipanti`}
-                    </span>
+                    </span> */}
+                    <span>Be the first one!</span>
+                    <span>0/{mockEvent.maxParticipants}</span>
                   </div>
                 </div>
               </div>
@@ -776,13 +783,14 @@ const MyEventCardDetails = ({
                 }}
                 className={styles.commentsToggle}
               >
-                Commenti ({comments.length}) {showComments ? "▼" : "▶"}
+                {/* Commenti ({comments.length}) {showComments ? "▼" : "▶"} */}
+                Commenti (0) {showComments ? "▼" : "▶"}
               </button>
             </div>
 
             {showComments && (
               <div className={styles.commentsContainer}>
-                {comments.map((comment, index) => {
+                {/* {comments.map((comment, index) => {
                   const displayName =
                     comment.authorId === "mim"
                       ? isOwner
@@ -796,7 +804,7 @@ const MyEventCardDetails = ({
                       <span className={styles.commentTime}>{comment.time}</span>
                     </div>
                   );
-                })}
+                })} */}
 
                 {/* Input nuovo commento */}
                 <div className={styles.newCommentInput}>
