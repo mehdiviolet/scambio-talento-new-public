@@ -15,6 +15,8 @@ import {
 import { AddEventButton, HeaderAddButton } from "./ui/AddButtons";
 import { DropdownFilters } from "./ui/SmartFilters";
 import RealEventSlideCard from "./RealEventSlideCard";
+import SlideEventCard from "./SlideEventCard";
+import MyEventCard from "./MyEventCard ";
 
 const EventsSection = () => {
   // State per il modal eventi
@@ -25,6 +27,8 @@ const EventsSection = () => {
   // ✅ Leggi direttamente da Redux
   const currentProfile = useAppSelector(selectCurrentUserProfile);
   const { isOwner } = useAppSelector((state) => state.onboarding);
+
+  console.log(currentProfile);
 
   // ✅ Hook per gestire events
   const { events, addEvent, removeEvent, updateEvent } = useEvents();
@@ -140,7 +144,7 @@ const EventsSection = () => {
   );
 
   const currentUserEvent = useAppSelector(selectCurrentUser);
-  console.log(currentUserEvent);
+  console.log(currentProfile);
 
   return (
     <div className={styles.container}>
@@ -149,13 +153,6 @@ const EventsSection = () => {
         <h3 className={styles.title}>Eventi Creati ({events.length})</h3>
 
         {isOwner && events.length !== 0 && (
-          // <button
-          //   onClick={handleOpenCreateModal}
-          //   className={styles.addButton}
-          //   title="Crea nuovo evento"
-          // >
-          //   +
-          // </button>
           <>
             <button
               className={styles.toggleFiltersBtn}
@@ -220,22 +217,42 @@ const EventsSection = () => {
               );
             })} */}
 
-            {filteredEvents.map((event) => {
+            {filteredEvents.map((event, i) => {
               const ownerPhoto = getOwnerPhoto();
               return (
-                <RealEventSlideCard
+                // <RealEventSlideCard
+                //   key={event.id}
+                //   event={event}
+                //   organizer={`${currentProfile?.firstName || "Tu"} ${
+                //     currentProfile?.lastName || ""
+                //   }`}
+                //   organizerPhoto={ownerPhoto}
+                //   isOwner={isOwner}
+                //   onEdit={isOwner ? () => handleEditEvent(event) : undefined}
+                //   onDelete={
+                //     isOwner ? () => handleDeleteEvent(event.id) : undefined
+                //   }
+                //   currentUserEvent={currentUserEvent}
+                // />
+                // <SlideEventCard
+                //   key={event.id}
+                //   isOwner={isOwner}
+                //   selectedPersonData={currentProfile}
+                //   eventId={event.id}
+                //   onEdit={isOwner ? () => handleEditEvent(event) : undefined}
+                //   onDelete={
+                //     isOwner ? () => handleDeleteEvent(event.id) : undefined
+                //   }
+                // />
+                <MyEventCard
+                  isOwner={true}
                   key={event.id}
-                  event={event}
-                  organizer={`${currentProfile?.firstName || "Tu"} ${
-                    currentProfile?.lastName || ""
-                  }`}
-                  organizerPhoto={ownerPhoto}
-                  isOwner={isOwner}
+                  eventId={event.id}
+                  // selectedPersonData={currentProfile}
                   onEdit={isOwner ? () => handleEditEvent(event) : undefined}
                   onDelete={
                     isOwner ? () => handleDeleteEvent(event.id) : undefined
                   }
-                  currentUserEvent={currentUserEvent}
                 />
               );
             })}

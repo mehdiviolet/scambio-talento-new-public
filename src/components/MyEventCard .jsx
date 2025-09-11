@@ -19,57 +19,58 @@ import {
   selectParticipants,
   selectEventStats,
 } from "../store/slices/sharedEventSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector } from "@/hooks/redux";
+import { selectEventById } from "@/store/slices/eventsSlice";
+import MyEventCardDetails from "./MyEventCardDetails";
 
 const SlideEventCard = ({
-  isOwner = false,
-  selectedPersonData,
+  isOwner = true,
+  // selectedPersonData,
   onEdit,
   onDelete,
+  eventId,
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
-  const participants = useSelector(selectParticipants);
+  // const [isSaved, setIsSaved] = useState(false);
+  // const participants = useSelector(selectParticipants);
   const eventStats = useSelector(selectEventStats);
+  const dispatch = useDispatch();
+  const event = useAppSelector((state) => selectEventById(state, eventId));
+  const myProfile = useSelector((state) => state.quickSetup.profileData);
+  console.log(event, myProfile);
+  console.log(event.coverImage.name);
 
-  console.log(eventStats);
-
-  // Dati mock dell'evento per la card preview
-  const mockEvent = {
-    id: "demo_event_001",
-    title: "Boardgame Night a San Salvario",
-    description:
-      "Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare.Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare.Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare...",
-    category: "Hobby e passioni",
-    language: "italiano",
-    startDate: "2024-12-20",
-    startTime: "19:30",
-    endTime: "22:30",
-    placeName: "Café Central",
-    placeAddress: "Via Madama Cristina 45, Torino",
-    coverImage: "/images/evento/azul-01.png",
+  const {
+    id = eventId,
+    title,
+    description,
+    category,
+    language,
+    startDate,
+    startTime,
+    endTime,
+    placeName,
+    placeAddress,
+    coverImage,
     // participants: 11,
-    participants: eventStats.participantsCount,
-    type: eventStats.type,
+    participants,
+    type,
     // maxParticipants: 20,
-    maxParticipants: eventStats.maxParticipants,
-    views: 24,
-    likes: 7,
-    shares: 3,
-  };
+    maxParticipants,
+  } = event;
 
   const handleCardClick = () => {
     setIsDrawerOpen(true);
   };
-  console.log(selectedPersonData);
+  // console.log(selectedPersonData);
 
   const organizer = {
-    id: selectedPersonData.profile.firstName?.toLowerCase() || "user",
+    id: myProfile.firstName?.toLowerCase() || "user",
     name:
-      `${selectedPersonData.profile.firstName || ""} ${
-        selectedPersonData.profile.lastName || ""
-      }`.trim() || "Organizzatore",
-    photo: selectedPersonData.profile.profilePhoto,
+      `${myProfile.firstName || ""} ${myProfile.lastName || ""}`.trim() ||
+      "Organizzatore",
+    photo: myProfile.profilePhoto,
     trustScore: 47, // Mantieni valore di default o calcolalo
     participationScore: 126, // Mantieni valore di default o calcolalo
   };
@@ -85,40 +86,44 @@ const SlideEventCard = ({
         <div className={styles.flexCard}>
           <div className={styles.flexCardMe}>
             <div className={styles.cardImage}>
-              {mockEvent.coverImage ? (
+              {coverImage ? (
                 <img
-                  src={mockEvent.coverImage}
-                  alt={mockEvent.title}
+                  src={
+                    event.coverImage instanceof File
+                      ? URL.createObjectURL(event.coverImage)
+                      : event.coverImage
+                  }
+                  alt={`${event.coverImage.name || "Pic"}`}
                   className={styles.eventImage}
                 />
               ) : (
                 <div className={styles.imagePlaceholder}>📅</div>
               )}
             </div>
-            <h4 className={styles.eventTitle}>{mockEvent.title}</h4>
+            <h4 className={styles.eventTitle}>{title}</h4>
           </div>
 
           <div className={styles.cardPreviewContent}>
             <div className={styles.eventMeta}>
               <div className={styles.metaItem}>
                 <Calendar size={14} />
-                <span>{mockEvent.startDate}</span>
+                <span>{startDate}</span>
               </div>
               <div className={styles.metaItem}>
                 <Clock size={14} />
-                <span>{mockEvent.startTime}</span>
+                <span>{startTime}</span>
               </div>
               <div className={styles.metaItem}>
                 <Users size={14} />
                 <span>
-                  {mockEvent.participants}/{mockEvent.maxParticipants}
+                  {participants}/{maxParticipants}
                 </span>
               </div>
             </div>
 
             <div className={styles.metaItem}>
               <MapPin size={14} />
-              <span>{mockEvent.placeName}</span>
+              <span>{placeName}</span>
             </div>
           </div>
         </div>
@@ -128,17 +133,15 @@ const SlideEventCard = ({
         <div className={styles.cardFooterPiccolo}>
           <div className={styles.organizerInfoPiccolo}>
             <div className={styles.avatar}>
-              {selectedPersonData?.profile?.profilePhoto ? (
+              {myProfile.profilePhoto ? (
                 <img
                   src={
-                    selectedPersonData?.profile.profilePhoto instanceof File
-                      ? URL.createObjectURL(
-                          selectedPersonData?.profile.profilePhoto
-                        )
-                      : selectedPersonData?.profile.profilePhoto
+                    myProfile.profilePhoto instanceof File
+                      ? URL.createObjectURL(myProfile.profilePhoto)
+                      : myProfile.profilePhoto
                   }
-                  alt={`${selectedPersonData?.profile?.firstName || "Sara"} ${
-                    selectedPersonData?.profile?.lastName || "Dormand"
+                  alt={`${myProfile.firstName || "Sara"} ${
+                    myProfile.lastName || "Dormand"
                   }`}
                 />
               ) : (
@@ -161,7 +164,7 @@ const SlideEventCard = ({
               </span>
             </span>
             {/* <span className={styles.categoryIcon}>
-                        {getCategoryIcon(mockEvent.category)}
+                        {getCategoryIcon(category)}
                       </span> */}
           </div>
 
@@ -216,13 +219,13 @@ const SlideEventCard = ({
 
         <div className={styles.drawerContent}>
           {isDrawerOpen && (
-            <MockEventCard
+            <MyEventCardDetails
               isOwner={isOwner}
-              selectedPersonData={selectedPersonData}
+              myProfile={myProfile}
               onEdit={onEdit}
               onDelete={onDelete}
               showExtended={true}
-              mockEvent={mockEvent}
+              mockEvent={event}
             />
           )}
         </div>

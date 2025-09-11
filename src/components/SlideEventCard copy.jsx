@@ -61,7 +61,6 @@ const SlideEventCard = ({
   const handleCardClick = () => {
     setIsDrawerOpen(true);
   };
-  console.log(selectedPersonData);
 
   const organizer = {
     id: selectedPersonData.profile.firstName?.toLowerCase() || "user",
