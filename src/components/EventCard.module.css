@@ -1053,6 +1053,8 @@
   transform: translateX(100%);
   transition: var(--transition-drawer);
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .slideDrawer.open {
@@ -1137,6 +1139,7 @@
   box-shadow: var(--shadow-2xl);
   border-color: var(--glass-border-strong);
   cursor: default; /* Rimuove pointer cursor */
+  height: 100%;
 }
 
 .card.expanded .overlayContent {

@@ -755,11 +755,10 @@ const MyEventCardDetails = ({
                   ? styles.actionButtonParticipating
                   : styles.actionButtonValutando
               }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                // ✅ PASSA FIRSTNAME NEL PAYLOAD
-                dispatch(toggleParticipation({ firstName }));
-              }}
+              // onClick={(e) => {
+              //   e.stopPropagation();
+              //   dispatch(toggleParticipation({ firstName }));
+              // }}
               title={
                 isParticipating
                   ? "Rimuovi partecipazione"

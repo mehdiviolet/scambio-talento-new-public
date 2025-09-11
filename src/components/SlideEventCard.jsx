@@ -12,6 +12,7 @@ import {
   Edit,
   ShieldCheck,
   Star,
+  Palette,
 } from "lucide-react";
 import styles from "./EventCard.module.css";
 import MockEventCard from "./MockEventCard";
@@ -65,6 +66,19 @@ const SlideEventCard = ({
   };
   console.log(selectedPersonData);
 
+  const getCategoryIcon = (category) => {
+    const icons = {
+      "Hobby e passioni": <Palette size={16} />,
+      "Sport e fitness": "🏃‍♂️",
+      Tecnologia: "💻",
+      "Musica e Arte": "🎵",
+      "Lingua e identità": "🗣️",
+      "Attività sociali": "👥",
+    };
+    return icons[category] || "🎉";
+  };
+  console.log(getCategoryIcon("Hobby e passioni"));
+
   const organizer = {
     id: selectedPersonData.profile.firstName?.toLowerCase() || "user",
     name:
@@ -115,6 +129,9 @@ const SlideEventCard = ({
                 <span>
                   {mockEvent.participants}/{mockEvent.maxParticipants}
                 </span>
+              </div>
+              <div className={styles.metaItem}>
+                <span>{getCategoryIcon("Hobby e passioni")}</span>
               </div>
             </div>
 

@@ -221,7 +221,7 @@ const EventiPage = ({ currentUser }) => {
                 } ${count === 0 ? styles.disabled : ""}`}
               >
                 <span className={styles.iconEmoji}>{icon}</span>
-                <span className={styles.iconCount}>({count})</span>
+                {/* <span className={styles.iconCount}>({count})</span> */}
               </button>
             );
           })}

@@ -11,6 +11,7 @@ import { useStatusFilter } from "@/components/useStatusFilter";
 import { useAppSelector } from "@/hooks/redux";
 import StatusFilterButtons from "@/components/StatusFilterButtons";
 import { DropdownFilters } from "@/components/ui/SmartFilters";
+import SlideEventCard from "@/components/SlideEventCard";
 
 const EventiPartecipati = () => {
   const selectedPersonData = useSelector(
@@ -93,14 +94,19 @@ const EventiPartecipati = () => {
       {isParticipating && filteredEvents.length > 0 ? (
         <div className={styles.eventsContainer}>
           {filteredEvents.map((event) => {
-            const EventComponent = event.component;
+            // const EventComponent = event.component;
             return (
-              <EventComponent
+              <SlideEventCard
                 key={event.id}
                 isOwner={false}
                 selectedPersonData={selectedPersonData}
-                eventData={event}
               />
+              // <EventComponent
+              //   key={event.id}
+              //   isOwner={false}
+              //   selectedPersonData={selectedPersonData}
+              //   mockEvent={event}
+              // />
             );
           })}
         </div>
