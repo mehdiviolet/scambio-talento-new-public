@@ -666,7 +666,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   <motion.button
                     className={`${styles.editProfileBtn} ${styles.liquidButton}`}
                     onClick={() => setIsCherryDrawerOpen(true)}
-                    title="Ruota della fortuna! (da definire)"
+                    title="Ruota della fortuna! "
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >

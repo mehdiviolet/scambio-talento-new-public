@@ -274,7 +274,7 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
                   <motion.button
                     className={`${styles.editProfileBtn} ${styles.liquidButton}`}
                     onClick={handleSettings}
-                    title="Ruota della fortuna! (da definire)"
+                    title="Ruota della fortuna!"
                     whileHover={{
                       scale: 1.05,
                       transition: { duration: 0.2 },
@@ -290,7 +290,7 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
               ) : (
                 // VIEWER VIEW - currentUser vede bottoni follow
                 <>
-                  <button
+                  {/* <button
                     className={styles.followBtn}
                     onClick={handleFollow}
                     style={{
@@ -298,30 +298,46 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
                     }}
                   >
                     {isFollowingIstruttore ? "FOLLOWING" : "FOLLOW"}
-                  </button>
-                  <div className={styles.iconsME}>
+                    </button>
+                    <div className={styles.iconsME}>
                     <button
-                      className={styles.shareBtn}
-                      onClick={handleShare}
-                      title="Like profile"
+                    className={styles.shareBtn}
+                    onClick={handleShare}
+                    title="Like profile"
                     >
-                      <Heart size={16} />
+                    <Heart size={16} />
                     </button>
                     <button
-                      className={styles.shareBtn}
-                      onClick={handleShare}
-                      title="Share profile"
+                    className={styles.shareBtn}
+                    onClick={handleShare}
+                    title="Share profile"
                     >
-                      <Share size={16} />
+                    <Share size={16} />
                     </button>
                     <button
                       className={styles.messageBtn}
                       onClick={handleMessage}
                       title="Send message"
-                    >
+                      >
                       <MessageCircle size={16} />
-                    </button>
-                  </div>
+                      </button>
+                      </div> */}
+                  <button
+                    className={styles.editProfileBtn}
+                    onClick={handleFollow}
+                  >
+                    {/* {"FOLLOW"} */}
+                    {isFollowingIstruttore ? "FOLLOWING" : "FOLLOW"}
+                    {/* {isFollowing ? "FOLLOWING" : "FOLLOW"} */}
+                  </button>
+
+                  <button
+                    className={`${styles.editProfileBtn} ${styles.msgButton}`}
+                    onClick={handleMessage}
+                    title="Send message"
+                  >
+                    <MessageCircle size={16} />
+                  </button>
                 </>
               )}
             </div>
@@ -354,7 +370,7 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
             </div>
 
             {/* Bio */}
-            <p className={styles.bio}>{user.bio}</p>
+            {/* <p className={styles.bio}>{user.bio}</p> */}
 
             {/* Meta Info */}
             <div className={styles.metaInfo}>
