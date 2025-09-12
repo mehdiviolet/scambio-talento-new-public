@@ -108,11 +108,60 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
       state.experienceSliceTest.selectedPersonData.social.followers || []
   );
 
+  // ******************
+  const { followers, following } = useSelector(
+    (state) => state.experienceSliceTest.selectedPersonData.social
+  );
+
+  const currentUserProfile = useSelector(
+    (state) => state.quickSetup.profileData
+  );
+
+  // Mappa i followers con i dati completi
+  const followersWithData = followers.map((follower) => {
+    if (follower.id === "currentUser") {
+      return {
+        id: "currentUser",
+        firstName: currentUserProfile.firstName,
+        lastName: currentUserProfile.lastName,
+        profilePhoto: currentUserProfile.profilePhoto,
+      };
+    }
+    return follower;
+  });
+
+  // const followersWithDataa = followers.map((follower) => {
+  //   if (follower.id === "currentUser") {
+  //     return {
+  //       id: "currentUser",
+  //       name: `${currentUserProfile.firstName} ${currentUserProfile.lastName}`,
+  //       username: "currentuser", // o quello che vuoi
+  //       avatar: currentUserProfile.profilePhoto,
+  //     };
+  //   }
+  //   return follower; // Mantieni gli altri followers così come sono
+  // });
+
+  console.log("FOLLL", followersWithData);
+  console.log("FOLLLwing", following);
+
+  // ******************
+
   const socialFollowing = useSelector(
     (state) =>
       state.experienceSliceTest.selectedPersonData.social.following || []
   );
   // ✅ CORRETTO: controlla se currentUser sta seguendo sara
+  // const isFollowingIstruttore = useSelector((state) => {
+  //   const currentUserConnections =
+  //     state.experienceSliceTest.socialConnections["currentUser"];
+  //   if (!currentUserConnections || !currentUserConnections.following)
+  //     return false;
+
+  //   const personId = selectedPerson.firstName + selectedPerson.lastName;
+  //   return currentUserConnections.following.includes(personId);
+  // });
+  // ✅ CORRETTO:
   const isFollowingIstruttore = useSelector((state) => {
     const currentUserConnections =
       state.experienceSliceTest.socialConnections["currentUser"];
@@ -120,8 +169,11 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
       return false;
 
     const personId = selectedPerson.firstName + selectedPerson.lastName;
-    return currentUserConnections.following.includes(personId);
+    return currentUserConnections.following.some(
+      (person) => person.id === personId
+    );
   });
+  console.log(isFollowingIstruttore);
 
   const [isAboutExpanded, setIsAboutExpanded] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -144,6 +196,10 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
     verified: true,
   };
 
+  // Dati della persona che stai visualizzando
+  const selectedPersonData = useSelector(
+    (state) => state.experienceSliceTest.selectedPersonData
+  );
   // Handlers
   const handleEditProfile = () => {
     console.log("Edit profile clicked");
@@ -156,11 +212,19 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
   // ✅ CORRETTO: usa solo followUser con logica toggle
   const handleFollow = () => {
     const personId = selectedPerson.firstName + selectedPerson.lastName;
+    console.log("personId", personId);
 
     dispatch(
       followUser({
         followerId: "currentUser",
         followedId: personId,
+        followerData: {
+          firstName: currentUserProfile.firstName,
+          lastName: currentUserProfile.lastName,
+          username: "currentuser",
+          profilePhoto: currentUserProfile.profilePhoto,
+        },
+        followedData: selectedPersonData.profile,
       })
     );
   };
@@ -174,8 +238,23 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
   };
 
   const handleMoreOptions = () => console.log("More options clicked");
-  const handleFollowingClick = () => console.log("Following list clicked");
+  // const handleFollowing = () => {
+  //   dispatch(
+  //     followUser({
+  //       followerId: "currentUser",
+  //       followedId: `${selectedPersonData.profile.firstName} ${selectedPersonData.profile.lastName}`,
+  //       followerData: {
+  //         firstName: currentUserProfile.firstName,
+  //         lastName: currentUserProfile.lastName,
+  //         username: "currentuser",
+  //         profilePhoto: currentUserProfile.profilePhoto,
+  //       },
+  //       followedData: selectedPersonData.profile,
+  //     })
+  //   );
+  // };
   const handleFollowersClick = () => console.log("Followers list clicked");
+  const handleFollowingClick = () => console.log("Following list clicked");
 
   return (
     <>

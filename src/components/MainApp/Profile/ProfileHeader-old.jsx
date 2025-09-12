@@ -108,10 +108,6 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
         .length || 0
   );
 
-  const { followers, following } = useSelector(
-    (state) => state.experienceSliceTest.selectedPersonData.social
-  );
-
   const user = {
     firstName: profileData.firstName,
     lastName: profileData.lastName,
@@ -346,32 +342,19 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
       isFollowingBack: false,
     },
   ];
-  console.log("USERRRR", followers, following);
 
-  // const mockFollowing = [
-  //   { id: 5, name: "Marco Blu", username: "marcoblu", avatar: null },
-  //   { id: 6, name: "Elena Rosa", username: "elenarosa", avatar: null },
-  //   { id: 7, name: "Paolo Giallo", username: "paologiallo", avatar: null },
-  // ];
+  const mockFollowing = [
+    { id: 5, name: "Marco Blu", username: "marcoblu", avatar: null },
+    { id: 6, name: "Elena Rosa", username: "elenarosa", avatar: null },
+    { id: 7, name: "Paolo Giallo", username: "paologiallo", avatar: null },
+  ];
 
-  const followersWithData = followers.map((follower) => {
-    if (follower.id === "currentUser") {
-      return {
-        id: "currentUser",
-        firstName: user.firstName,
-        lastName: user.lastName,
-        profilePhoto: user.profilePhoto,
-      };
-    }
-    return follower;
-  });
-
-  // const [followingList, setFollowingList] = useState(
-  //   new Set(mockFollowing.map((f) => f.id))
-  // );
-  // const [followersList, setFollowersList] = useState(
-  //   new Set(mockFollowers.map((f) => f.id))
-  // );
+  const [followingList, setFollowingList] = useState(
+    new Set(mockFollowing.map((f) => f.id))
+  );
+  const [followersList, setFollowersList] = useState(
+    new Set(mockFollowers.map((f) => f.id))
+  );
   const handleHelpSettings = () => {
     setCurrentSubmenu("help");
     setIsInSubmenu(true);
@@ -1077,7 +1060,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
             <span>Followers ({user.followers})</span>
           </button>
         </div>
-        {/* <div className={styles.drawerContent}>
+        <div className={styles.drawerContent}>
           <div style={{ padding: "0 1rem" }}>
             {mockFollowers.map((follower) => (
               <div
@@ -1090,6 +1073,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
                 }}
               >
+                {/* Avatar */}
                 <div
                   style={{
                     width: "40px",
@@ -1111,6 +1095,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     .join("")}
                 </div>
 
+                {/* Info */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div
                     style={{
@@ -1132,6 +1117,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   </div>
                 </div>
 
+                {/* Follow Button */}
                 <button
                   style={{
                     padding: "0.5rem 1rem",
@@ -1159,7 +1145,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
               </div>
             ))}
           </div>
-        </div> */}
+        </div>
       </div>
 
       {/* Following Drawer */}
@@ -1179,7 +1165,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
         </div>
         <div className={styles.drawerContent}>
           <div style={{ padding: "0 1rem" }}>
-            {/* {mockFollowing.map((following) => (
+            {mockFollowing.map((following) => (
               <div
                 key={following.id}
                 style={{
@@ -1190,6 +1176,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
                 }}
               >
+                {/* Avatar */}
                 <div
                   style={{
                     width: "40px",
@@ -1211,6 +1198,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     .join("")}
                 </div>
 
+                {/* Info */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div
                     style={{
@@ -1232,6 +1220,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   </div>
                 </div>
 
+                {/* Following Button */}
                 <button
                   style={{
                     padding: "0.5rem 1rem",
@@ -1253,22 +1242,13 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     transition: "all 0.2s ease",
                     flexShrink: 0,
                   }}
+                  // onClick={() => console.log(`Unfollow ${following.name}`)}
                   onClick={() => handleToggleFollow(following)}
                 >
                   {followingList.has(following.id) ? "Following" : "Follow"}
-                </button>
-              </div>
-            ))} */}
-            {followersWithData.map((follower) => (
-              <div key={follower.id}>
-                {follower.firstName} {follower.lastName}
-              </div>
-            ))}
 
-            <h3>Following:</h3>
-            {following.map((person) => (
-              <div key={person.id}>
-                {person.firstName} {person.lastName}
+                  {/* Following */}
+                </button>
               </div>
             ))}
           </div>

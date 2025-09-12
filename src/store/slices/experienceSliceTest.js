@@ -299,8 +299,31 @@ const experienceSliceTest = createSlice({
         joinedDate: "Luglio 2024",
       },
       social: {
-        followers: ["loo", "moo", "yio"],
-        following: ["MizoGucci", "Tarkovsky"],
+        followers: [
+          {
+            id: 5,
+            firstName: "Marco",
+            lastName: "blu",
+            username: "marcoblu",
+            profilePhoto: null,
+          },
+          {
+            id: 6,
+            firstName: "Elena",
+            lastName: "rosa",
+            username: "elenarosa",
+            profilePhoto: null,
+          },
+        ],
+        following: [
+          {
+            id: 7,
+            firstName: "Maria",
+            lastName: "Pink",
+            username: "Maria Pink",
+            profilePhoto: null,
+          },
+        ],
       },
       skills: [
         {
@@ -565,43 +588,124 @@ const experienceSliceTest = createSlice({
       }
     },
 
+    // followUser: (state, action) => {
+    //   const { followerId, followedId } = action.payload;
+
+    //   // Assicurati che socialConnections esista
+    //   if (!state.socialConnections) {
+    //     state.socialConnections = {};
+    //   }
+
+    //   // Inizializza currentUser se non esiste
+    //   if (!state.socialConnections[followerId]) {
+    //     state.socialConnections[followerId] = { followers: [], following: [] };
+    //   }
+
+    //   // Per la persona seguita, usa il sistema diverso (non socialConnections)
+    //   // Aggiorna solo selectedPersonData.social e currentUser
+
+    //   const isAlreadyFollowing =
+    //     state.socialConnections[followerId].following.includes(followedId);
+
+    //   if (isAlreadyFollowing) {
+    //     // UNFOLLOW
+    //     state.socialConnections[followerId].following = state.socialConnections[
+    //       followerId
+    //     ].following.filter((id) => id !== followedId);
+    //     // Rimuovi da selectedPersonData.social
+    //     state.selectedPersonData.social.followers =
+    //       state.selectedPersonData.social.followers.filter(
+    //         (id) => id !== followerId
+    //       );
+    //   } else {
+    //     // FOLLOW
+    //     state.socialConnections[followerId].following.push(followedId);
+    //     // Aggiungi a selectedPersonData.social
+    //     state.selectedPersonData.social.followers.push(followerId);
+    //   }
+    // },
+
+    // followUser: (state, action) => {
+    //   const { followerId, followedId, followerData, followedData } =
+    //     action.payload;
+
+    //   // Logica esistente per currentUser
+    //   if (!state.socialConnections[followerId]) {
+    //     state.socialConnections[followerId] = { followers: [], following: [] };
+    //   }
+
+    //   const isAlreadyFollowing =
+    //     state.socialConnections[followerId].following.includes(followedId);
+
+    //   if (isAlreadyFollowing) {
+    //     // UNFOLLOW
+    //     state.socialConnections[followerId].following = state.socialConnections[
+    //       followerId
+    //     ].following.filter((id) => id !== followedId);
+
+    //     // 🆕 RIMUOVI currentUser dai followers di selectedPersonData
+    //     state.selectedPersonData.social.followers =
+    //       state.selectedPersonData.social.followers.filter(
+    //         (follower) => follower.id !== followerId
+    //       );
+    //   } else {
+    //     // FOLLOW
+    //     state.socialConnections[followerId].following.push(followedId);
+
+    //     // 🆕 AGGIUNGI currentUser ai followers di selectedPersonData
+    //     state.selectedPersonData.social.followers.push({
+    //       id: followerId, // "currentUser"
+    //       firstName: "", // Dovrai passarlo nell'action
+    //       lastName: "",
+    //       username: "currentuser",
+    //       profilePhoto: null,
+    //     });
+    //   }
+    // },
     followUser: (state, action) => {
-      const { followerId, followedId } = action.payload;
+      const { followerId, followedId, followerData, followedData } =
+        action.payload;
 
-      // Assicurati che socialConnections esista
-      if (!state.socialConnections) {
-        state.socialConnections = {};
-      }
-
-      // Inizializza currentUser se non esiste
       if (!state.socialConnections[followerId]) {
         state.socialConnections[followerId] = { followers: [], following: [] };
       }
 
-      // Per la persona seguita, usa il sistema diverso (non socialConnections)
-      // Aggiorna solo selectedPersonData.social e currentUser
-
-      const isAlreadyFollowing =
-        state.socialConnections[followerId].following.includes(followedId);
+      // Controlla se già segue (cerca nell'array di oggetti)
+      const isAlreadyFollowing = state.socialConnections[
+        followerId
+      ].following.some((person) => person.id === followedId);
 
       if (isAlreadyFollowing) {
         // UNFOLLOW
         state.socialConnections[followerId].following = state.socialConnections[
           followerId
-        ].following.filter((id) => id !== followedId);
-        // Rimuovi da selectedPersonData.social
+        ].following.filter((person) => person.id !== followedId);
+
         state.selectedPersonData.social.followers =
           state.selectedPersonData.social.followers.filter(
-            (id) => id !== followerId
+            (follower) => follower.id !== followerId
           );
       } else {
         // FOLLOW
-        state.socialConnections[followerId].following.push(followedId);
-        // Aggiungi a selectedPersonData.social
-        state.selectedPersonData.social.followers.push(followerId);
+        // Aggiungi a following di currentUser (oggetto completo)
+        state.socialConnections[followerId].following.push({
+          id: followedId,
+          firstName: followedData?.firstName || "",
+          lastName: followedData?.lastName || "",
+          username: followedData?.username || followedId,
+          profilePhoto: followedData?.profilePhoto || null,
+        });
+
+        // Aggiungi currentUser ai followers della persona selezionata (UNA VOLTA SOLA)
+        state.selectedPersonData.social.followers.push({
+          id: followerId,
+          firstName: followerData?.firstName || "",
+          lastName: followerData?.lastName || "",
+          username: followerData?.username || followerId,
+          profilePhoto: followerData?.profilePhoto || null,
+        });
       }
     },
-
     setSelectedPersonData: (state, action) => {
       const { firstName, lastName, photo } = action.payload;
       state.selectedPersonData.profile.firstName = firstName;
