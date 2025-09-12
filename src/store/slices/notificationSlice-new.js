@@ -100,68 +100,7 @@ const notificationSlice = createSlice({
   },
 });
 
-// =============== SELECTORS MIGLIORATI ===============
-
-// ✅ SELECTORS PRINCIPALI (che usi già)
-export const selectNotificationsByRole = (role) => (state) => {
-  console.log("SLICE", role, state.notifications.items);
-  return state.notifications.items.filter(
-    (notification) => notification.targetRole === role
-  );
-};
-
-export const selectUnreadCountByRole = (role) => (state) => {
-  return state.notifications.items.filter(
-    (notification) => notification.targetRole === role && !notification.read
-  ).length;
-};
-
-// ✅ SELECTORS AGGIUNTIVI per logiche più sofisticate
-
-// Notifiche inviate DA un ruolo specifico
-export const selectNotificationsSentBy = (role) => (state) => {
-  return state.notifications.items.filter(
-    (notification) => notification.fromRole === role
-  );
-};
-
-// Notifiche per categoria specifica
-export const selectNotificationsByCategory = (category) => (state) => {
-  return state.notifications.items.filter(
-    (notification) => notification.category === category
-  );
-};
-
-// Notifiche per ruolo E categoria
-export const selectNotificationsByRoleAndCategory =
-  (role, category) => (state) => {
-    return state.notifications.items.filter(
-      (notification) =>
-        notification.targetRole === role && notification.category === category
-    );
-  };
-
-// Notifiche non lette per ruolo e categoria
-export const selectUnreadByRoleAndCategory = (role, category) => (state) => {
-  return state.notifications.items.filter(
-    (notification) =>
-      notification.targetRole === role &&
-      notification.category === category &&
-      !notification.read
-  ).length;
-};
-
-// Conversazioni tra due ruoli specifici
-export const selectConversationBetweenRoles = (fromRole, toRole) => (state) => {
-  return state.notifications.items.filter(
-    (notification) =>
-      (notification.fromRole === fromRole &&
-        notification.targetRole === toRole) ||
-      (notification.fromRole === toRole && notification.targetRole === fromRole)
-  );
-};
-
-// =============== SELECTORS ESISTENTI (mantieni questi) ===============
+// =============== SELECTORS ===============
 
 // Notifiche per il ruolo corrente
 export const selectNotificationsForCurrentRole = (state) => {
@@ -171,12 +110,26 @@ export const selectNotificationsForCurrentRole = (state) => {
   );
 };
 
+// Notifiche per ruolo specifico
+export const selectNotificationsByRole = (role) => (state) => {
+  return state.notifications.items.filter(
+    (notification) => notification.targetRole === role
+  );
+};
+
 // Conteggio non lette per ruolo corrente
 export const selectUnreadCountForCurrentRole = (state) => {
   return state.notifications.items.filter(
     (notification) =>
       notification.targetRole === state.notifications.currentRole &&
       !notification.read
+  ).length;
+};
+
+// Conteggio non lette per ruolo specifico
+export const selectUnreadCountByRole = (role) => (state) => {
+  return state.notifications.items.filter(
+    (notification) => notification.targetRole === role && !notification.read
   ).length;
 };
 

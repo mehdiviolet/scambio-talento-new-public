@@ -1,40 +1,43 @@
-// components/notifications/NotificationDropdown.jsx
+// components/notifications/NotificationPanel.jsx - Con stile chat
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectNotificationsForCurrentRole,
+  selectCurrentRole,
   markAsRead,
   markAllAsRead,
-  removeNotification, // CORRETTO: usa il nuovo action
+  removeNotification,
 } from "@/store/slices/notificationSlice";
 import {
   MessageCircle,
   BookOpen,
   Calendar,
-  Settings,
-  Trash2,
-  Check,
   Users,
   Heart,
+  Check,
+  X,
+  Trash2,
 } from "lucide-react";
-import styles from "../ChatComponent.module.css"; // USA STILI CHAT
+import styles from "./ChatComponent.module.css"; // USA LO STESSO CSS DEL CHAT!
 
-const NotificationDropdown = ({ currentRole, notifications }) => {
+const NotificationPanel = () => {
   const dispatch = useDispatch();
-  // const notifications = useSelector(selectNotificationsForCurrentRole);
+  const notifications = useSelector(selectNotificationsForCurrentRole);
+  const currentRole = useSelector(selectCurrentRole);
+  const unreadNotifications = notifications.filter((n) => !n.read);
 
   const getCategoryIcon = (category) => {
     switch (category) {
       case "course":
         return <BookOpen size={16} />;
-      case "chat":
-        return <MessageCircle size={16} />;
       case "event":
         return <Calendar size={16} />;
+      case "message":
+        return <MessageCircle size={16} />;
       case "social":
         return <Heart size={16} />;
       default:
-        return <Settings size={16} />;
+        return <Users size={16} />;
     }
   };
 
@@ -51,6 +54,17 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
     return `${days}g fa`;
   };
 
+  const handleNotificationClick = (notification) => {
+    if (!notification.read) {
+      dispatch(markAsRead(notification.id));
+    }
+
+    // Gestisci navigazione
+    if (notification.actionData) {
+      console.log(`Navigating based on notification:`, notification);
+    }
+  };
+
   const handleMarkAsRead = (id, e) => {
     e.stopPropagation();
     dispatch(markAsRead(id));
@@ -58,39 +72,14 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
 
   const handleRemove = (id, e) => {
     e.stopPropagation();
-    dispatch(removeNotification(id)); // CORRETTO
+    dispatch(removeNotification(id));
   };
 
   const handleMarkAllAsRead = () => {
     dispatch(markAllAsRead({ role: currentRole }));
   };
 
-  const handleNotificationClick = (notification) => {
-    if (!notification.read) {
-      dispatch(markAsRead(notification.id));
-    }
-
-    if (notification.actionData) {
-      switch (notification.category) {
-        case "course":
-          console.log(
-            "Navigate to course:",
-            notification.actionData.experienceId
-          );
-          break;
-        case "chat":
-          console.log(
-            "Navigate to chat:",
-            notification.actionData.conversationId
-          );
-          break;
-        default:
-          break;
-      }
-    }
-  };
-
-  // Render avatar notifica con stile chat
+  // Render avatar per notifica (simile alle chat)
   const renderNotificationAvatar = (notification) => {
     const iconColor =
       notification.category === "course"
@@ -107,7 +96,7 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
           width: "100%",
           height: "100%",
           borderRadius: "50%",
-          background: iconColor + "20",
+          background: iconColor + "20", // 20% opacity
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -119,6 +108,7 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
     );
   };
 
+  // Ottieni il titolo "esperienza" basato sulla categoria
   const getExperienceTitle = (notification) => {
     const titles = {
       course: "Corso",
@@ -128,8 +118,6 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
     };
     return titles[notification.category] || "Notifica";
   };
-
-  const unreadNotifications = notifications.filter((n) => !n.read);
 
   return (
     <div className={styles.conversationsList}>
@@ -141,8 +129,8 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
         </div>
       ) : (
         <>
-          {/* Header con "Segna tutte" */}
-          {/* {unreadNotifications.length > 0 && (
+          {/* Header "Segna tutte" - solo se ci sono notifiche non lette */}
+          {unreadNotifications.length > 0 && (
             <div
               style={{
                 padding: "10px 20px",
@@ -174,9 +162,9 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
                 Segna tutte
               </button>
             </div>
-          )} */}
+          )}
 
-          {/* Lista notifiche - STILE CHAT */}
+          {/* Lista notifiche - STESSO STILE DELLE CHAT */}
           {notifications.map((notification) => (
             <div
               key={notification.id}
@@ -185,13 +173,14 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
               }`}
               onClick={() => handleNotificationClick(notification)}
             >
-              {/* Avatar */}
+              {/* Avatar - stesso della chat */}
               <div className={styles.conversationAvatar}>
                 {renderNotificationAvatar(notification)}
               </div>
 
-              {/* Content */}
+              {/* Content - stesso layout della chat */}
               <div className={styles.conversationContent}>
+                {/* Top row: nome + tempo */}
                 <div className={styles.conversationTop}>
                   <span className={styles.conversationName}>
                     {notification.title}
@@ -201,6 +190,7 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
                   </span>
                 </div>
 
+                {/* Bottom row: categoria come "esperienza" */}
                 <div className={styles.conversationBottom}>
                   <span className={styles.experienceTitle}>
                     {getCategoryIcon(notification.category)}{" "}
@@ -208,12 +198,13 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
                   </span>
                 </div>
 
+                {/* Message preview - il messaggio della notifica */}
                 <div className={styles.messagePreview}>
                   {notification.message}
                 </div>
               </div>
 
-              {/* Actions */}
+              {/* Badge unread - stesso stile chat + azioni hover */}
               <div
                 style={{ display: "flex", alignItems: "center", gap: "4px" }}
               >
@@ -221,6 +212,7 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
                   <div className={styles.messageUnreadBadge}>•</div>
                 )}
 
+                {/* Azioni hover - piccole e discrete */}
                 <div
                   style={{
                     opacity: 0,
@@ -228,8 +220,8 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
                     display: "flex",
                     gap: "2px",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = 1)}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = 0)}
+                  onMouseEnter={(e) => (e.target.style.opacity = 1)}
+                  onMouseLeave={(e) => (e.target.style.opacity = 0)}
                 >
                   {!notification.read && (
                     <button
@@ -271,4 +263,4 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
   );
 };
 
-export default NotificationDropdown;
+export default NotificationPanel;

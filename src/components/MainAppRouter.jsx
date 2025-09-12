@@ -58,6 +58,12 @@ import ChatModal from "./ChatModal";
 import CookieModal from "./CookieModal";
 import { useAllNotifications } from "@/hooks/useAllNotifications";
 import StarModal from "./StarModal";
+import {
+  selectNotificationsByRole,
+  selectUnreadCountByRole,
+} from "@/store/slices/notificationSlice";
+import NotificationBell from "./notifications/NotificationBell";
+import NotificationPanel from "./notifications/NotificationPanel";
 // import useUnreadMessages from "src/hooks/useUnreadMessages.js";
 // Sostituisci ExplorePage con questo componente Esperienze
 
@@ -73,12 +79,20 @@ const MainAppRouter = () => {
 
   const allNotifications = useAllNotifications("viewer");
 
+  ////////////////NEW/////////////////
+
+  // ✅ Logica notifiche basata su isOwner
+  const userRole = "owner";
+  const notifications = useSelector(selectNotificationsByRole(userRole));
+  const notificationCount = useSelector(selectUnreadCountByRole(userRole));
+  ////////////////////
   // const chatNotifications = useUnreadMessages(role); // Viewer per pannello DX
   const lastSlotReward = useSelector(selectLastSlotReward);
   console.log(lastSlotReward);
 
   const currentUserEvent = useSelector(selectCurrentUser);
-  console.log(currentUserEvent);
+  // console.log(currentUserEvent);
+  console.log("NNNNN", useSelector(selectNotificationsByRole("viewer")));
 
   const userProfile = useSelector(selectUserProfile("currentUser"));
 
@@ -90,7 +104,9 @@ const MainAppRouter = () => {
   const { lastXpReward, addXP } = useQuickSetup();
 
   const renderDrawerContent = () => {
+    console.log("all");
     if (activeFilter === "chats") {
+      console.log("CHAT");
       return (
         <ChatComponentTest
           isOwner={false}
@@ -100,7 +116,16 @@ const MainAppRouter = () => {
     }
 
     if (activeFilter === "notifications") {
-      return <NotificationBell currentRole="viewer" />;
+      console.log("SS");
+
+      return (
+        <NotificationPanel
+          currentRole={userRole}
+          notifications={notifications}
+          unreadCount={notificationCount}
+          // mode="dropdown"
+        />
+      );
     }
 
     return null;
@@ -304,7 +329,8 @@ const MainAppRouter = () => {
             />
           )} */}
           <div className={styles.drawerContent}>
-            {isChatModalOpen && renderDrawerContent()}
+            {/* {isChatModalOpen && renderDrawerContent()} */}
+            {renderDrawerContent()}
           </div>
         </div>
       </div>

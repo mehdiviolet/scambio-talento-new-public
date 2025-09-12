@@ -72,7 +72,7 @@ const renderAvatar = (userData) => {
   );
 };
 
-const ChatComponentTest = ({ isOwner = true }) => {
+const ChatComponentTest = ({ isOwner = true, currentRole }) => {
   const dispatch = useDispatch();
 
   // Redux selectors
@@ -85,7 +85,8 @@ const ChatComponentTest = ({ isOwner = true }) => {
   const [activeFilter, setActiveFilter] = useState("chats"); // "chats" o "notifications"
 
   //  const activeRole = currentRole || roleFromStore;
-  const unreadCount = useSelector(selectUnreadCountByRole("viewer"));
+  // const unreadCount = useSelector(selectUnreadCountByRole("viewer"));
+  const unreadCount = useSelector(selectUnreadCountByRole(currentRole));
 
   // State locale
   const [localActiveConversation, setLocalActiveConversation] = useState(null);
@@ -418,7 +419,7 @@ const ChatComponentTest = ({ isOwner = true }) => {
               {/* <NotificationBell
                 currentRole={activeFilter === "notifications" ? userRole : null}
               /> */}
-              <NotificationBell currentRole="viewer" />
+              {/* <NotificationBell currentRole={currentRole} /> */}
             </>
           )}
         </div>
