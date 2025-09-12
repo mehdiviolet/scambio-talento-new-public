@@ -14,11 +14,17 @@ import {
   selectEventStats,
 } from "@/store/slices/sharedEventSlice";
 import SlideEventCard from "./SlideEventCard";
+import { HeaderAddButton } from "./ui/AddButtons";
 
-const EventSectionTest = ({ isOwner, selectedPersonData }) => {
+const EventSectionTest = ({
+  isOwner,
+  isInstructorPanel,
+  selectedPersonData,
+}) => {
   // State per il modal eventi
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const [editingEvent, setEditingEvent] = useState(null);
+  const [showFilters, setShowFilters] = useState(false);
 
   // ✅ Leggi direttamente da Redux
   // const currentProfile = useAppSelector(selectCurrentUserProfile);
@@ -52,11 +58,11 @@ const EventSectionTest = ({ isOwner, selectedPersonData }) => {
       icon: "Flame",
       statuses: ["completed", "fatto"],
     },
-    all: {
-      label: "Tutti",
-      icon: null,
-      statuses: null,
-    },
+    // all: {
+    //   label: "Tutti",
+    //   icon: null,
+    //   statuses: null,
+    // },
   };
 
   // 🎯 Unifica eventi con status dinamici
@@ -107,20 +113,40 @@ const EventSectionTest = ({ isOwner, selectedPersonData }) => {
           Eventi Creati ({events.length})
         </h3>
 
-        <button
-          onClick={handleOpenCreateModal}
-          className={styles.addButton}
-          title="Crea nuovo evento"
-        >
-          +
-        </button>
+        <>
+          <button
+            className={styles.toggleFiltersBtn}
+            onClick={() => setShowFilters(!showFilters)}
+          >
+            Filtri {showFilters ? "↑" : "↓"}
+          </button>
+          <HeaderAddButton
+            onClick={handleOpenCreateModal}
+            title="Crea nuovo evento"
+          />
+        </>
       </div>
-      <StatusFilterButtons
-        activeFilter={statusFilter}
-        onFilterChange={setStatusFilter}
-        filterCounts={filterCounts}
-        filterConfig={filterConfig}
-      />
+      <div className={styles.filtersContainer}>
+        {/* <button
+            className={styles.toggleFiltersBtn}
+            onClick={() => setShowFilters(!showFilters)}
+          >
+            Filtri {showFilters ? "↑" : "↓"}
+          </button> */}
+
+        <div
+          className={`${styles.filterContent} ${
+            showFilters ? styles.open : ""
+          }`}
+        >
+          <StatusFilterButtons
+            activeFilter={statusFilter}
+            onFilterChange={setStatusFilter}
+            filterCounts={filterCounts}
+            filterConfig={filterConfig}
+          />
+        </div>
+      </div>
 
       {/* Content */}
       <div className={styles.content}>

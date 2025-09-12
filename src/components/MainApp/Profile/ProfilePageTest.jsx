@@ -72,6 +72,7 @@ const ProfilePageTest = () => {
               mockExperiencesNew={selectedPersonData.experiences}
             />
             <EventSectionTest
+              isInstructorPanel={true}
               isOwner={true}
               selectedPersonData={selectedPersonData}
             />
