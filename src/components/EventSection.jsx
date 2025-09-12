@@ -151,15 +151,14 @@ const EventsSection = () => {
       {/* Header */}
       <div className={styles.header}>
         <h3 className={styles.title}>Eventi Creati ({events.length})</h3>
-
+        <button
+          className={styles.toggleFiltersBtn}
+          onClick={() => setShowFilters(!showFilters)}
+        >
+          Filtri {showFilters ? "↑" : "↓"}
+        </button>
         {isOwner && events.length !== 0 && (
           <>
-            <button
-              className={styles.toggleFiltersBtn}
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              Filtri {showFilters ? "↑" : "↓"}
-            </button>
             <HeaderAddButton
               onClick={handleOpenCreateModal}
               title="Crea nuovo evento"

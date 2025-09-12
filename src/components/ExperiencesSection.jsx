@@ -206,6 +206,12 @@ const ExperiencesSection = () => {
         <h3 className={styles.title}>
           Esperienze Offerte ({experiences.length})
         </h3>
+        <button
+          className={styles.toggleFiltersBtn}
+          onClick={() => setShowFilters(!showFilters)}
+        >
+          Filtri {showFilters ? "↑" : "↓"}
+        </button>
 
         {isOwner && (
           <>
@@ -217,13 +223,8 @@ const ExperiencesSection = () => {
               // >
               //   +
               // </button>
+
               <>
-                <button
-                  className={styles.toggleFiltersBtn}
-                  onClick={() => setShowFilters(!showFilters)}
-                >
-                  Filtri {showFilters ? "↑" : "↓"}
-                </button>
                 <HeaderAddButton
                   onClick={handleAddExperience}
                   title="Crea nuova esperienza"

@@ -457,11 +457,11 @@ const SearchPage = () => {
                       mockSkills={updatedSkills}
                       mockExperiencesNew={selectedPersonData.experiences}
                     />
-                    <ExperiencesSectionStudenteTest />
                     <EventSectionTest
                       isOwner={false}
                       selectedPersonData={selectedPersonData}
                     />
+                    <ExperiencesSectionStudenteTest />
                   </div>
                 </div>
               </div>

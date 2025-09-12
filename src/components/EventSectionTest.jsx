@@ -120,10 +120,12 @@ const EventSectionTest = ({
           >
             Filtri {showFilters ? "↑" : "↓"}
           </button>
-          <HeaderAddButton
-            onClick={handleOpenCreateModal}
-            title="Crea nuovo evento"
-          />
+          {isInstructorPanel && (
+            <HeaderAddButton
+              onClick={handleOpenCreateModal}
+              title="Crea nuovo evento"
+            />
+          )}
         </>
       </div>
       <div className={styles.filtersContainer}>

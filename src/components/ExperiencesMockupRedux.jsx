@@ -154,14 +154,14 @@ const ExperiencesMockupRedux = ({
           {/* Esperienze Offerte ({mockExperiences.length}) */}
           Esperienze Offerte
         </h3>
+        <button
+          className={styles.toggleFiltersBtn}
+          onClick={() => setShowFilters(!showFilters)}
+        >
+          Filtri {showFilters ? "↑" : "↓"}
+        </button>
         {isInstructorPanel && (
           <>
-            <button
-              className={styles.toggleFiltersBtn}
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              Filtri {showFilters ? "↑" : "↓"}
-            </button>
             <HeaderAddButton
               // onClick={handleAddSkill}
               title="Aggiungi nuova skill"
