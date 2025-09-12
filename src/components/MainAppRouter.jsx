@@ -61,6 +61,7 @@ import StarModal from "./StarModal";
 import {
   selectNotificationsByRole,
   selectUnreadCountByRole,
+  selectUnreadCountForCurrentRole,
 } from "@/store/slices/notificationSlice";
 import NotificationBell from "./notifications/NotificationBell";
 import NotificationPanel from "./notifications/NotificationPanel";
@@ -85,7 +86,11 @@ const MainAppRouter = () => {
   // const userRole = "owner";
   const userRole = "viewer";
   const notifications = useSelector(selectNotificationsByRole(userRole));
-  const notificationCount = useSelector(selectUnreadCountByRole(userRole));
+  const notificationUnread = useSelector(selectUnreadCountByRole(userRole));
+  // const notificationUnread = useSelector(selectUnreadCountForCurrentRole);
+
+  console.log(notificationUnread);
+
   ////////////////////
   // const chatNotifications = useUnreadMessages(role); // Viewer per pannello DX
   const lastSlotReward = useSelector(selectLastSlotReward);
@@ -127,7 +132,7 @@ const MainAppRouter = () => {
         <NotificationPanel
           currentRole={userRole}
           notifications={notifications}
-          unreadCount={notificationCount}
+          unreadCount={notificationUnread}
           // mode="dropdown"
         />
       );
@@ -327,16 +332,32 @@ const MainAppRouter = () => {
           </button>
           {/* Aggiungi questi tab */}
           <div className={styles.drawerTabs}>
-            <button
-              className={`${styles.tab} ${
+            <div
+              className={`${styles.headerTitle} ${
                 activeFilter === "chats" ? styles.active : ""
               }`}
               onClick={() => setActiveFilter("chats")}
             >
-              <MessageCircle size={16} />
-              Chats
-            </button>
-            <button
+              <MessageCircle size={20} />
+              <span>Chats</span>
+              {/* {totalUnread > 0 && (
+                <div className={styles.unreadBadge}>{totalUnread}</div>
+              )} */}
+            </div>
+            <div
+              className={`${styles.headerTitle} ${
+                activeFilter === "notifications" ? styles.active : ""
+              }`}
+              onClick={() => setActiveFilter("notifications")}
+            >
+              <Bell size={20} />
+              <span>Notifications</span>
+              {notificationUnread > 0 && (
+                <div className={styles.unreadBadge}>{notificationUnread}</div>
+              )}
+            </div>
+
+            {/* <button
               className={`${styles.tab} ${
                 activeFilter === "notifications" ? styles.active : ""
               }`}
@@ -344,7 +365,7 @@ const MainAppRouter = () => {
             >
               <Bell size={16} />
               Notifications
-            </button>
+            </button> */}
           </div>
         </div>
         <div className={styles.drawerContent}>

@@ -7,6 +7,7 @@ import {
   Crown,
   Gem,
   LucideDatabase,
+  MessageCircle,
   ShieldCheckIcon,
   Star,
   StarHalf,
@@ -43,6 +44,11 @@ import CookieModal from "./CookieModal";
 import ActivityModalTest from "./ActivityModalTest";
 import StarModal from "./StarModal";
 import { useAllNotifications } from "@/hooks/useAllNotifications";
+import NotificationPanel from "./notifications/NotificationPanel";
+import {
+  selectNotificationsByRole,
+  selectUnreadCountByRole,
+} from "@/store/slices/notificationSlice";
 
 // Placeholder components per ora
 const HomePage = ({ currentUser }) => (
@@ -85,6 +91,10 @@ const MainAppRouter = () => {
   const dispatch = useDispatch();
 
   const { addXP, profileData } = useQuickSetup();
+
+  const userRole = "owner";
+  const notifications = useSelector(selectNotificationsByRole(userRole));
+  const notificationUnread = useSelector(selectUnreadCountByRole(userRole));
 
   const saraXP = useSelector(selectUserXP("sara"));
   const demoState = useSelector(selectDemoState);
@@ -143,9 +153,15 @@ const MainAppRouter = () => {
         />
       );
     }
-
     if (activeFilter === "notifications") {
-      return <NotificationBell currentRole="owner" />;
+      return (
+        <NotificationPanel
+          currentRole={userRole}
+          notifications={notifications}
+          unreadCount={notificationUnread}
+          // mode="dropdown"
+        />
+      );
     }
 
     return null;
@@ -249,14 +265,45 @@ const MainAppRouter = () => {
             <ChevronLeft size={20} />
             <span>Messaggi</span>
           </button>
+          {/* Aggiungi questi tab */}
+          <div className={styles.drawerTabs}>
+            <div
+              className={`${styles.headerTitle} ${
+                activeFilter === "chats" ? styles.active : ""
+              }`}
+              onClick={() => setActiveFilter("chats")}
+            >
+              <MessageCircle size={20} />
+              <span>Chats</span>
+              {/* {totalUnread > 0 && (
+                <div className={styles.unreadBadge}>{totalUnread}</div>
+              )} */}
+            </div>
+            <div
+              className={`${styles.headerTitle} ${
+                activeFilter === "notifications" ? styles.active : ""
+              }`}
+              onClick={() => setActiveFilter("notifications")}
+            >
+              <Bell size={20} />
+              <span>Notifications</span>
+              {notificationUnread > 0 && (
+                <div className={styles.unreadBadge}>{notificationUnread}</div>
+              )}
+            </div>
+
+            {/* <button
+              className={`${styles.tab} ${
+                activeFilter === "notifications" ? styles.active : ""
+              }`}
+              onClick={() => setActiveFilter("notifications")}
+            >
+              <Bell size={16} />
+              Notifications
+            </button> */}
+          </div>
         </div>
         <div className={styles.drawerContent}>
-          {/* {isChatModalOpen && (
-            <ChatComponentTest
-              isOwner={true}
-              onClose={() => setIsChatModalOpen(false)}
-            />
-          )} */}
           <div className={styles.drawerContent}>
             {isChatModalOpen && renderDrawerContent()}
           </div>

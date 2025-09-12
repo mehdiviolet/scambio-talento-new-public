@@ -173,7 +173,7 @@ export const selectNotificationsForCurrentRole = (state) => {
 
 // Conteggio non lette per ruolo corrente
 export const selectUnreadCountForCurrentRole = (state) => {
-  return state.notifications.items.filter(
+  return state.notifications?.items.filter(
     (notification) =>
       notification.targetRole === state.notifications.currentRole &&
       !notification.read

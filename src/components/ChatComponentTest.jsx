@@ -298,9 +298,9 @@ const ChatComponentTest = ({ isOwner = true, currentRole }) => {
   if (showChatList || !localActiveConversation) {
     return (
       <div className={styles.chatContainer}>
-        <div>
-          <div className={styles.chatHeader}>
-            <div
+        {/* <div> */}
+        {/* <div className={styles.chatHeader}> */}
+        {/* <div
               className={`${styles.headerTitle} ${
                 activeFilter === "chats" ? styles.active : ""
               }`}
@@ -311,9 +311,9 @@ const ChatComponentTest = ({ isOwner = true, currentRole }) => {
               {totalUnread > 0 && (
                 <div className={styles.unreadBadge}>{totalUnread}</div>
               )}
-            </div>
+            </div> */}
 
-            {/* <div
+        {/* <div
               className={`${styles.headerTitle} ${
                 activeFilter === "notifications" ? styles.active : ""
               }`}
@@ -325,8 +325,8 @@ const ChatComponentTest = ({ isOwner = true, currentRole }) => {
                 <div className={styles.unreadBadge}>{unreadCount}</div>
               )}
             </div> */}
-          </div>
-        </div>
+        {/* </div> */}
+        {/* </div> */}
 
         <div className={styles.conversationsList}>
           {activeFilter === "chats" ? (
