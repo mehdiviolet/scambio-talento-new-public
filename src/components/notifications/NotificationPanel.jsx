@@ -34,7 +34,6 @@ const NotificationPanel = ({
   };
 
   console.log("AAAAAAAAAAAAAAAA");
-
   console.log("NNNNOtPANEL", notifications);
 
   // // Chiudi dropdown se click fuori (solo in modalità dropdown)
@@ -261,27 +260,26 @@ const NotificationPanel = ({
 
   // Modalità dropdown - con campanella
   // if (mode === "dropdown") {
-  return (
-    <div className={styles.bellContainer} ref={bellRef}>
-      <button
-        className={`${styles.bellButton} ${isOpen ? styles.active : ""}`}
-        onClick={handleToggle}
-      >
-        <Bell size={20} />
-        {unreadCount > 0 && (
-          <span className={styles.badge}>
-            {unreadCount > 99 ? "99+" : unreadCount}
-          </span>
-        )}
-      </button>
+  // return (
+  //   <div className={styles.bellContainer} ref={bellRef}>
+  //     <button
+  //       className={`${styles.bellButton} ${isOpen ? styles.active : ""}`}
+  //       onClick={handleToggle}
+  //     >
+  //       <Bell size={20} />
+  //       <span>Notifications</span>
+  //       {unreadCount > 0 && (
+  //         <div className={styles.unreadBadge}>{unreadCount}</div>
+  //       )}
+  //     </button>
 
-      {isOpen && (
-        <div className={styles.dropdownContainer}>
-          <NotificationList />
-        </div>
-      )}
-    </div>
-  );
+  //     {isOpen && (
+  //       <div className={styles.dropdownContainer}>
+  //         <NotificationList />
+  //       </div>
+  //     )}
+  //   </div>
+  // );
   // }
 
   // Modalità panel - solo lista (per drawer)

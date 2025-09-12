@@ -313,7 +313,7 @@ const ChatComponentTest = ({ isOwner = true, currentRole }) => {
               )}
             </div>
 
-            <div
+            {/* <div
               className={`${styles.headerTitle} ${
                 activeFilter === "notifications" ? styles.active : ""
               }`}
@@ -324,7 +324,7 @@ const ChatComponentTest = ({ isOwner = true, currentRole }) => {
               {unreadCount > 0 && (
                 <div className={styles.unreadBadge}>{unreadCount}</div>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
 

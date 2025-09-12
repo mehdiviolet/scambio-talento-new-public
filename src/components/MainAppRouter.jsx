@@ -82,13 +82,18 @@ const MainAppRouter = () => {
   ////////////////NEW/////////////////
 
   // ✅ Logica notifiche basata su isOwner
-  const userRole = "owner";
+  // const userRole = "owner";
+  const userRole = "viewer";
   const notifications = useSelector(selectNotificationsByRole(userRole));
   const notificationCount = useSelector(selectUnreadCountByRole(userRole));
   ////////////////////
   // const chatNotifications = useUnreadMessages(role); // Viewer per pannello DX
   const lastSlotReward = useSelector(selectLastSlotReward);
-  console.log(lastSlotReward);
+  console.log("OWNERRRRRRRRR", useSelector(selectNotificationsByRole("owner")));
+  console.log(
+    "VIEWERRRRRRRR",
+    useSelector(selectNotificationsByRole("viewer"))
+  );
 
   const currentUserEvent = useSelector(selectCurrentUser);
   // console.log(currentUserEvent);
@@ -320,6 +325,27 @@ const MainAppRouter = () => {
             <ChevronLeft size={20} />
             <span>Messaggi</span>
           </button>
+          {/* Aggiungi questi tab */}
+          <div className={styles.drawerTabs}>
+            <button
+              className={`${styles.tab} ${
+                activeFilter === "chats" ? styles.active : ""
+              }`}
+              onClick={() => setActiveFilter("chats")}
+            >
+              <MessageCircle size={16} />
+              Chats
+            </button>
+            <button
+              className={`${styles.tab} ${
+                activeFilter === "notifications" ? styles.active : ""
+              }`}
+              onClick={() => setActiveFilter("notifications")}
+            >
+              <Bell size={16} />
+              Notifications
+            </button>
+          </div>
         </div>
         <div className={styles.drawerContent}>
           {/* {isChatModalOpen && (
@@ -328,10 +354,7 @@ const MainAppRouter = () => {
               onClose={() => setIsChatModalOpen(false)}
             />
           )} */}
-          <div className={styles.drawerContent}>
-            {/* {isChatModalOpen && renderDrawerContent()} */}
-            {renderDrawerContent()}
-          </div>
+          {isChatModalOpen && renderDrawerContent()}
         </div>
       </div>
     </div>
