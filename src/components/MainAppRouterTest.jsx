@@ -1,6 +1,8 @@
 import {
   Activity,
+  Bell,
   Cherry,
+  ChevronLeft,
   Cookie,
   Crown,
   Gem,
@@ -37,6 +39,10 @@ import {
 import { selectCurrentUserId } from "@/services/userService";
 import { store } from "@/store";
 import { selectOrganizer } from "@/store/slices/sharedEventSlice";
+import CookieModal from "./CookieModal";
+import ActivityModalTest from "./ActivityModalTest";
+import StarModal from "./StarModal";
+import { useAllNotifications } from "@/hooks/useAllNotifications";
 
 // Placeholder components per ora
 const HomePage = ({ currentUser }) => (
@@ -68,6 +74,13 @@ const MainAppRouter = () => {
   const [xpJustChanged, setXpJustChanged] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
   const chatNotifications = useUnreadMessages("owner"); // Perché isOwner={true} nel tuo chat
+  const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
+  const [isChatModalOpen, setIsChatModalOpen] = useState(false);
+  const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
+  const [isStarteModalOpen, setsStarteModalOpen] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("chats"); // "chats" o "notifications"
+
+  const allNotifications = useAllNotifications("owner");
 
   const dispatch = useDispatch();
 
@@ -76,6 +89,9 @@ const MainAppRouter = () => {
   const saraXP = useSelector(selectUserXP("sara"));
   const demoState = useSelector(selectDemoState);
   const organizerEvent = useSelector(selectOrganizer);
+
+  // const userXP = useSelector(selectUserXP("currentUser"));
+  const userXP = saraXP + demoState.dayXP;
 
   const renderCurrentPage = () => {
     // Crea currentUser dal profileData
@@ -117,139 +133,69 @@ const MainAppRouter = () => {
     dispatch(setCurrentUser({ userId: "sara" }));
   }, [dispatch]);
 
-  // Configurazione dinamica per la progress bar
-  const GIORNI_MASSIMI = 20; // Massimo per completare la progress bar
-
-  const giorniConsecutivi = demoState.currentDay;
-  // const totalDisplayXP = useSelector(selectTotalDisplayXP);
-  const saraDisplayXP = saraXP + demoState.dayXP;
-
-  // const { dayXP } = useSelector((state) => state.demo);
-
-  // Calcolo della percentuale della progress bar
-  const calcolaPercentualeProgressBar = (giorniAttuali, giorniMax) => {
-    const percentuale = Math.min((giorniAttuali / giorniMax) * 100, 100);
-    return Math.round(percentuale); // Arrotonda per evitare decimali
-  };
-
-  // Funzione per ottenere il messaggio dinamico
-  const getMessaggioGiorni = (giorni, max) => {
-    if (giorni >= max) {
-      return "Grande! 💎";
-    } else if (giorni === 0) {
-      return "Inizia il tuo streak!";
-    } else if (giorni >= max - 3) {
-      return `Ci sei quasi! ${giorni} giorni! 🔥`;
-    } else if (giorni >= max - 5) {
-      return `Quasi al traguardo! ${giorni} giorni! ⭐`;
-    } else if (giorni >= max / 2) {
-      return `Ottimo lavoro! ${giorni} giorni! 🚀`;
-    } else if (giorni >= 5) {
-      return `Continua così! ${giorni} giorni! 💪`;
-    } else {
-      return `${giorni} ${giorni > 1 ? "" : "giorno"} 🌱`;
+  // Nel drawer content, sostituisci la parte esistente con:
+  const renderDrawerContent = () => {
+    if (activeFilter === "chats") {
+      return (
+        <ChatComponentTest
+          isOwner={true}
+          onClose={() => setIsChatModalOpen(false)}
+        />
+      );
     }
+
+    if (activeFilter === "notifications") {
+      return <NotificationBell currentRole="owner" />;
+    }
+
+    return null;
   };
 
-  // 🎯 3. MODIFICA renderGameHUD per includere la notifica
   const renderGameHUD = () => {
-    const percentualeProgress = calcolaPercentualeProgressBar(
-      giorniConsecutivi,
-      GIORNI_MASSIMI
-    );
-    const messaggioGiorni = getMessaggioGiorni(
-      giorniConsecutivi,
-      GIORNI_MASSIMI
-    );
-
     return (
       <div className={styles.gameHud}>
-        {/* <NotificationBell />
-        <ToastContainer /> */}
-        {/* <RoleSpecificNotificationDropdown
-          role="owner"
-          title="Notifiche Istruttore"
-        /> */}
-        {/* <ToastContainer role="owner" /> */}
-
         <div className={styles.hudTop}>
           <div className={styles.hudLeft}>
             <div className={styles.hudLevel}>
-              <Cookie className="icon-md" style={{ color: "#fde047" }} />
-              <span>{saraDisplayXP} XP</span>
-            </div>
-            <div className={styles.hudXp}>
-              <div className={styles.cherryContainer}>
-                <Cherry className="icon-sm" style={{ color: "#fde047" }} />
-                {xpJustChanged && (
-                  <div className={styles.splashEffect}>
-                    <div className={styles.spark}></div>
-                    <div className={styles.spark}></div>
-                    <div className={styles.spark}></div>
-                    <div className={styles.flash}></div>
-                  </div>
-                )}
-              </div>
-              <span>+{10}</span>
-            </div>
-          </div>
-          <div className={styles.hudLevel}>
-            <Star className="icon-md text-yellow-300" />
-            {/* ✅ NUOVO: Usa totalDisplayXP (include demo bonus) */}
-            <span>{organizerEvent.participationScore} </span>
-            <span>0</span>
-          </div>
-          <div className={styles.hudLevel}>
-            <ShieldCheckIcon className="icon-md text-yellow-300" />
-            {/* ✅ NUOVO: Usa totalDisplayXP (include demo bonus) */}
-            <span>{organizerEvent.trustScore} </span>
-            {/* <span>0</span> */}
-          </div>
-
-          {/* 🎯 4. AGGIUNGI la sezione chat notifiche */}
-          <div className={styles.hudRight}>
-            <div className={styles.hudAchievements}>
-              <Activity className="icon-sm text-yellow-300" />
-              <span>4</span>
-            </div>
-
-            {/* 🎯 NOTIFICA CHAT CLICCABILE */}
-            {/* {chatNotifications.hasUnread && (
               <div
-                className={`${styles.hudChat} ${
-                  chatNotifications.hasUnread ? styles.hasNotifications : ""
-                }`}
-                onClick={() => {
-                  setActiveTab("chat"); 
-                }}
+                className={`${styles.hudLevel} ${styles.clickable}`}
+                onClick={() => setIsCookieModalOpen(true)}
                 style={{ cursor: "pointer" }}
               >
-                💬
-                {chatNotifications.hasUnread && (
-                  <div className={styles.notificationBadge}>
-                    {chatNotifications.total}
-                  </div>
-                )}
+                <Cookie style={{ color: "var(--text-secondary)" }} />
               </div>
-            )} */}
-          </div>
-        </div>
-        <div className={styles.progressSection}>
-          <div className={styles.progressLabel}>
-            <span>Giorni consecutivi attivi!</span>
-            <span>{messaggioGiorni}</span>
-          </div>
-          <div className={styles.progressBar}>
+            </div>
             <div
-              className={styles.progressFill}
-              style={{
-                width: `${percentualeProgress}%`,
-                background:
-                  percentualeProgress >= 90
-                    ? "linear-gradient(to right, #f59e0b, #fbbf24)"
-                    : "linear-gradient(to right, #2e9688, #aaebe2)",
-              }}
-            />
+              className={`${styles.hudAchievements} ${styles.clickable}`}
+              onClick={() => setsStarteModalOpen(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <Star style={{ color: "var(--text-secondary)" }} />
+            </div>
+            <div
+              className={`${styles.hudAchievements} ${styles.clickable}`}
+              onClick={() => setIsActivityModalOpen(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <Activity style={{ color: "var(--text-secondary)" }} />
+            </div>
+          </div>
+          <div
+            className={`${styles.hudAchievements} ${styles.clickable}`}
+            onClick={() => setIsChatModalOpen(true)}
+            style={{ cursor: "pointer" }}
+          >
+            <Bell style={{ color: "var(--text-secondary)" }} />
+
+            {allNotifications.hasUnread && (
+              <div
+                className={`${styles.notificationBadge} ${
+                  allNotifications.total > 9 ? styles.large : ""
+                }`}
+              >
+                {allNotifications.total > 99 ? "99+" : allNotifications.total}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -273,6 +219,48 @@ const MainAppRouter = () => {
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />
+      </div>
+      {/* Activity Modal */}
+      <ActivityModalTest
+        isOpen={isActivityModalOpen}
+        onClose={() => setIsActivityModalOpen(false)}
+      />
+      <CookieModal
+        isOpen={isCookieModalOpen}
+        onClose={() => setIsCookieModalOpen(false)}
+        userXP={userXP}
+      />
+      <StarModal
+        isOpen={isStarteModalOpen}
+        onClose={() => setsStarteModalOpen(false)}
+        userStars={userXP}
+      />
+      {/* Chat Slide Drawer */}
+      <div
+        className={`${styles.slideDrawer} ${
+          isChatModalOpen ? styles.open : ""
+        }`}
+      >
+        <div className={styles.drawerHeader}>
+          <button
+            className={styles.backButton}
+            onClick={() => setIsChatModalOpen(false)}
+          >
+            <ChevronLeft size={20} />
+            <span>Messaggi</span>
+          </button>
+        </div>
+        <div className={styles.drawerContent}>
+          {/* {isChatModalOpen && (
+            <ChatComponentTest
+              isOwner={true}
+              onClose={() => setIsChatModalOpen(false)}
+            />
+          )} */}
+          <div className={styles.drawerContent}>
+            {isChatModalOpen && renderDrawerContent()}
+          </div>
+        </div>
       </div>
     </div>
   );

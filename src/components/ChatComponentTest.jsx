@@ -17,6 +17,7 @@ import {
 import styles from "./ChatComponent.module.css";
 import NotificationBell from "./notifications/NotificationBell";
 import { selectUnreadCountByRole } from "@/store/slices/notificationSlice";
+import { updateProfileData } from "@/store/slices/quickSetupSlice";
 
 // ✅ HELPER per generare ID persona (stesso del chatSlice)
 const generatePersonId = (firstName, lastName) => {
@@ -78,10 +79,10 @@ const ChatComponentTest = ({ isOwner = true }) => {
   const conversations = useSelector((state) => state.chat.conversations);
   const allUnreadCounts = useSelector((state) => state.chat.unreadCounts);
   const selectedOwner = useSelector((state) => state.chat.selectedOwner);
-  const userProfile = useSelector((state) => state.onboarding?.userProfile);
-  const [activeFilter, setActiveFilter] = useState("chats"); // "chats" o "notifications"
-
+  // const userProfile = useSelector((state) => state.onboarding?.userProfile);
+  const userProfile = useSelector((state) => state.quickSetup.profileData);
   console.log("USERRRRRRRRRRRRRRRRRR-----viewerData", userProfile);
+  const [activeFilter, setActiveFilter] = useState("chats"); // "chats" o "notifications"
 
   //  const activeRole = currentRole || roleFromStore;
   const unreadCount = useSelector(selectUnreadCountByRole("viewer"));
@@ -414,8 +415,10 @@ const ChatComponentTest = ({ isOwner = true }) => {
             //   <p>Nessuna notificaaa</p>
             // </div>
             <>
+              {/* <NotificationBell
+                currentRole={activeFilter === "notifications" ? userRole : null}
+              /> */}
               <NotificationBell currentRole="viewer" />
-              {/* <NotificationBell currentRole="viewer" /> */}
             </>
           )}
         </div>

@@ -1,11 +1,15 @@
 // hooks/useAllNotifications.js
 import { useUnreadMessages } from "@/hooks/useUnreadMessages";
 import { useSelector } from "react-redux";
-import { selectUnreadCountForCurrentRole } from "@/store/slices/notificationSlice";
+import {
+  selectUnreadCountByRole,
+  selectUnreadCountForCurrentRole,
+} from "@/store/slices/notificationSlice";
 
 export const useAllNotifications = (role) => {
   const chatNotifications = useUnreadMessages(role);
-  const notificationCount = useSelector(selectUnreadCountForCurrentRole);
+  // const notificationCount = useSelector(selectUnreadCountForCurrentRole);
+  const notificationCount = useSelector(selectUnreadCountByRole(role));
 
   return {
     total: chatNotifications.total + notificationCount,

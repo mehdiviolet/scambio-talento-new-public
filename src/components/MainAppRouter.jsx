@@ -69,6 +69,7 @@ const MainAppRouter = () => {
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
   const [isStarteModalOpen, setsStarteModalOpen] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("chats"); // "chats" o "notifications"
 
   const allNotifications = useAllNotifications("viewer");
 
@@ -87,6 +88,23 @@ const MainAppRouter = () => {
   // const currentUserId = useSelector(selectCurrentUserId);
 
   const { lastXpReward, addXP } = useQuickSetup();
+
+  const renderDrawerContent = () => {
+    if (activeFilter === "chats") {
+      return (
+        <ChatComponentTest
+          isOwner={false}
+          onClose={() => setIsChatModalOpen(false)}
+        />
+      );
+    }
+
+    if (activeFilter === "notifications") {
+      return <NotificationBell currentRole="viewer" />;
+    }
+
+    return null;
+  };
 
   const renderCurrentPage = () => {
     const currentUser = {
@@ -279,12 +297,15 @@ const MainAppRouter = () => {
           </button>
         </div>
         <div className={styles.drawerContent}>
-          {isChatModalOpen && (
+          {/* {isChatModalOpen && (
             <ChatComponentTest
               isOwner={false}
               onClose={() => setIsChatModalOpen(false)}
             />
-          )}
+          )} */}
+          <div className={styles.drawerContent}>
+            {isChatModalOpen && renderDrawerContent()}
+          </div>
         </div>
       </div>
     </div>

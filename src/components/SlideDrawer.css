@@ -122,7 +122,7 @@
 .slide-drawer__content {
   flex: 1;
   overflow-y: auto;
-  padding: 0 24px 24px;
+  /* padding: 0 24px 24px; */
   -webkit-overflow-scrolling: touch;
 }
 
