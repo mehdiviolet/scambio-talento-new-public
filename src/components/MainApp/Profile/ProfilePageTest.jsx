@@ -62,6 +62,7 @@ const ProfilePageTest = () => {
             <SkillMockup
               mockSkills={updatedSkills}
               selectedPersonData={selectedPersonData}
+              isInstructorPanel={true}
             />
             {/* <ExperiencesMockup /> */}
             {/* <TestCard isOwner={true} /> */}

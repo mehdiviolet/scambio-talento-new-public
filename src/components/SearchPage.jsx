@@ -450,6 +450,7 @@ const SearchPage = () => {
                     <SkillMockup
                       mockSkills={updatedSkills}
                       selectedPersonData={selectedPersonData}
+                      isInstructorPanel={false}
                     />
                     <ExperiencesMockupRedux
                       isInstructorPanel={false}

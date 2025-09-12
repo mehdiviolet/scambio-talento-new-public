@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { ChevronDown, Gem } from "lucide-react";
 import styles from "./SkillsSection.module.css";
+import { HeaderAddButton } from "./ui/AddButtons";
 
-const SkillMockup = ({ mockSkills, selectedPersonData }) => {
+const SkillMockup = ({ mockSkills, selectedPersonData, isInstructorPanel }) => {
   const [expandedSkillId, setExpandedSkillId] = useState(null);
 
   // Dati utente fissi (Sara Dormand)
@@ -32,6 +33,12 @@ const SkillMockup = ({ mockSkills, selectedPersonData }) => {
       {/* Header - NO add button (viewer mode) */}
       <div className={styles.header}>
         <h2 className={styles.title}>Skills</h2>
+        {isInstructorPanel && (
+          <HeaderAddButton
+            // onClick={handleAddSkill}
+            title="Aggiungi nuova skill"
+          />
+        )}
       </div>
 
       {/* Content */}

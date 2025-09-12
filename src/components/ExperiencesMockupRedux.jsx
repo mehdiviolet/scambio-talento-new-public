@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import TestCardRedux from "@components/MainApp/Shared/Modals/TestCardRedux.jsx";
 import StatusFilterButtons from "./StatusFilterButtons.jsx";
 import { useStatusFilter } from "./useStatusFilter.js";
 import styles from "./ExperiencesSection.module.css";
 import { useSelector } from "react-redux";
+import { HeaderAddButton } from "./ui/AddButtons.jsx";
 
 const ExperiencesMockupRedux = ({
   isInstructorPanel,
@@ -109,6 +110,7 @@ const ExperiencesMockupRedux = ({
     //   statuses: null,
     // },
   };
+  const [showFilters, setShowFilters] = useState(false);
 
   // 🎯 USA IL CUSTOM HOOK
   const {
@@ -149,20 +151,41 @@ const ExperiencesMockupRedux = ({
       {/* Header */}
       <div className={styles.header}>
         <h3 className={styles.title}>
-          Esperienze Offerte ({mockExperiences.length})
+          {/* Esperienze Offerte ({mockExperiences.length}) */}
+          Esperienze Offerte
         </h3>
-        <button className={styles.addButton} title="Crea nuova esperienza">
-          +
-        </button>
+        {isInstructorPanel && (
+          <>
+            <button
+              className={styles.toggleFiltersBtn}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              Filtri {showFilters ? "↑" : "↓"}
+            </button>
+            <HeaderAddButton
+              // onClick={handleAddSkill}
+              title="Aggiungi nuova skill"
+            />
+          </>
+        )}
       </div>
 
-      {/* 🎯 COMPONENTE FILTRI RIUTILIZZABILE */}
-      <StatusFilterButtons
-        activeFilter={statusFilter}
-        onFilterChange={setStatusFilter}
-        filterCounts={filterCounts}
-        filterConfig={filterConfig}
-      />
+      <div>
+        <div className={styles.filtersContainer}>
+          <div
+            className={`${styles.filterContent} ${
+              showFilters ? styles.open : ""
+            }`}
+          >
+            <StatusFilterButtons
+              activeFilter={statusFilter}
+              onFilterChange={setStatusFilter}
+              filterCounts={filterCounts}
+              filterConfig={filterConfig}
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Content */}
       <div className={styles.content}>
