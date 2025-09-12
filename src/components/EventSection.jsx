@@ -123,11 +123,11 @@ const EventsSection = () => {
       icon: "Flame",
       statuses: ["completed"],
     },
-    // all: {
-    //   label: "Tutti",
-    //   icon: null,
-    //   statuses: null,
-    // },
+    all: {
+      label: "Tutti",
+      icon: null,
+      statuses: null,
+    },
   };
 
   // 🎯 USA IL CUSTOM HOOK

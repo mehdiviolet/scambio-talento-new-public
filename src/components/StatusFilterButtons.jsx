@@ -69,7 +69,7 @@ const StatusFilterButtons = ({
     <div className={styles.statusFilterContainer}>
       <div className={`${styles.filterButtons} ${className}`}>
         {/* Filtro "Tutti" */}
-        {showAllFilter && (
+        {/* {showAllFilter && (
           <button
             className={getFilterButtonClass(
               "all",
@@ -84,7 +84,7 @@ const StatusFilterButtons = ({
             <span className={styles.filterLabel}>Tutti</span>
             <span className={styles.filterCount}>({totalCount})</span>
           </button>
-        )}
+        )} */}
 
         {/* Filtri configurati */}
         {Object.entries(filterConfig).map(([filterKey, config]) => {

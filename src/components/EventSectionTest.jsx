@@ -58,11 +58,11 @@ const EventSectionTest = ({
       icon: "Flame",
       statuses: ["completed", "fatto"],
     },
-    // all: {
-    //   label: "Tutti",
-    //   icon: null,
-    //   statuses: null,
-    // },
+    all: {
+      label: "Tutti",
+      icon: null,
+      statuses: null,
+    },
   };
 
   // 🎯 Unifica eventi con status dinamici
