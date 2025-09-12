@@ -330,6 +330,8 @@ const MainAppRouter = () => {
             <ChevronLeft size={20} />
             <span>Messaggi</span>
           </button>
+        </div>
+        <div className={styles.drawerContent}>
           {/* Aggiungi questi tab */}
           <div className={styles.drawerTabs}>
             <div
@@ -367,8 +369,6 @@ const MainAppRouter = () => {
               Notifications
             </button> */}
           </div>
-        </div>
-        <div className={styles.drawerContent}>
           {/* {isChatModalOpen && (
             <ChatComponentTest
               isOwner={false}
