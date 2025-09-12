@@ -157,6 +157,7 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
   const isOwnProfile = isInstructorPanel; // Nel pannello instructor, Sara vede il suo profilo
 
   console.log(selectedPerson);
+  const [isViewerDrawerOpen, setIsViewerDrawerOpen] = useState(false);
 
   const socialFollowers = useSelector(
     (state) =>

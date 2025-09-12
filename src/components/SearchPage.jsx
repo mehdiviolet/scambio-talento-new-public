@@ -1,6 +1,6 @@
 // SearchPage.jsx - VERSIONE CORRETTA CON SELEZIONE UNIFICATA
 import React, { useState } from "react";
-import { Search, User, List } from "lucide-react";
+import { Search, User, List, Activity, Star, Cookie } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import SlideDrawer from "./SlideDrawer";
 import { useSlideDrawer } from "../hooks/useSlideDrawer";
@@ -12,6 +12,10 @@ import EventSectionTest from "./EventSectionTest";
 import { setSelectedPersonData } from "@/store/slices/experienceSliceTest";
 import { setSelectedOwner } from "@/store/slices/chatSlice";
 import searchStyles from "./SearchPage.module.css";
+import ActivityModalTest from "./ActivityModalTest";
+import CookieModal from "./CookieModal";
+import StarModal from "./StarModal";
+import { selectDemoState, selectUserXP } from "@/services/xpService";
 
 // Lista di persone (come nel codice originale)
 const peopleList = [
@@ -125,13 +129,20 @@ const SearchPage = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedPersonForDrawer, setSelectedPersonForDrawer] = useState(null);
-
+  const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
+  const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
+  const [isStarteModalOpen, setsStarteModalOpen] = useState(false);
   // State per la modalità lista in pagina
   const [showPageList, setShowPageList] = useState(false);
   const [frozenSuggestions, setFrozenSuggestions] = useState([]);
 
   // Hook per gestire il slide drawer
   const { isOpen, openDrawer, closeDrawer } = useSlideDrawer();
+
+  const saraXP = useSelector(selectUserXP("sara"));
+  const demoState = useSelector(selectDemoState);
+
+  const userXP = saraXP + demoState.dayXP;
 
   // Selettori Redux
   const skillGemBonus = useSelector(
@@ -273,6 +284,57 @@ const SearchPage = () => {
     }, 300);
   };
 
+  const renderGameHUD = () => {
+    return (
+      <div className={searchStyles.gameHud}>
+        <div className={searchStyles.hudTop}>
+          <div className={searchStyles.hudLeft}>
+            <div className={searchStyles.hudLevel}>
+              <div
+                className={`${searchStyles.hudLevel} ${searchStyles.clickable}`}
+                onClick={() => setIsCookieModalOpen(true)}
+                style={{ cursor: "pointer" }}
+              >
+                <Cookie style={{ color: "var(--text-secondary)" }} />
+              </div>
+            </div>
+            <div
+              className={`${searchStyles.hudAchievements} ${searchStyles.clickable}`}
+              onClick={() => setsStarteModalOpen(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <Star style={{ color: "var(--text-secondary)" }} />
+            </div>
+            <div
+              className={`${searchStyles.hudAchievements} ${searchStyles.clickable}`}
+              onClick={() => setIsActivityModalOpen(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <Activity style={{ color: "var(--text-secondary)" }} />
+            </div>
+          </div>
+          {/* <div
+            className={`${styles.hudAchievements} ${styles.clickable}`}
+            onClick={() => setIsChatModalOpen(true)}
+            style={{ cursor: "pointer" }}
+          >
+            <Bell style={{ color: "var(--text-secondary)" }} />
+
+            {allNotifications.hasUnread && (
+              <div
+                className={`${styles.notificationBadge} ${
+                  allNotifications.total > 9 ? styles.large : ""
+                }`}
+              >
+                {allNotifications.total > 99 ? "99+" : allNotifications.total}
+              </div>
+            )}
+          </div> */}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className={searchStyles.searchContainer}>
       {/* Barra di ricerca principale con pulsante */}
@@ -375,30 +437,35 @@ const SearchPage = () => {
       >
         {/* Content del drawer - caricato solo quando drawer è aperto */}
         {isOpen && selectedPersonData.profile.firstName && (
-          <>
-            <div className={searchStyles.profilePage}>
-              <div className={searchStyles.profileContainer}>
-                <ProfileHeaderMockup
-                  selectedPerson={selectedPersonData.profile}
-                  isInstructorPanel={false}
-                />
-                <SkillMockup
-                  mockSkills={updatedSkills}
-                  selectedPersonData={selectedPersonData}
-                />
-                <ExperiencesMockupRedux
-                  isInstructorPanel={false}
-                  mockSkills={updatedSkills}
-                  mockExperiencesNew={selectedPersonData.experiences}
-                />
-                <ExperiencesSectionStudenteTest />
-                <EventSectionTest
-                  isOwner={false}
-                  selectedPersonData={selectedPersonData}
-                />
+          <div className={searchStyles.screenBg}>
+            <div className={searchStyles.cardApp}>
+              {renderGameHUD()}
+              <div className={searchStyles.contentArea}>
+                <div className={searchStyles.profilePage}>
+                  <div className={searchStyles.profileContainer}>
+                    <ProfileHeaderMockup
+                      selectedPerson={selectedPersonData.profile}
+                      isInstructorPanel={false}
+                    />
+                    <SkillMockup
+                      mockSkills={updatedSkills}
+                      selectedPersonData={selectedPersonData}
+                    />
+                    <ExperiencesMockupRedux
+                      isInstructorPanel={false}
+                      mockSkills={updatedSkills}
+                      mockExperiencesNew={selectedPersonData.experiences}
+                    />
+                    <ExperiencesSectionStudenteTest />
+                    <EventSectionTest
+                      isOwner={false}
+                      selectedPersonData={selectedPersonData}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </>
+          </div>
         )}
 
         {/* Loading state */}
@@ -408,6 +475,21 @@ const SearchPage = () => {
           </div>
         )}
       </SlideDrawer>
+      {/* Activity Modal */}
+      <ActivityModalTest
+        isOpen={isActivityModalOpen}
+        onClose={() => setIsActivityModalOpen(false)}
+      />
+      <CookieModal
+        isOpen={isCookieModalOpen}
+        onClose={() => setIsCookieModalOpen(false)}
+        userXP={userXP}
+      />
+      <StarModal
+        isOpen={isStarteModalOpen}
+        onClose={() => setsStarteModalOpen(false)}
+        userStars={userXP}
+      />
     </div>
   );
 };

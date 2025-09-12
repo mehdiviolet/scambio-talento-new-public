@@ -80,8 +80,8 @@ const MainAppRouter = () => {
   const [xpJustChanged, setXpJustChanged] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
   const chatNotifications = useUnreadMessages("owner"); // Perché isOwner={true} nel tuo chat
-  const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
+  const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
   const [isStarteModalOpen, setsStarteModalOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState("chats"); // "chats" o "notifications"

@@ -65,6 +65,7 @@ import {
 } from "@/store/slices/notificationSlice";
 import NotificationBell from "./notifications/NotificationBell";
 import NotificationPanel from "./notifications/NotificationPanel";
+import { useAppSelector } from "@/hooks/redux";
 // import useUnreadMessages from "src/hooks/useUnreadMessages.js";
 // Sostituisci ExplorePage con questo componente Esperienze
 
@@ -81,6 +82,7 @@ const MainAppRouter = () => {
   const allNotifications = useAllNotifications("viewer");
 
   ////////////////NEW/////////////////
+  const { isOwner } = useAppSelector((state) => state.onboarding);
 
   // ✅ Logica notifiche basata su isOwner
   // const userRole = "owner";
@@ -266,24 +268,26 @@ const MainAppRouter = () => {
             <Activity className="icon-sm text-yellow-300" />
             <span>0</span>
           </div> */}
-          <div
-            className={`${styles.hudAchievements} ${styles.clickable}`}
-            onClick={() => setIsChatModalOpen(true)}
-            style={{ cursor: "pointer" }}
-          >
-            <Bell style={{ color: "var(--text-secondary)" }} />
-            {/* <span>{chatNotifications.total}</span> */}
-            {/* Badge Instagram-style */}
-            {allNotifications.hasUnread && (
-              <div
-                className={`${styles.notificationBadge} ${
-                  allNotifications.total > 9 ? styles.large : ""
-                }`}
-              >
-                {allNotifications.total > 99 ? "99+" : allNotifications.total}
-              </div>
-            )}
-          </div>
+          {isOwner && (
+            <div
+              className={`${styles.hudAchievements} ${styles.clickable}`}
+              onClick={() => setIsChatModalOpen(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <Bell style={{ color: "var(--text-secondary)" }} />
+              {/* <span>{chatNotifications.total}</span> */}
+              {/* Badge Instagram-style */}
+              {allNotifications.hasUnread && (
+                <div
+                  className={`${styles.notificationBadge} ${
+                    allNotifications.total > 9 ? styles.large : ""
+                  }`}
+                >
+                  {allNotifications.total > 99 ? "99+" : allNotifications.total}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );

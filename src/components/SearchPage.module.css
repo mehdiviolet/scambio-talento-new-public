@@ -239,3 +239,126 @@
   padding: 40px;
   color: #6b7280;
 }
+
+/* ***************** */
+
+.contentArea {
+  flex: 1;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.contentArea::-webkit-scrollbar {
+  display: none;
+}
+
+/* Game HUD */
+.gameHud {
+  flex-shrink: 0;
+  width: 100%;
+  /* color: var(--text-primary); */
+  padding: 1.25rem 1.5rem;
+  position: sticky;
+  z-index: 3;
+  top: 0;
+}
+
+.hudTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.hudLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hudLevel,
+.hudXp,
+.hudAchievements {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  /* font-size: 16px; */
+}
+
+.hudLevel {
+  font-size: 1rem;
+}
+
+.leggero {
+  font-weight: 120;
+}
+
+/* Fissa anche il container padre */
+.hudXp {
+  font-weight: 500;
+  min-width: fit-content; /* Non cambia mai dimensione */
+  align-items: center; /* Mantiene allineamento verticale */
+}
+
+.progressSection {
+  width: 100%;
+}
+
+.progressLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  color: rgba(191, 219, 254, 1);
+}
+
+.progressBar {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  height: 0.5rem;
+  overflow: hidden;
+}
+
+.progressFill {
+  background: linear-gradient(to right, #2e9688, #aaebe2);
+  height: 100%;
+  border-radius: 9999px;
+  transition: var(--transition-slow);
+}
+.screenBg {
+  /* background: linear-gradient(135deg, #3b82f6, #6366f1); */
+  /* background: linear-gradient(135deg, #187599, #28f50d); */
+  /* background: linear-gradient(135deg, #3e82f0, #4b4dc7); */
+  /* background: var(--card-gradient); */
+
+  /* min-height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Transizione smooth */
+  border-radius: var(--card-border-radius);
+  /* border: none; */
+}
+.cardApp {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  background: var(--bg);
+  /* background: var(--card-app-bg); */
+  /* background: rgba(255, 255, 255, 0.1); */
+  backdrop-filter: blur(20px);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* animation: float 6s ease-in-out infinite; */
+  /* overflow-y: hidden; */
+  overflow: hidden;
+}
