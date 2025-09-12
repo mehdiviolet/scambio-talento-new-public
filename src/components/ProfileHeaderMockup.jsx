@@ -23,6 +23,7 @@ import messageStyles from "@/components/MainApp/Shared/Modals/ViewSkillModal.mod
 import { useSelector, useDispatch } from "react-redux";
 // ✅ CORRETTO: importa solo followUser
 import { followUser } from "@/store/slices/experienceSliceTest";
+import MessageModal from "./MainApp/Shared/Modals/MessageModal";
 
 const ShareModal = ({ isOpen, onClose, userProfile }) => {
   if (!isOpen) return null;
@@ -87,63 +88,6 @@ const ShareModal = ({ isOpen, onClose, userProfile }) => {
             <button className={shareStyles.cancelButton} onClick={onClose}>
               <X />
               Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const MessageModal = ({ isOpen, onClose, userProfile }) => {
-  const [message, setMessage] = useState("");
-
-  if (!isOpen) return null;
-
-  return (
-    <div className={messageStyles.overlay}>
-      <div className={messageStyles.container}>
-        <div className={messageStyles.header}>
-          <h3 className={messageStyles.title}>
-            Message {userProfile.firstName}
-          </h3>
-          <button className={messageStyles.closeButton} onClick={onClose}>
-            <X />
-          </button>
-        </div>
-
-        <div className={messageStyles.content}>
-          <div className={messageStyles.descriptionBox}>
-            <textarea
-              className={messageStyles.editTextarea}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Write your message..."
-              rows={4}
-            />
-          </div>
-        </div>
-
-        <div className={messageStyles.footer}>
-          <div className={messageStyles.userInfo}>
-            <div className={messageStyles.avatar}>
-              <div className={messageStyles.avatarEmoji}>👩‍🎨</div>
-            </div>
-            <span className={messageStyles.userName}>
-              {userProfile.firstName} {userProfile.lastName}
-            </span>
-          </div>
-        </div>
-
-        <div className={messageStyles.actions}>
-          <div className={messageStyles.editActions}>
-            <button className={messageStyles.cancelButton} onClick={onClose}>
-              <X />
-              Cancel
-            </button>
-            <button className={messageStyles.saveButton}>
-              <Send />
-              Send
             </button>
           </div>
         </div>
