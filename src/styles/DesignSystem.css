@@ -4,9 +4,11 @@
   /* === PALETTE COLORI PRINCIPALE === */
   --text-primary: #256679; /* Azzurro principale */
   --text-secondary: #f59e0b; /* Arancione accento */
+  --text-secondaryLight: rgb(245, 158, 11, 0.3); /* Arancione accento */
   --text-primary-light: #3a8ba3; /* Azzurro chiaro */
-  --text-primaryLight: #3a8ba3; /* Azzurro chiaro */
-  --text-primary-dark: #1a4d5c; /* Azzurro scuro */
+  --text-primaryLight: rgb(58, 139, 163, 0.7); /* Azzurro chiaro */
+  --text-primary-dark: rgb(26, 77, 92); /* Azzurro scuro */
+  --text-primary-darkLight: rgb(16, 185, 129, 0.3); /* Azzurro scuro */
   --text-primaryDark: #1a4d5c; /* Azzurro scuro */
 
   /* ********************MY SYSTEM*********************** */

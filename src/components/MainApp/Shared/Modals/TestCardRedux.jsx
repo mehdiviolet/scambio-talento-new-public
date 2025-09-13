@@ -1076,156 +1076,207 @@ function TestCardRedux({
           {/* Stati del corso - Gestione esplicita */}
           {(isRequestOpen || courseState.status !== "idle") && (
             <div className={styles.unifiedSection}>
-              {/* STATO: requested */}
-              {isInstructor && instructorNotification?.hasNewRequest ? (
-                <div className={styles.instructorNotification}>
-                  <div className={styles.notificationMessage}>
+              {/* ========== RIGA MESSAGGI ========== */}
+              <div className={styles.messageRow}>
+                {/* STATO: requested - Messaggi */}
+                {isInstructor && instructorNotification?.hasNewRequest && (
+                  <div className={styles.studentWaiting}>
                     <CheckCircle size={16} />
-                    <span>🔔 Qualcuno interessato al corso.</span>
+                    <span>Qualcuno interessato al corso.</span>
+                    {/* <span>🔔 Qualcuno interessato al corso.</span> */}
                   </div>
+                )}
+
+                {!isInstructor && courseState.status === "requested" && (
+                  <div className={styles.studentWaiting}>
+                    <CheckCircle size={16} />
+                    <span>Richiesta inviata! Aspetta la notifica.</span>
+                  </div>
+                )}
+
+                {/* STATO: ready - Messaggi */}
+                {courseState.status === "ready" && !isInstructor && (
+                  <div className={styles.studentWaiting}>
+                    <span>⏳ L'istruttore sta preparando il corso...</span>
+                  </div>
+                )}
+
+                {/* STATO: waiting - Messaggi */}
+                {courseState.status === "waiting" && isInstructor && (
+                  <div className={styles.waitingMessage}>
+                    <div className={styles.progressBar}>
+                      <div className={styles.progressFill}></div>
+                    </div>
+                    <span>⏳ In attesa del student...</span>
+                  </div>
+                )}
+
+                {courseState.status === "waiting" && showXPWarning && (
+                  <div className={styles.xpWarning}>
+                    <span>
+                      ⚠️ XP insufficienti! Servono {getXPCosts().firstPayment}{" "}
+                      XP
+                    </span>
+                    <button onClick={() => setShowXPWarning(false)}>OK</button>
+                  </div>
+                )}
+
+                {/* STATO: active - Messaggi */}
+                {courseState.status === "active" && (
+                  <>
+                    {courseState.showFinishWaiting ? (
+                      <div className={styles.finishWaiting}>
+                        <p>
+                          {courseState.finishClicks.includes(
+                            isInstructor ? "instructor" : "student"
+                          )
+                            ? "⏳ In attesa che l'altro utente clicchi Termina..."
+                            : "⏳ L'altro utente ha cliccato Termina. Clicca anche tu!"}
+                        </p>
+                        <div className={styles.finishStatus}>
+                          <span
+                            className={
+                              courseState.finishClicks.includes("instructor")
+                                ? styles.clicked
+                                : styles.pending
+                            }
+                          >
+                            instructor:{" "}
+                            {courseState.finishClicks.includes("instructor")
+                              ? "✅"
+                              : "⏳"}
+                          </span>
+                          <span
+                            className={
+                              courseState.finishClicks.includes("student")
+                                ? styles.clicked
+                                : styles.pending
+                            }
+                          >
+                            student:{" "}
+                            {courseState.finishClicks.includes("student")
+                              ? "✅"
+                              : "⏳"}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={styles.activeMessage}>
+                        <span>🎓 Corso in sessione!</span>
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {/* STATO: pending_feedback - Messaggi */}
+                {courseState.status === "pending_feedback" && (
+                  <>
+                    {!isInstructor ? (
+                      <div className={styles.pendingFeedbackMessage}>
+                        <CheckCircle size={20} />
+                        <span>🎉 Corso completato!</span>
+                      </div>
+                    ) : (
+                      <div className={styles.instructorWaitingMessage}>
+                        <CheckCircle size={20} />
+                        <span>
+                          🎉 Complimenti! Aspetti feedback dello studente.
+                        </span>
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {/* STATO: completed - Messaggi */}
+                {courseState.status === "completed" && (
+                  <div className={styles.completedMessage}>
+                    <CheckCircle size={20} />
+                    <span>🎉 Corso completato con successo!</span>
+                    {isInstructor && (
+                      <p className={styles.completedNote}>
+                        📈 Complimenti per aver completato un altro corso!
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {/* STATO: rejected - Commenti */}
+                {courseState.status === "rejected" &&
+                  courseState.rejectComments?.length > 0 && (
+                    <div className={styles.rejectCommentsSection}>
+                      <h5>💬 Commenti sul rifiuto:</h5>
+                      {courseState.rejectComments.map((comment, index) => (
+                        <div key={index} className={styles.rejectCommentItem}>
+                          <div className={styles.commentHeader}>
+                            <strong>
+                              {comment.author === "instructor"
+                                ? "Istruttore"
+                                : "Studente"}
+                            </strong>
+                            <span className={styles.commentTime}>
+                              {new Date(comment.timestamp).toLocaleTimeString()}
+                            </span>
+                            {comment.isResponse && (
+                              <span className={styles.responseTag}>
+                                Risposta
+                              </span>
+                            )}
+                          </div>
+                          <p className={styles.commentText}>
+                            {comment.comment}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+              </div>
+
+              {/* ========== RIGA PULSANTI ========== */}
+              <div className={styles.buttonRow}>
+                {/* STATO: requested - Pulsanti */}
+                {isInstructor && instructorNotification?.hasNewRequest && (
                   <div className={styles.ownerChoices}>
                     <button
-                      className={styles.acceptRequestButton}
+                      // className={styles.acceptRequestButton}
+                      className={`${styles.actionButton} ${styles.acceptRequestButton}`}
                       onClick={handleInstructorAcceptRequest}
                     >
                       ✅ Accetto
                     </button>
                     <button
-                      className={styles.rejectRequestButton}
+                      // className={styles.rejectRequestButton}
+                      className={`${styles.actionButton} ${styles.rejectRequestButton}`}
                       onClick={handleInstructorRejectRequest}
                     >
                       ❌ Rifiuto
                     </button>
                   </div>
-                </div>
-              ) : (
-                !isInstructor &&
-                courseState.status === "requested" && (
-                  <div className={styles.studentWaiting}>
-                    <CheckCircle size={16} />
-                    <span>Richiesta inviata! Aspetta la notifica.</span>
-                  </div>
-                )
-              )}
-              {courseState.status === "rejected" &&
-                courseState.rejectComments?.length > 0 && (
-                  <div className={styles.rejectCommentsSection}>
-                    <h5>💬 Commenti sul rifiuto:</h5>
-                    {courseState.rejectComments.map((comment, index) => (
-                      <div key={index} className={styles.rejectCommentItem}>
-                        <div className={styles.commentHeader}>
-                          <strong>
-                            {comment.author === "instructor"
-                              ? "Istruttore"
-                              : "Studente"}
-                          </strong>
-                          <span className={styles.commentTime}>
-                            {new Date(comment.timestamp).toLocaleTimeString()}
-                          </span>
-                          {comment.isResponse && (
-                            <span className={styles.responseTag}>Risposta</span>
-                          )}
-                        </div>
-                        <p className={styles.commentText}>{comment.comment}</p>
-                      </div>
-                    ))}
-                  </div>
                 )}
-              {/* STATO: ready */}
-              {courseState.status === "ready" && (
-                <>
-                  {isInstructor ? (
-                    <button
-                      className={styles.startCourseButton}
-                      onClick={handleStartCourse}
-                    >
-                      🚀 Avvio Corso!
-                    </button>
-                  ) : (
-                    <div className={styles.studentWaiting}>
-                      <span>⏳ L'istruttore sta preparando il corso...</span>
-                    </div>
-                  )}
-                </>
-              )}
-              {/* STATO: waiting */}
-              {courseState.status === "waiting" && (
-                <>
-                  {isInstructor ? (
-                    <div className={styles.waitingCourseButton}>
-                      <div className={styles.progressBar}>
-                        <div className={styles.progressFill}></div>
-                      </div>
-                      <span>⏳ In attesa del student...</span>
-                    </div>
-                  ) : (
-                    <>
-                      <button
-                        className={styles.acceptCourseButton}
-                        onClick={handleStudentAccepts}
-                        disabled={!canAffordCourse()}
-                      >
-                        ✅ Accetta Corso - {getXPCosts().firstPayment} XP ora +{" "}
-                        {getXPCosts().secondPayment} XP dopo
-                      </button>
-                      {showXPWarning && (
-                        <div className={styles.xpWarning}>
-                          <span>
-                            ⚠️ XP insufficienti! Servono{" "}
-                            {getXPCosts().firstPayment} XP
-                          </span>
-                          <button onClick={() => setShowXPWarning(false)}>
-                            OK
-                          </button>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </>
-              )}
-              {/* STATO: active */}
-              {courseState.status === "active" && (
-                <div className={styles.courseActions}>
-                  {courseState.showFinishWaiting ? (
-                    <div className={styles.finishWaiting}>
-                      <p>
-                        {courseState.finishClicks.includes(
-                          isInstructor ? "instructor" : "student"
-                        )
-                          ? "⏳ In attesa che l'altro utente clicchi Termina..."
-                          : "⏳ L'altro utente ha cliccato Termina. Clicca anche tu!"}
-                      </p>
-                      <div className={styles.finishStatus}>
-                        <span
-                          className={
-                            courseState.finishClicks.includes("instructor")
-                              ? styles.clicked
-                              : styles.pending
-                          }
-                        >
-                          instructor:{" "}
-                          {courseState.finishClicks.includes("instructor")
-                            ? "✅"
-                            : "⏳"}
-                        </span>
-                        <span
-                          className={
-                            courseState.finishClicks.includes("student")
-                              ? styles.clicked
-                              : styles.pending
-                          }
-                        >
-                          student:{" "}
-                          {courseState.finishClicks.includes("student")
-                            ? "✅"
-                            : "⏳"}
-                        </span>
-                      </div>
-                    </div>
-                  ) : (
-                    <p>🎓 Corso in sessione!</p>
-                  )}
 
+                {/* STATO: ready - Pulsanti */}
+                {courseState.status === "ready" && isInstructor && (
+                  <button
+                    className={styles.startCourseButton}
+                    onClick={handleStartCourse}
+                  >
+                    🚀 Avvio Corso!
+                  </button>
+                )}
+
+                {/* STATO: waiting - Pulsanti */}
+                {courseState.status === "waiting" && !isInstructor && (
+                  <button
+                    className={styles.acceptCourseButton}
+                    onClick={handleStudentAccepts}
+                    disabled={!canAffordCourse()}
+                  >
+                    ✅ Accetta Corso - {getXPCosts().firstPayment} XP ora +{" "}
+                    {getXPCosts().secondPayment} XP dopo
+                  </button>
+                )}
+
+                {/* STATO: active - Pulsanti */}
+                {courseState.status === "active" && (
                   <div className={styles.courseButtons}>
                     <button
                       className={styles.rejectCourseButton}
@@ -1248,66 +1299,20 @@ function TestCardRedux({
                         : "Termina"}
                     </button>
                   </div>
-                </div>
-              )}
-              {/* 🆕 STATO: pending_feedback */}
-              {/* 🆕 STATO: pending_feedback */}
-              {courseState.status === "pending_feedback" && (
-                <div className={styles.pendingFeedbackState}>
-                  {!isInstructor ? (
-                    <>
-                      <div className={styles.pendingFeedbackMessage}>
-                        <CheckCircle size={20} />
-                        <span>🎉 Corso completato!</span>
-                      </div>
-                      <button
-                        className={styles.openFeedbackButton}
-                        onClick={() => setShowFeedbackModal(true)}
-                      >
-                        📝 Lascia Feedback
-                      </button>
-                    </>
-                  ) : (
-                    <div className={styles.instructorWaitingMessage}>
-                      <CheckCircle size={20} />
-                      <span>
-                        🎉 Complimenti! Aspetti feedback dello studente.
-                      </span>
-                    </div>
-                  )}
-                </div>
-              )}
-              {/* {courseState.status === "pending_feedback" && !isInstructor && (
-                <div className={styles.pendingFeedbackState}>
-                  <div className={styles.pendingFeedbackMessage}>
-                    <CheckCircle size={20} />
-                    <span>🎉 Corso completato!</span>
-                  </div>
-                </div>
-              )} */}
+                )}
 
-              {/* STATO: completed */}
-              {courseState.status === "completed" && (
-                <div className={styles.completedState}>
-                  <div className={styles.completedMessage}>
-                    <CheckCircle size={20} />
-                    <span>🎉 Corso completato con successo!</span>
-                  </div>
-                  {/* {!isInstructor && (
-                    <p className={styles.completedNote}>
-                      💎 Non dimenticare di lasciare una recensione!
-                    </p>
-                  )} */}
-                  {isInstructor && (
-                    <p className={styles.completedNote}>
-                      📈 Complimenti per aver completato un altro corso!
-                    </p>
-                  )}
-                </div>
-              )}
+                {/* STATO: pending_feedback - Pulsanti */}
+                {courseState.status === "pending_feedback" && !isInstructor && (
+                  <button
+                    className={styles.openFeedbackButton}
+                    onClick={() => setShowFeedbackModal(true)}
+                  >
+                    📝 Lascia Feedback
+                  </button>
+                )}
+              </div>
             </div>
           )}
-
           {/* MODAL PER CHI INIZIA IL RIFIUTO */}
           {showInitiateRejectModal && (
             <div className={styles.rejectModal}>
