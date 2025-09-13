@@ -957,11 +957,11 @@ function TestCardRedux({
   const getStatusStyles = () => {
     switch (courseState.status) {
       case "requested":
-        return { border: "2px solid red" };
+        return { border: "2px solid var(--text-secondary)" };
       case "ready":
-        return { border: "2px solid blue" };
+        return { border: "2px solid var(--text-primaryLight)" };
       case "waiting":
-        return { border: "2px solid gray" };
+        return { border: "2px solid var(--text-primaryLight)" };
       case "rejected":
         return { border: "2px solid black", backgroundColor: "red" };
       case "completed":
@@ -996,7 +996,8 @@ function TestCardRedux({
               <span className={styles.infoValue}>{lezioni}</span>
             </div>
             <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Durata lezione:</span>
+              {/* <span className={styles.infoLabel}>Durata lezione:</span> */}
+              <span className={styles.infoLabel}>Durata:</span>
               <span className={styles.infoValue}>{durataLezione}</span>
             </div>
             <div className={styles.infoItem}>
