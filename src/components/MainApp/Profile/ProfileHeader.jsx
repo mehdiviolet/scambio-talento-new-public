@@ -46,18 +46,21 @@ import { useAppSelector } from "../../../hooks/redux";
 import ShareModal from "./ShareModal";
 import MessageModal from "../Shared/Modals/MessageModal";
 import PhotoUploadModal from "./PhotoUploadModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import HelpModal from "./HelpModal";
 import LogoutModal from "./LogoutModal";
 import InviteFriendModal from "./InviteFriendModal";
 import { selectFeedbacks } from "@/store/slices/sharedEventSlice";
 import CherryComp from "@/components/CherryComp";
+import { followUser } from "@/store/slices/experienceSliceTest";
 
 const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const { profileData, level, achievements, updateProfileData, languagesData } =
     useQuickSetup();
   const { setShowQuickSetup, setShowDashboard } = useOnboarding();
   const { setCurrentStep, currentStep, resetForEdit } = useQuickSetup();
+
+  const dispatch = useDispatch();
 
   const { isOwner } = useAppSelector((state) => state.onboarding);
 
@@ -108,9 +111,18 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
         .length || 0
   );
 
-  const { followers, following } = useSelector(
-    (state) => state.experienceSliceTest.selectedPersonData.social
+  // const { followers, following } = useSelector(
+  //   (state) => state.experienceSliceTest.selectedPersonData.social
+  // );
+
+  const currentUserSocial = useSelector(
+    (state) => state.experienceSliceTest.socialConnections.currentUser
   );
+
+  const { followers, following } = currentUserSocial || {
+    followers: [],
+    following: [],
+  };
 
   const user = {
     firstName: profileData.firstName,
@@ -143,6 +155,43 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const myFeedback = feedbacks.find(
     (feedback) => feedback.fromUserId === currentUser.id
   );
+
+  const handleUnfollow = (personToUnfollow) => {
+    dispatch(
+      followUser({
+        followerId: "currentUser",
+        followedId: personToUnfollow.id,
+        followerData: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          username: user.username,
+          profilePhoto: user.profilePhoto,
+        },
+        followedData: personToUnfollow,
+      })
+    );
+  };
+
+  const handleFollowBack = (followerToFollowBack) => {
+    dispatch(
+      followUser({
+        followerId: "currentUser",
+        followedId: followerToFollowBack.id,
+        followerData: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          username: "currentuser",
+          profilePhoto: user.profilePhoto,
+        },
+        followedData: {
+          firstName: followerToFollowBack.firstName,
+          lastName: followerToFollowBack.lastName,
+          username: followerToFollowBack.username,
+          profilePhoto: followerToFollowBack.profilePhoto,
+        },
+      })
+    );
+  };
 
   const helpCategories = [
     {
@@ -346,7 +395,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
       isFollowingBack: false,
     },
   ];
-  console.log("USERRRR", followers, following);
+  // console.log("USERRRR", followers, following);
 
   // const mockFollowing = [
   //   { id: 5, name: "Marco Blu", username: "marcoblu", avatar: null },
@@ -1077,9 +1126,9 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
             <span>Followers ({user.followers})</span>
           </button>
         </div>
-        {/* <div className={styles.drawerContent}>
+        <div className={styles.drawerContent}>
           <div style={{ padding: "0 1rem" }}>
-            {mockFollowers.map((follower) => (
+            {followers.map((follower) => (
               <div
                 key={follower.id}
                 style={{
@@ -1105,10 +1154,8 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     flexShrink: 0,
                   }}
                 >
-                  {follower.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
+                  {follower.firstName?.[0]}
+                  {follower.lastName?.[0]}
                 </div>
 
                 <div style={{ flex: 1, minWidth: 0 }}>
@@ -1120,7 +1167,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       marginBottom: "2px",
                     }}
                   >
-                    {follower.name}
+                    {follower.firstName} {follower.lastName}
                   </div>
                   <div
                     style={{
@@ -1137,29 +1184,21 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     padding: "0.5rem 1rem",
                     fontSize: "0.75rem",
                     borderRadius: "1rem",
-                    border: `1px solid ${
-                      followingList.has(follower.id)
-                        ? "var(--success-green)"
-                        : "rgba(255, 255, 255, 0.2)"
-                    }`,
-                    background: followingList.has(follower.id)
-                      ? "rgba(16, 185, 129, 0.15)"
-                      : "rgba(255, 255, 255, 0.1)",
-                    color: followingList.has(follower.id)
-                      ? "var(--success-green-dark)"
-                      : "var(--text-primary)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    color: "var(--text-primary)",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
                     flexShrink: 0,
                   }}
-                  onClick={() => handleToggleFollow(follower)}
+                  onClick={() => handleFollowBack(follower)}
                 >
-                  {followingList.has(follower.id) ? "Following" : "Follow"}
+                  Follow Back
                 </button>
               </div>
             ))}
           </div>
-        </div> */}
+        </div>
       </div>
 
       {/* Following Drawer */}
@@ -1179,7 +1218,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
         </div>
         <div className={styles.drawerContent}>
           <div style={{ padding: "0 1rem" }}>
-            {/* {mockFollowing.map((following) => (
+            {following.map((following) => (
               <div
                 key={following.id}
                 style={{
@@ -1205,10 +1244,8 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     flexShrink: 0,
                   }}
                 >
-                  {following.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
+                  {following.firstName?.[0]}
+                  {following.lastName?.[0]}
                 </div>
 
                 <div style={{ flex: 1, minWidth: 0 }}>
@@ -1220,7 +1257,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       marginBottom: "2px",
                     }}
                   >
-                    {following.name}
+                    {following.firstName} {following.lastName}
                   </div>
                   <div
                     style={{
@@ -1233,6 +1270,23 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                 </div>
 
                 <button
+                  style={{
+                    padding: "0.5rem 1rem",
+                    fontSize: "0.75rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    color: "var(--text-primary)",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                    flexShrink: 0,
+                  }}
+                  onClick={() => handleUnfollow(following)}
+                >
+                  Following
+                </button>
+
+                {/* <button
                   style={{
                     padding: "0.5rem 1rem",
                     fontSize: "0.75rem",
@@ -1256,21 +1310,21 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   onClick={() => handleToggleFollow(following)}
                 >
                   {followingList.has(following.id) ? "Following" : "Follow"}
-                </button>
+                </button> */}
               </div>
-            ))} */}
-            {followersWithData.map((follower) => (
+            ))}
+            {/* {followersWithData.map((follower) => (
               <div key={follower.id}>
                 {follower.firstName} {follower.lastName}
               </div>
-            ))}
+            ))} */}
 
-            <h3>Following:</h3>
+            {/* <h3>Following:</h3>
             {following.map((person) => (
               <div key={person.id}>
                 {person.firstName} {person.lastName}
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

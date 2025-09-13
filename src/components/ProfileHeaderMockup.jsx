@@ -16,6 +16,7 @@ import {
   Instagram,
   Settings,
   Cherry,
+  ChevronLeft,
 } from "lucide-react";
 import styles from "@/components/MainApp/Profile/ProfileHeader.module.css";
 import shareStyles from "@/components/MainApp/Shared/Modals/ShareModal.module.css";
@@ -178,6 +179,8 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
   const [isAboutExpanded, setIsAboutExpanded] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
+  const [isFollowersDrawerOpen, setIsFollowersDrawerOpen] = useState(false);
+  const [isFollowingDrawerOpen, setIsFollowingDrawerOpen] = useState(false);
 
   const user = {
     firstName: selectedPerson.firstName,
@@ -253,8 +256,11 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
   //     })
   //   );
   // };
-  const handleFollowersClick = () => console.log("Followers list clicked");
-  const handleFollowingClick = () => console.log("Following list clicked");
+  // const handleFollowersClick = () => console.log("Followers list clicked");
+  // const handleFollowingClick = () => console.log("Following list clicked");
+
+  const handleFollowersClick = () => setIsFollowersDrawerOpen(true);
+  const handleFollowingClick = () => setIsFollowingDrawerOpen(true);
 
   return (
     <>
@@ -414,6 +420,29 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
                 className={styles.followStat}
                 onClick={handleFollowingClick}
               >
+                <strong>{user.following ? user.following : 0}</strong> following
+              </button>
+              <button
+                className={styles.followStat}
+                onClick={handleFollowersClick}
+              >
+                <strong>{user.followers ? user.followers : 0}</strong> followers
+              </button>
+              <button
+                className={styles.aboutToggle}
+                onClick={() => setIsAboutExpanded(!isAboutExpanded)}
+              >
+                <span>About me</span>
+                {isAboutExpanded ? (
+                  <ChevronUp size={20} />
+                ) : (
+                  <ChevronDown size={20} />
+                )}
+              </button>
+              {/* <button
+                className={styles.followStat}
+                onClick={handleFollowingClick}
+              >
                 <strong>{user.following}</strong> following
               </button>
               <button
@@ -432,7 +461,7 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
                 ) : (
                   <ChevronDown size={20} />
                 )}
-              </button>
+              </button> */}
             </div>
           </div>
 
@@ -446,7 +475,223 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
           </div>
         </div>
       </div>
+      {/* Followers Drawer */}
+      <div
+        className={`${styles.slideDrawer} ${
+          isFollowersDrawerOpen ? styles.open : ""
+        }`}
+      >
+        <div className={styles.drawerHeader}>
+          <button
+            className={styles.backButton}
+            onClick={() => setIsFollowersDrawerOpen(false)}
+          >
+            <ChevronLeft size={20} />
+            <span>Followers ({user.followers})</span>
+          </button>
+        </div>
+        <div className={styles.drawerContent}>
+          <div style={{ padding: "0 1rem" }}>
+            {followers.map((follower) => (
+              <div
+                key={follower.id}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  padding: "1rem 0",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                }}
+              >
+                <div
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "var(--text-primary)",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    flexShrink: 0,
+                  }}
+                >
+                  {follower.firstName?.[0]}
+                  {follower.lastName?.[0]}
+                </div>
 
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div
+                    style={{
+                      fontWeight: "600",
+                      fontSize: "0.875rem",
+                      color: "var(--text-primary)",
+                      marginBottom: "2px",
+                    }}
+                  >
+                    {follower.firstName} {follower.lastName}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.75rem",
+                      color: "var(--text-primary-light)",
+                    }}
+                  >
+                    @{follower.username}
+                  </div>
+                </div>
+
+                <button
+                  style={{
+                    padding: "0.5rem 1rem",
+                    fontSize: "0.75rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    color: "var(--text-primary)",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                    flexShrink: 0,
+                  }}
+                  // onClick={() => handleFollowBack(follower)}
+                >
+                  Follow Back
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Following Drawer */}
+      <div
+        className={`${styles.slideDrawer} ${
+          isFollowingDrawerOpen ? styles.open : ""
+        }`}
+      >
+        <div className={styles.drawerHeader}>
+          <button
+            className={styles.backButton}
+            onClick={() => setIsFollowingDrawerOpen(false)}
+          >
+            <ChevronLeft size={20} />
+            <span>Following ({user.following})</span>
+          </button>
+        </div>
+        <div className={styles.drawerContent}>
+          <div style={{ padding: "0 1rem" }}>
+            {following.map((following) => (
+              <div
+                key={following.id}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  padding: "1rem 0",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                }}
+              >
+                <div
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "var(--text-primary)",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    flexShrink: 0,
+                  }}
+                >
+                  {following.firstName?.[0]}
+                  {following.lastName?.[0]}
+                </div>
+
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div
+                    style={{
+                      fontWeight: "600",
+                      fontSize: "0.875rem",
+                      color: "var(--text-primary)",
+                      marginBottom: "2px",
+                    }}
+                  >
+                    {following.firstName} {following.lastName}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.75rem",
+                      color: "var(--text-primary-light)",
+                    }}
+                  >
+                    @{following.username}
+                  </div>
+                </div>
+
+                <button
+                  style={{
+                    padding: "0.5rem 1rem",
+                    fontSize: "0.75rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    color: "var(--text-primary)",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                    flexShrink: 0,
+                  }}
+                  // onClick={() => handleUnfollow(following)}
+                >
+                  Following
+                </button>
+
+                {/* <button
+                        style={{
+                          padding: "0.5rem 1rem",
+                          fontSize: "0.75rem",
+                          borderRadius: "1rem",
+                          border: `1px solid ${
+                            followingList.has(following.id)
+                              ? "var(--success-green)"
+                              : "rgba(255, 255, 255, 0.2)"
+                          }`,
+      
+                          background: followingList.has(following.id)
+                            ? "rgba(16, 185, 129, 0.15)"
+                            : "rgba(255, 255, 255, 0.1)",
+                          color: followingList.has(following.id)
+                            ? "var(--success-green-dark)"
+                            : "var(--text-primary)",
+                          cursor: "pointer",
+                          transition: "all 0.2s ease",
+                          flexShrink: 0,
+                        }}
+                        onClick={() => handleToggleFollow(following)}
+                      >
+                        {followingList.has(following.id) ? "Following" : "Follow"}
+                      </button> */}
+              </div>
+            ))}
+            {/* {followersWithData.map((follower) => (
+              <div key={follower.id}>
+                {follower.firstName} {follower.lastName}
+              </div>
+            ))} */}
+
+            {/* <h3>Following:</h3>
+                  {following.map((person) => (
+                    <div key={person.id}>
+                      {person.firstName} {person.lastName}
+                    </div>
+                  ))} */}
+          </div>
+        </div>
+      </div>
       {/* Modali */}
       <ShareModal
         isOpen={isShareModalOpen}
