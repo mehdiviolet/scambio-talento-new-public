@@ -71,7 +71,8 @@ const ActivityModalTest = ({ isOpen, onClose }) => {
           <div className={styles.activityDisplay}>
             <div className={styles.activityValue}>
               <Activity size={32} className={styles.activityIcon} />
-              <span className={styles.valueNumber}>{giorniConsecutivi}</span>
+              {/* <span className={styles.valueNumber}>{giorniConsecutivi}</span> */}
+              <span className={styles.valueNumber}>0</span>
             </div>
 
             <h4 className={styles.statsTitle}>
@@ -118,7 +119,7 @@ const ActivityModalTest = ({ isOpen, onClose }) => {
                 {/* Cookie guadagnati */}
                 {cookieReward > 0 && (
                   <div className={styles.goalHeader}>
-                    <span className={styles.goalTitle}>Cookie guadagnati:</span>
+                    <span className={styles.goalTitle}>XP guadagnati:</span>
                     <span className={styles.badgeNumber}>{cookieReward}</span>
                     <Cookie size={20} className={styles.badgeIcon} />
                   </div>
@@ -126,27 +127,27 @@ const ActivityModalTest = ({ isOpen, onClose }) => {
 
                 {/* Prossimo obiettivo */}
                 <div className={styles.nextGoal}>
-                  <span className={styles.goalTitle}>
+                  {/* <span className={styles.goalTitle}>
                     {giorniConsecutivi < 21
                       ? "Primo badge:"
                       : "Prossimo badge:"}
-                  </span>
+                  </span> */}
                   <span className={styles.goalSubtext}>
                     {giorniConsecutivi < 21
-                      ? `Ancora ${21 - giorniConsecutivi} giorni per 50 Cookie`
-                      : `Ancora ${giorniRimasti} giorni per +50 Cookie`}
+                      ? `Ancora ${21 - giorniConsecutivi} giorni per 50 XP`
+                      : `Ancora ${giorniRimasti} giorni per +50 XP`}
                   </span>
                 </div>
 
                 {/* Sistema rewards */}
-                <div className={styles.rewardSystem}>
+                {/* <div className={styles.rewardSystem}>
                   <div className={styles.rewardItem}>
                     <span className={styles.badgeNumber}>21</span>
                     <Activity size={16} className={styles.badgeIcon} />
                     <span className={styles.rewardText}>= 50</span>
                     <Cookie size={16} className={styles.badgeIcon} />
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
 

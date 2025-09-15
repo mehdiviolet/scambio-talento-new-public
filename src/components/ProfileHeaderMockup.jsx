@@ -18,7 +18,8 @@ import {
   Cherry,
   ChevronLeft,
 } from "lucide-react";
-import styles from "@/components/MainApp/Profile/ProfileHeader.module.css";
+// import styles from "@/components/MainApp/Profile/ProfileHeader.module.css";
+import styles from "../components/MainApp/Profile/ProfileHeader.module.css";
 import shareStyles from "@/components/MainApp/Shared/Modals/ShareModal.module.css";
 import messageStyles from "@/components/MainApp/Shared/Modals/ViewSkillModal.module.css";
 import { useSelector, useDispatch } from "react-redux";

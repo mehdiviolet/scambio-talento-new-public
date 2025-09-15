@@ -316,8 +316,7 @@ const SkillsSection = () => {
                             skill.description
                           ) : isOwner ? (
                             <span className={styles.descriptionPlaceholder}>
-                              Nessuna descrizione disponibile. Clicca per
-                              aggiungerne una.
+                              Clicca per aggiungere una descrizione.
                             </span>
                           ) : (
                             <span className={styles.descriptionPlaceholder}>

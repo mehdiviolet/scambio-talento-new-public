@@ -86,6 +86,7 @@
   --radius-sm: 0.5rem; /* 8px */
   --radius-md: 0.75rem; /* 12px */
   --radius-lg: 1rem; /* 16px */
+  --radius-lgMe: 24px; /* 16px */
   --radius-xl: 1.5rem; /* 24px */
   --radius-2xl: 2rem; /* 32px */
   --radius-full: 50%; /* Circular */

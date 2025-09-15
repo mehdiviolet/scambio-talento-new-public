@@ -1,6 +1,15 @@
 // SearchPage.jsx - VERSIONE CORRETTA CON SELEZIONE UNIFICATA
 import React, { useState } from "react";
-import { Search, User, List, Activity, Star, Cookie } from "lucide-react";
+import {
+  Search,
+  User,
+  List,
+  Activity,
+  Star,
+  Cookie,
+  ChevronLeft,
+  X,
+} from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import SlideDrawer from "./SlideDrawer";
 import { useSlideDrawer } from "../hooks/useSlideDrawer";
@@ -16,6 +25,7 @@ import ActivityModalTest from "./ActivityModalTest";
 import CookieModal from "./CookieModal";
 import StarModal from "./StarModal";
 import { selectDemoState, selectUserXP } from "@/services/xpService";
+import SlideDrawerSearch from "./SlideDrawerSearch";
 
 // Lista di persone (come nel codice originale)
 const peopleList = [
@@ -284,52 +294,95 @@ const SearchPage = () => {
     }, 300);
   };
 
+  // const renderGameHUD = () => {
+  //   return (
+  //     <div className={searchStyles.gameHud}>
+  //       <div className={searchStyles.hudTop}>
+  //         <div className={searchStyles.hudLeft}>
+  //           <div className={searchStyles.hudLevel}>
+  //             <div
+  //               className={`${searchStyles.hudLevel} ${searchStyles.clickable}`}
+  //               onClick={() => setIsCookieModalOpen(true)}
+  //               style={{ cursor: "pointer" }}
+  //             >
+  //               <Cookie style={{ color: "var(--text-secondary)" }} />
+  //             </div>
+  //           </div>
+  //           <div
+  //             className={`${searchStyles.hudAchievements} ${searchStyles.clickable}`}
+  //             onClick={() => setsStarteModalOpen(true)}
+  //             style={{ cursor: "pointer" }}
+  //           >
+  //             <Star style={{ color: "var(--text-secondary)" }} />
+  //           </div>
+  //           <div
+  //             className={`${searchStyles.hudAchievements} ${searchStyles.clickable}`}
+  //             onClick={() => setIsActivityModalOpen(true)}
+  //             style={{ cursor: "pointer" }}
+  //           >
+  //             <Activity style={{ color: "var(--text-secondary)" }} />
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
   const renderGameHUD = () => {
     return (
       <div className={searchStyles.gameHud}>
         <div className={searchStyles.hudTop}>
+          {/* Lato sinistro - Freccia indietro (solo se drawer aperto) */}
           <div className={searchStyles.hudLeft}>
-            <div className={searchStyles.hudLevel}>
-              <div
-                className={`${searchStyles.hudLevel} ${searchStyles.clickable}`}
-                onClick={() => setIsCookieModalOpen(true)}
-                style={{ cursor: "pointer" }}
+            {isOpen && (
+              <button
+                className={searchStyles.drawerBackBtn}
+                onClick={handleCloseDrawer}
               >
-                <Cookie style={{ color: "var(--text-secondary)" }} />
-              </div>
+                <ChevronLeft size={24} />
+              </button>
+            )}
+          </div>
+
+          {/* Centro - Titolo (solo se drawer aperto) */}
+          {isOpen && (
+            <div className={searchStyles.hudCenter}>
+              <h2 className={searchStyles.drawerTitle}>
+                {selectedPersonForDrawer
+                  ? `${selectedPersonForDrawer.firstName} ${selectedPersonForDrawer.lastName}`
+                  : "Profilo"}
+              </h2>
+            </div>
+          )}
+
+          {/* Lato destro - Icone sempre visibili */}
+          <div className={searchStyles.hudRight}>
+            <div
+              className={`${searchStyles.hudLevel} ${searchStyles.clickable}`}
+              onClick={() => setIsCookieModalOpen(true)}
+            >
+              <Cookie style={{ color: "var(--text-secondary)" }} />
             </div>
             <div
               className={`${searchStyles.hudAchievements} ${searchStyles.clickable}`}
               onClick={() => setsStarteModalOpen(true)}
-              style={{ cursor: "pointer" }}
             >
               <Star style={{ color: "var(--text-secondary)" }} />
             </div>
             <div
               className={`${searchStyles.hudAchievements} ${searchStyles.clickable}`}
               onClick={() => setIsActivityModalOpen(true)}
-              style={{ cursor: "pointer" }}
             >
               <Activity style={{ color: "var(--text-secondary)" }} />
             </div>
-          </div>
-          {/* <div
-            className={`${styles.hudAchievements} ${styles.clickable}`}
-            onClick={() => setIsChatModalOpen(true)}
-            style={{ cursor: "pointer" }}
-          >
-            <Bell style={{ color: "var(--text-secondary)" }} />
-
-            {allNotifications.hasUnread && (
-              <div
-                className={`${styles.notificationBadge} ${
-                  allNotifications.total > 9 ? styles.large : ""
-                }`}
+            {/* {isOpen && (
+              <button
+                className={searchStyles.drawerCloseBtn}
+                onClick={handleCloseDrawer}
               >
-                {allNotifications.total > 99 ? "99+" : allNotifications.total}
-              </div>
-            )}
-          </div> */}
+                <X size={20} />
+              </button>
+            )} */}
+          </div>
         </div>
       </div>
     );
@@ -426,7 +479,7 @@ const SearchPage = () => {
         )}
 
       {/* Slide Drawer per visualizzare profilo selezionato */}
-      <SlideDrawer
+      <SlideDrawerSearch
         isOpen={isOpen}
         onClose={handleCloseDrawer}
         title={
@@ -475,7 +528,7 @@ const SearchPage = () => {
             <p>Caricamento profilo...</p>
           </div>
         )}
-      </SlideDrawer>
+      </SlideDrawerSearch>
       {/* Activity Modal */}
       <ActivityModalTest
         isOpen={isActivityModalOpen}

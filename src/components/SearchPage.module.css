@@ -24,7 +24,7 @@
 
 /* --------------------------------- */
 .searchContainer {
-  padding: 20px;
+  padding: 0 20px;
   max-width: 100%;
   margin: 0 auto;
   position: relative;
@@ -176,13 +176,15 @@
   color: #6b7280;
   position: absolute;
   top: calc(100% + 8px);
-  left: 56px;
+  /* left: 56px; */
+  left: 0px;
   right: 0;
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
   z-index: 50;
+  margin: 0 20px;
 }
 
 .noResults p {
@@ -361,4 +363,67 @@
   /* animation: float 6s ease-in-out infinite; */
   /* overflow-y: hidden; */
   overflow: hidden;
+  /* border: 2px solid red; */
+  /* margin: 84px 0; */
+}
+
+/* **************** */
+.hudTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  min-height: 40px; /* Altezza fissa */
+}
+
+.hudLeft {
+  display: flex;
+  align-items: center;
+  min-width: 50px; /* Spazio riservato per freccia */
+}
+
+.hudCenter {
+  flex: 1;
+  display: flex;
+  /* justify-content: center; */
+  justify-content: flex-start;
+  /* margin: 0 1rem; */
+}
+
+.hudRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.drawerBackBtn,
+.drawerCloseBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
+}
+
+.drawerBackBtn:hover,
+.drawerCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.drawerTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

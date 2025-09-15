@@ -10,6 +10,7 @@
   justify-content: center;
   z-index: 5000000;
   padding: 1rem;
+  border-radius: var(--radius-lgMe);
 }
 
 .modal {

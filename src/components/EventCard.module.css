@@ -1,9 +1,10 @@
 /* EventCard.module.css - AGGIORNATO CON DESIGN SYSTEM */
 
 .card {
-  background: var(--glass-bg-light);
+  /* background: var(--glass-bg-light); */
+  background: var(--bg--evento);
   backdrop-filter: var(--glass-blur);
-  border-radius: var(--radius-xl);
+  /* border-radius: var(--radius-xl); */
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-md);
   transition: var(--transition-normal);
@@ -178,7 +179,7 @@
 .cardContent {
   /* padding viene gestito dai contenitori figli */
   flex: 1; /* Prende tutto lo spazio disponibile */
-  border: 2px solid red; /* TEMPORANEO per debug */
+  /* border: 2px solid red;  */
 }
 
 .eventTitle {
@@ -857,7 +858,7 @@
   /* gap: var(--space-lg); */
   /* height: 200px; */
   margin-top: auto; /* Si posiziona automaticamente in fondo */
-  border: 2px solid blue; /* TEMPORANEO per debug */
+  /* border: 2px solid blue;  */
 }
 
 .cardFooterPiccolo {

@@ -17,6 +17,8 @@
   position: fixed;
   inset: 0;
   background: var(--bg--overlay);
+  /* border-radius: var(--radius-lgMe); */
+  border-radius: var(--radius-lgMe);
   backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
