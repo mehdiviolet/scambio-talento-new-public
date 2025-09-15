@@ -15,6 +15,7 @@ import {
 } from "@/store/slices/sharedEventSlice";
 import SlideEventCard from "./SlideEventCard";
 import { HeaderAddButton } from "./ui/AddButtons";
+import SlideEventCardCompleted from "./SlideEventCardCompleted";
 
 const EventSectionTest = ({
   isOwner,
@@ -177,8 +178,13 @@ const EventSectionTest = ({
 
           if (event.type === "static") {
             return (
-              <StaticEventShowcase
+              // <StaticEventShowcase
+              //   key={event.id}
+              //   selectedPersonData={selectedPersonData}
+              // />
+              <SlideEventCardCompleted
                 key={event.id}
+                isOwner={isOwner}
                 selectedPersonData={selectedPersonData}
               />
             );

@@ -511,6 +511,7 @@ const SearchPage = () => {
                       mockExperiencesNew={selectedPersonData.experiences}
                     />
                     <EventSectionTest
+                      isInstructorPanel={false}
                       isOwner={false}
                       selectedPersonData={selectedPersonData}
                     />

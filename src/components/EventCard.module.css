@@ -981,6 +981,7 @@
   align-items: flex-start;
   margin-bottom: var(--space-lg);
   flex-direction: column;
+  /* border: 1px solid red; */
 }
 
 .flexCard {

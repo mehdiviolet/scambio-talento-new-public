@@ -293,16 +293,6 @@ const MainAppRouter = () => {
                 <div className={styles.unreadBadge}>{notificationUnread}</div>
               )}
             </div>
-
-            {/* <button
-              className={`${styles.tab} ${
-                activeFilter === "notifications" ? styles.active : ""
-              }`}
-              onClick={() => setActiveFilter("notifications")}
-            >
-              <Bell size={16} />
-              Notifications
-            </button> */}
           </div>
           {isChatModalOpen && renderDrawerContent()}
         </div>
