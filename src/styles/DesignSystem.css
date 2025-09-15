@@ -30,6 +30,9 @@
   --text-disabled: rgba(255, 255, 255, 0.4);
   --text-cherry: rgb(172, 17, 17);
   --text-chat: #464645;
+  --triangle-err: #ef4444;
+  --rifiuto-corso: #fe9898e2;
+  --fatto-corso: #97d96a;
 
   /* === COLORI BASE === */
   --black: #000;

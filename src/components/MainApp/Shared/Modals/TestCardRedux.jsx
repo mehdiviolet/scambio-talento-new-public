@@ -45,6 +45,8 @@ import {
   GlassWaterIcon,
   GlobeIcon,
   Home,
+  X,
+  AlertTriangle,
 } from "lucide-react";
 import styles from "./TestCard.module.css";
 import {
@@ -963,9 +965,15 @@ function TestCardRedux({
       case "waiting":
         return { border: "2px solid var(--text-primaryLight)" };
       case "rejected":
-        return { border: "2px solid black", backgroundColor: "red" };
+        return {
+          border: "2px solid black",
+          backgroundColor: "var(--rifiuto-corso)",
+        };
       case "completed":
-        return { border: "2px solid black", backgroundColor: "gray" };
+        return {
+          border: "2px solid black",
+          backgroundColor: "var(--fatto-corso)",
+        };
       default:
         return {};
     }
@@ -1193,16 +1201,16 @@ function TestCardRedux({
                   <div className={styles.completedMessage}>
                     <CheckCircle size={20} />
                     <span>🎉 Corso completato con successo!</span>
-                    {isInstructor && (
+                    {/* {isInstructor && (
                       <p className={styles.completedNote}>
                         📈 Complimenti per aver completato un altro corso!
                       </p>
-                    )}
+                    )} */}
                   </div>
                 )}
 
                 {/* STATO: rejected - Commenti */}
-                {courseState.status === "rejected" &&
+                {/* {courseState.status === "rejected" &&
                   courseState.rejectComments?.length > 0 && (
                     <div className={styles.rejectCommentsSection}>
                       <h5>💬 Commenti sul rifiuto:</h5>
@@ -1228,6 +1236,61 @@ function TestCardRedux({
                           </p>
                         </div>
                       ))}
+                    </div>
+                  )} */}
+                {courseState.status === "rejected" &&
+                  courseState.rejectComments?.length > 0 && (
+                    <div className={styles.rejectCommentsSection}>
+                      <div className={styles.commentsHeader}>
+                        <MessageCircle size={16} />
+                        <h5>Commenti sul rifiuto</h5>
+                      </div>
+
+                      <div className={styles.commentsContainer}>
+                        {courseState.rejectComments.map((comment, index) => (
+                          <div key={index} className={styles.rejectCommentItem}>
+                            <div className={styles.commentHeader}>
+                              <div className={styles.commentAuthor}>
+                                <div
+                                  className={`${styles.authorBadge} ${
+                                    comment.author === "instructor"
+                                      ? styles.instructorBadge
+                                      : styles.studentBadge
+                                  }`}
+                                >
+                                  {comment.author === "instructor"
+                                    ? "Istruttore"
+                                    : "Studente"}
+                                </div>
+
+                                {comment.isResponse && (
+                                  <div className={styles.responseTag}>
+                                    Risposta
+                                  </div>
+                                )}
+                              </div>
+
+                              <span className={styles.commentTime}>
+                                {new Date(comment.timestamp).toLocaleString(
+                                  "it-IT",
+                                  {
+                                    day: "2-digit",
+                                    month: "2-digit",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                  }
+                                )}
+                              </span>
+                            </div>
+
+                            <div className={styles.commentContent}>
+                              <p className={styles.commentText}>
+                                "{comment.comment}"
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
               </div>
@@ -1349,6 +1412,78 @@ function TestCardRedux({
               </div>
             </div>
           )}
+          {/* {showInitiateRejectModal && (
+            <div
+              className={styles.overlay}
+              onClick={(e) => {
+                if (e.target === e.currentTarget) {
+                  handleCancelReject();
+                }
+              }}
+            >
+              <div
+                className={styles.modal}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className={styles.header}>
+                  <h3>Rifiuta Corso</h3>
+                  <button
+                    className={styles.closeButton}
+                    onClick={handleCancelReject}
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+
+                <div className={styles.content}>
+                  <div className={styles.xpDisplay}>
+                    <AlertTriangle
+                      size={32}
+                      className={styles.xpIcon}
+                      style={{ color: "var(--triangle-err)" }}
+                    />
+
+                    <h4 className={styles.xpTitle}>
+                      Perché vuoi rifiutare il corso?
+                    </h4>
+
+                    <textarea
+                      value={rejectComment}
+                      onChange={(e) => setRejectComment(e.target.value)}
+                      placeholder="Spiega il motivo del rifiuto (opzionale)..."
+                      className={styles.rejectTextarea}
+                      rows={4}
+                    />
+
+                    <div className={styles.statsGrid}>
+                      <button
+                        onClick={handleCancelReject}
+                        className={styles.rejectCancel}
+                      >
+                        Annulla
+                      </button>
+                      <button
+                        onClick={() => handleConfirmReject(false)}
+                        className={styles.rejectNoComment}
+                      >
+                        Rifiuta (-10 XP)
+                      </button>
+                    </div>
+
+                    {rejectComment.trim() && (
+                      <button
+                        onClick={() => handleConfirmReject(true)}
+                        className={styles.rejectConfirm}
+                        style={{ width: "100%", marginTop: "0.5rem" }}
+                      >
+                        Conferma con commento
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )} */}
           {/* MODAL PER CHI RICEVE LA NOTIFICA DEL RIFIUTO */}
           {showRejectResponseModal && (
             <div className={styles.rejectResponseModal}>
@@ -1360,7 +1495,6 @@ function TestCardRedux({
                     : "studente"}
                 </h4>
 
-                {/* Mostra il commento originale del rifiuto */}
                 {courseState.rejectComments?.[0] && (
                   <div className={styles.originalRejectComment}>
                     <strong>Motivo del rifiuto:</strong>
@@ -1387,7 +1521,6 @@ function TestCardRedux({
                     Chiudi
                   </button>
 
-                  {/* 🆕 BOTTONE NO COMMENT CON PENALITÀ */}
                   <button
                     onClick={() => {
                       setResponseToRejectComment(""); // Assicura che sia vuoto
@@ -1408,6 +1541,108 @@ function TestCardRedux({
               </div>
             </div>
           )}
+          {/* {showRejectResponseModal && (
+            <div
+              className={styles.overlay}
+              onClick={(e) => {
+                if (e.target === e.currentTarget) {
+                  handleSkipResponse();
+                }
+              }}
+            >
+              <div
+                className={styles.modal}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className={styles.header}>
+                  <h3>Corso Rifiutato</h3>
+                  <button
+                    className={styles.closeButton}
+                    onClick={handleSkipResponse}
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+
+                <div className={styles.content}>
+                  <div className={styles.xpDisplay}>
+                    <AlertTriangle
+                      size={32}
+                      className={styles.xpIcon}
+                      style={{ color: "#ef4444" }}
+                    />
+
+                    <h4 className={styles.xpTitle}>
+                      Rifiutato da{" "}
+                      {courseState.rejectionInitiatedBy === "instructor"
+                        ? "istruttore"
+                        : "studente"}
+                    </h4>
+
+                    {courseState.rejectComments?.[0] && (
+                      <div className={styles.infoGuide}>
+                        <p className={styles.guideText}>
+                          <strong>Motivo del rifiuto:</strong>
+                          <br />"{courseState.rejectComments[0].comment}"
+                        </p>
+                      </div>
+                    )}
+
+                    <div className={styles.progressContainer}>
+                      <label
+                        style={{
+                          fontSize: "0.9rem",
+                          color: "var(--text-primary)",
+                          fontWeight: "600",
+                          marginBottom: "0.5rem",
+                          display: "block",
+                        }}
+                      >
+                        La tua risposta (facoltativa):
+                      </label>
+                      <textarea
+                        value={responseToRejectComment}
+                        onChange={(e) =>
+                          setResponseToRejectComment(e.target.value)
+                        }
+                        placeholder="Vuoi aggiungere un commento in risposta?"
+                        className={styles.rejectTextarea}
+                        rows={4}
+                      />
+                    </div>
+
+                    <div className={styles.statsGrid}>
+                      <button
+                        onClick={handleSkipResponse}
+                        className={styles.rejectCancel}
+                      >
+                        Chiudi
+                      </button>
+                      <button
+                        onClick={() => {
+                          setResponseToRejectComment("");
+                          handleRespondToRejection();
+                        }}
+                        className={styles.rejectNoComment}
+                      >
+                        No comment (-10 XP)
+                      </button>
+                    </div>
+
+                    {responseToRejectComment.trim() && (
+                      <button
+                        onClick={handleRespondToRejection}
+                        className={styles.rejectConfirm}
+                        style={{ width: "100%", marginTop: "0.5rem" }}
+                      >
+                        Invia Risposta
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )} */}
 
           {showFeedbackModal && (
             <div
