@@ -27,9 +27,6 @@ import SearchPage from "./SearchPage";
 import ChatComponentTest from "./ChatComponentTest";
 import { useUnreadMessages } from "@/hooks/useUnreadMessages";
 import BottomNavigationTest from "./MainApp/Shared/BottomNavigationTest";
-// import ToastContainer from "./notifications/ToastContainer";
-// import NotificationBell from "./notifications/NotificationBell";
-// import RoleSpecificNotificationDropdown from "@/components/notifications/RoleSpecificNotificationDropdown";
 
 // ✨ NUOVO: Import XP Service selectors
 import {
@@ -66,8 +63,6 @@ import {
 import NotificationBell from "./notifications/NotificationBell";
 import NotificationPanel from "./notifications/NotificationPanel";
 import { useAppSelector } from "@/hooks/redux";
-// import useUnreadMessages from "src/hooks/useUnreadMessages.js";
-// Sostituisci ExplorePage con questo componente Esperienze
 
 const MainAppRouter = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -79,31 +74,30 @@ const MainAppRouter = () => {
   const [isStarteModalOpen, setsStarteModalOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState("chats"); // "chats" o "notifications"
 
+  // Nuovi stati per la navigazione del drawer
+  const [drawerView, setDrawerView] = useState("list"); // 'list' | 'chat'
+  const [selectedChat, setSelectedChat] = useState(null);
+
   const allNotifications = useAllNotifications("viewer");
 
   ////////////////NEW/////////////////
   const { isOwner } = useAppSelector((state) => state.onboarding);
 
   // ✅ Logica notifiche basata su isOwner
-  // const userRole = "owner";
   const userRole = "viewer";
   const notifications = useSelector(selectNotificationsByRole(userRole));
   const notificationUnread = useSelector(selectUnreadCountByRole(userRole));
-  // const notificationUnread = useSelector(selectUnreadCountForCurrentRole);
 
   console.log(notificationUnread);
 
-  ////////////////////
-  // const chatNotifications = useUnreadMessages(role); // Viewer per pannello DX
   const lastSlotReward = useSelector(selectLastSlotReward);
-  console.log("OWNERRRRRRRRR", useSelector(selectNotificationsByRole("owner")));
+  console.log("OWNERRRRRRR", useSelector(selectNotificationsByRole("owner")));
   console.log(
     "VIEWERRRRRRRR",
     useSelector(selectNotificationsByRole("viewer"))
   );
 
   const currentUserEvent = useSelector(selectCurrentUser);
-  // console.log(currentUserEvent);
   console.log("NNNNN", useSelector(selectNotificationsByRole("viewer")));
 
   const userProfile = useSelector(selectUserProfile("currentUser"));
@@ -111,31 +105,200 @@ const MainAppRouter = () => {
   const totalDisplayXP = useSelector(selectTotalDisplayXP); // XP + demo bonus
 
   const userXP = useSelector(selectUserXP("currentUser"));
-  // const currentUserId = useSelector(selectCurrentUserId);
 
   const { lastXpReward, addXP } = useQuickSetup();
 
+  // Funzione per gestire il back del drawer
+  const handleDrawerBack = () => {
+    if (drawerView === "chat") {
+      setDrawerView("list");
+      setSelectedChat(null);
+    } else {
+      setIsChatModalOpen(false);
+    }
+  };
+
+  // Funzione per renderizzare la vista della chat singola
+  const renderChatView = () => {
+    return (
+      <div style={{ padding: "20px", height: "100%" }}>
+        <div style={{ marginBottom: "20px" }}>
+          <button
+            onClick={() => setDrawerView("list")}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              background: "none",
+              border: "none",
+              color: "var(--text-primary)",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+          >
+            <ChevronLeft size={20} />
+            Torna alle chat
+          </button>
+        </div>
+
+        <div style={{ marginBottom: "20px" }}>
+          <h3 style={{ margin: 0, color: "var(--text-primary)" }}>
+            {selectedChat?.name || "Chat"}
+          </h3>
+        </div>
+
+        {/* Header della conversazione */}
+        <div
+          style={{
+            background: "var(--bg-secondary)",
+            padding: "15px",
+            borderRadius: "12px",
+            marginBottom: "20px",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <div
+              style={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                background: "var(--accent-primary)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              {selectedChat?.name?.charAt(0) || "C"}
+            </div>
+            <div>
+              <div style={{ fontWeight: "600", color: "var(--text-primary)" }}>
+                {selectedChat?.name || "Chat"}
+              </div>
+              <div style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
+                Online ora
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Area messaggi */}
+        <div
+          style={{
+            flex: 1,
+            background: "var(--bg-secondary)",
+            borderRadius: "12px",
+            padding: "20px",
+            minHeight: "400px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+          }}
+        >
+          {/* Messaggio di esempio */}
+          <div
+            style={{
+              alignSelf: "flex-start",
+              background: "white",
+              padding: "12px 16px",
+              borderRadius: "18px 18px 18px 6px",
+              maxWidth: "80%",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            }}
+          >
+            <div style={{ fontSize: "14px", color: "#333" }}>
+              Ciao! Come stai oggi?
+            </div>
+            <div style={{ fontSize: "12px", color: "#999", marginTop: "4px" }}>
+              10:30
+            </div>
+          </div>
+
+          <div
+            style={{
+              alignSelf: "flex-end",
+              background: "var(--accent-primary)",
+              color: "white",
+              padding: "12px 16px",
+              borderRadius: "18px 18px 6px 18px",
+              maxWidth: "80%",
+            }}
+          >
+            <div style={{ fontSize: "14px" }}>Tutto bene! Tu come va?</div>
+            <div style={{ fontSize: "12px", opacity: 0.8, marginTop: "4px" }}>
+              10:32
+            </div>
+          </div>
+        </div>
+
+        {/* Input per nuovo messaggio */}
+        <div
+          style={{
+            marginTop: "20px",
+            display: "flex",
+            gap: "12px",
+            alignItems: "center",
+          }}
+        >
+          <input
+            type="text"
+            placeholder="Scrivi un messaggio..."
+            style={{
+              flex: 1,
+              padding: "12px 16px",
+              border: "1px solid var(--border-color)",
+              borderRadius: "24px",
+              background: "var(--bg)",
+              color: "var(--text-primary)",
+              fontSize: "14px",
+            }}
+          />
+          <button
+            style={{
+              background: "var(--accent-primary)",
+              border: "none",
+              borderRadius: "50%",
+              width: "44px",
+              height: "44px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              color: "white",
+            }}
+          >
+            →
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   const renderDrawerContent = () => {
-    console.log("all");
+    if (drawerView === "chat") {
+      return renderChatView();
+    }
+
     if (activeFilter === "chats") {
-      console.log("CHAT");
       return (
         <ChatComponentTest
           isOwner={false}
           onClose={() => setIsChatModalOpen(false)}
+          onChatOpen={(chatData) => {
+            setDrawerView("chat");
+            setSelectedChat(chatData);
+          }}
         />
       );
     }
 
     if (activeFilter === "notifications") {
-      console.log("SS");
-
       return (
         <NotificationPanel
           currentRole={userRole}
           notifications={notifications}
           unreadCount={notificationUnread}
-          // mode="dropdown"
         />
       );
     }
@@ -153,8 +316,6 @@ const MainAppRouter = () => {
       joinedDate: userProfile?.joinedDate || "",
     };
 
-    // console.log(currentUser);
-
     switch (activeTab) {
       case "Eventi":
         return <EventiPage />;
@@ -162,10 +323,8 @@ const MainAppRouter = () => {
         return <EsperienzePage />;
       case "UserRoundSearch":
         return <SearchPage />;
-
       case "profile":
         return <ProfilePage />;
-
       default:
         return <EventiPage />;
     }
@@ -173,16 +332,16 @@ const MainAppRouter = () => {
 
   const calcolaPercentualeProgressBar = (giorniAttuali, giorniMax) => {
     const percentuale = Math.min((giorniAttuali / giorniMax) * 100, 100);
-    return Math.round(percentuale); // Arrotonda per evitare decimali
+    return Math.round(percentuale);
   };
-  const GIORNI_MASSIMI = 20; // Massimo per completare la progress bar
-  const giorniConsecutivi = 10;
 
+  const GIORNI_MASSIMI = 20;
+  const giorniConsecutivi = 10;
   const percentualeProgress = calcolaPercentualeProgressBar(
     giorniConsecutivi,
     GIORNI_MASSIMI
   );
-  const chatNotifications = useUnreadMessages("viewer"); // o "viewer" a seconda del ruolo
+  const chatNotifications = useUnreadMessages("viewer");
 
   const renderGameHUD = () => {
     return (
@@ -196,9 +355,6 @@ const MainAppRouter = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Cookie style={{ color: "var(--text-secondary)" }} />
-                {/* <span style={{ color: "var(--text-secondary)" }}>
-                  {userXP} XP
-                </span> */}
               </div>
             </div>
 
@@ -209,65 +365,16 @@ const MainAppRouter = () => {
             >
               <Star style={{ color: "var(--text-secondary)" }} />
             </div>
+
             <div
               className={`${styles.hudAchievements} ${styles.clickable}`}
               onClick={() => setIsActivityModalOpen(true)}
               style={{ cursor: "pointer" }}
             >
               <Activity style={{ color: "var(--text-secondary)" }} />
-              {/* <span style={{ color: "var(--text-secondary)" }}>0</span> */}
-              {/* <Bell size={24} /> */}
             </div>
-
-            {/* <div className={styles.hudXp}>
-              <div className={styles.cherryContainer}>
-                <Cherry
-                  className="icon-sm text-yellow-300"
-                  style={{
-                    color:
-                      lastSlotReward >= 30
-                        ? "#b81313"
-                        : lastSlotReward >= 10
-                        ? "#fde047"
-                        : "rgb(19, 200, 255)",
-                    transition: "all 0.3s ease",
-                    animation: xpJustChanged
-                      ? "cherry-shake-scale 0.4s ease-in-out"
-                      : "none",
-                  }}
-                />
-              </div>
-              <span>{lastSlotReward > 0 ? `+${lastSlotReward}` : 0}</span>
-            </div> */}
           </div>
-          {/* <div className={styles.hudXp}>
-            <div className={styles.cherryContainer}>
-              <Cherry
-                className="icon-sm text-yellow-300"
-                style={{
-                  color:
-                    lastSlotReward >= 30
-                      ? "#b81313"
-                      : lastSlotReward >= 10
-                      ? "#fde047"
-                      : "rgb(19, 200, 255)",
-                  transition: "all 0.3s ease",
-                  animation: xpJustChanged
-                    ? "cherry-shake-scale 0.4s ease-in-out"
-                    : "none",
-                }}
-              />
-            </div>
-            <span>{lastSlotReward > 0 ? `+${lastSlotReward}` : 0}</span>
-          </div> */}
-          {/* <div
-            className={`${styles.hudAchievements} ${styles.clickable}`}
-            onClick={() => setIsActivityModalOpen(true)}
-            style={{ cursor: "pointer" }}
-          >
-            <Activity className="icon-sm text-yellow-300" />
-            <span>0</span>
-          </div> */}
+
           {isOwner && (
             <div
               className={`${styles.hudAchievements} ${styles.clickable}`}
@@ -275,8 +382,6 @@ const MainAppRouter = () => {
               style={{ cursor: "pointer" }}
             >
               <Bell style={{ color: "var(--text-secondary)" }} />
-              {/* <span>{chatNotifications.total}</span> */}
-              {/* Badge Instagram-style */}
               {allNotifications.hasUnread && (
                 <div
                   className={`${styles.notificationBadge} ${
@@ -292,7 +397,6 @@ const MainAppRouter = () => {
       </div>
     );
   };
-  // Nel MainAppRouter.jsx, modifica la parte del return:
 
   return (
     <div className={styles.screen}>
@@ -309,11 +413,13 @@ const MainAppRouter = () => {
         giorniConsecutivi={giorniConsecutivi}
         percentualeProgress={percentualeProgress}
       />
+
       <CookieModal
         isOpen={isCookieModalOpen}
         onClose={() => setIsCookieModalOpen(false)}
         userXP={userXP}
       />
+
       <StarModal
         isOpen={isStarteModalOpen}
         onClose={() => setsStarteModalOpen(false)}
@@ -327,58 +433,47 @@ const MainAppRouter = () => {
         }`}
       >
         <div className={styles.drawerHeader}>
-          <button
-            className={styles.backButton}
-            onClick={() => setIsChatModalOpen(false)}
-          >
+          <button className={styles.backButton} onClick={handleDrawerBack}>
             <ChevronLeft size={20} />
-            <span>Messaggi</span>
+            <span>
+              {drawerView === "chat" ? selectedChat?.name || "Chat" : "Profile"}
+            </span>
           </button>
-        </div>
-        <div className={styles.drawerContent}>
-          {/* Aggiungi questi tab */}
-          <div className={styles.drawerTabs}>
-            <div
-              className={`${styles.headerTitle} ${
-                activeFilter === "chats" ? styles.active : ""
-              }`}
-              onClick={() => setActiveFilter("chats")}
-            >
-              <MessageCircle size={20} />
-              <span>Chats</span>
-              {/* {totalUnread > 0 && (
-                <div className={styles.unreadBadge}>{totalUnread}</div>
-              )} */}
-            </div>
-            <div
-              className={`${styles.headerTitle} ${
-                activeFilter === "notifications" ? styles.active : ""
-              }`}
-              onClick={() => setActiveFilter("notifications")}
-            >
-              <Bell size={20} />
-              <span>Notifications</span>
-              {notificationUnread > 0 && (
-                <div className={styles.unreadBadge}>{notificationUnread}</div>
-              )}
-            </div>
+          {drawerView === "list" && (
+            <>
+              <div className={styles.drawerTabs}>
+                <div
+                  className={`${styles.headerTitle} ${
+                    activeFilter === "chats" ? styles.active : ""
+                  }`}
+                  onClick={() => setActiveFilter("chats")}
+                >
+                  <MessageCircle size={20} />
+                  {/* <span>Chats</span> */}
+                </div>
 
-            {/* <button
-              className={`${styles.tab} ${
-                activeFilter === "notifications" ? styles.active : ""
-              }`}
-              onClick={() => setActiveFilter("notifications")}
-            >
-              <Bell size={16} />
-              Notifications
-            </button> */}
-          </div>
-          {/* {isChatModalOpen && (
-            <ChatComponentTest
-              isOwner={false}
-              onClose={() => setIsChatModalOpen(false)}
-            />
-          )} */}
+                <div
+                  className={`${styles.headerTitle} ${
+                    activeFilter === "notifications" ? styles.active : ""
+                  }`}
+                  onClick={() => setActiveFilter("notifications")}
+                >
+                  <Bell size={20} />
+                  {/* <span>Notifications</span> */}
+                  {notificationUnread > 0 && (
+                    <div className={styles.unreadBadge}>
+                      {notificationUnread}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+
+        <div className={styles.drawerContent}>
+          {/* Mostra i tab solo se sei nella vista lista */}
+
           {isChatModalOpen && renderDrawerContent()}
         </div>
       </div>

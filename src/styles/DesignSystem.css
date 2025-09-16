@@ -11,6 +11,47 @@
   --text-primary-darkLight: rgba(16, 185, 129, 0.3); /* Verde scuro */
   --text-primaryDark: #1a4d5c; /* Azzurro scuro */
 
+  /* **********/
+
+  --primary-light: #3a8ca0; /* Per hover states e accenti leggeri */
+  --primary-lighter: #4da6c7; /* Per backgrounds delicati */
+  --primary-dark: #1a4d5a; /* Per testi importanti e contrasti forti */
+  --primary-darker: #0f3540; /* Per elementi di massimo contrasto */
+  --primary-muted: #7ba8b5; /* Per testi secondari e icone passive */
+
+  --secondary-light: #f6b332; /* Per hover su elementi secondary */
+  --secondary-lighter: #fbbf24; /* Per backgrounds e badge */
+  --secondary-dark: #d97706; /* Per CTA importanti */
+  --secondary-darker: #92400e; /* Per stati pressed e focus */
+  --secondary-muted: #fcd34d; /* Per notifiche soft */
+
+  --gray-50: #f8fafc; /* Backgrounds molto leggeri */
+  --gray-100: #f1f5f9; /* Separatori e cards */
+  --gray-200: #e2e8f0; /* Borders */
+  --gray-300: #cbd5e1; /* Placeholder text */
+  --gray-600: #475569; /* Testi di supporto */
+  --gray-800: #1e293b; /* Headings */
+
+  --bg: #ffffff;
+  --bg-old: #ececec;
+  --black: #000;
+  --white: #fff;
+  --bg--overlay: hsla(219, 66%, 46%, 0.345);
+  --bg--overlayDark: hsla(219, 66%, 46%, 0.4);
+
+  /* Progress Bar */
+  /* Nuove tonalità Teal */
+  --teal-primary: #2e9688; /* Verde-blu principale */
+  --teal-light: #22d3ee; /* Azzurro chiaro */
+  --teal-dark: #1f7a6b; /* Versione più scura del teal */
+  --teal-muted: #7dd3d3; /* Versione soft per backgrounds */
+
+  /* Tonalità Gold estese */
+  --gold-primary: #f59e0b; /* Il tuo secondary esistente */
+  --gold-light: #fbbf24; /* Oro chiaro */
+  --gold-dark: #d97706; /* Oro scuro */
+  --gold-lighter: #fef3c7; /* Oro molto chiaro per backgrounds */
+
   /* === COLORI RGB PER RGBA === */
   --text-primary-rgb: 37, 102, 121;
   --text-secondary-rgb: 245, 158, 11;
@@ -35,12 +76,7 @@
   --fatto-corso: #97d96a;
 
   /* === COLORI BASE === */
-  --black: #000;
-  --white: #fff;
-  --bg: #ffffff;
-  --bg--overlay: hsla(219, 66%, 46%, 0.345);
-  --bg--overlayDark: hsla(219, 66%, 46%, 0.4);
-  --bg-old: #ececec;
+
   --bg--skill-01: #cecec7;
   --bg--skill: #cecec758;
   --bg--esperienza: #d8cda3;

@@ -139,12 +139,20 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.progressTeal {
+/* .progressTeal {
   background: linear-gradient(90deg, #2e9688, #22d3ee);
 }
 
 .progressGold {
   background: linear-gradient(90deg, #f59e0b, #fbbf24);
+} */
+
+.progressTeal {
+  background: linear-gradient(90deg, var(--teal-primary), var(--teal-light));
+}
+
+.progressGold {
+  background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
 }
 
 .progressText {

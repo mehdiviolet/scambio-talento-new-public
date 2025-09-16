@@ -545,7 +545,8 @@
 }
 
 .statIcon {
-  color: var(--text-terzo);
+  /* color: var(--text-terzo); */
+  color: var(--text-primary);
   flex-shrink: 0;
 }
 

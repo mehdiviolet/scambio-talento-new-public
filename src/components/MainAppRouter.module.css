@@ -652,6 +652,8 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .backButton {
@@ -763,10 +765,11 @@
 .drawerTabs {
   display: flex;
   gap: 8px;
-  margin-left: auto;
+  /* margin-left: auto; */
   /* padding: 20px; */
   justify-content: space-around;
-  margin-top: var(--space-md);
+  /* margin-top: var(--space-md); */
+  margin: var(--space-md) auto;
 }
 
 .tab {
@@ -797,7 +800,7 @@
   cursor: pointer;
   font-weight: 500;
   font-size: 14px;
-  color: var(--text-secondary, #6b7280);
+  /* color: var(--text-secondary, #6b7280); */
   background: transparent;
   min-width: 100px;
   justify-content: center;
@@ -805,15 +808,14 @@
 
 /* Stato hover */
 .headerTitle:hover {
-  background: var(--bg-old);
-  color: var(--text-primary, #374151);
+  background: color-mix(in srgb, var(--text-primary) 10%, var(--bg));
+  color: var(--text-primary);
 }
 
-/* Stato attivo/selezionato */
 .headerTitle.active {
-  /* background: var(--bg--skill-01); */
-  background: var(--bg--overlay);
-  color: var(--text-primary, #1f2937);
+  /* background: var(--text-primary); */
+  background: var(--text-secondary);
+  color: var(--bg);
 }
 .drawerContent::-webkit-scrollbar {
   display: none;

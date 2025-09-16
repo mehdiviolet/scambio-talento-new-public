@@ -126,12 +126,14 @@
   justify-content: center;
   height: 300px;
   color: var(--text-secondary, #6b7280);
+  color: var(--primary-light);
   text-align: center;
   gap: 10px;
 }
 
 .emptyIcon {
-  color: var(--text-secondary, #9ca3af);
+  color: var(--primary-lighter);
+  /* color: var(--text-secondary, #9ca3af); */
 }
 
 .conversationItem {
@@ -151,7 +153,8 @@
 }
 
 .conversationItem.unread {
-  background: var(--bg--esperienza, #d8cda3);
+  /* background: var(--bg--esperienza, #d8cda3); */
+  background: var(--text-secondaryLight);
   border-left: 3px solid #f59e0b;
 }
 

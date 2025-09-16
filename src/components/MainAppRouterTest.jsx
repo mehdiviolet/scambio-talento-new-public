@@ -263,7 +263,9 @@ const MainAppRouter = () => {
             onClick={() => setIsChatModalOpen(false)}
           >
             <ChevronLeft size={20} />
-            <span>Messaggi</span>
+            <span>Profile</span>
+
+            {/* <span>Messaggi</span> */}
           </button>
         </div>
         <div className={styles.drawerContent}>
