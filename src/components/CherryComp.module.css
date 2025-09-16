@@ -7,7 +7,8 @@
   justify-content: center;
   align-items: center;
   min-height: 500px;
-  padding: 20px;
+  padding: 0 20px;
+  /* padding: 20px; */
   /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; */
 }
 
@@ -27,15 +28,15 @@
 }
 
 /* ===== AREA RICOMPENSA - SEMPRE PRESENTE ===== */
-.rewardMessage {
-  min-height: 120px; /* ALTEZZA FISSA */
+/* .rewardMessage {
+  min-height: 120px; 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* padding: 1.5rem; */
+  padding: 1.5rem;
   border-radius: 1rem;
-}
+} */
 
 /* .rewardMessage svg {
   width: 100%;
@@ -88,7 +89,8 @@
 /* ===== BASE DELLE SLOT ===== */
 .slotBase {
   border-radius: 1rem;
-  padding: 2rem;
+  /* padding: 2rem; */
+  padding: 1rem;
   position: relative;
   flex: 1;
   display: flex;
@@ -100,7 +102,8 @@
 .slotsContainer {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  /* gap: 1.5rem; */
+  gap: 1rem;
   position: relative;
   z-index: 2;
 }
@@ -318,10 +321,12 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(99, 102, 241, 0.3);
-  backdrop-filter: blur(35px);
+  /* background-color: rgba(99, 102, 241, 0.3); */
+  /* backdrop-filter: blur(35px); */
+  backdrop-filter: blur(45px);
   z-index: 9998;
   animation: overlayFadeIn 0.3s ease-out;
+  /* background-color: #065f46; */
 }
 
 @keyframes overlayFadeIn {
@@ -338,17 +343,20 @@
 /* 🆕 MODAL CONTAINER */
 .infoModal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
   z-index: 9999;
-  width: 90%;
-  max-width: 500px;
-  max-height: 80vh;
+  /* width: 90%; */
+  width: 100%;
+  height: 100%;
+  /* max-width: 500px; */
+  /* max-height: 80vh; */
   animation: modalAppear 0.3s ease-out;
 }
 
-@keyframes modalAppear {
+/* @keyframes modalAppear {
   from {
     opacity: 0;
     transform: translate(-50%, -50%) translateY(-8px) scale(0.95);
@@ -357,19 +365,19 @@
     opacity: 1;
     transform: translate(-50%, -50%) translateY(0) scale(1);
   }
-}
+} */
 
 /* 🆕 MODAL CONTENT - Stile glassmorphism come settings */
 .infoModalContent {
   background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(35px) saturate(150%);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* backdrop-filter: blur(35px) saturate(150%); */
+  /* border-radius: 1rem; */
+  /* border: 1px solid rgba(255, 255, 255, 0.3); */
   box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.4);
   padding: 1.5rem;
   overflow-y: auto;
-  max-height: 80vh;
+  /* max-height: 80vh; */
 }
 
 /* 🆕 HEADER MODAL */
@@ -541,8 +549,9 @@
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(8px);
   border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #374151;
+  border: 1px solid var(--text-secondary);
+  /* color: #374151; */
+  color: var(--text-secondary);
   flex-shrink: 0;
   margin-top: 0.125rem;
   gap: 8px;
@@ -580,7 +589,8 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 0.75rem;
-  background: rgba(255, 255, 255, 0.3);
+  /* background: rgba(255, 255, 255, 0.3); */
+  background: var(--gray-200);
   border-radius: 0.5rem;
   font-size: 0.8rem;
 }
@@ -652,8 +662,10 @@
 }
 
 .tipIcon {
+  /* font-size: 1.25rem; */
   font-size: 1.25rem;
   flex-shrink: 0;
+  margin: auto 0;
 }
 
 .tipContent {
@@ -904,9 +916,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: var(--glass-bg-light);
+  /* background: var(--glass-bg-light); */
   backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
+  /* border: 1px solid var(--glass-border); */
   border-radius: var(--radius-xl);
   padding: var(--space-xl);
   position: relative;
@@ -936,16 +948,17 @@
   justify-content: center;
   width: 5rem;
   height: 5rem;
-  background: var(--glass-bg-medium);
-  backdrop-filter: var(--glass-blur);
-  border: 2px solid var(--glass-border);
+  /* background: var(--glass-bg-medium); */
+  /* backdrop-filter: var(--glass-blur); */
+  /* border: 2px solid var(--glass-border); */
   border-radius: var(--radius-2xl);
   transition: var(--transition-normal);
 }
 
 .rewardWin .rewardIcon {
   transform: scale(1.1);
-  box-shadow: var(--shadow-glow);
+  /* box-shadow: var(--shadow-glow); */
+  /* box-shadow: var(--shadow-glow); */
   border-color: var(--text-secondary);
 }
 
@@ -959,7 +972,8 @@
 
 .rewardAmount {
   display: flex;
-  align-items: baseline;
+  /* align-items: baseline; */
+  align-items: center;
   gap: var(--space-sm);
 }
 

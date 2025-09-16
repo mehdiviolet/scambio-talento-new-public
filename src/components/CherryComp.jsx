@@ -188,9 +188,9 @@ const CherryComp = ({
                   size={48}
                   style={{
                     color:
-                      xpRewarded >= 30
+                      xpRewarded >= 10
                         ? "var(--danger-red)"
-                        : xpRewarded >= 10
+                        : xpRewarded >= 30
                         ? "var(--text-secondary)"
                         : "var(--teal-light)",
                     transition: "var(--transition-normal)",
@@ -206,9 +206,9 @@ const CherryComp = ({
                   className={styles.xpValue}
                   style={{
                     color:
-                      xpRewarded >= 30
+                      xpRewarded >= 10
                         ? "var(--danger-red)"
-                        : xpRewarded >= 10
+                        : xpRewarded >= 30
                         ? "var(--text-secondary)"
                         : "var(--teal-light)",
                     transition: "var(--transition-normal)",
@@ -217,12 +217,13 @@ const CherryComp = ({
                   {xpRewarded > 0 ? `+${xpRewarded}` : "0"}
                 </span>
                 <span
-                  className={styles.xpLabel}
+                  // className={styles.xpLabel}
+                  className={styles.xpValue}
                   style={{
                     color:
-                      xpRewarded >= 30
+                      xpRewarded >= 10
                         ? "var(--danger-red)"
-                        : xpRewarded >= 10
+                        : xpRewarded >= 30
                         ? "var(--text-secondary)"
                         : "var(--teal-light)",
                     transition: "var(--transition-normal)",
@@ -371,20 +372,20 @@ const CherryComp = ({
 
               {/* 📝 RIASSUNTO BREVE */}
               <div className={styles.summarySection}>
-                <h3 className={styles.sectionTitle}>📋 Riassunto Veloce</h3>
+                <h3 className={styles.sectionTitle}>Riassunto Veloce:</h3>
                 <div className={styles.quickInfo}>
                   <div className={styles.quickInfoItem}>
                     <span className={styles.quickInfoIcon}>🗓️</span>
                     <span>
-                      <strong>1 giro al giorno</strong> gratis
+                      <strong>1 giro al giorno</strong>
                     </span>
                   </div>
-                  <div className={styles.quickInfoItem}>
+                  {/* <div className={styles.quickInfoItem}>
                     <span className={styles.quickInfoIcon}>💰</span>
                     <span>
                       <strong>Fino a 30 XP</strong> per vincita
                     </span>
-                  </div>
+                  </div> */}
                   <div className={styles.quickInfoItem}>
                     <span className={styles.quickInfoIcon}>⚠️</span>
                     <span>
@@ -399,18 +400,20 @@ const CherryComp = ({
 
               {/* 📖 GUIDA COMPLETA */}
               <div className={styles.detailedSection}>
-                <h3 className={styles.sectionTitle}>📖 Guida Completa</h3>
+                <h3 className={styles.sectionTitle}>Guida Completa</h3>
 
                 {/* Sezione 1: Come Funziona */}
                 <div className={styles.guideItem}>
-                  <div className={styles.guideIcon}>
+                  {/* <div className={styles.guideIcon}>
                     <Zap size={18} />
-                  </div>
+                  </div> */}
                   <div className={styles.guideContent}>
-                    <h4 className={styles.guideTitle}>Come Funziona</h4>
+                    <h4 className={styles.guideTitle}>Come Funziona:</h4>
                     <p className={styles.guideDescription}>
-                      Clicca "GIRA ORA" per far girare i 3 rulli. Ogni rullo
-                      mostra un simbolo casuale: 🍒🍋🍊🍇💎⭐🍀
+                      Clicca "GIRA ORA" per far girare i 3 rulli.
+                      <br />
+                      Ogni rullo mostra un simbolo casuale:
+                      <br /> 🍒🍋🍊🍇💎⭐🍀
                     </p>
                   </div>
                 </div>
@@ -455,9 +458,9 @@ const CherryComp = ({
 
                 {/* Sezione 3: Sistema Anti-Spam */}
                 <div className={styles.guideItem}>
-                  <div className={styles.guideIcon}>
+                  {/* <div className={styles.guideIcon}>
                     <Shield size={18} />
-                  </div>
+                  </div> */}
                   <div className={styles.guideContent}>
                     <h4 className={styles.guideTitle}>Sistema di Blocco</h4>
                     <p className={styles.guideDescription}>
@@ -477,7 +480,7 @@ const CherryComp = ({
                 </div>
 
                 {/* Sezione 4: Limitazioni */}
-                <div className={styles.guideItem}>
+                {/* <div className={styles.guideItem}>
                   <div className={styles.guideIcon}>
                     <Clock size={18} />
                   </div>
@@ -496,11 +499,13 @@ const CherryComp = ({
                       </li>
                     </ul>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Tip finale */}
                 <div className={styles.tipSection}>
-                  <div className={styles.tipIcon}>💡</div>
+                  <div className={styles.tipIcon}>
+                    <Cookie size={24} />
+                  </div>
                   <div className={styles.tipContent}>
                     <strong>N.B:</strong> L'XP vinto viene aggiunto
                     immediatamente al tuo totale e registrato nella cronologia!
