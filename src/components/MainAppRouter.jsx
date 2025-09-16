@@ -88,8 +88,8 @@ const MainAppRouter = () => {
   const notifications = useSelector(selectNotificationsByRole(userRole));
   const notificationUnread = useSelector(selectUnreadCountByRole(userRole));
 
-  console.log(notificationUnread);
-
+  const chatUnread = allNotifications.chat.total;
+  console.log("chattt un read", chatUnread);
   const lastSlotReward = useSelector(selectLastSlotReward);
   console.log("OWNERRRRRRR", useSelector(selectNotificationsByRole("owner")));
   console.log(
@@ -450,6 +450,9 @@ const MainAppRouter = () => {
                 >
                   <MessageCircle size={20} />
                   {/* <span>Chats</span> */}
+                  {chatUnread > 0 && (
+                    <div className={styles.unreadBadge}>{chatUnread}</div>
+                  )}
                 </div>
 
                 <div
