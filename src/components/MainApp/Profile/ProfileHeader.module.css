@@ -91,6 +91,9 @@
   z-index: 20;
   flex-direction: column;
   width: 140px; /* aggiungi una larghezza fissa */
+  /* width: 140px;  */
+  /* background-color: #10363a; */
+  padding: 8px;
 }
 .iconsME {
   display: flex;
@@ -100,7 +103,8 @@
 }
 .editProfileBtn {
   background-color: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* border: 1px solid rgba(255, 255, 255, 0.3); */
+  border: 1px solid var(--gray-200);
   border-radius: 20px;
   padding: 8px 16px;
   font-size: 14px;
@@ -372,6 +376,11 @@
   background: transparent;
   cursor: pointer;
   transition: all 0.3s ease;
+  color: var(--danger-red);
+}
+
+.msgButton {
+  color: var(--primary-dark);
 }
 
 .liquidButton::before {

@@ -244,14 +244,6 @@ const SkillsSection = () => {
                           {isOwner && (
                             <div className={styles.actions}>
                               <div className={styles.actionButtons}>
-                                {/* <button
-                                  className={`${styles.actionButton} ${styles.actionButtonDelete}`}
-                                  onClick={(e) => handleDeleteClick(skill, e)}
-                                  title="Elimina esperienza"
-                                >
-                                  <Trash2 size={16} />
-                                  <span>Elimina</span>
-                                </button> */}
                                 <Button
                                   className={`${styles.actionButton} ${styles.actionButtonDelete}`}
                                   onClick={(e) => handleDeleteClick(skill, e)}
@@ -262,13 +254,6 @@ const SkillsSection = () => {
                                   <span>Elimina</span>
                                 </Button>
 
-                                {/* <button
-                            onClick={handleEditCancel}
-                            className={styles.editCancelButton}
-                          >
-                            <X size={14} />
-                            Annulla
-                          </button> */}
                                 <Button
                                   onClick={handleEditCancel}
                                   className={styles.editCancelButton}
@@ -284,14 +269,6 @@ const SkillsSection = () => {
                                   <Save size={14} />
                                   Salva
                                 </Button>
-                                {/* <button
-                            onClick={handleEditSave}
-                            disabled={!editedDescription.trim()}
-                            className={styles.editSaveButton}
-                          >
-                            <Save size={14} />
-                            Salva
-                          </button> */}
                               </div>
                             </div>
                           )}

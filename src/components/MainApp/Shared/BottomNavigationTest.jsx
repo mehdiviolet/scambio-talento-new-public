@@ -1,5 +1,14 @@
 import React from "react";
-import { Cherry, Search, Building, MessageCircle, User } from "lucide-react";
+import {
+  Cherry,
+  Search,
+  Building,
+  MessageCircle,
+  User,
+  CalendarCheck,
+  UserRoundSearch,
+  GraduationCap,
+} from "lucide-react";
 import styles from "./BottomNavigation.module.css";
 // import { useSelector } from "react-redux";
 import { useUnreadMessages } from "@/hooks/useUnreadMessages";
@@ -17,15 +26,10 @@ const BottomNavigationTest = ({ activeTab, onTabChange }) => {
   // console.log(chatNotifications);
 
   const tabs = [
-    { id: "home", icon: Cherry, label: "Cherry" },
-    { id: "search", icon: Search, label: "Cerca" },
-    { id: "explore", icon: Building, label: "Esplora" },
-    {
-      id: "chat",
-      icon: MessageCircle,
-      label: "Chat",
-      badge: chatNotifications,
-    },
+    { id: "Eventi", icon: CalendarCheck, label: "Eventi" },
+    { id: "Esperienze", icon: GraduationCap, label: "Esperienze" },
+    { id: "UserRoundSearch", icon: UserRoundSearch, label: "Persone" },
+
     { id: "profile", icon: User, label: "Profilo" },
   ];
 

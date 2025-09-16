@@ -49,6 +49,9 @@ import {
   selectNotificationsByRole,
   selectUnreadCountByRole,
 } from "@/store/slices/notificationSlice";
+import EsperienzePage from "./EsperienzePage";
+import EventiPage from "./EventiPage";
+import SearchPage from "./SearchPage";
 
 // Placeholder components per ora
 const HomePage = ({ currentUser }) => (
@@ -113,18 +116,16 @@ const MainAppRouter = () => {
     };
 
     switch (activeTab) {
-      case "home":
-        return <HomePage addXP={addXP} currentUser={currentUser} />;
-      case "search":
-        return <SearchPageTest />;
-      case "explore":
-        return <ExplorePage />;
-      case "chat":
-        return <ChatComponentTest isOwner={true} />;
+      case "Eventi":
+        return <EventiPage />;
+      case "Esperienze":
+        return <EsperienzePage />;
+      case "UserRoundSearch":
+        return <SearchPage />;
       case "profile":
         return <ProfilePageTest />;
       default:
-        return <HomePage addXP={addXP} currentUser={currentUser} />;
+        return <EventiPage />;
     }
   };
 
