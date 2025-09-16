@@ -217,7 +217,7 @@
   width: 120%;
   height: 120%;
   background: rgba(239, 68, 68, 0.2);
-  border-radius: 50%;
+  /* border-radius: 50%; */
   transition: all 0.5s ease;
   z-index: 1;
 }
