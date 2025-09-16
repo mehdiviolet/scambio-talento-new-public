@@ -537,7 +537,7 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
                   <div
                     style={{
                       fontSize: "0.75rem",
-                      color: "var(--text-primary-light)",
+                      color: "var(--primary-light)",
                     }}
                   >
                     @{follower.username}
@@ -627,7 +627,7 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
                   <div
                     style={{
                       fontSize: "0.75rem",
-                      color: "var(--text-primary-light)",
+                      color: "var(--primary-light)",
                     }}
                   >
                     @{following.username}

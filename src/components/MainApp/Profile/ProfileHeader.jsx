@@ -1172,7 +1172,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   <div
                     style={{
                       fontSize: "0.75rem",
-                      color: "var(--text-primary-light)",
+                      color: "var(--primary-light)",
                     }}
                   >
                     @{follower.username}
@@ -1262,7 +1262,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   <div
                     style={{
                       fontSize: "0.75rem",
-                      color: "var(--text-primary-light)",
+                      color: "var(--primary-light)",
                     }}
                   >
                     @{following.username}
@@ -1403,13 +1403,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       })
                     }
                     style={{
-                      width: "100%",
-                      padding: "0.75rem",
                       borderRadius: "0.75rem",
-                      border: "1px solid rgba(255, 255, 255, 0.2)",
-                      background: "rgba(255, 255, 255, 0.1)",
-                      color: "var(--text-primary)",
-                      fontSize: "0.875rem",
                     }}
                   />
                 </div>
@@ -1435,13 +1429,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       })
                     }
                     style={{
-                      width: "100%",
-                      padding: "0.75rem",
                       borderRadius: "0.75rem",
-                      border: "1px solid rgba(255, 255, 255, 0.2)",
-                      background: "rgba(255, 255, 255, 0.1)",
-                      color: "var(--text-primary)",
-                      fontSize: "0.875rem",
                     }}
                   />
                 </div>
@@ -1467,13 +1455,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     setEditFormData({ ...editFormData, email: e.target.value })
                   }
                   style={{
-                    width: "100%",
-                    padding: "0.75rem",
                     borderRadius: "0.75rem",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    color: "var(--text-primary)",
-                    fontSize: "0.875rem",
                   }}
                 />
               </div>
@@ -1498,13 +1480,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     setEditFormData({ ...editFormData, phone: e.target.value })
                   }
                   style={{
-                    width: "100%",
-                    padding: "0.75rem",
                     borderRadius: "0.75rem",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    color: "var(--text-primary)",
-                    fontSize: "0.875rem",
                   }}
                 />
               </div>
@@ -1532,13 +1508,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     })
                   }
                   style={{
-                    width: "100%",
-                    padding: "0.75rem",
                     borderRadius: "0.75rem",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    color: "var(--text-primary)",
-                    fontSize: "0.875rem",
                   }}
                 />
               </div>
@@ -1567,13 +1537,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   }
                   placeholder="Città, Paese"
                   style={{
-                    width: "100%",
-                    padding: "0.75rem",
                     borderRadius: "0.75rem",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    color: "var(--text-primary)",
-                    fontSize: "0.875rem",
                   }}
                 />
               </div>
@@ -1602,15 +1566,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   placeholder="Raccontaci qualcosa di te..."
                   rows={3}
                   style={{
-                    width: "100%",
-                    padding: "0.75rem",
                     borderRadius: "0.75rem",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    color: "var(--text-primary)",
-                    fontSize: "0.875rem",
-                    resize: "vertical",
-                    fontFamily: "inherit",
                   }}
                 />
               </div>
@@ -1698,13 +1654,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     e.target.value = "";
                   }}
                   style={{
-                    width: "100%",
-                    padding: "0.75rem",
                     borderRadius: "0.75rem",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    color: "var(--text-primary)",
-                    fontSize: "0.875rem",
                   }}
                 >
                   <option value="">Aggiungi una lingua...</option>
@@ -1727,7 +1677,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     flex: 1,
                     padding: "0.75rem",
                     borderRadius: "1rem",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    border: "1px solid var(--gray-300)",
                     background: "rgba(255, 255, 255, 0.1)",
                     color: "var(--text-primary)",
                     fontSize: "0.875rem",

@@ -425,23 +425,35 @@
 }
 
 .closeButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  border: 1px solid var(--primary-light);
   cursor: pointer;
   transition: all 0.2s ease;
-  color: #6b7280;
 }
 
 .closeButton:hover {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: rgba(239, 68, 68, 0.2);
-  color: #dc2626;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--secondary-light);
+}
+
+.closeButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--primary-light);
+  /* color: var(--text-secondary); */
+  /* color: var(--text-primary-light); */
+}
+
+.closeButton:hover svg {
+  color: var(--text-secondary);
+  /* color: var(--text-primary); */
 }
 
 /* 🆕 SEZIONE RIASSUNTO */
