@@ -104,9 +104,10 @@ const MessageModal = ({ isOpen, onClose, userProfile }) => {
                   Messaggio inviato!
                 </h4>
                 <div className={styles.rewardInfo}>
-                  <MessageCircle size={20} className={styles.rewardIcon} />
+                  {/* <MessageCircle size={20} className={styles.rewardIcon} /> */}
                   <p className={styles.rewardText}>
-                    Il tuo messaggio è stato inviato a {userProfile?.firstName}{" "}
+                    Il tuo messaggio è stato inviato{" "}
+                    {userProfile?.firstName ? `a ${userProfile.firstName}` : ""}{" "}
                     con successo.
                   </p>
                 </div>

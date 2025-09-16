@@ -48,7 +48,7 @@ const CherryComp = ({
     return "ready";
   };
 
-  console.log(xpRewarded);
+  console.log("xpRewarded", xpRewarded, "lastSlotReward", lastSlotReward);
 
   // Controlla lo stato della slot machine
   useEffect(() => {
@@ -163,28 +163,6 @@ const CherryComp = ({
     <div className={styles.container}>
       {/* 🆕 HEADER CON BOTTONE INFO */}
       <div className={styles.slotHeader}>
-        {/* AGGIUNGI QUESTO QUI */}
-        {/* <div className={styles.hudXp}>
-          <div className={styles.cherryContainer}>
-            <Cherry
-              className="icon-sm text-yellow-300"
-              style={{
-                color:
-                  lastSlotReward >= 30
-                    ? "#b81313"
-                    : lastSlotReward >= 10
-                    ? "#fde047"
-                    : "rgb(19, 200, 255)",
-                transition: "all 0.3s ease",
-                animation: xpJustChanged
-                  ? "cherry-shake-scale 0.4s ease-in-out"
-                  : "none",
-              }}
-            />
-          </div>
-          <span>{xpRewarded > 0 ? `+${xpRewarded}` : 0}</span>
-        </div> */}
-
         <h3 className={styles.slotTitle}>
           Slot della Fortuna
           <button
@@ -200,74 +178,76 @@ const CherryComp = ({
         {/* Area ricompensa - sempre presente */}
         <div className={styles.rewardMessage}>
           {showReward ? (
-            <>
-              {xpRewarded > 0 ? (
-                <>
-                  {/* <div className={styles.xpAmount}>
-                    <span className={styles.trophy}>
-                      <Cookie size={60} />
-                    </span>
-                    +{xpRewarded} XP
-                  </div>
-                  <p className={styles.rewardText}>
-                    {xpRewarded === 500 ? "WOW!" : "Vittoria!"}
-                  </p> */}
-                  <div className={styles.hudXp}>
-                    <div className={styles.cherryContainer}>
-                      <Cherry
-                        className="icon-sm text-yellow-300"
-                        style={{
-                          color:
-                            lastSlotReward >= 30
-                              ? "#b81313"
-                              : lastSlotReward >= 10
-                              ? "#fde047"
-                              : "rgb(19, 200, 255)",
-                          transition: "all 0.3s ease",
-                          animation: xpJustChanged
-                            ? "cherry-shake-scale 0.4s ease-in-out"
-                            : "none",
-                        }}
-                      />
-                    </div>
-                    <span>{xpRewarded > 0 ? `+${xpRewarded}` : 0}</span>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <>
-                    {/* <p className={styles.failText}>Sfortuna!</p>
-                    <div className={styles.xpAmount}>
-                      <span className={styles.trophy}>
-                        <Cookie size={60} />
-                      </span>
-                      +{xpRewarded} XP
-                    </div> */}
+            <div
+              className={`${styles.rewardContainer} ${
+                xpRewarded > 0 ? styles.rewardWin : styles.rewardLoss
+              }`}
+            >
+              <div className={styles.rewardIcon}>
+                <Cherry
+                  size={48}
+                  style={{
+                    color:
+                      xpRewarded >= 30
+                        ? "var(--danger-red)"
+                        : xpRewarded >= 10
+                        ? "var(--text-secondary)"
+                        : "var(--teal-light)",
+                    transition: "var(--transition-normal)",
+                  }}
+                  className={
+                    xpRewarded > 0 ? styles.cherryWin : styles.cherryNeutral
+                  }
+                />
+              </div>
 
-                    <Cherry
-                      style={{
-                        color: "rgb(19, 200, 255)",
-                        transition: "all 0.3s ease",
-                        animation: xpJustChanged
-                          ? "cherry-shake-scale 0.4s ease-in-out"
-                          : "none",
-                      }}
-                    />
-                    <p>0</p>
-                  </>
+              <div className={styles.rewardAmount}>
+                <span
+                  className={styles.xpValue}
+                  style={{
+                    color:
+                      xpRewarded >= 30
+                        ? "var(--danger-red)"
+                        : xpRewarded >= 10
+                        ? "var(--text-secondary)"
+                        : "var(--teal-light)",
+                    transition: "var(--transition-normal)",
+                  }}
+                >
+                  {xpRewarded > 0 ? `+${xpRewarded}` : "0"}
+                </span>
+                <span
+                  className={styles.xpLabel}
+                  style={{
+                    color:
+                      xpRewarded >= 30
+                        ? "var(--danger-red)"
+                        : xpRewarded >= 10
+                        ? "var(--text-secondary)"
+                        : "var(--teal-light)",
+                    transition: "var(--transition-normal)",
+                  }}
+                >
+                  XP
+                </span>
+              </div>
 
-                  {consecutiveFailures >= 3 && (
-                    <p className={styles.blockText}>
-                      Dopo 3 tentativi falliti, la lotteria si blocca per un
-                      giorno.
-                    </p>
-                  )}
-                </>
-              )}
-            </>
+              {/* {xpRewarded > 0 && (
+                <div className={styles.rewardText}>
+                  {xpRewarded >= 30
+                    ? "Fantastico!"
+                    : xpRewarded >= 10
+                    ? "Ottimo!"
+                    : "Bene!"}
+                </div>
+              )} */}
+            </div>
           ) : (
             <div className={styles.placeholder}>
-              {hasSpunToday ? "Completato per oggi!" : "Clicca per girare!"}
+              <div className={styles.placeholderIcon}>🎲</div>
+              <div className={styles.placeholderText}>
+                {hasSpunToday ? "Completato per oggi!" : "Clicca per girare!"}
+              </div>
             </div>
           )}
         </div>
@@ -343,6 +323,11 @@ const CherryComp = ({
               ))}
             </span>
           </div>
+          {consecutiveFailures >= 3 && (
+            <p className={styles.blockText}>
+              Dopo 3 tentativi falliti, la lotteria si blocca per un giorno.
+            </p>
+          )}
 
           {/* DEBUG INFO */}
           {/* <div className={styles.debugInfo}>

@@ -37,6 +37,11 @@
   border-radius: 1rem;
 }
 
+/* .rewardMessage svg {
+  width: 100%;
+  height: 2.8rem;
+} */
+
 .placeholder {
   font-size: 1rem;
   color: rgb(75, 85, 99);
@@ -76,7 +81,7 @@
   font-size: 0.875rem;
   color: rgb(75, 85, 99);
   margin: 1rem 0 0 0;
-  padding: 1rem;
+  /* padding: 1rem; */
   border-radius: 0.75rem;
 }
 
@@ -891,3 +896,150 @@
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
 } */
+
+/* === REWARD MESSAGE MIGLIORATA === */
+.rewardMessage {
+  min-height: 180px; /* Più alto */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--glass-bg-light);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.rewardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  text-align: center;
+  transition: var(--transition-normal);
+}
+
+.rewardWin {
+  animation: rewardPulse 0.6s ease-out;
+}
+
+.rewardLoss {
+  opacity: 0.8;
+}
+
+.rewardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  background: var(--glass-bg-medium);
+  backdrop-filter: var(--glass-blur);
+  border: 2px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  transition: var(--transition-normal);
+}
+
+.rewardWin .rewardIcon {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-glow);
+  border-color: var(--text-secondary);
+}
+
+.cherryWin {
+  animation: cherryBounce 0.8s ease-out;
+}
+
+.cherryNeutral {
+  opacity: 0.7;
+}
+
+.rewardAmount {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.xpValue {
+  font-size: 2.5rem;
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.rewardWin .xpValue {
+  color: var(--text-secondary);
+  text-shadow: 0 2px 8px rgba(var(--text-secondary-rgb), 0.3);
+}
+
+.xpLabel {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  /* color: var(--text-primary-light); */
+  /* color: var(--teal-light); */
+  opacity: 0.8;
+}
+
+.rewardText {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--text-secondary);
+  padding: var(--space-sm) var(--space-lg);
+  background: rgba(var(--text-secondary-rgb), 0.1);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(var(--text-secondary-rgb), 0.2);
+}
+
+/* === PLACEHOLDER MIGLIORATO === */
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.placeholderIcon {
+  font-size: 3rem;
+  opacity: 0.6;
+}
+
+.placeholderText {
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+  font-weight: var(--font-medium);
+}
+
+/* === ANIMAZIONI === */
+@keyframes rewardPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes cherryBounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}

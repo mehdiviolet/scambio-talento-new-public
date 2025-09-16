@@ -437,7 +437,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
       </div>
 
       {/* Help Categories Section */}
-      <div className={styles.submenuSection}>
+      {/* <div className={styles.submenuSection}>
         <h3 className={styles.submenuSectionTitle}>Argomenti di aiuto</h3>
         <div className={styles.submenuOptions}>
           {helpCategories.map((category) => (
@@ -458,7 +458,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
             </button>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Contact Support Section */}
       <div className={styles.submenuSection}>
@@ -512,7 +512,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
     {
       icon: <Key size={16} />,
       label: "Cambia password",
-      description: "Cambia password .... ",
+      description: "da definire... ",
       action: handlePrivacySettings,
       hasSubmenu: true,
     },
