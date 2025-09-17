@@ -239,19 +239,26 @@ const CreateEventModal = ({
 
     switch (currentStep) {
       case 1:
-        return `${prefix} - Categoria`;
+        return `Categoria`;
+      // return `${prefix} - Categoria`;
       case 2:
-        return `${prefix} - Titolo e Descrizione`;
+        return `Titolo e Descrizione`;
+      // return `${prefix} - Titolo e Descrizione`;
       case 3:
-        return `${prefix} - Data, Ora, Partecipanti`;
+        return `Data, Ora, Partecipanti`;
+      // return `${prefix} - Data, Ora, Partecipanti`;
       case 4:
-        return `${prefix} - Luogo dell'evento`;
+        return `Luogo dell'evento`;
+      // return `${prefix} - Luogo dell'evento`;
       case 5:
-        return `${prefix} - Lingua`;
+        return `Lingua`;
+      // return `${prefix} - Lingua`;
       case 6:
-        return `${prefix} - Immagine`;
+        return `Immagine`;
+      // return `${prefix} - Immagine`;
       case 7:
         return "✅ Conferma evento";
+      // return "✅ Conferma evento";
       default:
         return "";
     }

@@ -91,7 +91,7 @@
 /* Welcome Screen */
 .welcomeContent {
   text-align: center;
-  color: var(--text-primary);
+  color: var(--bg);
   z-index: 10;
   padding: 2rem;
   margin: auto;
@@ -174,7 +174,8 @@
 .gameHud {
   flex-shrink: 0;
   width: 100%;
-  color: var(--text-primary);
+  /* color: var(--bg); */
+  color: var(--bg);
   padding: 1.25rem 1.5rem;
   position: sticky;
   z-index: 3;
@@ -206,6 +207,10 @@
 .hudLevel {
   font-size: 1.125rem;
 }
+
+/* .hudLevel span {
+  color: white;
+} */
 
 .hudXp {
   font-weight: 500;
@@ -266,7 +271,9 @@
   /* font-size: 2.25rem; */
   font-size: 2rem;
   font-weight: 700;
-  color: var(--text-primary);
+  /* color: var(--bg); */
+  color: var(--bg);
+
   margin-bottom: 0.5rem;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
@@ -298,7 +305,7 @@
 .avatar {
   width: 8rem;
   height: 8rem;
-  background: var(--card-gradient);
+  /* background: var(--card-gradient); */
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -319,7 +326,7 @@
   bottom: 0;
   right: 0;
   background: linear-gradient(to right, #22d3ee, #3b82f6);
-  color: var(--text-primary);
+  color: var(--bg);
   padding: 0.75rem;
   border-radius: 50%;
   cursor: pointer;
@@ -375,7 +382,8 @@
   border: 2px solid var(--glass-border);
   border-radius: var(--border-radius);
   font-size: 1rem;
-  color: var(--text-primary);
+  color: var(--bg);
+  /* color: var(--gray-300); */
   transition: var(--transition-normal);
   outline: none;
   backdrop-filter: var(--backdrop-blur);
@@ -409,7 +417,7 @@
 .orDivider {
   text-align: center;
   font-size: 0.875rem;
-  color: var(--text-tertiary);
+  color: var(--gray-300);
   position: relative;
   background: var(--secondary-gradient);
   padding: 0 0.75rem;
@@ -484,7 +492,7 @@
 
 .skillName {
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--bg);
   font-size: 0.875rem;
 }
 
@@ -495,7 +503,8 @@
 
 .skillsCounter p {
   font-size: 0.875rem;
-  color: var(--text-tertiary);
+  /* color: var(--text-tertiary); */
+  color: var(--gray-300);
 }
 
 /* Languages & Location */
@@ -507,7 +516,7 @@
 .sectionTitle {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--bg);
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
@@ -553,7 +562,7 @@
 
 .languageName {
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--bg);
   font-size: 0.875rem;
 }
 
@@ -571,7 +580,7 @@
   border: 2px solid var(--glass-border);
   border-radius: var(--border-radius);
   font-size: 1rem;
-  color: var(--text-primary);
+  color: var(--bg);
   transition: var(--transition-normal);
   outline: none;
   resize: none;
@@ -601,13 +610,13 @@
 
 .settingsContent h4 {
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--bg);
   margin-bottom: 0.25rem;
 }
 
 .settingsContent p {
   font-size: 0.875rem;
-  color: var(--text-tertiary);
+  color: var(--gray-300);
   margin: 0;
 }
 
@@ -632,7 +641,7 @@
 .toggleHandle {
   width: 1.25rem;
   height: 1.25rem;
-  background: var(--text-primary);
+  background: var(--bg);
   border-radius: 50%;
   transition: var(--transition-normal);
   position: absolute;
@@ -665,7 +674,7 @@
 .completionTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--bg);
   margin-bottom: 0.5rem;
 }
 
@@ -727,7 +736,7 @@
 
 .navButton.next {
   background: var(--card-gradient);
-  color: var(--text-primary);
+  color: var(--bg);
 }
 
 .navButton.next:hover:not(.disabled) {
@@ -789,6 +798,7 @@
 .iconXl {
   width: 4rem;
   height: 4rem;
+  color: var(--gray-200);
 }
 
 .iconXxl {
@@ -801,7 +811,8 @@
 }
 
 .textPurple400 {
-  color: #c084fc;
+  /* color: #c084fc; */
+  color: var(--gray-300);
 }
 
 .textYellow400 {

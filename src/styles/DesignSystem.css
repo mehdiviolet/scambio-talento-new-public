@@ -34,6 +34,7 @@
 
   --bg: #ffffff;
   --bg-old: #ececec;
+  --bg--evento: #d0d8a3;
   --black: #000;
   --white: #fff;
   --bg--overlay: hsla(219, 66%, 46%, 0.345);
@@ -80,7 +81,7 @@
   --bg--skill-01: #cecec7;
   --bg--skill: #cecec758;
   --bg--esperienza: #d8cda3;
-  --bg--evento: #d0d8a3;
+
   --bg--evento-one: #cfd3b9;
 
   /* === GLASSMORPHISM === */

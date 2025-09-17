@@ -273,6 +273,7 @@
 .radioLabel input[type="radio"] {
   margin: 0;
   accent-color: rgb(17, 24, 39);
+  width: auto;
 }
 
 .radioLabel span {
@@ -300,6 +301,7 @@
 .checkboxLabel input[type="checkbox"] {
   margin: 0;
   accent-color: rgb(17, 24, 39);
+  width: auto;
 }
 
 .checkboxLabel span {
