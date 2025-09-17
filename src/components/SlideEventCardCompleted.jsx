@@ -24,6 +24,7 @@ const SlideEventCardCompleted = ({
   selectedPersonData,
   onEdit,
   onDelete,
+  stato,
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const participants = useSelector(selectParticipants);
@@ -86,7 +87,11 @@ const SlideEventCardCompleted = ({
       <div
         className={styles.cardPreview}
         onClick={handleCardClick}
-        style={{ cursor: "pointer", background: "var(--gray-300)" }}
+        style={{
+          cursor: "pointer",
+          background:
+            stato === "inCorso" ? "var(--secondary-muted)" : "var(--gray-300)",
+        }}
       >
         {/* Badge "Completato" */}
         {/* <div

@@ -182,11 +182,25 @@ const EventSectionTest = ({
               //   key={event.id}
               //   selectedPersonData={selectedPersonData}
               // />
-              <SlideEventCardCompleted
-                key={event.id}
-                isOwner={isOwner}
-                selectedPersonData={selectedPersonData}
-              />
+              <>
+                <SlideEventCardCompleted
+                  key={event.id}
+                  isOwner={isOwner}
+                  selectedPersonData={selectedPersonData}
+                  stato={"inCorso"}
+                />
+                <SlideEventCardCompleted
+                  key={event.id}
+                  isOwner={isOwner}
+                  selectedPersonData={selectedPersonData}
+                />
+
+                <SlideEventCardCompleted
+                  key={event.id}
+                  isOwner={isOwner}
+                  selectedPersonData={selectedPersonData}
+                />
+              </>
             );
           }
 

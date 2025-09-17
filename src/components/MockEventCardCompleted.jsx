@@ -156,7 +156,10 @@ const MockEventCardCompleto = ({ isOwner = true }) => {
   };
 
   return (
-    <div className={`${styles.card} ${styles.expanded}`}>
+    <div
+      className={`${styles.card} ${styles.expanded}`}
+      style={{ background: "var(--gray-300)" }}
+    >
       {/* Status Badge - COMPLETATO */}
       <div
         className={styles.statusBadge}

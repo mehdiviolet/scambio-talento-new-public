@@ -2,8 +2,8 @@
 
 .card {
   /* background: var(--glass-bg-light); */
-  /* background: var(--bg--evento); */
-  background: var(--gray-300);
+  background: var(--bg--evento);
+  /* background: var(--gray-300); */
   backdrop-filter: var(--glass-blur);
   /* border-radius: var(--radius-xl); */
   border: 1px solid var(--glass-border);
@@ -1027,7 +1027,7 @@
 .cardPreview:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-  background: var(--glass-bg-strong);
+  /* background: var(--glass-bg-strong); */
 }
 
 .cardImage {
