@@ -21,8 +21,8 @@ const SimpleImageModal = ({
   };
 
   return (
-    <div className={styles.modalOverlay} onClick={handleOverlayClick}>
-      <div className={styles.modalContent}>
+    <div className={styles.overlay} onClick={handleOverlayClick}>
+      <div className={styles.modal}>
         {/* Close Button */}
         <button
           className={styles.closeButton}

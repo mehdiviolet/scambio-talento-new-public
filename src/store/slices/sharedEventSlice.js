@@ -440,7 +440,7 @@ const sharedEventSlice = createSlice({
       const mockPhotos = [
         {
           id: "photo_1",
-          url: "/images/evento/azul-03.png",
+          url: "/images/evento/azul-02.png",
           alt: "Foto evento 1",
           caption: "Momento divertente durante il gioco!",
           uploadedAt: new Date().toISOString(),
@@ -454,7 +454,7 @@ const sharedEventSlice = createSlice({
         },
         {
           id: "photo_3",
-          url: "/images/evento/azul-02.jpg",
+          url: "/images/evento/azul-03.png",
           alt: "Foto evento 3",
           caption: "Il momento della vittoria!",
           uploadedAt: new Date().toISOString(),

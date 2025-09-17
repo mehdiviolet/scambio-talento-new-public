@@ -1,84 +1,139 @@
-/* SimpleImageModal.module.css */
+/* SimpleImageModal.module.css - Following CookieModal design pattern */
 
-.modalOverlay {
+:root {
+  --black: #000;
+  --white: #fff;
+  --text-primary: #256679;
+  --text-secondary: #f59e0b;
+  --text-primary-light: #3a8ba3;
+  --text-primary-dark: #1a4d5c;
+  --text-secondary-light: #fbbf24;
+  --text-secondary-dark: #d97706;
+  --progress-blue: #3b82f6;
+  --progress-blue-dark: #1d4ed8;
+}
+
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+  width: 100vw;
+  height: 100vh;
+  /* invece di inset: 0 che può dare problemi */
+  background: var(--bg--overlay);
+  backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
-  animation: fadeIn 0.2s ease-out;
+  padding: 1rem;
+  z-index: 500000000;
+  overflow: hidden; /* importante! */
 }
 
-.modalContent {
-  position: relative;
+.modal {
+  background: var(--bg-old);
+  backdrop-filter: blur(20px) saturate(150%);
+  border-radius: 2rem;
   max-width: 90vw;
   max-height: 90vh;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .closeButton {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  right: 1rem;
+  top: 1rem;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  z-index: 10;
+  width: 2.75rem;
+  height: 2.75rem;
 }
 
 .closeButton:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.closeButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.closeButton:hover svg {
+  color: var(--text-primary);
 }
 
 .navButton {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 50%;
-  width: 54px;
-  height: 54px;
+  padding: 0.75rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  cursor: pointer;
-  transition: all 0.2s;
-  z-index: 10;
+  width: 3.375rem;
+  height: 3.375rem;
 }
 
 .navButton:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-50%) scale(1.1);
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.05);
 }
 
 .navButton:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navButton svg {
+  width: 2rem;
+  height: 2rem;
+  color: var(--text-secondary);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.navButton:hover:not(:disabled) svg {
+  color: var(--text-primary);
+}
+
+.navButton:disabled svg {
+  color: var(--text-primary-light);
+  opacity: 0.5;
 }
 
 .prevButton {
-  left: 20px;
+  left: 1rem;
 }
 
 .nextButton {
-  right: 20px;
+  right: 1rem;
 }
 
 .imageContainer {
@@ -86,46 +141,137 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
 }
 
 .modalImage {
-  max-width: 80vw;
-  max-height: 80vh;
+  max-width: calc(100% - 4rem);
+  max-height: calc(100% - 4rem);
+  width: auto;
+  height: auto;
   object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .imageInfo {
   position: absolute;
-  bottom: -50px;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  max-width: calc(100% - 2rem);
 }
 
 .imageCounter {
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 4px;
-  opacity: 0.8;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .imageCaption {
-  font-size: 16px;
+  font-size: 0.9rem;
   font-weight: 400;
-  max-width: 300px;
+  color: var(--text-primary-light);
+  margin: 0;
+  line-height: 1.4;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
 }
 
-@keyframes fadeIn {
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal {
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: 1.5rem;
+  }
+
+  .closeButton {
+    right: 0.75rem;
+    top: 0.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .closeButton svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .navButton {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.5rem;
+  }
+
+  .navButton svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .prevButton {
+    left: 0.75rem;
+  }
+
+  .nextButton {
+    right: 0.75rem;
+  }
+
+  .imageContainer {
+    padding: 1.5rem;
+  }
+
+  .modalImage {
+    max-width: calc(100% - 3rem);
+    max-height: calc(100% - 3rem);
+    border-radius: 0.75rem;
+  }
+
+  .imageInfo {
+    bottom: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    max-width: calc(100% - 1.5rem);
+  }
+
+  .imageCounter {
+    font-size: 0.8rem;
+  }
+
+  .imageCaption {
+    font-size: 0.85rem;
+  }
+}
+
+/* Animation for smooth appearance */
+@keyframes modalFadeIn {
   from {
     opacity: 0;
+    transform: scale(0.95);
   }
   to {
     opacity: 1;
+    transform: scale(1);
   }
+}
+
+.modal {
+  animation: modalFadeIn 0.2s ease-out;
 }

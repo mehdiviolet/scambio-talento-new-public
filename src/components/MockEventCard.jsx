@@ -21,6 +21,7 @@ import {
   ChevronRight,
   Map,
   Languages,
+  ZoomIn,
 } from "lucide-react";
 import styles from "./EventCard.module.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -49,6 +50,7 @@ import FeedbackModal from "./FeedbackModal";
 import MapComponent from "./MapComponent";
 import SimpleImageModal from "./SimpleImageModal";
 import LoadingSpinner from "./LoadingSpinner";
+import GallerySlider from "./GallerySlider";
 
 // DATI MOCK COMPLETI
 // const mockEvent = {
@@ -612,7 +614,9 @@ const MockEventCard = ({
 
               {showGallery && (
                 <div className={styles.galleryGrid}>
-                  {galleryPhotos.map((photo, index) => (
+                  <GallerySlider photos={galleryPhotos} isOwner={isOwner} />
+
+                  {/* {galleryPhotos.map((photo, index) => (
                     <div
                       key={photo.id}
                       className={styles.galleryItem}
@@ -627,10 +631,12 @@ const MockEventCard = ({
                         className={styles.galleryImage}
                       />
                       <div className={styles.galleryOverlay}>
-                        <span className={styles.galleryIcon}>🔍</span>
+                        <span className={styles.galleryIcon}>
+                          <ZoomIn style={{ color: "var(--primary-lighter)" }} />
+                        </span>
                       </div>
                     </div>
-                  ))}
+                  ))} */}
                 </div>
               )}
             </div>

@@ -48,7 +48,7 @@ const SlideEventCard = ({
     endTime: "22:30",
     placeName: "Café Central",
     placeAddress: "Via Madama Cristina 45, Torino",
-    coverImage: "/images/evento/azul-01.png",
+    coverImage: "/images/evento/azul-03.png",
     // participants: 11,
     participants: eventStats.participantsCount,
     // type: eventStats.type,
@@ -68,7 +68,7 @@ const SlideEventCard = ({
 
   const getCategoryIcon = (category) => {
     const icons = {
-      "Hobby e passioni": <Palette size={16} />,
+      "Hobby e passioni": "🎨",
       "Sport e fitness": "🏃‍♂️",
       Tecnologia: "💻",
       "Musica e Arte": "🎵",

@@ -567,11 +567,13 @@
 .feedbackSection {
   background: rgba(59, 130, 246, 0.1);
   border-color: rgba(59, 130, 246, 0.3);
+  margin: var(--space-lg);
 }
 
 .gallerySection {
   background: var(--glass-bg-light);
   border-color: var(--glass-border);
+  margin: var(--space-lg);
 }
 
 .notificationsHeader {
@@ -629,6 +631,7 @@
 .feedbackList {
   max-height: 120px;
   overflow-y: auto;
+  margin-top: var(--space-md);
 }
 
 .feedbackList {
@@ -688,6 +691,7 @@
 
 .starsContainer {
   margin-left: var(--space-sm);
+  display: flex;
 }
 
 .feedbackComment {
@@ -704,7 +708,8 @@
 /* === GALLERY === */
 .galleryGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); */
+  grid-template-columns: auto;
   gap: var(--space-sm);
   margin-top: var(--space-lg);
 }
@@ -874,6 +879,7 @@
 .organizerInfo {
   display: flex;
   align-items: center;
+  gap: var(--space-md);
 }
 
 .organizerInfoPiccolo {
