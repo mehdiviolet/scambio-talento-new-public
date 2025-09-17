@@ -70,12 +70,12 @@ const QRCodeComponent = ({ isOwner = false, size = 80 }) => {
         return {
           style: {
             background: "transparent",
-            border: "2px dashed var(--gray-300)",
-            color: "var(--gray-400)",
+            // border: "2px dashed var(--gray-300)",
+            // color: "var(--gray-400)",
           },
-          content: "QR",
-          cursor: "default",
-          title: "QR non ancora disponibile",
+          // content: "QR",
+          // cursor: "default",
+          // title: "QR non ancora disponibile",
         };
 
       case "waiting":

@@ -276,9 +276,9 @@ const MockEventCard = ({
         // onClick={handleCardClick}
       >
         {/* Notifiche per Owner */}
-        {isOwner && notifications.length > 0 && (
+        {/* {isOwner && notifications.length > 0 && (
           <div className={styles.notificationBadge}>{notifications.length}</div>
-        )}
+        )} */}
 
         {/* Status Badge */}
         <div

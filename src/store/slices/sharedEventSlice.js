@@ -440,21 +440,21 @@ const sharedEventSlice = createSlice({
       const mockPhotos = [
         {
           id: "photo_1",
-          url: "https://picsum.photos/800/600?random=1",
+          url: "/images/evento/azul-03.png",
           alt: "Foto evento 1",
           caption: "Momento divertente durante il gioco!",
           uploadedAt: new Date().toISOString(),
         },
         {
           id: "photo_2",
-          url: "https://picsum.photos/800/600?random=2",
+          url: "/images/evento/azul-01.png",
           alt: "Foto evento 2",
           caption: "Tutti concentrati sulla strategia",
           uploadedAt: new Date().toISOString(),
         },
         {
           id: "photo_3",
-          url: "https://picsum.photos/800/600?random=3",
+          url: "/images/evento/azul-02.jpg",
           alt: "Foto evento 3",
           caption: "Il momento della vittoria!",
           uploadedAt: new Date().toISOString(),

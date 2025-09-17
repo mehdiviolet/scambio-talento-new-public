@@ -84,15 +84,15 @@ const SlideEventCardCompleted = ({
       <div
         className={styles.cardPreview}
         onClick={handleCardClick}
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", background: "var(--gray-300)" }}
       >
         {/* Badge "Completato" */}
-        <div
+        {/* <div
           className={styles.statusBadge}
           style={{ backgroundColor: "#6c757d" }}
         >
           ✅ Completato
-        </div>
+        </div> */}
 
         <div className={styles.flexCard}>
           <div className={styles.flexCardMe}>

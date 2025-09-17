@@ -309,6 +309,8 @@
 .coverImageWithOverlay {
   position: relative;
   height: 200px;
+  /* min-height: auto; */
+  /* height: auto; */
   overflow: hidden;
   border: 1px solid var(--glass-border);
 }
@@ -855,15 +857,18 @@
   /* margin-bottom: 90px; */
   /* margin-bottom: 180px; */
   padding: var(--space-lg);
-  /* gap: var(--space-lg); */
+  gap: var(--space-lg);
   /* height: 200px; */
   margin-top: auto; /* Si posiziona automaticamente in fondo */
   /* border: 2px solid blue;  */
+  background-color: var(--bg--eventoFooter);
 }
 
 .cardFooterPiccolo {
   padding: 0;
   width: 100%;
+  padding: var(--space-sm);
+  background-color: var(--bg--eventoFooter);
 }
 
 .organizerInfo {
@@ -973,7 +978,7 @@
   background: var(--bg--evento);
   backdrop-filter: var(--glass-blur-strong);
   border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+  /* padding: var(--space-lg); */
   /* border: 1px solid var(--glass-border-strong); */
   border: 1px solid var(--primary-light);
   box-shadow: var(--shadow-md);
@@ -984,12 +989,14 @@
   margin-bottom: var(--space-lg);
   flex-direction: column;
   /* border: 1px solid red; */
+  overflow: hidden;
 }
 
 .flexCard {
   display: flex;
   gap: var(--space-sm);
   flex-direction: column;
+  padding: var(--space-lg);
 }
 
 .flexCardMe {

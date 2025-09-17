@@ -16,7 +16,7 @@ const CreateEventModal = ({
   const [selectedCategory, setSelectedCategory] = useState("");
 
   // Step 2: Titolo e Descrizione
-  const [eventTitle, setEventTitle] = useState("");
+  const [eventTitle, setEventTitle] = useState("Board Game...");
   const [eventDescription, setEventDescription] = useState("");
 
   // Step 3: Data, Ora, Partecipanti
@@ -28,7 +28,7 @@ const CreateEventModal = ({
   // Step 4: Luogo
   const [eventType, setEventType] = useState("presenza");
   const [onlineLink, setOnlineLink] = useState("");
-  const [placeName, setPlaceName] = useState("");
+  const [placeName, setPlaceName] = useState("Via Roma, 45");
   const [placeAddress, setPlaceAddress] = useState("");
 
   // Step 5: Lingua
@@ -98,18 +98,40 @@ const CreateEventModal = ({
     }
   }, [currentStep]);
 
+  // const resetForm = () => {
+  //   setSelectedCategory("");
+  //   setEventTitle("");
+  //   setEventDescription("");
+  //   setStartDate("");
+  //   setStartTime("");
+  //   setEndTime("");
+  //   setMaxParticipants("");
+  //   setEventType("presenza");
+  //   setOnlineLink("");
+  //   setPlaceName("");
+  //   setPlaceAddress("");
+  //   setEventLanguage("italiano");
+  //   setCustomLanguage("");
+  //   setCoverImage(null);
+  //   setAcceptTerms(false);
+  //   setWantNotifications(true);
+  // };
+
   const resetForm = () => {
-    setSelectedCategory("");
-    setEventTitle("");
-    setEventDescription("");
-    setStartDate("");
-    setStartTime("");
-    setEndTime("");
-    setMaxParticipants("");
+    // Valori per demo/presentazione
+    setSelectedCategory("Hobby e passioni");
+    setEventTitle("Boardgame Night a San Salvario");
+    setEventDescription(
+      "Una serata speciale tutta dedicata ai giochi da tavolo, pensata sia per gli appassionati che per chi vuole scoprire questo mondo per la prima volta! Ci ritroveremo per condividere il piacere di giocare insieme, tra risate, strategia e un po’ di sana competizione amichevole. Metteremo sul tavolo alcuni titoli che sono ormai dei veri e propri classici moderni, come Azul e Splendor, perfetti per chi ama sfide rapide e avvincenti, ma ci sarà spazio anche per altri giochi che sapranno sorprendere con meccaniche diverse e atmosfere coinvolgenti. Sarà l’occasione ideale per imparare nuove regole, sperimentare strategie originali e passare qualche ora in buona compagnia, lasciandosi catturare dal fascino di tessere colorate, gemme scintillanti e mondi da esplorare."
+    );
+    setStartDate("2025-10-20");
+    setStartTime("19:30");
+    setEndTime("22:00");
+    setMaxParticipants("8");
     setEventType("presenza");
     setOnlineLink("");
-    setPlaceName("");
-    setPlaceAddress("");
+    setPlaceName("Café Central");
+    setPlaceAddress("Via Roma 45");
     setEventLanguage("italiano");
     setCustomLanguage("");
     setCoverImage(null);
