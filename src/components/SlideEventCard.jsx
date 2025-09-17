@@ -130,7 +130,7 @@ const SlideEventCard = ({
                   {mockEvent.participants}/{mockEvent.maxParticipants}
                 </span>
               </div>
-              <div className={styles.metaItem}>
+              <div className={styles.metaItemIcon}>
                 <span>{getCategoryIcon("Hobby e passioni")}</span>
               </div>
             </div>

@@ -17,6 +17,7 @@ import {
   selectEventStats,
 } from "../store/slices/sharedEventSlice";
 import { useSelector } from "react-redux";
+import MockEventCardCompleto from "./MockEventCardCompleted";
 
 const SlideEventCardCompleted = ({
   isOwner = false,
@@ -35,7 +36,7 @@ const SlideEventCardCompleted = ({
     description:
       "Serata di scambio linguistico spagnolo-italiano completata con successo! È stata un'esperienza fantastica di conversazione e condivisione culturale. Abbiamo praticato entrambe le lingue in un ambiente rilassato e amichevole.",
     category: "Hobby e passioni",
-    language: "spagnolo/italiano",
+    language: "spagnolo",
     startDate: "2024-09-04", // Data nel passato
     startTime: "19:00",
     endTime: "21:30",
@@ -58,7 +59,8 @@ const SlideEventCardCompleted = ({
   const getCategoryIcon = (category) => {
     const icons = {
       "Lingua e identità": "🗣️",
-      "Hobby e passioni": <Palette size={16} />,
+      "Hobby e passioni": "🎨",
+      // "Hobby e passioni": <Palette size={16} />,
       "Sport e fitness": "🏃‍♂️",
       Tecnologia: "💻",
       "Musica e Arte": "🎵",
@@ -128,7 +130,7 @@ const SlideEventCardCompleted = ({
                   {mockCompletedEvent.maxParticipants}
                 </span>
               </div>
-              <div className={styles.metaItem}>
+              <div className={styles.metaItemIcon}>
                 <span>{getCategoryIcon(mockCompletedEvent.category)}</span>
               </div>
             </div>
@@ -211,7 +213,7 @@ const SlideEventCardCompleted = ({
 
         <div className={styles.drawerContent}>
           {isDrawerOpen && (
-            <MockEventCard
+            <MockEventCardCompleto
               isOwner={isOwner}
               selectedPersonData={selectedPersonData}
               onEdit={onEdit}

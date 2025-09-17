@@ -2,7 +2,8 @@
 
 .card {
   /* background: var(--glass-bg-light); */
-  background: var(--bg--evento);
+  /* background: var(--bg--evento); */
+  background: var(--gray-300);
   backdrop-filter: var(--glass-blur);
   /* border-radius: var(--radius-xl); */
   border: 1px solid var(--glass-border);
@@ -202,6 +203,19 @@
   gap: var(--space-sm);
   font-size: var(--text-sm);
   color: var(--gray-600);
+}
+
+.metaItemIcon {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  margin-left: auto;
+}
+
+.metaItemIcon span {
+  font-size: 24px;
 }
 
 .metaIcon {
