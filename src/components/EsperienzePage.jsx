@@ -244,9 +244,9 @@ const EsperienzePage = () => {
             </div>
           )}
 
-          <p className={styles.hint}>
+          {/* <p className={styles.hint}>
             💡 Clicca sulla carta per espandere/comprimere
-          </p>
+          </p> */}
         </div>
       </div>
     </>

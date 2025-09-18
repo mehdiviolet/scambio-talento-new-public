@@ -1,4 +1,4 @@
-// SlideEventCardCompleted.jsx
+// SlideEventCardInCorso.jsx
 import React, { useState } from "react";
 import {
   ChevronLeft,
@@ -8,50 +8,46 @@ import {
   MapPin,
   Star,
   ShieldCheck,
-  Palette,
 } from "lucide-react";
 import styles from "./EventCard.module.css";
-import MockEventCard from "./MockEventCard";
+import MockEventCardInCorso from "./MockEventCardInCorso";
 import {
   selectParticipants,
   selectEventStats,
 } from "../store/slices/sharedEventSlice";
 import { useSelector } from "react-redux";
-import MockEventCardCompleto from "./MockEventCardCompleted";
-import MockEventCardInCorso from "./MockEventCardInCorso";
 
-const SlideEventCardCompleted = ({
+const SlideEventCardInCorso = ({
   isOwner = false,
   selectedPersonData,
   onEdit,
   onDelete,
-  stato,
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const participants = useSelector(selectParticipants);
   const eventStats = useSelector(selectEventStats);
 
-  // Dati mock dell'evento COMPLETATO
-  const mockCompletedEvent = {
-    id: "demo_event_completed_001",
-    title: "Aperitivo Spagnolo al Centro",
+  // Dati mock dell'evento IN CORSO
+  const mockEventInCorso = {
+    id: "demo_event_in_corso_001",
+    title: "Workshop di Fotografia Urbana",
     description:
-      "Serata di scambio linguistico spagnolo-italiano completata con successo! È stata un'esperienza fantastica di conversazione e condivisione culturale. Abbiamo praticato entrambe le lingue in un ambiente rilassato e amichevole.",
+      "Workshop pratico di fotografia urbana in corso! Stiamo esplorando i luoghi più caratteristici di Torino per catturare l'essenza della città attraverso l'obiettivo. Un'esperienza immersiva tra tecnica fotografica e scoperta del territorio.",
     category: "Hobby e passioni",
-    language: "spagnolo",
-    startDate: "2024-09-04", // Data nel passato
-    startTime: "19:00",
-    endTime: "21:30",
-    placeName: "Bar Centrale",
-    placeAddress: "Via Roma 15, Torino",
-    coverImage: "/images/evento/aperitivo-02.jpeg",
-    participants: 10, // Partecipanti effettivi
+    language: "italiano",
+    startDate: "2024-12-20", // Data di oggi
+    startTime: "14:00",
+    endTime: "18:00",
+    placeName: "Piazza Castello",
+    placeAddress: "Piazza Castello, Torino",
+    coverImage: "/images/evento/workshop-fotografia.jpg",
+    participants: 6, // Partecipanti attuali
     type: "presenza",
-    maxParticipants: 10,
-    views: 35,
-    likes: 12,
-    shares: 5,
-    state: "fatto", // Evento completato
+    maxParticipants: 8,
+    views: 28,
+    likes: 9,
+    shares: 3,
+    state: "in svolgimento", // Evento in corso
   };
 
   const handleCardClick = () => {
@@ -62,7 +58,6 @@ const SlideEventCardCompleted = ({
     const icons = {
       "Lingua e identità": "🗣️",
       "Hobby e passioni": "🎨",
-      // "Hobby e passioni": <Palette size={16} />,
       "Sport e fitness": "🏃‍♂️",
       Tecnologia: "💻",
       "Musica e Arte": "🎵",
@@ -78,72 +73,70 @@ const SlideEventCardCompleted = ({
         selectedPersonData.profile.lastName || ""
       }`.trim() || "Organizzatore",
     photo: selectedPersonData.profile.profilePhoto,
-    trustScore: 36,
-    participationScore: 112,
+    trustScore: 42,
+    participationScore: 89,
   };
 
   return (
     <>
-      {/* Card Preview - versione compatta per evento completato */}
+      {/* Card Preview - versione compatta per evento in corso */}
       <div
         className={styles.cardPreview}
         onClick={handleCardClick}
         style={{
           cursor: "pointer",
-          background:
-            stato === "inCorso" ? "var(--secondary-muted)" : "var(--gray-300)",
+          background: "var(--secondary-muted)",
         }}
       >
-        {/* Badge "Completato" */}
-        {/* <div
+        {/* Badge "In Corso" */}
+        <div
           className={styles.statusBadge}
-          style={{ backgroundColor: "#6c757d" }}
+          style={{ backgroundColor: "#fd7e14" }}
         >
-          ✅ Completato
-        </div> */}
+          🟠 In corso
+        </div>
 
         <div className={styles.flexCard}>
           <div className={styles.flexCardMe}>
             <div className={styles.cardImage}>
-              {mockCompletedEvent.coverImage ? (
+              {mockEventInCorso.coverImage ? (
                 <img
-                  src={mockCompletedEvent.coverImage}
-                  alt={mockCompletedEvent.title}
+                  src={mockEventInCorso.coverImage}
+                  alt={mockEventInCorso.title}
                   className={styles.eventImage}
                 />
               ) : (
-                <div className={styles.imagePlaceholder}>📅</div>
+                <div className={styles.imagePlaceholder}>📸</div>
               )}
             </div>
-            <h4 className={styles.eventTitle}>{mockCompletedEvent.title}</h4>
+            <h4 className={styles.eventTitle}>{mockEventInCorso.title}</h4>
           </div>
 
           <div className={styles.cardPreviewContent}>
             <div className={styles.eventMeta}>
               <div className={styles.metaItem}>
                 <Calendar size={14} />
-                <span>{mockCompletedEvent.startDate}</span>
+                <span>{mockEventInCorso.startDate}</span>
               </div>
               <div className={styles.metaItem}>
                 <Clock size={14} />
-                <span>{mockCompletedEvent.startTime}</span>
+                <span>{mockEventInCorso.startTime}</span>
               </div>
               <div className={styles.metaItem}>
                 <Users size={14} />
-                {/* <span>{mockCompletedEvent.participants} partecipanti</span> */}
                 <span>
-                  {mockCompletedEvent.participants}/
-                  {mockCompletedEvent.maxParticipants}
+                  {mockEventInCorso.participants}/
+                  {mockEventInCorso.maxParticipants}
                 </span>
               </div>
               <div className={styles.metaItemIcon}>
-                <span>{getCategoryIcon(mockCompletedEvent.category)}</span>
+                <span>{getCategoryIcon(mockEventInCorso.category)}</span>
               </div>
             </div>
 
             <div className={styles.metaItem}>
               <MapPin size={14} />
-              <span>{mockCompletedEvent.placeName}</span>
+              <span>{mockEventInCorso.placeName}</span>
             </div>
           </div>
         </div>
@@ -185,18 +178,12 @@ const SlideEventCardCompleted = ({
             </span>
           </div>
 
-          {/* Indicatori evento completato */}
+          {/* Indicatori evento in corso */}
           {/* <div className={styles.actionButtons}>
-            <div className={styles.completedIndicators}>
-              <span className={styles.completedBadge}>
-                📸{" "}
-                {mockCompletedEvent.participants > 5
-                  ? "5+"
-                  : mockCompletedEvent.participants}{" "}
-                foto
-              </span>
-              <span className={styles.completedBadge}>
-                ⭐ {Math.floor(Math.random() * 5) + 3} recensioni
+            <div className={styles.inProgressIndicators}>
+              <span className={styles.inProgressBadge}>⏱️ In corso</span>
+              <span className={styles.inProgressBadge}>
+                👥 {mockEventInCorso.participants - 2} presenti
               </span>
             </div>
           </div> */}
@@ -213,7 +200,7 @@ const SlideEventCardCompleted = ({
             onClick={() => setIsDrawerOpen(false)}
           >
             <ChevronLeft size={20} />
-            <span>Evento Completato</span>
+            <span>Evento in Corso</span>
           </button>
         </div>
 
@@ -225,10 +212,7 @@ const SlideEventCardCompleted = ({
               onEdit={onEdit}
               onDelete={onDelete}
               showExtended={true}
-              mockEvent={mockCompletedEvent}
-              // Forza lo stato "fatto" per mostrare le sezioni specifiche
-              initialEventState="fatto"
-              stato={stato}
+              mockEvent={mockEventInCorso}
             />
           )}
         </div>
@@ -237,4 +221,4 @@ const SlideEventCardCompleted = ({
   );
 };
 
-export default SlideEventCardCompleted;
+export default SlideEventCardInCorso;

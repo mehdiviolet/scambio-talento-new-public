@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useEffect } from "react";
 import StaticEventShowcase from "./StaticEventShowcase";
 import styles from "./MyExplorePage.module.css";
+import SlideEventCardInCorso from "./SlideEventCardInCorso";
+import SlideEventCardCompleted from "./SlideEventCardCompleted";
 
 const EventiPage = ({ currentUser }) => {
   // State per filtri (solo per eventi)
@@ -39,7 +41,7 @@ const EventiPage = ({ currentUser }) => {
         categoria: "🎭",
         stato: "idle",
         component: (
-          <StaticEventShowcase
+          <SlideEventCardInCorso
             key="event1"
             selectedPersonData={selectedPersonData.saraDormand}
           />
@@ -51,9 +53,9 @@ const EventiPage = ({ currentUser }) => {
         categoria: "🎵",
         stato: "active",
         component: (
-          <StaticEventShowcase
+          <SlideEventCardCompleted
             key="event2"
-            selectedPersonData={selectedPersonData.saraBianchi}
+            selectedPersonData={selectedPersonData.saraDormand}
           />
         ),
       },
@@ -64,7 +66,7 @@ const EventiPage = ({ currentUser }) => {
         categoria: "🎨",
         stato: "idle",
         component: (
-          <StaticEventShowcase
+          <SlideEventCardCompleted
             key="event3"
             selectedPersonData={selectedPersonData.saraDormand}
           />
@@ -76,9 +78,9 @@ const EventiPage = ({ currentUser }) => {
         categoria: "🍳",
         stato: "active",
         component: (
-          <StaticEventShowcase
-            key="event4"
-            selectedPersonData={selectedPersonData.saraBianchi}
+          <SlideEventCardInCorso
+            key="event1"
+            selectedPersonData={selectedPersonData.saraDormand}
           />
         ),
       },
@@ -240,9 +242,9 @@ const EventiPage = ({ currentUser }) => {
             </div>
           )}
 
-          <p className={styles.hint}>
+          {/* <p className={styles.hint}>
             💡 Clicca sulla carta per espandere/comprimere
-          </p>
+          </p> */}
         </div>
       </div>
     </>

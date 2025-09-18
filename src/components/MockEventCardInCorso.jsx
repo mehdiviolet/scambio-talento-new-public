@@ -1,4 +1,4 @@
-// MockEventCardCompleto.jsx - STATO FINALE STATICO
+// MockEventCardInCorso.jsx - STATO IN CORSO STATICO
 import React, { useState } from "react";
 import {
   Edit,
@@ -11,11 +11,11 @@ import {
   ChevronRight,
   Star,
   ShieldCheck,
-  ZoomIn,
+  CheckCircle,
 } from "lucide-react";
 import styles from "./EventCard.module.css";
 
-// DATI MOCK COMPLETI STATO FINALE
+// DATI MOCK STATO IN CORSO
 const mockEventData = {
   id: "demo_event_001",
   title: "Boardgame Night a San Salvario",
@@ -41,66 +41,15 @@ const mockParticipants = [
   { id: "p6", name: "Giulia Romano", initials: "GR" },
 ];
 
+// Check-in parziale - solo 4 su 6 hanno fatto check-in
 const mockCheckInList = [
   { id: "c1", participantName: "Mario Rossi", time: "19:35" },
   { id: "c2", participantName: "Anna Bianchi", time: "19:40" },
   { id: "c3", participantName: "Luca Verdi", time: "19:45" },
   { id: "c4", participantName: "Sara Neri", time: "19:50" },
-  { id: "c5", participantName: "Paolo Ferrari", time: "20:00" },
 ];
 
-const mockFeedbacks = [
-  {
-    id: "f1",
-    fromUserName: "Mario Rossi",
-    stars: 3,
-    comment: "Serata fantastica! Ottima organizzazione e giochi divertenti.",
-    timestamp: "2024-12-20T23:00:00Z",
-  },
-  {
-    id: "f2",
-    fromUserName: "Anna Bianchi",
-    stars: 3,
-    comment: "Ambiente accogliente, perfetto per socializzare.",
-    timestamp: "2024-12-20T23:15:00Z",
-  },
-  {
-    id: "f3",
-    fromUserName: "Luca Verdi",
-    stars: 2,
-    comment: "Bello ma poteva durare un po' di più!",
-    timestamp: "2024-12-20T23:30:00Z",
-  },
-  {
-    id: "f4",
-    fromUserName: "Paolo Ferrari",
-    stars: 3,
-    comment: "Tornerò sicuramente al prossimo evento.",
-    timestamp: "2024-12-20T23:45:00Z",
-  },
-];
-
-const mockGalleryPhotos = [
-  {
-    id: "photo_1",
-    url: "/images/evento/azul-02.png",
-    alt: "Foto evento 1",
-    caption: "Momento divertente durante il gioco!",
-  },
-  {
-    id: "photo_2",
-    url: "/images/evento/azul-01.png",
-    alt: "Foto evento 2",
-    caption: "Tutti concentrati sulla strategia",
-  },
-  {
-    id: "photo_3",
-    url: "/images/evento/azul-03.png",
-    alt: "Foto evento 3",
-    caption: "Il momento della vittoria!",
-  },
-];
-
+// Commenti durante l'evento - no commenti post-evento
 const mockComments = [
   {
     id: "c1",
@@ -117,23 +66,28 @@ const mockComments = [
   {
     id: "c3",
     authorName: "Luca Verdi",
-    text: "È stato fantastico! Grazie per l'organizzazione",
-    time: "22:45",
+    text: "Appena arrivato, che bello!",
+    time: "19:45",
+  },
+  {
+    id: "c4",
+    authorName: "Sara Neri",
+    text: "Sto arrivando, 5 minuti!",
+    time: "19:48",
   },
 ];
 
 const mockOrganizer = {
   name: "Sara Dormand",
   photo: "/images/people/sara-avatar.jpg",
-  trustScore: 28, // Calcolato dai feedback
+  trustScore: 25, // Ancora in costruzione
   participationScore: 126,
 };
 
-const MockEventCardCompleto = ({ isOwner = true, stato }) => {
+const MockEventCardInCorso = ({ isOwner = true }) => {
   // Stati per toggle delle sezioni
-  const [showFeedbacks, setShowFeedbacks] = useState(false);
-  const [showGallery, setShowGallery] = useState(false);
   const [showComments, setShowComments] = useState(false);
+
   // Helper functions
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -159,28 +113,26 @@ const MockEventCardCompleto = ({ isOwner = true, stato }) => {
     <div
       className={`${styles.card} ${styles.expanded}`}
       style={{
-        background:
-          stato === "inCorso" ? "var(--secondary-muted)" : "var(--gray-300)",
+        background: "var(--secondary-muted)",
       }}
     >
-      {/* Status Badge - COMPLETATO */}
+      {/* Status Badge - IN CORSO */}
       <div
         className={styles.statusBadge}
-        style={{ backgroundColor: "#6c757d" }}
+        style={{ backgroundColor: "#fd7e14" }}
       >
-        ✅ Completato
+        🟠 In corso
       </div>
 
-      {/* Immagine copertina con QR finito */}
+      {/* Immagine copertina con QR attivo */}
       <div className={styles.coverImageWithOverlay}>
         <img
           src={mockEventData.coverImage}
           alt={mockEventData.title}
           className={styles.coverImg}
         />
-        <div className={styles.overlayContent}>
+        {/* <div className={styles.overlayContent}>
           <div className={styles.bottomRightIcons}>
-            {/* QR Code in stato "Finito" */}
             <div
               style={{
                 width: "80px",
@@ -189,18 +141,75 @@ const MockEventCardCompleto = ({ isOwner = true, stato }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "rgba(255, 255, 255, 0.15)",
+                background: "var(--white)",
+                border: "2px solid #28a745",
                 backdropFilter: "blur(8px)",
-                border: "2px solid #6c757d",
-                color: "#6c757d",
-                fontSize: "12px",
-                fontWeight: "600",
+                cursor: isOwner ? "pointer" : "default",
+                transition: "transform 0.2s",
+              }}
+              title={
+                isOwner
+                  ? `Click per scan (${
+                      mockParticipants.length - mockCheckInList.length
+                    } rimanenti)`
+                  : "QR Code attivo"
+              }
+              onMouseEnter={(e) => {
+                if (isOwner) e.target.style.transform = "scale(1.02)";
+              }}
+              onMouseLeave={(e) => {
+                if (isOwner) e.target.style.transform = "scale(1)";
               }}
             >
-              Finito
+              <div
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  background: `
+                    linear-gradient(90deg, var(--text-primary) 50%, transparent 50%),
+                    linear-gradient(var(--text-primary) 50%, transparent 50%)
+                  `,
+                  backgroundSize: "4px 4px",
+                  position: "relative",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "2px",
+                    left: "2px",
+                    width: "8px",
+                    height: "8px",
+                    background: "var(--text-primary)",
+                    border: "1px solid var(--white)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "2px",
+                    right: "2px",
+                    width: "8px",
+                    height: "8px",
+                    background: "var(--text-primary)",
+                    border: "1px solid var(--white)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "2px",
+                    left: "2px",
+                    width: "8px",
+                    height: "8px",
+                    background: "var(--text-primary)",
+                    border: "1px solid var(--white)",
+                  }}
+                />
+              </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Header espanso */}
@@ -260,7 +269,7 @@ const MockEventCardCompleto = ({ isOwner = true, stato }) => {
 
       {/* Contenuto principale */}
       <div className={styles.cardContent}>
-        {/* Check-in sezione (solo owner) */}
+        {/* Check-in sezione (solo owner) - PARZIALE */}
         {isOwner && (
           <div className={styles.checkInSection}>
             <div className={styles.dropdownTrigger}>
@@ -278,90 +287,8 @@ const MockEventCardCompleto = ({ isOwner = true, stato }) => {
           </div>
         )}
 
-        {/* Feedback sezione (toggle) */}
-        <div className={styles.feedbackSection}>
-          <button
-            className={styles.dropdownTrigger}
-            onClick={(e) => {
-              console.log(e);
-              e.stopPropagation();
-              setShowFeedbacks(!showFeedbacks);
-            }}
-          >
-            ⭐ Feedback ricevuti ({mockFeedbacks.length})
-            {showFeedbacks ? (
-              <ChevronDown size={16} />
-            ) : (
-              <ChevronRight size={16} />
-            )}
-          </button>
-
-          {showFeedbacks && (
-            <div className={styles.feedbackList}>
-              {mockFeedbacks.map((feedback) => (
-                <div key={feedback.id} className={styles.feedbackItem}>
-                  <div className={styles.feedbackHeader}>
-                    <strong>{feedback.fromUserName}</strong>
-                    <div className={styles.starsContainer}>
-                      {[...Array(3)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={12}
-                          fill={i < feedback.stars ? "#ffd700" : "none"}
-                          color={i < feedback.stars ? "#ffd700" : "#ddd"}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <div className={styles.feedbackComment}>
-                    "{feedback.comment}"
-                  </div>
-                  <div className={styles.feedbackTime}>
-                    {new Date(feedback.timestamp).toLocaleDateString("it-IT")}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Gallery sezione (toggle) */}
-        <div className={styles.gallerySection}>
-          <button
-            className={styles.dropdownTrigger}
-            onClick={(e) => {
-              console.log(e);
-              e.stopPropagation();
-              setShowGallery(!showGallery);
-            }}
-          >
-            📸 Gallery ({mockGalleryPhotos.length} foto)
-            {showGallery ? (
-              <ChevronDown size={16} />
-            ) : (
-              <ChevronRight size={16} />
-            )}
-          </button>
-
-          {showGallery && (
-            <div className={styles.galleryGrid}>
-              {mockGalleryPhotos.map((photo, index) => (
-                <div key={photo.id} className={styles.galleryItem}>
-                  <img
-                    src={photo.url}
-                    alt={photo.alt}
-                    className={styles.galleryImage}
-                  />
-                  <div className={styles.galleryOverlay}>
-                    <span className={styles.galleryIcon}>
-                      <ZoomIn style={{ color: "var(--primary-lighter)" }} />
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        {/* NO Feedback - non ancora disponibili */}
+        {/* NO Gallery - non ancora disponibile */}
 
         {/* Dettagli extra */}
         <div className={styles.extraDetails}>
@@ -376,7 +303,23 @@ const MockEventCardCompleto = ({ isOwner = true, stato }) => {
         </div>
       </div>
 
-      {/* Sezione commenti (toggle) */}
+      {/* Bottone Termina Evento per Owner */}
+      {isOwner && (
+        <div className={styles.confermButtonOwner}>
+          <button
+            className={`${styles.actionButton} ${styles.actionButtonDelete}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              console.log("🏁 DEMO: Termina evento");
+            }}
+          >
+            <CheckCircle size={16} />
+            <span>Termina Evento</span>
+          </button>
+        </div>
+      )}
+
+      {/* Sezione commenti (toggle) - DURANTE EVENTO */}
       <div className={styles.commentsSection}>
         <div className={styles.commentsHeader}>
           <button
@@ -425,7 +368,7 @@ const MockEventCardCompleto = ({ isOwner = true, stato }) => {
           </span>
         </div>
 
-        {/* Bottoni owner */}
+        {/* Bottoni normali per owner (sempre disponibili) */}
         {isOwner && (
           <div className={styles.actionButtons}>
             <button
@@ -447,4 +390,4 @@ const MockEventCardCompleto = ({ isOwner = true, stato }) => {
   );
 };
 
-export default MockEventCardCompleto;
+export default MockEventCardInCorso;

@@ -16,6 +16,7 @@ import {
 import SlideEventCard from "./SlideEventCard";
 import { HeaderAddButton } from "./ui/AddButtons";
 import SlideEventCardCompleted from "./SlideEventCardCompleted";
+import SlideEventCardInCorso from "./SlideEventCardInCorso";
 
 const EventSectionTest = ({
   isOwner,
@@ -183,7 +184,7 @@ const EventSectionTest = ({
               //   selectedPersonData={selectedPersonData}
               // />
               <>
-                <SlideEventCardCompleted
+                <SlideEventCardInCorso
                   key={event.id}
                   isOwner={isOwner}
                   selectedPersonData={selectedPersonData}
