@@ -589,7 +589,7 @@ const QuickSetupSlides = ({ onComplete }) => {
                 }`}
               >
                 <ChevronLeft className={styles.iconSm} />
-                <span>Indietro</span>
+                {/* <span>Indietro</span> */}
               </button>
 
               <div className={styles.progressDots}>
@@ -614,9 +614,9 @@ const QuickSetupSlides = ({ onComplete }) => {
                   !canContinue() ? styles.disabled : ""
                 }`}
               >
-                <span>
+                {/* <span>
                   {currentStep === steps.length - 1 ? "Finito!" : "Avanti"}
-                </span>
+                </span> */}
                 {currentStep === steps.length - 1 ? (
                   <Flame className={styles.iconSm} />
                 ) : (

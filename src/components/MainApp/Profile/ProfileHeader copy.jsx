@@ -37,7 +37,6 @@ import {
   Copy,
   Facebook,
   Key,
-  Gem,
 } from "lucide-react";
 import styles from "./ProfileHeader.module.css";
 import { useQuickSetup } from "../../../hooks/useQuickSetup";
@@ -64,8 +63,6 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const dispatch = useDispatch();
 
   const { isOwner } = useAppSelector((state) => state.onboarding);
-
-  const [isSkillsDrawerOpen, setIsSkillsDrawerOpen] = useState(false);
 
   const [isAboutExpanded, setIsAboutExpanded] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -350,7 +347,6 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
 
   const handleFollowersClick = () => setIsFollowersDrawerOpen(true);
   const handleFollowingClick = () => setIsFollowingDrawerOpen(true);
-  const handleSkillsClick = () => setIsSkillsDrawerOpen(true);
 
   const handleToggleFollow = (person) => {
     const isCurrentlyFollowing = followingList.has(person.id);
@@ -697,9 +693,10 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.profileGrid}>
-          {/* Riga 1 - Avatar | Nome | Actions */}
-          <div className={styles.gridAvatar}>
+        <div className={styles.profileHeader}>
+          {/* Cover Photo */}
+          <div className={`${styles.coverPhoto}`}>
+            {/* Avatar */}
             <div
               className={`${styles.avatarContainer} ${
                 isOwner ? styles.clickable : ""
@@ -720,138 +717,138 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                 </div>
               )}
             </div>
+
+            {/* Action Buttons */}
+            <div className={styles.actionButtons}>
+              {isOwner ? (
+                <>
+                  <button
+                    className={styles.editProfileBtn}
+                    onClick={handleEditProfile}
+                  >
+                    Edit profile
+                  </button>
+
+                  <motion.button
+                    className={`${styles.editProfileBtn} ${styles.liquidButton}`}
+                    onClick={() => setIsCherryDrawerOpen(true)}
+                    title="Ruota della fortuna! "
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Cherry size={16} />
+                  </motion.button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className={styles.editProfileBtn}
+                    onClick={handleFollow}
+                  >
+                    {isFollowing ? "FOLLOWING" : "FOLLOW"}
+                  </button>
+
+                  <button
+                    className={`${styles.editProfileBtn} ${styles.msgButton}`}
+                    onClick={handleMessage}
+                    title="Send message"
+                  >
+                    <MessageCircle size={16} />
+                  </button>
+                </>
+              )}
+            </div>
           </div>
 
-          <div className={styles.gridName}>
-            <h1 className={styles.displayName}>
-              {user.firstName} {user.lastName}
-            </h1>
-          </div>
+          <div className={styles.profileInfo}>
+            {/* Name and More Options */}
+            <div className={styles.nameSection}>
+              <h1 className={styles.displayName}>
+                {user.firstName} {user.lastName}
+                <div></div>
+                {!isOwner && (
+                  <button
+                    className={styles.moreOptionsBtn}
+                    onClick={() => setIsViewerDrawerOpen(true)}
+                    title="More options"
+                  >
+                    <MoreHorizontal size={20} />
+                  </button>
+                )}
+                {isOwner && (
+                  <Settings
+                    className={styles.settingsIcon}
+                    size={20}
+                    onClick={() => setIsSettingsDrawerOpen(true)}
+                    style={{ cursor: "pointer" }}
+                  />
+                )}
+              </h1>
 
-          <div className={styles.gridActions}>
-            {isOwner ? (
-              <>
-                <button
-                  className={styles.actionBtn}
-                  onClick={() => setIsSettingsDrawerOpen(true)}
-                  title="Settings"
-                >
-                  <Settings size={16} />
-                </button>
-                <button
-                  className={styles.actionBtn}
-                  onClick={handleEditProfile}
-                  title="Edit Profile"
-                >
-                  <Camera size={16} />
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  className={styles.actionBtn}
-                  onClick={() => setIsViewerDrawerOpen(true)}
-                  title="More options"
-                >
-                  <MoreHorizontal size={16} />
-                </button>
-                <button
-                  className={styles.actionBtn}
-                  onClick={handleMessage}
-                  title="Send message"
-                >
-                  <MessageCircle size={16} />
-                </button>
-              </>
-            )}
-          </div>
+              <div className={styles.hudLevel}>
+                <p className={styles.username}>@{user.username}</p>
+              </div>
+            </div>
 
-          {/* Riga 2 - Username */}
-          <div className={styles.gridUsername}>
-            <p className={styles.username}>@{user.username}</p>
-          </div>
-
-          {/* Riga 3 - Meta Info | Cherry/Follow */}
-          <div className={styles.gridMeta}>
+            {/* Meta Info */}
             <div className={styles.metaInfo}>
-              <div className={styles.metaItem}>
-                <MapPin size={16} />
-                <span>{user.location ? user.location : "nowhere"}</span>
-              </div>{" "}
               <div className={styles.metaItem}>
                 <Calendar size={16} />
                 <span>Joined {user.joinedDate}</span>
               </div>
+              <div className={styles.metaItem}>
+                <MapPin size={16} />
+                <span>{user.location ? user.location : "nowhere"}</span>
+              </div>
+            </div>
+
+            {/* Enhanced Stats */}
+            <div className={styles.followStats}>
+              <button
+                className={styles.followStat}
+                onClick={handleFollowingClick}
+              >
+                <strong>{user.following ? user.following : 0}</strong> following
+              </button>
+              <button
+                className={styles.followStat}
+                onClick={handleFollowersClick}
+              >
+                <strong>{user.followers ? user.followers : 0}</strong> followers
+              </button>
+              <button
+                className={styles.aboutToggle}
+                onClick={() => setIsAboutExpanded(!isAboutExpanded)}
+              >
+                <span>About me</span>
+                {isAboutExpanded ? (
+                  <ChevronUp size={20} />
+                ) : (
+                  <ChevronDown size={20} />
+                )}
+              </button>
             </div>
           </div>
 
-          <div className={styles.gridSpecialAction}>
-            {isOwner ? (
-              <motion.button
-                className={`${styles.cherryBtn} ${styles.liquidButton}`}
-                onClick={() => setIsCherryDrawerOpen(true)}
-                title="Ruota della fortuna!"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Cherry size={16} />
-              </motion.button>
-            ) : (
-              <button className={styles.followBtn} onClick={handleFollow}>
-                {isFollowing ? "FOLLOWING" : "FOLLOW"}
-              </button>
+          {/* About Me Section */}
+          <div className={styles.aboutSection}>
+            {isAboutExpanded && (
+              <div className={styles.aboutContent}>
+                <div className={styles.descriptionContainer}>
+                  <p className={styles.aboutText}>{visibleText}</p>
+                  {needsTruncation && (
+                    <button
+                      onClick={() =>
+                        setShowFullDescription(!showFullDescription)
+                      }
+                      className={styles.expandTextButton}
+                    >
+                      {showFullDescription ? "Riduci" : "Leggi tutto"}
+                    </button>
+                  )}
+                </div>
+              </div>
             )}
-          </div>
-
-          {/* Riga 4 - Following/Followers | Skills */}
-          <div className={styles.gridStats}>
-            <button
-              className={styles.followStat}
-              onClick={handleFollowingClick}
-            >
-              <strong>{user.following ? user.following : 0}</strong> following
-            </button>
-            <button
-              className={styles.followStat}
-              onClick={handleFollowersClick}
-            >
-              <strong>{user.followers ? user.followers : 0}</strong> followers
-            </button>
-          </div>
-
-          <div className={styles.gridSkills}>
-            <button className={styles.skillsBtn} onClick={handleSkillsClick}>
-              <Gem size={16} />
-              <span>5</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* AGGIUNGERE il Skills Drawer prima della chiusura */}
-      <div
-        className={`${styles.slideDrawer} ${
-          isSkillsDrawerOpen ? styles.open : ""
-        }`}
-      >
-        <div className={styles.drawerHeader}>
-          <button
-            className={styles.backButton}
-            onClick={() => setIsSkillsDrawerOpen(false)}
-          >
-            <ChevronLeft size={20} />
-            <span>Skills</span>
-          </button>
-        </div>
-        <div className={styles.drawerContent}>
-          <div style={{ padding: "1rem", textAlign: "center" }}>
-            <Gem
-              size={48}
-              style={{ color: "var(--success-green)", marginBottom: "1rem" }}
-            />
-            <p style={{ color: "var(--text-primary)" }}>
-              Skills drawer - Coming soon!
-            </p>
           </div>
         </div>
       </div>
