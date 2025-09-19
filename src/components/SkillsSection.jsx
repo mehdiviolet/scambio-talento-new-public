@@ -155,18 +155,8 @@ const SkillsSection = () => {
     <div className={styles.container}>
       {/* Header - conditional add button for owner only */}
       <div className={styles.header}>
-        <h2 className={styles.title}>Skills ({skills.length})</h2>
+        {/* <h2 className={styles.title}>Skills ({skills.length})</h2> */}
         {isOwner && skills.length !== 0 && (
-          // (
-          //   <button
-          //     onClick={handleAddSkill}
-          //     className={styles.addButton}
-          //     title="Aggiungi nuova skill"
-          //   >
-          //     +
-          //   </button>
-          // )
-
           <HeaderAddButton
             onClick={handleAddSkill}
             title="Aggiungi nuova skill"
@@ -305,10 +295,10 @@ const SkillsSection = () => {
                     )}
 
                     {/* Divider - same as ShareModal */}
-                    <div className={styles.divider}></div>
+                    {/* <div className={styles.divider}></div> */}
 
                     {/* Footer - same as ShareModal */}
-                    <div className={styles.footer}>
+                    {/* <div className={styles.footer}>
                       <div className={styles.userInfo}>
                         <div className={styles.avatar}>
                           {currentProfile?.profilePhoto ? (
@@ -325,7 +315,6 @@ const SkillsSection = () => {
                               }`}
                             />
                           ) : (
-                            // <div className={styles.avatarEmoji}>👩‍🎨</div>
                             <User2 />
                           )}
                         </div>
@@ -334,14 +323,7 @@ const SkillsSection = () => {
                           {currentProfile?.lastName || "Dormand"}
                         </span>
                       </div>
-
-                      {/* <div className={styles.skillGemsDisplay}>
-                        <span className={styles.gemsIcon}>⚡</span>
-                        <span className={styles.gemsCount}>
-                          {skill.gems || 0}
-                        </span>
-                      </div> */}
-                    </div>
+                    </div> */}
                   </div>
                 )}
               </div>
