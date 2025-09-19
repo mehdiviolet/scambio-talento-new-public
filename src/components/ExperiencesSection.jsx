@@ -203,9 +203,9 @@ const ExperiencesSection = () => {
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        <h3 className={styles.title}>
+        {/* <h3 className={styles.title}>
           Esperienze Offerte ({experiences.length})
-        </h3>
+        </h3> */}
         <button
           className={styles.toggleFiltersBtn}
           onClick={() => setShowFilters(!showFilters)}

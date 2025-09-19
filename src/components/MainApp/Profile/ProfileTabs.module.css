@@ -1,0 +1,121 @@
+/* ProfileTabs.module.css */
+
+.tabsContainer {
+  width: 100%;
+  max-width: 400px;
+}
+
+.tabsNavigation {
+  display: flex;
+  /* background: rgba(37, 102, 121, 0.08); */
+  border-radius: 16px;
+  padding: 6px;
+  backdrop-filter: blur(10px);
+}
+
+.tabButton {
+  flex: 1;
+  padding: 14px 18px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(37, 102, 121, 0.65);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.tabButton:hover {
+  color: #256679;
+  background: rgba(37, 102, 121, 0.1);
+  transform: translateY(-1px);
+}
+
+.tabButton.active {
+  color: #256679;
+  background: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(37, 102, 121, 0.15);
+}
+
+/* .tabContent {
+  margin-top: 24px;
+} */
+
+.content {
+  /* padding: 24px; */
+  background: rgba(37, 102, 121, 0.04);
+  border-radius: 16px;
+  /* border: 1px solid rgba(37, 102, 121, 0.08); */
+  backdrop-filter: blur(8px);
+  animation: slideIn 0.3s ease-out;
+}
+
+.content p {
+  margin: 0;
+  color: rgba(37, 102, 121, 0.8);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------ */
+
+.toggleContainer {
+  display: flex;
+  background: rgba(37, 102, 121, 0.1);
+  border-radius: 8px;
+  padding: 2px;
+  margin-bottom: 16px;
+  /* width: fit-content; */
+  justify-content: center;
+}
+
+.toggleButton {
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(37, 102, 121, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.toggleButton.toggleActive {
+  background: rgba(255, 255, 255, 0.9);
+  color: #256679;
+  font-weight: 600;
+}
+
+.experienceContent {
+  margin-top: 8px;
+}
+.aboutSection {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.aboutText {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #666;
+  margin: 0;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}

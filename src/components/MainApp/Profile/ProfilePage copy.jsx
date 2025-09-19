@@ -12,27 +12,30 @@ import EventsSection from "@/components/EventSection";
 import ExperiencesSectionStudente from "@/components/ExperiencesSectionStudente";
 import GallerySection from "@/components/GallerySection";
 import EventiPartecipati from "./EventiPartecipati";
-import ProfileTabs from "./ProfileTabs";
 
 const ProfilePage = () => {
   // ===== RENDER - SOLO COMPOSIZIONE UI =====
   return (
     <div className={styles.profilePage}>
       <div className={styles.profileContainer}>
+        {/* Header del profilo */}
         <ProfileHeader />
 
-        <ProfileTabs />
+        {/* Sezione Skills */}
+        <SkillsSection />
 
-        {/* <SkillsSection />
-
+        {/* Sezione Esperienze */}
         <ExperiencesSection />
         <EventsSection />
         <ExperiencesSectionStudente />
 
+        {/* Sezione Esperienze */}
         <EventiPartecipati />
 
+        {/* Sezione Ricerca */}
+
         <SearchSection />
-        <GallerySection isOwner={true} /> */}
+        <GallerySection isOwner={true} />
       </div>
     </div>
   );
