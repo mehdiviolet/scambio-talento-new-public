@@ -7,6 +7,8 @@
   position: relative;
   /* border-bottom: 1px solid #e5e7eb; */
   margin-bottom: 20px;
+  /* border: 1px solid saddlebrown; */
+  /* border-top: none; */
 }
 
 /* Header */
@@ -18,7 +20,8 @@
   justify-content: flex-end;
   /* padding: 16px 20px; */
   /* margin: 20px 0; */
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  margin: 10px 0;
 }
 
 .title {
@@ -102,7 +105,9 @@
   justify-content: space-between;
   cursor: pointer;
   font-size: 15px;
-  color: #1a1a1a;
+  /* color: #1a1a1a; */
+  /* color: var(--primary-900); */
+  color: var(--gray-800);
   transition: background-color 0.2s ease;
   text-align: left;
   margin: 8px 0;
@@ -124,7 +129,7 @@
 
 .skillIcon {
   font-size: 18px;
-  color: #10363a;
+  color: var(--gray-600);
   flex-shrink: 0;
 }
 
@@ -142,6 +147,7 @@
   gap: 12px;
   flex-shrink: 0;
   padding-right: var(--space-md);
+  color: var(--gem);
 }
 
 .skillGems {
@@ -149,12 +155,14 @@
   align-items: center;
   gap: 4px;
   font-size: 14px;
-  color: #10363a;
+  /* color: var(--gray-600); */
+  /* color: var(--primary-500); */
 }
 
 .gemsCount {
   font-weight: 600;
-  color: #1a1a1a;
+  /* color: var(--gray-600); */
+  /* color: #1a1a1a; */
 }
 
 .expandIcon {
@@ -474,88 +482,6 @@
 }
 
 /* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .container {
-    background-color: #1a1a1a;
-    border-bottom-color: #333;
-  }
-
-  .skillCard {
-    color: #ffffff;
-  }
-
-  .skillCard:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-
-  .title {
-    color: #ffffff;
-  }
-
-  .skillName {
-    color: #ffffff;
-  }
-
-  .skillMeta,
-  .skillGems {
-    color: #e8e7e7;
-  }
-
-  .gemsCount,
-  .userName {
-    color: #ffffff;
-  }
-
-  .addButton,
-  .editCancelButton {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .addButton:hover,
-  .editCancelButton:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .descriptionBox {
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  .descriptionText {
-    color: #e5e7eb;
-  }
-
-  .editDescriptionTextarea {
-    background-color: rgba(0, 0, 0, 0.25);
-    border-color: rgba(255, 255, 255, 0.3);
-    color: #ffffff;
-  }
-
-  .footer {
-    background: rgba(0, 0, 0, 0.25);
-  }
-
-  .descriptionClickable {
-    /* color: #ffffff; */
-  }
-
-  .descriptionPlaceholder {
-    color: #9ca3af;
-  }
-
-  .emptyTitle {
-    color: #ffffff;
-  }
-
-  .skillItem {
-    border-bottom-color: #333;
-  }
-
-  .expandIcon {
-    color: #ffffff;
-  }
-}
 
 .skillExpanded {
   /* padding: 0 20px 0px 20px; */

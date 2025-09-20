@@ -43,14 +43,15 @@ const ProfileTabs = () => {
               </p>
             </div>
             <SearchSection />
-            <GallerySection isOwner={true} />
+            {/* <GallerySection isOwner={true} /> */}
           </div>
         );
       case "skills":
         return <SkillsSection />;
       case "experiences":
         return (
-          <div className={styles.content}>
+          <>
+            {/* <div className={styles.content}> */}
             <div className={styles.toggleContainer}>
               <button
                 className={`${styles.toggleButton} ${
@@ -68,16 +69,16 @@ const ProfileTabs = () => {
               >
                 Cerco
               </button>
-            </div>
-
-            <div className={styles.experienceContent}>
-              {experienceMode === "offer" ? (
-                <ExperiencesSectionStudente />
-              ) : (
-                <ExperiencesSection />
-              )}
-            </div>
-          </div>
+            </div>{" "}
+            {/* <div className={styles.experienceContent}> */}
+            {experienceMode === "offer" ? (
+              <ExperiencesSectionStudente />
+            ) : (
+              <ExperiencesSection />
+            )}
+            {/* </div> */}
+            {/* </div> */}
+          </>
         );
       case "events":
         return (

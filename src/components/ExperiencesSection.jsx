@@ -200,172 +200,7 @@ const ExperiencesSection = () => {
   );
 
   return (
-    <div className={styles.container}>
-      {/* Header */}
-      <div className={styles.header}>
-        {/* <h3 className={styles.title}>
-          Esperienze Offerte ({experiences.length})
-        </h3> */}
-        <button
-          className={styles.toggleFiltersBtn}
-          onClick={() => setShowFilters(!showFilters)}
-        >
-          Filtri {showFilters ? "↑" : "↓"}
-        </button>
-
-        {isOwner && (
-          <>
-            {skills && experiences.length > 0 && (
-              // <button
-              //   onClick={handleAddExperience}
-              //   className={styles.addButton}
-              //   title="Crea nuova esperienza"
-              // >
-              //   +
-              // </button>
-
-              <>
-                <HeaderAddButton
-                  onClick={handleAddExperience}
-                  title="Crea nuova esperienza"
-                />
-              </>
-            )}
-          </>
-        )}
-      </div>
-      <div>
-        <div className={styles.filtersContainer}>
-          {/* <button
-            className={styles.toggleFiltersBtn}
-            onClick={() => setShowFilters(!showFilters)}
-          >
-            Filtri {showFilters ? "↑" : "↓"}
-          </button> */}
-
-          <div
-            className={`${styles.filterContent} ${
-              showFilters ? styles.open : ""
-            }`}
-          >
-            <StatusFilterButtons
-              activeFilter={statusFilter}
-              onFilterChange={setStatusFilter}
-              filterCounts={filterCounts}
-              filterConfig={filterConfig}
-            />
-          </div>
-        </div>
-        {/* <StatusFilterButtons
-          activeFilter={statusFilter}
-          onFilterChange={setStatusFilter}
-          filterCounts={filterCounts}
-          filterConfig={filterConfig}
-        /> */}
-        {/* <DropdownFilters
-          filters={Object.entries(filterConfig).map(([key, config]) => ({
-            key,
-            label: config.label,
-            count: filterCounts[key] || 0,
-          }))}
-          activeFilter={statusFilter}
-          onFilterChange={setStatusFilter}
-        /> */}
-      </div>
-
-      {/* Content */}
-      <div className={styles.content}>
-        {experiences.length > 0 ? (
-          <div className={styles.experiencesGrid}>
-            {experiences.map((experience) => {
-              // ✅ Trova la skill associata per ottenere i gem corretti
-              const associatedSkill = findSkillForExperience(experience);
-              const skillGems = associatedSkill?.gems || 0;
-
-              // ✅ Ottieni foto profilo owner
-              const ownerPhoto = getOwnerPhoto();
-
-              return (
-                <TestCard
-                  key={experience.id}
-                  lingua={experience.lingua}
-                  modalita={experience.modalita}
-                  icon={experience.icon}
-                  title={experience.title}
-                  lezioni={experience.lezioni}
-                  durataLezione={experience.durataLezione}
-                  costo={experience.costo}
-                  descrizione={experience.descrizione}
-                  istruttore={`${currentProfile?.firstName || "Tu"} ${
-                    currentProfile?.lastName || ""
-                  }`}
-                  // ✅ Passa foto profilo owner
-                  ownerPhoto={ownerPhoto}
-                  // ✅ Usa gem della skill invece di esperienza
-                  skillGems={skillGems}
-                  partecipanti={experience.partecipanti}
-                  experienceData={experience}
-                  isOwner={isOwner}
-                  onEdit={isOwner ? handleEditExperience : undefined}
-                  onDelete={isOwner ? handleDeleteExperience : undefined}
-                  userXP={100}
-                  onXPChange={(amount) => console.log(`XP changed: ${amount}`)}
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <div className={styles.emptyState}>
-            {isOwner ? (
-              // Owner Mode - Empty State
-              skills && skills.length > 0 ? (
-                // (
-                //   <>
-                //     <div className={styles.emptyIcon}>🎓</div>
-                //     <h4 className={styles.emptyTitle}>
-                //       Nessuna esperienza creata
-                //     </h4>
-                //     <p className={styles.emptyDescription}>
-                //       Clicca + per creare la tua prima esperienza
-                //     </p>
-                //   </>
-                // )
-                <AddExperienceButton onClick={handleAddExperience} />
-              ) : (
-                <>
-                  {/* <div className={styles.emptyIcon}>🎯</div>
-                  <h4 className={styles.emptyTitle}>
-                    Aggiungi prima una skill
-                  </h4>
-                  <p className={styles.emptyDescription}>
-                    Le esperienze si basano sulle tue competenze
-                  </p> */}
-                  <AddSkillFirstButton />
-                </>
-              )
-            ) : (
-              // Viewer Mode - Empty State
-              <>
-                {/* <div className={styles.emptyIcon}>👀</div>
-                <h4 className={styles.emptyTitle}>
-                  Nessuna esperienza disponibile
-                </h4>
-                <p className={styles.emptyDescription}>
-                  Questo utente non ha ancora pubblicato esperienze
-                </p> */}
-                <p>Nessuna esperienza</p>
-              </>
-            )}
-          </div>
-        )}
-        {/* <h3 className={styles.title}>
-          <span className={styles.experiencesIcon}>🌊</span>
-          Esperienze fatte (0) | Esperienze in corso (4)
-        </h3>
-        <p>QUI...</p>
-        <CompletionCardsTest data={userCompletionCards} /> */}
-      </div>
-
+    <>
       {/* Modal per aggiungere nuova esperienza */}
       <AddExperienceModal
         isOpen={isAddModalOpen}
@@ -385,7 +220,150 @@ const ExperiencesSection = () => {
         editMode={true}
         initialData={experienceToEdit}
       />
-    </div>
+      <div className={styles.container}>
+        {/* Header */}
+        <div className={styles.header}>
+          {/* <h3 className={styles.title}>
+          Esperienze Offerte ({experiences.length})
+          </h3> */}
+
+          {isOwner && (
+            <>
+              {skills && experiences.length > 0 && (
+                <>
+                  <HeaderAddButton
+                    onClick={handleAddExperience}
+                    title="Crea nuova esperienza"
+                  />
+                </>
+              )}
+            </>
+          )}
+        </div>
+        <div>
+          <div className={styles.filtersContainer}>
+            <div
+              className={`${styles.filterContent} ${
+                showFilters ? styles.open : ""
+              }`}
+            >
+              <StatusFilterButtons
+                activeFilter={statusFilter}
+                onFilterChange={setStatusFilter}
+                filterCounts={filterCounts}
+                filterConfig={filterConfig}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className={styles.content}>
+          {experiences.length > 0 ? (
+            <div className={styles.experiencesGrid}>
+              <button
+                className={styles.toggleFiltersBtn}
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                Filtri {showFilters ? "↑" : "↓"}
+              </button>
+              {experiences.map((experience) => {
+                // ✅ Trova la skill associata per ottenere i gem corretti
+                const associatedSkill = findSkillForExperience(experience);
+                const skillGems = associatedSkill?.gems || 0;
+
+                // ✅ Ottieni foto profilo owner
+                const ownerPhoto = getOwnerPhoto();
+
+                return (
+                  <TestCard
+                    key={experience.id}
+                    lingua={experience.lingua}
+                    modalita={experience.modalita}
+                    icon={experience.icon}
+                    title={experience.title}
+                    lezioni={experience.lezioni}
+                    durataLezione={experience.durataLezione}
+                    costo={experience.costo}
+                    descrizione={experience.descrizione}
+                    istruttore={`${currentProfile?.firstName || "Tu"} ${
+                      currentProfile?.lastName || ""
+                    }`}
+                    // ✅ Passa foto profilo owner
+                    ownerPhoto={ownerPhoto}
+                    // ✅ Usa gem della skill invece di esperienza
+                    skillGems={skillGems}
+                    partecipanti={experience.partecipanti}
+                    experienceData={experience}
+                    isOwner={isOwner}
+                    onEdit={isOwner ? handleEditExperience : undefined}
+                    onDelete={isOwner ? handleDeleteExperience : undefined}
+                    userXP={100}
+                    onXPChange={(amount) =>
+                      console.log(`XP changed: ${amount}`)
+                    }
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <div className={styles.emptyState}>
+              {isOwner ? (
+                // Owner Mode - Empty State
+                skills && skills.length > 0 ? (
+                  // (
+                  //   <>
+                  //     <div className={styles.emptyIcon}>🎓</div>
+                  //     <h4 className={styles.emptyTitle}>
+                  //       Nessuna esperienza creata
+                  //     </h4>
+                  //     <p className={styles.emptyDescription}>
+                  //       Clicca + per creare la tua prima esperienza
+                  //     </p>
+                  //   </>
+                  // )
+                  // <AddExperienceButton onClick={handleAddExperience} />
+                  <HeaderAddButton
+                    onClick={handleAddExperience}
+                    title="Crea nuova esperienza"
+                    txt="esperienze"
+                  />
+                ) : (
+                  <>
+                    {/* <div className={styles.emptyIcon}>🎯</div>
+                  <h4 className={styles.emptyTitle}>
+                  Aggiungi prima una skill
+                  </h4>
+                  <p className={styles.emptyDescription}>
+                  Le esperienze si basano sulle tue competenze
+                  </p> */}
+                    <AddSkillFirstButton />
+                  </>
+                )
+              ) : (
+                // Viewer Mode - Empty State
+                <>
+                  {/* <div className={styles.emptyIcon}>👀</div>
+                <h4 className={styles.emptyTitle}>
+                Nessuna esperienza disponibile
+                </h4>
+                <p className={styles.emptyDescription}>
+                Questo utente non ha ancora pubblicato esperienze
+                </p> */}
+                  <p>Nessuna esperienza</p>
+                </>
+              )}
+            </div>
+          )}
+          {/* <h3 className={styles.title}>
+          <span className={styles.experiencesIcon}>🌊</span>
+          Esperienze fatte (0) | Esperienze in corso (4)
+          </h3>
+          <p>QUI...</p>
+          <CompletionCardsTest data={userCompletionCards} /> */}
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -6,7 +6,7 @@
   /* background: var(--bg--esperienza); */
   /* background: var(--bg-old); */
   /* background: var(--bg); */
-  background: var(--bg--overlay);
+  /* background: var(--bg--overlay); */
   /* background: var(--text-primary-darkLight); */
   backdrop-filter: var(--backdrop-blur);
   border-radius: var(--radius-xl);
@@ -55,8 +55,20 @@
 
 .navRight {
   display: flex;
-  align-items: center;
   gap: var(--space-sm);
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  position: absolute;
+  right: 10px;
+}
+
+.nav:hover .navRight {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .navUl {
@@ -127,11 +139,17 @@
 }
 
 /* Info lezione */
-.infoLezione {
+/* .infoLezione {
   display: flex;
   gap: var(--space-sm);
   margin-bottom: var(--space-md);
   justify-content: space-between;
+} */
+
+.infoLezione {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 per riga */
+  gap: 0.5rem;
 }
 
 .infoItem {

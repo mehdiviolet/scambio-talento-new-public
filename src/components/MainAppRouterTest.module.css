@@ -2515,7 +2515,7 @@
 
 .skillIcon {
   font-size: 18px;
-  color: #10363a;
+  color: var(--gray-600);
   flex-shrink: 0;
 }
 
@@ -2539,7 +2539,7 @@
   align-items: center;
   gap: 4px;
   font-size: 14px;
-  color: #10363a;
+  color: var(--gray-600);
 }
 
 .gemsCount {

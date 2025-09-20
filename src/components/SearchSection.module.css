@@ -20,8 +20,12 @@
 
 .title {
   font-size: 16px;
-  font-weight: 600;
-  color: #2d2d2d;
+  /* font-weight: 600; */
+  /* color: #2d2d2d; */
+  /* color: var(--gray-800); */
+  /* color: var(--primary-700); */
+  color: var(--primary-700);
+
   margin: 0;
   display: flex;
   align-items: center;
@@ -30,7 +34,7 @@
 
 .searchIcon {
   font-size: 18px;
-  color: #10363a;
+  color: var(--gray-600);
 }
 
 .addButton {
@@ -103,7 +107,7 @@
 
 .skillIcon {
   font-size: 18px;
-  color: #10363a;
+  color: var(--gray-600);
   flex-shrink: 0;
 }
 

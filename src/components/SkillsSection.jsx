@@ -157,10 +157,13 @@ const SkillsSection = () => {
       <div className={styles.header}>
         {/* <h2 className={styles.title}>Skills ({skills.length})</h2> */}
         {isOwner && skills.length !== 0 && (
-          <HeaderAddButton
-            onClick={handleAddSkill}
-            title="Aggiungi nuova skill"
-          />
+          <>
+            <HeaderAddButton
+              onClick={handleAddSkill}
+              title="Aggiungi nuova skill"
+              txt="SKILL"
+            />
+          </>
         )}
       </div>
 
@@ -192,8 +195,8 @@ const SkillsSection = () => {
                     ) : (
                       skill.icon
                     )} */}
-                    {skill.icon}
                     {/* {IconComponent ? <IconComponent size={24} /> : skill.icon} */}
+                    {skill.icon}
                     <div className={styles.skillName}>
                       {skill.detail || skill.name}
                     </div>

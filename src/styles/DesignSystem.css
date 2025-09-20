@@ -7,6 +7,8 @@
   --text-primary: #3b82f6;
   --text-secondary: #f59e0b; /* Arancione accento */
   --text-tertiary: #6366f1; /* Azzurro principale */
+  --gem: #6366f1;
+  /* --gem: #3b82f6; */
   --text-secondaryLight: rgba(245, 158, 11, 0.3); /* Arancione accento */
   --text-primary-light: #3a8ba3; /* Azzurro chiaro */
   --text-primaryLight: rgba(58, 139, 163, 0.7); /* Azzurro chiaro */
@@ -15,7 +17,25 @@
   --text-primaryDark: #1a4d5c; /* Azzurro scuro */
 
   /* --cyan: #22d3ee */
+  /* Varianti PRIMARY (blu #3b82f6) */
+  --primary-50: #eff6ff; /* Backgrounds molto leggeri */
+  --primary-100: #dbeafe; /* Cards e containers */
+  --primary-200: #bfdbfe; /* Borders leggeri */
+  --primary-300: #93c5fd; /* Placeholder e disabled */
+  --primary-500: #3b82f6; /* Il tuo colore base */
+  --primary-600: #2563eb; /* Hover states */
+  --primary-700: #1d4ed8; /* Active/pressed */
+  --primary-900: #1e3a8a; /* Testi scuri su sfondi chiari */
 
+  /* Varianti SECONDARY (arancione #f59e0b) */
+  --secondary-50: #fffbeb; /* Backgrounds molto leggeri */
+  --secondary-100: #fef3c7; /* Cards e containers */
+  --secondary-200: #fde68a; /* Borders leggeri */
+  --secondary-300: #fcd34d; /* Placeholder e disabled */
+  --secondary-500: #f59e0b; /* Il tuo colore base */
+  --secondary-600: #d97706; /* Hover states */
+  --secondary-700: #b45309; /* Active/pressed */
+  --secondary-900: #92400e; /* Testi scuri su sfondi chiari */
   /* **********/
 
   --primary-light: #3a8ca0; /* Per hover states e accenti leggeri */
@@ -34,6 +54,7 @@
   --gray-100: #f1f5f9; /* Separatori e cards */
   --gray-200: #e2e8f0; /* Borders */
   --gray-300: #cbd5e1; /* Placeholder text */
+  --gray-500: #64748b;
   --gray-600: #475569; /* Testi di supporto */
   --gray-800: #1e293b; /* Headings */
 

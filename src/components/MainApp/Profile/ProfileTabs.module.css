@@ -16,25 +16,30 @@
 .tabButton {
   flex: 1;
   padding: 14px 18px;
-  background: transparent;
   border: none;
   font-size: 14px;
   font-weight: 500;
-  color: #64748b; /* il tuo grigio che ti piace */
+  color: var(--gray-500);
   cursor: pointer;
   transition: all 0.25s ease;
   position: relative;
+  /* background: transparent; */
+  background: var(--gray-100);
 }
 
 .tabButton:hover {
-  background: #dbeafe; /* container blu chiaro */
-  color: #3b82f6; /* blu scuro per contrasto */
+  background: var(--primary-100); /* container blu chiaro */
+  /* color: var(--text-primary);  */
+  color: var(--primary-700);
   transform: translateY(-1px);
 }
 
 .tabButton.active {
-  background: rgba(59, 130, 246, 0.15); /* stesso sfondo dell'hover */
-  color: #3b82f6; /* blu scuro invece del blu medio */
+  /* background: rgba(59, 130, 246, 0.15); */
+  /* background: var(--gray-100); */
+  background: transparent;
+  /* color: var(--text-primary);  */
+  color: var(--primary-700);
   font-weight: 600;
 }
 
@@ -46,7 +51,8 @@
   /* padding: 24px; */
   /* background: rgba(37, 102, 121, 0.04); */
 
-  background: rgba(59, 130, 246, 0.15); /* stesso sfondo dell'hover */
+  /* background: rgba(59, 130, 246, 0.15);  */
+  /* background: var(--gray-100); */
   /* border-radius: 16px; */
   /* border: 1px solid rgba(37, 102, 121, 0.08); */
   backdrop-filter: blur(8px);
@@ -55,7 +61,8 @@
 
 .content p {
   margin: 0;
-  color: rgba(37, 102, 121, 0.8);
+  color: var(--gray-600);
+  /* color: var(--primary-900); */
   font-size: 14px;
   line-height: 1.6;
 }
@@ -75,30 +82,35 @@
 
 .toggleContainer {
   display: flex;
-  background: rgba(37, 102, 121, 0.1);
-  border-radius: 8px;
-  padding: 2px;
+  /* background: rgba(37, 102, 121, 0.1); */
+  /* border-radius: 8px; */
+  /* padding: 2px; */
   margin-bottom: 16px;
   /* width: fit-content; */
   justify-content: center;
 }
 
 .toggleButton {
-  padding: 8px 16px;
-  background: transparent;
+  /* padding: 8px 16px; */
+  padding: 14px 16px;
+  /* background: transparent; */
+  background: var(--gray-100);
   border: none;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   font-size: 13px;
   font-weight: 500;
-  color: rgba(37, 102, 121, 0.7);
+  /* color: rgba(37, 102, 121, 0.7); */
+  color: var(--gray-500);
   cursor: pointer;
   transition: all 0.2s ease;
   width: 100%;
 }
 
 .toggleButton.toggleActive {
-  background: rgba(255, 255, 255, 0.9);
-  color: #256679;
+  /* background: rgba(255, 255, 255, 0.9); */
+  background: transparent;
+  color: var(--primary-700);
+  /* color: #256679; */
   font-weight: 600;
 }
 

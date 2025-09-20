@@ -223,7 +223,7 @@
 /* ****************** */
 /* Header Add Button Styles */
 .headerAddButton {
-  width: 2rem;
+  /* width: 2rem;
   height: 2rem;
   border-radius: 2rem;
   background: rgba(255, 255, 255, 0.15);
@@ -234,15 +234,52 @@
   justify-content: center;
   cursor: pointer;
   border-color: var(--text-primary);
-  transition: all 0.2s ease;
+  transition: all 0.2s ease; */
+
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  /* background: rgb(233, 195, 68); */
+  /* background: var(--bg--esperienza); */
+  /* background: var(--bg-old); */
+  backdrop-filter: blur(20px) saturate(150%);
+  /* border-radius: 1.5rem; */
+  /* padding: 0.75rem; */
+  /* padding: 1rem; */
+  max-width: 356px;
+  width: 100%;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; */
+  /* color: rgb(17, 24, 39); */
+  color: var(--primary-900);
+
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  transition: all 0.3s ease;
+  /* margin-top: 20px; */
+  /* margin-bottom: 20px; */
+  /* box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4); */
+  /* box-shadow: 0 32px 64px -2px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4); */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 12px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -1px 0 rgba(0, 0, 0, 0.1); */
+  /* box-shadow: var(--box-shadow-minimal); */
+  /* border: 2px solid var(--bg--skill); */
+  /* box-shadow: var(--box-shadow); */
+  padding: var(--space-sm) 0;
 }
 
 .headerAddButton:hover {
-  border-color: var(--text-primary);
+  /* border-color: var(--text-primary); */
+  /* background: var(--gray-300); */
+  /* background: var(--gray-300); */
   /* border-color: var(--text-secondary); */
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
+
   /* color: var(--text-secondary); */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* box-shadow: var(--box-shadow-minimal); */
 }
 
 .headerAddButton:active {

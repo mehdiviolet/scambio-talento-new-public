@@ -984,15 +984,36 @@ function TestCardRedux({
       <div className={styles.nav} onClick={toggleExpanded}>
         <h4 className={styles.navTitle}>{title}</h4>
         <div className={styles.navRight}>
-          <ul className={styles.navUl}>
+          {/* <ul className={styles.navUl}>
             <li>
               {modalita === "online" ? <GlobeIcon size={20} /> : <Home />}
             </li>
             <li>{lingua}</li>
-            {/* <li>
-              <Clock size={20} />
-            </li> */}
-          </ul>
+          </ul> */}
+
+          <div className={styles.actionSpacer}></div>
+          <button
+            className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
+            onClick={handleShareClick}
+            title="Condividi"
+          >
+            <Share size={16} />
+          </button>
+
+          <button
+            className={`${styles.actionButton} ${
+              styles.actionButtonSecondary
+            } ${isBookmarked ? styles.bookmarked : ""}`}
+            onClick={handleBookmarkClick}
+            title={isBookmarked ? "Rimuovi dai salvati" : "Salva"}
+          >
+            <Bookmark
+              size={16}
+              className={
+                isBookmarked ? styles.bookmarkFilled : styles.bookmarkEmpty
+              }
+            />
+          </button>
         </div>
       </div>
 
@@ -1004,7 +1025,6 @@ function TestCardRedux({
               <span className={styles.infoValue}>{lezioni}</span>
             </div>
             <div className={styles.infoItem}>
-              {/* <span className={styles.infoLabel}>Durata lezione:</span> */}
               <span className={styles.infoLabel}>Durata:</span>
               <span className={styles.infoValue}>{durataLezione}</span>
             </div>
@@ -1012,7 +1032,16 @@ function TestCardRedux({
               <span className={styles.infoLabel}>Costo:</span>
               <span className={styles.infoValue}>{costo} XP</span>
             </div>
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>Lingua:</span>
+              <span className={styles.infoValue}>{lingua}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>Modalità:</span>
+              <span className={styles.infoValue}>{modalita}</span>
+            </div>
           </div>
+
           <div className={styles.descAvat}>
             <div className={styles.descriptionBox}>{descrizione}</div>
             <div className={styles.requestSection}>
@@ -1807,13 +1836,13 @@ function TestCardRedux({
               {/* <Gem size={16} /> */}
               <Gem size={18} />
               <span>{skillGems}</span>
-              <div className={styles.iconclass}>{icon}</div>
+              {/* <div className={styles.iconclass}>{icon}</div> */}
             </div>
           </div>
           {/* ACTION BUTTONS (invariati) */}
           <div className={styles.actionButtons}>
-            {isInstructor ? (
-              courseState.status === "idle" ? (
+            {isInstructor &&
+              (courseState.status === "idle" ? (
                 <>
                   <button
                     className={`${styles.actionButton} ${styles.actionButtonEdit}`}
@@ -1834,42 +1863,7 @@ function TestCardRedux({
                 </>
               ) : (
                 <div className={styles.actionSpacer}></div>
-              )
-            ) : (
-              <>
-                <div className={styles.actionSpacer}></div>
-                <button
-                  className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
-                  onClick={handleShareClick}
-                  title="Condividi"
-                >
-                  <Share size={16} />
-                </button>
-                {/* <button
-                  className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
-                  onClick={handleLikeClick}
-                  title="Mi piace"
-                >
-                  <Heart size={16} />
-                </button> */}
-                <button
-                  className={`${styles.actionButton} ${
-                    styles.actionButtonSecondary
-                  } ${isBookmarked ? styles.bookmarked : ""}`}
-                  onClick={handleBookmarkClick}
-                  title={isBookmarked ? "Rimuovi dai salvati" : "Salva"}
-                >
-                  <Bookmark
-                    size={16}
-                    className={
-                      isBookmarked
-                        ? styles.bookmarkFilled
-                        : styles.bookmarkEmpty
-                    }
-                  />
-                </button>
-              </>
-            )}
+              ))}
           </div>
         </div>
       )}

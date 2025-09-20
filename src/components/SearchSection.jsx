@@ -131,7 +131,7 @@ const SearchSection = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h3 className={styles.title}>
-          <span className={styles.searchIcon}>🎯</span>
+          {/* <span className={styles.searchIcon}>🎯</span> */}
           Alla Ricerca
         </h3>
         {isOwner && (
