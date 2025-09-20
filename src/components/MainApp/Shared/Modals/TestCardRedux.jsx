@@ -78,6 +78,7 @@ import {
 } from "@/services/userService";
 import { useQuickSetup } from "@/hooks/useQuickSetup";
 import { createSelector } from "@reduxjs/toolkit";
+import { Button } from "@/components/ui/Button";
 
 function TestCardRedux({
   // Identificativo unico dell'esperienza
@@ -959,7 +960,7 @@ function TestCardRedux({
   const getStatusStyles = () => {
     switch (courseState.status) {
       case "requested":
-        return { border: "2px solid var(--text-secondary)" };
+        return { border: "2px solid var(--text-primary)" };
       case "ready":
         return { border: "2px solid var(--text-primaryLight)" };
       case "waiting":
@@ -1168,8 +1169,8 @@ function TestCardRedux({
                           {courseState.finishClicks.includes(
                             isInstructor ? "instructor" : "student"
                           )
-                            ? "⏳ In attesa che l'altro utente clicchi Termina..."
-                            : "⏳ L'altro utente ha cliccato Termina. Clicca anche tu!"}
+                            ? "⏳ In attesa che l'altro utente clicchi Conclude..."
+                            : "⏳ L'altro utente ha cliccato Conclude. Clicca anche tu!"}
                         </p>
                         <div className={styles.finishStatus}>
                           <span
@@ -1329,54 +1330,96 @@ function TestCardRedux({
                 {/* STATO: requested - Pulsanti */}
                 {isInstructor && instructorNotification?.hasNewRequest && (
                   <div className={styles.ownerChoices}>
-                    <button
-                      // className={styles.acceptRequestButton}
+                    {/* <button
                       className={`${styles.actionButton} ${styles.acceptRequestButton}`}
                       onClick={handleInstructorAcceptRequest}
                     >
                       ✅ Accetto
-                    </button>
-                    <button
-                      // className={styles.rejectRequestButton}
+                      </button> */}
+
+                    <Button
+                      variant="primary"
+                      mode="solid"
+                      onClick={handleInstructorAcceptRequest}
+                    >
+                      {/* <Heart></Heart> */}
+                      Accetto
+                    </Button>
+
+                    {/* <button
                       className={`${styles.actionButton} ${styles.rejectRequestButton}`}
                       onClick={handleInstructorRejectRequest}
                     >
                       ❌ Rifiuto
-                    </button>
+                      </button> */}
+
+                    <Button
+                      variant="gray"
+                      onClick={handleInstructorRejectRequest}
+                    >
+                      Rifiuto
+                    </Button>
                   </div>
                 )}
 
                 {/* STATO: ready - Pulsanti */}
                 {courseState.status === "ready" && isInstructor && (
-                  <button
-                    className={styles.startCourseButton}
+                  // <button
+                  //   className={styles.startCourseButton}
+                  //   onClick={handleStartCourse}
+                  // >
+                  //   🚀 Avvio Corso!
+                  // </button>
+                  <Button
+                    variant="primary"
+                    mode="solid"
                     onClick={handleStartCourse}
                   >
+                    {/* <Heart></Heart> */}
                     🚀 Avvio Corso!
-                  </button>
+                  </Button>
                 )}
 
                 {/* STATO: waiting - Pulsanti */}
                 {courseState.status === "waiting" && !isInstructor && (
-                  <button
-                    className={styles.acceptCourseButton}
+                  // <button
+                  //   className={styles.acceptCourseButton}
+                  //   onClick={handleStudentAccepts}
+                  //   disabled={!canAffordCourse()}
+                  // >
+                  //   ✅ Accetta Corso - {getXPCosts().firstPayment} XP ora +{" "}
+                  //   {getXPCosts().secondPayment} XP dopo
+                  // </button>
+
+                  <Button
+                    variant="primary"
+                    mode="outline"
                     onClick={handleStudentAccepts}
-                    disabled={!canAffordCourse()}
                   >
-                    ✅ Accetta Corso - {getXPCosts().firstPayment} XP ora +{" "}
+                    {/* ✅  */}
+                    Accetta Corso - {getXPCosts().firstPayment} XP ora +
                     {getXPCosts().secondPayment} XP dopo
-                  </button>
+                  </Button>
                 )}
 
                 {/* STATO: active - Pulsanti */}
                 {courseState.status === "active" && (
                   <div className={styles.courseButtons}>
-                    <button
+                    {/* <button
                       className={styles.rejectCourseButton}
                       onClick={handleRejectCourse}
-                    >
+                      >
                       ❌ Rifiuta
-                    </button>
+                    </button> */}
+
+                    <Button
+                      variant="tertiary"
+                      mode="outline"
+                      onClick={handleRejectCourse}
+                    >
+                      Rifiuto
+                    </Button>
+
                     <button
                       className={styles.finishCourseButton}
                       onClick={handleFinishCourse}
@@ -1388,8 +1431,8 @@ function TestCardRedux({
                       {courseState.finishClicks.includes(
                         isInstructor ? "instructor" : "student"
                       )
-                        ? "Terminato!"
-                        : "Termina"}
+                        ? "concluso!"
+                        : "Conclude"}
                     </button>
                   </div>
                 )}
