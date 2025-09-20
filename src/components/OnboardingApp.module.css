@@ -2,7 +2,7 @@
   /* background: linear-gradient(135deg, #3b82f6, #6366f1); */
   /* background: linear-gradient(135deg, #187599, #28f50d); */
   /* background: linear-gradient(135deg, #3e82f0, #4b4dc7); */
-  background: var(--card-gradient);
+  /* background: var(--card-gradient); */
 
   /* min-height: 100vh; */
   display: flex;
@@ -13,6 +13,7 @@
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Transizione smooth */
   border-radius: var(--card-border-radius);
   /* border: none; */
+  /* background: linear-gradient(135deg, #6366f1 50%, #3b82f6 100%); */
 }
 
 /* Aggiungere questi stili al file esistente */

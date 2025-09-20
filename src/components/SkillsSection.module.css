@@ -85,7 +85,9 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.4); */
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 12px 24px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -1px 0 rgba(0, 0, 0, 0.1); */
-  box-shadow: var(--box-shadow-minimal);
+  /* box-shadow: var(--box-shadow-minimal); */
+  border: 2px solid var(--bg--skill);
+  /* box-shadow: var(--box-shadow); */
 }
 
 .skillCard {
@@ -212,7 +214,7 @@
 .skillItem:hover {
   /* border: 1px solid #a15c3a; */
   /* box-shadow: inset 0 0 4px var(--text-secondary); */
-  box-shadow: inset 0 0 4px var(--text-primary);
+  /* box-shadow: inset 0 0 4px var(--text-primary); */
   /* background: linear-gradient(
     135deg,
     rgba(56, 189, 248, 0.06) 0%,
@@ -221,6 +223,7 @@
   ); */
   /* transform: translateY(-1px); */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--box-shadow-minimal);
 }
 
 .descriptionText {
@@ -572,7 +575,7 @@
   margin: 8px 0;
   /* box-shadow: var(--box-shadow); */
   /* box-shadow: inset 0 0 4px var(--text-secondary); */
-  box-shadow: inset 0 0 4px var(--text-primary);
+  /* box-shadow: inset 0 0 4px var(--text-primary); */
 }
 
 /* Action Buttons */

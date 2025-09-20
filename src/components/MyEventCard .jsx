@@ -86,6 +86,88 @@ const SlideEventCard = ({
         onClick={handleCardClick}
         style={{ cursor: "pointer" }}
       >
+        {/* Footer con organizzatore */}
+        <div className={styles.cardFooterPiccolo}>
+          <div className={styles.organizerInfoPiccolo}>
+            <div
+              className={styles.statusBadge}
+              style={{ backgroundColor: "#28a745" }}
+            >
+              Aperto
+            </div>
+            {/* <div
+                      className={styles.statusBadge}
+                      style={{ backgroundColor: stateDisplay.color }}
+                    >
+                      {stateDisplay.label}
+                    </div> */}
+
+            {/* <div className={styles.avatar}>
+              {myProfile.profilePhoto ? (
+                <img
+                  src={
+                    myProfile.profilePhoto instanceof File
+                      ? URL.createObjectURL(myProfile.profilePhoto)
+                      : myProfile.profilePhoto
+                  }
+                  alt={`${myProfile.firstName || "Sara"} ${
+                    myProfile.lastName || "Dormand"
+                  }`}
+                />
+              ) : (
+                <div className={styles.avatarEmoji}>👩‍🎨</div>
+              )}
+            </div> */}
+            {/* <div className={styles.organizerDetails}>
+              <span className={styles.organizerLabel}>Organizzato da</span>
+              <span className={styles.organizerName}>{organizer.name}</span>
+            </div> */}
+            <span className={styles.categoryIcons}>
+              <span>
+                {" "}
+                <Star />
+                {organizer.trustScore}{" "}
+              </span>
+              <span>
+                <ShieldCheck />
+                {organizer.participationScore}
+              </span>
+            </span>
+          </div>
+
+          <div className={styles.actionButtons}>
+            {!isOwner && (
+              <div className={styles.bookShareLayout}>
+                {/* <button
+                  className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log("📤 DEMO: Condividi evento");
+                  }}
+                  title="Condividi"
+                >
+                  <Share size={16} />
+                </button> */}
+
+                {/* <button
+                  className={`${styles.actionButton} ${
+                    isSaved
+                      ? styles.actionButtonSaved
+                      : styles.actionButtonSecondary
+                  }`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsSaved(!isSaved);
+                    console.log("🔖 DEMO: Bookmark evento");
+                  }}
+                  title="Salva evento"
+                >
+                  <Bookmark size={16} />
+                </button> */}
+              </div>
+            )}
+          </div>
+        </div>
         <div className={styles.flexCard}>
           <div className={styles.flexCardMe}>
             <div className={styles.cardImage}>
@@ -129,79 +211,6 @@ const SlideEventCard = ({
           </div>
         </div>
         {/* <hr /> */}
-
-        {/* Footer con organizzatore */}
-        <div className={styles.cardFooterPiccolo}>
-          <div className={styles.organizerInfoPiccolo}>
-            <div className={styles.avatar}>
-              {myProfile.profilePhoto ? (
-                <img
-                  src={
-                    myProfile.profilePhoto instanceof File
-                      ? URL.createObjectURL(myProfile.profilePhoto)
-                      : myProfile.profilePhoto
-                  }
-                  alt={`${myProfile.firstName || "Sara"} ${
-                    myProfile.lastName || "Dormand"
-                  }`}
-                />
-              ) : (
-                <div className={styles.avatarEmoji}>👩‍🎨</div>
-              )}
-            </div>
-            <div className={styles.organizerDetails}>
-              <span className={styles.organizerLabel}>Organizzato da</span>
-              <span className={styles.organizerName}>{organizer.name}</span>
-            </div>
-            <span className={styles.categoryIcons}>
-              <span>
-                {" "}
-                <Star />
-                {organizer.trustScore}{" "}
-              </span>
-              <span>
-                <ShieldCheck />
-                {organizer.participationScore}
-              </span>
-            </span>
-            {/* <span className={styles.categoryIcon}>
-                        {getCategoryIcon(category)}
-                      </span> */}
-          </div>
-
-          <div className={styles.actionButtons}>
-            {!isOwner && (
-              <div className={styles.bookShareLayout}>
-                {/* <button
-                  className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("📤 DEMO: Condividi evento");
-                  }}
-                  title="Condividi"
-                >
-                  <Share size={16} />
-                </button> */}
-
-                {/* <button
-                  className={`${styles.actionButton} ${
-                    isSaved
-                      ? styles.actionButtonSaved
-                      : styles.actionButtonSecondary
-                  }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsSaved(!isSaved);
-                    console.log("🔖 DEMO: Bookmark evento");
-                  }}
-                  title="Salva evento"
-                >
-                  <Bookmark size={16} />
-                </button> */}
-              </div>
-            )}
-          </div>
-        </div>
       </div>
 
       {/* Event Slide Drawer */}

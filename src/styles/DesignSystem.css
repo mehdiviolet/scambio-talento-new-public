@@ -2,14 +2,19 @@
 
 :root {
   /* === PALETTE COLORI PRINCIPALE === */
-  --text-primary: #256679; /* Azzurro principale */
+  /* --text-primary: #256679; Azzurro principale */
+  /* --text-primary: #1e40af; /* */
+  --text-primary: #3b82f6;
   --text-secondary: #f59e0b; /* Arancione accento */
+  --text-tertiary: #6366f1; /* Azzurro principale */
   --text-secondaryLight: rgba(245, 158, 11, 0.3); /* Arancione accento */
   --text-primary-light: #3a8ba3; /* Azzurro chiaro */
   --text-primaryLight: rgba(58, 139, 163, 0.7); /* Azzurro chiaro */
   --text-primary-dark: rgb(26, 77, 92); /* Azzurro scuro */
   --text-primary-darkLight: rgba(16, 185, 129, 0.3); /* Verde scuro */
   --text-primaryDark: #1a4d5c; /* Azzurro scuro */
+
+  /* --cyan: #22d3ee */
 
   /* **********/
 

@@ -150,7 +150,7 @@ const EventsSection = () => {
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        <h3 className={styles.title}>Eventi Creati ({events.length})</h3>
+        {/* <h3 className={styles.title}>Eventi Creati ({events.length})</h3> */}
         <button
           className={styles.toggleFiltersBtn}
           onClick={() => setShowFilters(!showFilters)}

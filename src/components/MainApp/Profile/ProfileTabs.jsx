@@ -72,9 +72,9 @@ const ProfileTabs = () => {
 
             <div className={styles.experienceContent}>
               {experienceMode === "offer" ? (
-                <ExperiencesSection />
-              ) : (
                 <ExperiencesSectionStudente />
+              ) : (
+                <ExperiencesSection />
               )}
             </div>
           </div>

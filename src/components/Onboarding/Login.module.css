@@ -20,7 +20,7 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
+  /* background: radial-gradient(
       circle at 25% 25%,
       rgba(168, 85, 247, 0.3) 0%,
       transparent 50%
@@ -34,8 +34,14 @@
       circle at 50% 50%,
       rgba(236, 72, 153, 0.2) 0%,
       transparent 70%
-    );
+    ); */
   animation: bgFloat 8s ease-in-out infinite;
+  /* background: linear-gradient(135deg, #6366f1 50%, #3b82f6 100%); */
+  background: linear-gradient(
+    135deg,
+    var(--text-tertiary) 50%,
+    var(--text-primary) 100%
+  );
 }
 
 /* @keyframes bgFloat {
