@@ -1,0 +1,32 @@
+.iconButton {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.iconButton.relative {
+  position: relative;
+  right: auto;
+  top: auto;
+}
+
+.iconButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.iconButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--gray-800);
+}
+
+.iconButton:hover svg {
+  color: var(--text-secondary);
+}

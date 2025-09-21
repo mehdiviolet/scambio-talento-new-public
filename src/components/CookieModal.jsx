@@ -8,8 +8,10 @@ import {
   Telescope,
   Book,
   Activity,
+  Trash2,
 } from "lucide-react";
 import styles from "./CookieModal.module.css";
+import IconButton from "./ui/IconButton";
 
 const CookieModal = ({ isOpen, onClose, userXP }) => {
   if (!isOpen) return null;
@@ -26,9 +28,11 @@ const CookieModal = ({ isOpen, onClose, userXP }) => {
         <div className={styles.header}>
           {/* <h3>Experience Points</h3> */}
           <h3>XP Totali</h3>
-          <button className={styles.closeButton} onClick={onClose}>
+          {/* <button className={styles.closeButton} onClick={onClose}>
             <X size={20} />
-          </button>
+          </button> */}
+
+          <IconButton icon={X} onClick={onClose} />
         </div>
 
         <div className={styles.content}>

@@ -47,6 +47,7 @@ import {
   Home,
   X,
   AlertTriangle,
+  Rocket,
 } from "lucide-react";
 import styles from "./TestCard.module.css";
 import {
@@ -1388,7 +1389,8 @@ function TestCardRedux({
                     onClick={handleStartCourse}
                   >
                     {/* <Heart></Heart> */}
-                    🚀 Avvio Corso!
+                    <Rocket size={20} />
+                    Avvio Corso!
                   </Button>
                 )}
 
@@ -1777,9 +1779,14 @@ function TestCardRedux({
               <div className={styles.feedbackModalContent}>
                 {!feedbackSubmitted ? (
                   <>
-                    <h4>🎉 Corso completato! Lascia un feedback</h4>
+                    <h4>
+                      {" "}
+                      Corso completato!
+                      <br />
+                      Lascia un feedback
+                    </h4>
                     <div className={styles.ratingSection}>
-                      <label>Valutazione:</label>
+                      {/* <label>Valutazione:</label> */}
                       {/* <div className={styles.starRating}>
                         {[1, 2, 3, 4, 5].map((star) => (
                           <Star

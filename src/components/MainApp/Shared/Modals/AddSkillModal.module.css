@@ -13,10 +13,11 @@
   z-index: 50;
   padding: 1rem;
   flex-direction: column;
+  /* color: var(--primary-700); */
 }
 
 .modal {
-  background: #e9be31;
+  /* background: #e9be31; */
   backdrop-filter: blur(20px) saturate(150%);
   border-radius: 2rem;
   max-width: 28rem;
@@ -39,6 +40,8 @@
   /* background: #d0b0b0; */
   /* background: var(--bg--skill); */
   background: var(--bg-old);
+  /* background: var(--primary-200); */
+  /* background: var(--gray-100); */
 }
 
 .header {
@@ -164,12 +167,12 @@
 }
 
 .skillItem.selected {
-  color: rgb(17, 24, 39);
+  /* color: rgb(17, 24, 39); */
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .skillItem:not(.selected) {
-  color: rgb(55, 65, 81);
+  /* color: rgb(55, 65, 81); */
 }
 
 .skillContent {
@@ -224,31 +227,74 @@
 }
 
 .controlButton:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--primary-700);
+  color: var(--text-primary);
 }
 
 .primaryButton {
   width: 100%;
+  /* background-color: rgba(255, 255, 255, 0.25); */
+  backdrop-filter: blur(8px);
+  color: rgb(17, 24, 39);
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  /* border: 1px solid rgba(255, 255, 255, 0.4); */
+  border: 1px solid var(--primary-50);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(255, 255, 255, 0.35); */
+  /* filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.primaryButton:hover {
+  /* background-color: rgba(255, 255, 255, 0.35); */
+  /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); */
+  /* transform: scale(1.02); */
+  /* color: var(--text-secondary); */
+  border-color: var(--primary-700);
+  color: var(--text-primary);
+}
+
+.primaryButton:active {
+  transform: scale(0.98);
+}
+
+.secondaryButton {
+  width: 33%;
   background-color: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(8px);
   color: rgb(17, 24, 39);
   padding: 1rem 1.5rem;
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  /* border: 1px solid rgba(255, 255, 255, 0.4); */
+  border: 1px solid var(--primary-50);
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  /* background-color: rgba(255, 255, 255, 0.35); */
+  /* filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.primaryButton:hover {
-  background-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  transform: scale(1.02);
+.secondaryButton:hover {
+  /* background-color: rgba(255, 255, 255, 0.35); */
+  /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); */
+  /* transform: scale(1.02); */
+  /* color: var(--text-secondary); */
+  border-color: var(--primary-700);
+  color: var(--text-primary);
 }
 
-.primaryButton:active {
+.secondaryButton:active {
   transform: scale(0.98);
 }
 
@@ -285,7 +331,9 @@
 .stepTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  color: rgb(17, 24, 39);
+  /* color: rgb(17, 24, 39); */
+  color: var(--primary-700);
+
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
   margin: 0;
 }
@@ -331,12 +379,32 @@
 }
 
 .continueButton {
-  width: 100%;
+  /* width: 100%;
   padding: 1rem 1.5rem;
   border-radius: 0.75rem;
   transition: all 0.2s ease;
   font-weight: 600;
   border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+  width: 100%;
+  /* background-color: rgba(255, 255, 255, 0.25); */
+  backdrop-filter: blur(8px);
+  color: rgb(17, 24, 39);
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  /* border: 1px solid rgba(255, 255, 255, 0.4); */
+  border: 1px solid var(--primary-50);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(255, 255, 255, 0.35); */
+  /* filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .continueButton.enabled {
@@ -350,8 +418,14 @@
 
 .continueButton.enabled:hover {
   background-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  transform: scale(1.02);
+  /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); */
+  /* transform: scale(1.02); */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* color: var(--primary-700); */
+  /* color: var(--text-secondary); */
+
+  border-color: var(--primary-700);
+  color: var(--text-primary);
 }
 
 .continueButton.disabled {
@@ -363,11 +437,11 @@
 
 /* SUMMARY STYLES - Step 3 */
 .summary {
-  background-color: rgba(255, 255, 255, 0.2);
+  /* background-color: rgba(255, 255, 255, 0.2); */
   backdrop-filter: blur(8px);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  /* border-radius: 1rem; */
+  /* border: 1px solid rgba(255, 255, 255, 0.3); */
+  /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); */
   padding: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -389,7 +463,8 @@
 .summaryHeader h3 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: rgb(17, 24, 39);
+  /* color: rgb(17, 24, 39); */
+  color: var(--primary-700);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
   margin: 0;
 }

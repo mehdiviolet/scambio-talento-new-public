@@ -344,7 +344,8 @@ const AddExperienceModal = ({
                                 isSelected ? styles.selected : ""
                               }`}
                             >
-                              {skill.icon}
+                              {/* {skill.icon} */}
+                              {skill.icon ? <skill.icon size={24} /> : "⚡"}
                             </span>
                             <span
                               className={`${styles.skillName} ${
@@ -389,7 +390,14 @@ const AddExperienceModal = ({
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
                 <div className={styles.iconContainer}>
-                  <span>{selectedSkill.icon}</span>
+                  {/* <span>{selectedSkill.icon}</span> */}
+                  <span>
+                    {selectedSkill.icon ? (
+                      <selectedSkill.icon size={24} />
+                    ) : (
+                      "⚡"
+                    )}
+                  </span>
                 </div>
                 <h3 className={styles.stepTitle}>{selectedSkill.name}</h3>
               </div>
@@ -444,7 +452,14 @@ const AddExperienceModal = ({
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
                 <div className={styles.iconContainer}>
-                  <span>{selectedSkill.icon}</span>
+                  {/* <span>{selectedSkill.icon}</span> */}
+                  <span>
+                    {selectedSkill.icon ? (
+                      <selectedSkill.icon size={24} />
+                    ) : (
+                      "⚡"
+                    )}
+                  </span>
                 </div>
                 <h3 className={styles.stepTitle}>{skillDetail}</h3>
               </div>
@@ -669,7 +684,13 @@ const AddExperienceModal = ({
                   <div className={styles.previewHeader}>
                     <div className={styles.previewIconContainer}>
                       <span className={styles.previewIconLarge}>
-                        {selectedSkill.icon}
+                        {/* {selectedSkill.icon} */}
+
+                        {selectedSkill.icon ? (
+                          <selectedSkill.icon size={24} />
+                        ) : (
+                          "⚡"
+                        )}
                       </span>
                     </div>
                     <div>

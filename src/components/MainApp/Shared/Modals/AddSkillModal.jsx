@@ -21,9 +21,13 @@ import {
   Languages,
   Gamepad2,
   Mic,
+  ArrowUp,
+  ArrowDown,
+  ArrowRight,
 } from "lucide-react";
 import styles from "./AddSkillModal.module.css";
 import { SKILL_ICONS } from "@/components/ui/SkillIconsMap";
+import IconButton from "@/components/ui/IconButton";
 
 const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -188,9 +192,10 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
       <div className={`${styles.modal} ${styles.modalSkill}`}>
         <div className={styles.header}>
           <h2>{getStepTitle()}</h2>
-          <button onClick={onClose} className={styles.closeButton}>
+          {/* <button onClick={onClose} className={styles.closeButton}>
             <X />
-          </button>
+          </button> */}
+          <IconButton icon={X} onClick={onClose} />
         </div>
 
         <div className={styles.content}>
@@ -245,18 +250,19 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
                   </div>
 
                   <div className={styles.controls}>
-                    <button
+                    <IconButton
+                      icon={ArrowUp}
+                      position="relative"
+                      // className={styles.controlButton}
                       onClick={() => handleWheelSpin("up")}
-                      className={styles.controlButton}
-                    >
-                      ↑ Su
-                    </button>
-                    <button
+                    />
+
+                    <IconButton
+                      icon={ArrowDown}
+                      position="relative"
+                      // className={styles.controlButton}
                       onClick={() => handleWheelSpin("down")}
-                      className={styles.controlButton}
-                    >
-                      ↓ Giù
-                    </button>
+                    />
                   </div>
 
                   <button
@@ -288,13 +294,13 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
                 <div className={styles.iconContainer}>
-                  {/* <span>{selectedSkill.icon}</span> */}
-                  {selectedSkill.IconComponent ? (
-                    <selectedSkill.IconComponent size={24} />
-                  ) : (
-                    "⚡"
-                  )}
-                  {/* <span>{selectedSkill.icon}</span> */}
+                  <span className={styles.skillIcon}>
+                    {selectedSkill.icon ? (
+                      <selectedSkill.icon size={24} />
+                    ) : (
+                      "⚡"
+                    )}
+                  </span>
                 </div>
                 <h3 className={styles.stepTitle}>{selectedSkill.name}</h3>
               </div>
@@ -312,9 +318,26 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
               </div>
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  {/* <ArrowLeft size={16} /> Indietro */}
+                  <ArrowLeft size={20} />
                 </button>
+
+                {/* <IconButton
+                  position="relative"
+                  icon={ArrowLeft}
+                  onClick={onClose}
+                />
+
+                <IconButton
+                  position="relative"
+                  icon={ArrowRight}
+                  onClick={handleDescriptionSubmit}
+                  className={`${styles.continueButton} ${
+                    description.trim() ? styles.enabled : styles.disabled
+                  }`}
+                /> */}
+
                 <button
                   onClick={handleDescriptionSubmit}
                   disabled={!description.trim()}
@@ -322,7 +345,8 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
                     description.trim() ? styles.enabled : styles.disabled
                   }`}
                 >
-                  Continua →
+                  <span>Continua</span>
+                  <ArrowRight size={20} />
                 </button>
               </div>
             </div>
@@ -331,16 +355,17 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
           {currentStep === 3 && selectedSkill && (
             <div className={styles.stepContent}>
               <div className={styles.summary}>
-                <div className={styles.summaryHeader}>
-                  {/* <span className={styles.summaryIcon}>
-                    {selectedSkill.icon}
-                  </span> */}
-                  <span className={styles.summaryIcon}>
-                    {selectedSkill.IconComponent && (
-                      <selectedSkill.IconComponent size={24} />
-                    )}
-                  </span>
-                  <h3>{selectedSkill.name}</h3>
+                <div className={styles.stepHeader}>
+                  <div className={styles.iconContainer}>
+                    <span className={styles.skillIcon}>
+                      {selectedSkill.icon ? (
+                        <selectedSkill.icon size={24} />
+                      ) : (
+                        "⚡"
+                      )}
+                    </span>
+                  </div>
+                  <h3 className={styles.stepTitle}>{selectedSkill.name}</h3>
                 </div>
 
                 <div className={styles.summaryDescription}>
@@ -361,9 +386,10 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
               </div>
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
+
                 <button
                   onClick={handleFinalSubmit}
                   className={styles.primaryButton}
