@@ -967,20 +967,23 @@ function TestCardRedux({
 
   const getStatusStyles = () => {
     switch (courseState.status) {
-      // case "requested":
-      //   return { border: "2px solid var(--text-primary)" };
-      // case "ready":
-      //   return { border: "2px solid var(--text-primary)" };
-      // case "waiting":
-      //   return { border: "2px solid var(--text-primary)" };
-      // case "rejected":
-      //   return { border: "2px solid var(--text-primary)" };
-
-      // case "completed":
-      //   return { border: "2px solid var(--text-primary)" };
-
+      case "requested":
+        return { border: "2px solid var(--text-primary)" };
+      case "ready":
+        return { border: "2px solid var(--text-primaryLight)" };
+      case "waiting":
+        return { border: "2px solid var(--text-primaryLight)" };
+      case "rejected":
+        return {
+          border: "2px solid black",
+          backgroundColor: "var(--rifiuto-corso)",
+        };
+      case "completed":
+        return {
+          border: "2px solid black",
+          backgroundColor: "var(--fatto-corso)",
+        };
       default:
-        // return { border: "2px solid var(--text-primary)" };
         return {};
     }
   };
@@ -1161,7 +1164,7 @@ function TestCardRedux({
                 {/* STATO: waiting - Messaggi */}
                 {courseState.status === "waiting" && isInstructor && (
                   <div className={styles.waitingMessage}>
-                    <span>⏳ In attesa dello student...</span>
+                    <span>⏳ In attesa del student...</span>
                   </div>
                 )}
 
@@ -1176,7 +1179,7 @@ function TestCardRedux({
                 )}
 
                 {/* STATO: active - Messaggi */}
-                {/* {courseState.status === "active" && (
+                {courseState.status === "active" && (
                   <>
                     {courseState.showFinishWaiting ? (
                       <div className={styles.finishWaiting}>
@@ -1216,28 +1219,6 @@ function TestCardRedux({
                       </div>
                     ) : (
                       <div className={styles.activeMessage}>
-                        <span>🎓 Corso in sessione!</span>
-                      </div>
-                    )}
-                  </>
-                )} */}
-                {courseState.status === "active" && (
-                  <>
-                    {courseState.showFinishWaiting ? (
-                      <div className={styles.waitingMessage}>
-                        <span>
-                          {courseState.finishClicks.includes("instructor") &&
-                          courseState.finishClicks.includes("student")
-                            ? "⏳ Completamento in corso..."
-                            : courseState.finishClicks.includes("instructor")
-                            ? "⏳ In attesa dello studente..."
-                            : courseState.finishClicks.includes("student")
-                            ? "⏳ In attesa dell'istruttore..."
-                            : "⏳ In attesa di entrambi..."}
-                        </span>
-                      </div>
-                    ) : (
-                      <div className={styles.studentWaiting}>
                         <span>🎓 Corso in sessione!</span>
                       </div>
                     )}
@@ -1452,7 +1433,7 @@ function TestCardRedux({
 
                 {/* STATO: active - Pulsanti */}
                 {courseState.status === "active" && (
-                  <div className={styles.buttonContainer}>
+                  <div className={styles.courseButtons}>
                     {/* <button
                       className={styles.rejectCourseButton}
                       onClick={handleRejectCourse}
@@ -1468,11 +1449,7 @@ function TestCardRedux({
                       Rifiuto
                       </Button> */}
 
-                    <Button
-                      variant="gray"
-                      className={styles.flex25}
-                      onClick={handleRejectCourse}
-                    >
+                    <Button variant="gray" onClick={handleRejectCourse}>
                       Rifiuto
                     </Button>
 
@@ -1491,7 +1468,6 @@ function TestCardRedux({
                     </button> */}
 
                     <Button
-                      className={styles.flex75}
                       size="md"
                       variant="primary"
                       mode="solid"

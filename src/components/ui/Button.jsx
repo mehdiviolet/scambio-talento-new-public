@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Button.module.css";
 
-const Button = ({
+export const Button = ({
   children,
   variant = "primary",
   mode = "solid",
@@ -22,5 +22,3 @@ const Button = ({
     </button>
   );
 };
-
-export default Button;
