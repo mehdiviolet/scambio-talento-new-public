@@ -28,7 +28,8 @@ const ProfileTabs = () => {
     switch (activeTab) {
       case "about":
         return (
-          <div className={styles.content}>
+          <>
+            {/* <div className={styles.content}> */}
             <div className={styles.aboutSection}>
               <p className={styles.aboutText}>
                 {(() => {
@@ -44,7 +45,8 @@ const ProfileTabs = () => {
             </div>
             <SearchSection />
             {/* <GallerySection isOwner={true} /> */}
-          </div>
+            {/* </div> */}
+          </>
         );
       case "skills":
         return <SkillsSection />;

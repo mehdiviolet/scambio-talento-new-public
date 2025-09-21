@@ -128,154 +128,7 @@ const SearchSection = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <h3 className={styles.title}>
-          {/* <span className={styles.searchIcon}>🎯</span> */}
-          Alla Ricerca
-        </h3>
-        {isOwner && (
-          // <button
-          //   onClick={handleAddSkill}
-          //   className={styles.addButton}
-          //   title="Aggiungi skill da cercare"
-          // >
-          //   +
-          // </button>
-          <HeaderAddButton onClick={handleAddSkill} />
-        )}
-      </div>
-
-      <div className={styles.content}>
-        {selectedSkills.length > 0 ? (
-          selectedSkills.map((skill, index) => {
-            const isSkillExpanded = isExpanded(skill);
-            const isEditing = editingSkill && editingSkill.id === skill.id;
-            const wantedSkill = currentProfile?.wantedSkills?.find(
-              (s) => s.id === skill.id
-            );
-
-            return (
-              <div
-                key={`wanted-skill-${index}-${skill.id}`}
-                className={`${styles.skillItem} ${
-                  isSkillExpanded ? styles.expanded : ""
-                }`}
-              >
-                {/* Skill Toggle Button */}
-                <button
-                  onClick={() => handleSkillToggle(skill)}
-                  className={styles.skillCard}
-                >
-                  <div className={styles.skillInfo}>
-                    <span className={styles.skillIcon}>{skill.icon}</span>
-                    <div className={styles.skillName}>{skill.name}</div>
-                  </div>
-
-                  <div className={styles.skillMeta}>
-                    <ChevronDown
-                      size={16}
-                      className={`${styles.expandIcon} ${
-                        isSkillExpanded ? styles.expanded : ""
-                      }`}
-                    />
-                  </div>
-                </button>
-
-                {/* Expanded Content */}
-                {isSkillExpanded && (
-                  <div className={styles.skillExpanded}>
-                    {/* Description Box */}
-                    {isEditing && isOwner ? (
-                      <div className={styles.editDescriptionContainer}>
-                        <textarea
-                          value={editedDescription}
-                          onChange={(e) => setEditedDescription(e.target.value)}
-                          rows={4}
-                          className={styles.editDescriptionTextarea}
-                          placeholder="Perché vuoi imparare questa skill?"
-                          autoFocus
-                        />
-                        <div className={styles.editActions}>
-                          {/* Actions - only visible for owner */}
-                          {isOwner && (
-                            <div className={styles.actions}>
-                              <div className={styles.actionButtons}>
-                                <button
-                                  className={`${styles.actionButton} ${styles.actionButtonDelete}`}
-                                  onClick={(e) => handleDeleteClick(skill, e)}
-                                  title="Rimuovi dalla ricerca"
-                                >
-                                  <Trash2 size={16} />
-                                  <span>Rimuovi</span>
-                                </button>
-                              </div>
-                            </div>
-                          )}
-                          <button
-                            onClick={handleEditCancel}
-                            className={styles.editCancelButton}
-                          >
-                            <X size={14} />
-                            Annulla
-                          </button>
-                          <button
-                            onClick={handleEditSave}
-                            disabled={!editedDescription.trim()}
-                            className={styles.editSaveButton}
-                          >
-                            <Save size={14} />
-                            Salva
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <div
-                        className={`${styles.descriptionBox} ${
-                          isOwner ? styles.descriptionBoxHoverable : ""
-                        }`}
-                      >
-                        <p
-                          onClick={
-                            isOwner ? () => handleEditStart(skill) : undefined
-                          }
-                          className={`${styles.descriptionText} ${
-                            isOwner ? styles.descriptionClickable : ""
-                          }`}
-                          style={{ cursor: isOwner ? "pointer" : "default" }}
-                        >
-                          {wantedSkill?.description ? (
-                            wantedSkill.description
-                          ) : isOwner ? (
-                            <span className={styles.descriptionPlaceholder}>
-                              Nessuna descrizione. Clicca per aggiungere perché
-                              vuoi imparare questa skill.
-                            </span>
-                          ) : (
-                            <span className={styles.descriptionPlaceholder}>
-                              Nessuna descrizione disponibile.
-                            </span>
-                          )}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })
-        ) : (
-          // <div className={styles.emptyState}>
-          //   <div className={styles.emptyIcon}>🎪</div>
-          //   <p className={styles.emptyTitle}>Nessuna skill selezionata</p>
-          //   <p className={styles.emptyDescription}>
-          //     Seleziona le skill che stai cercando di imparare
-          //   </p>
-          // </div>
-          <p>Nessuna skill selezionata </p>
-        )}
-      </div>
-
+    <>
       {/* ✅ MODAL PER AGGIUNGERE WANTED SKILLS */}
       <AddWantedSkillModal
         isOpen={isAddModalOpen}
@@ -283,7 +136,157 @@ const SearchSection = () => {
         onSave={handleSaveNewWantedSkill}
         currentWantedSkills={currentProfile?.wantedSkills || []}
       />
-    </div>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h3 className={styles.title}>
+            {/* <span className={styles.searchIcon}>🎯</span> */}
+            Alla Ricerca
+          </h3>
+        </div>
+
+        <div className={styles.content}>
+          {isOwner && (
+            // <button
+            //   onClick={handleAddSkill}
+            //   className={styles.addButton}
+            //   title="Aggiungi skill da cercare"
+            // >
+            //   +
+            // </button>
+            <HeaderAddButton onClick={handleAddSkill} />
+          )}
+          {selectedSkills.length > 0 ? (
+            selectedSkills.map((skill, index) => {
+              const isSkillExpanded = isExpanded(skill);
+              const isEditing = editingSkill && editingSkill.id === skill.id;
+              const wantedSkill = currentProfile?.wantedSkills?.find(
+                (s) => s.id === skill.id
+              );
+
+              return (
+                <div
+                  key={`wanted-skill-${index}-${skill.id}`}
+                  className={`${styles.skillItem} ${
+                    isSkillExpanded ? styles.expanded : ""
+                  }`}
+                >
+                  {/* Skill Toggle Button */}
+                  <button
+                    onClick={() => handleSkillToggle(skill)}
+                    className={styles.skillCard}
+                  >
+                    <div className={styles.skillInfo}>
+                      <span className={styles.skillIcon}>{skill.icon}</span>
+                      <div className={styles.skillName}>{skill.name}</div>
+                    </div>
+
+                    <div className={styles.skillMeta}>
+                      <ChevronDown
+                        size={16}
+                        className={`${styles.expandIcon} ${
+                          isSkillExpanded ? styles.expanded : ""
+                        }`}
+                      />
+                    </div>
+                  </button>
+
+                  {/* Expanded Content */}
+                  {isSkillExpanded && (
+                    <div className={styles.skillExpanded}>
+                      {/* Description Box */}
+                      {isEditing && isOwner ? (
+                        <div className={styles.editDescriptionContainer}>
+                          <textarea
+                            value={editedDescription}
+                            onChange={(e) =>
+                              setEditedDescription(e.target.value)
+                            }
+                            rows={4}
+                            className={styles.editDescriptionTextarea}
+                            placeholder="Perché vuoi imparare questa skill?"
+                            autoFocus
+                          />
+                          <div className={styles.editActions}>
+                            {/* Actions - only visible for owner */}
+                            {isOwner && (
+                              <div className={styles.actions}>
+                                <div className={styles.actionButtons}>
+                                  <button
+                                    className={`${styles.actionButton} ${styles.actionButtonDelete}`}
+                                    onClick={(e) => handleDeleteClick(skill, e)}
+                                    title="Rimuovi dalla ricerca"
+                                  >
+                                    <Trash2 size={16} />
+                                    <span>Rimuovi</span>
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+                            <button
+                              onClick={handleEditCancel}
+                              className={styles.editCancelButton}
+                            >
+                              <X size={14} />
+                              Annulla
+                            </button>
+                            <button
+                              onClick={handleEditSave}
+                              disabled={!editedDescription.trim()}
+                              className={styles.editSaveButton}
+                            >
+                              <Save size={14} />
+                              Salva
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div
+                          className={`${styles.descriptionBox} ${
+                            isOwner ? styles.descriptionBoxHoverable : ""
+                          }`}
+                        >
+                          <p
+                            onClick={
+                              isOwner ? () => handleEditStart(skill) : undefined
+                            }
+                            className={`${styles.descriptionText} ${
+                              isOwner ? styles.descriptionClickable : ""
+                            }`}
+                            style={{ cursor: isOwner ? "pointer" : "default" }}
+                          >
+                            {wantedSkill?.description ? (
+                              wantedSkill.description
+                            ) : isOwner ? (
+                              <span className={styles.descriptionPlaceholder}>
+                                Nessuna descrizione. Clicca per aggiungere
+                                perché vuoi imparare questa skill.
+                              </span>
+                            ) : (
+                              <span className={styles.descriptionPlaceholder}>
+                                Nessuna descrizione disponibile.
+                              </span>
+                            )}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            // <div className={styles.emptyState}>
+            //   <div className={styles.emptyIcon}>🎪</div>
+            //   <p className={styles.emptyTitle}>Nessuna skill selezionata</p>
+            //   <p className={styles.emptyDescription}>
+            //     Seleziona le skill che stai cercando di imparare
+            //   </p>
+            // </div>
+            <p>Nessuna skill selezionata </p>
+          )}
+        </div>
+      </div>
+    </>
   );
 };
 

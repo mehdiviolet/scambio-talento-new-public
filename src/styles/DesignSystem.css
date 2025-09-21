@@ -7,7 +7,9 @@
   --text-primary: #3b82f6;
   --text-secondary: #f59e0b; /* Arancione accento */
   --text-tertiary: #6366f1; /* Azzurro principale */
-  --gem: #6366f1;
+  /* --text-tertiary: ##5763c1; */
+  /* --gem: #6366f1; */
+  --gem: #1d4ed8;
 
   --text-secondaryLight: rgba(245, 158, 11, 0.3); /* Arancione accento */
   --text-primary-light: #3a8ba3; /* Azzurro chiaro */
@@ -32,6 +34,7 @@
   --secondary-100: #fef3c7; /* Cards e containers */
   --secondary-200: #fde68a; /* Borders leggeri */
   --secondary-300: #fcd34d; /* Placeholder e disabled */
+  --secondary-350: #fbbf24; /* Variante intermedia */
   --secondary-500: #f59e0b; /* Il tuo colore base */
   --secondary-600: #d97706; /* Hover states */
   --secondary-700: #b45309; /* Active/pressed */

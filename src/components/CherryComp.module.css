@@ -761,7 +761,8 @@
 .slotTitle {
   font-size: 1.4rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #f59e0b, #d97706);
+  /* background: linear-gradient(135deg, #f59e0b, #d97706); */
+  background: var(--primary-700);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

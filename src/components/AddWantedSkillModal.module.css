@@ -1,20 +1,27 @@
 /* AddWantedSkillModal.module.css - Following AddSkillModal glassmorphism design */
+/* Glassmorphism Modal Styles */
 
 .overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(99, 102, 241, 0.3);
-  backdrop-filter: blur(35px);
+  /* background-color: rgba(99, 102, 241, 0.3); */
+  background: var(--bg--overlay);
+
+  backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 50;
+  z-index: 999999;
   padding: 1rem;
   flex-direction: column;
+  margin-bottom: 80px;
 }
 
 .modal {
-  background: #e9be31;
+  /* background: #e9be31; */
+  background: var(--bg-old);
+  /* background: var(--bg--esperienza); */
+
   backdrop-filter: blur(20px) saturate(150%);
   border-radius: 2rem;
   max-width: 28rem;
@@ -25,14 +32,12 @@
   box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  /* Hide scrollbar */
+  /* Webkit browsers (Chrome, Safari, Edge) */
   -webkit-scrollbar: none;
+  /* Firefox */
   scrollbar-width: none;
+  /* IE */
   -ms-overflow-style: none;
-}
-
-.modalSkill {
-  background: #d0b0b0;
 }
 
 .header {
@@ -43,6 +48,9 @@
   border-top-right-radius: 1.5rem;
   position: relative;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* gap: 5px; */
 }
 
 .header h2 {

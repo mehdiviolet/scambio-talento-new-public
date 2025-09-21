@@ -6,7 +6,8 @@
   /* --text-primary: #1e40af; /* */
   --text-primary: #3b82f6;
   --text-secondary: #f59e0b; /* Arancione accento */
-  --text-tertiary: #6366f1; /* Azzurro principale */
+  /* --text-tertiary: #6366f1;  */
+  --text-tertiary: ##5763c1; /* Azzurro principale */
   --gem: #6366f1;
   /* --gem: #3b82f6; */
   --text-secondaryLight: rgba(245, 158, 11, 0.3); /* Arancione accento */

@@ -1,5 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
-import { X, ArrowLeft } from "lucide-react";
+import {
+  X,
+  ArrowLeft,
+  BookOpen,
+  ChefHat,
+  Camera,
+  GraduationCap,
+  Music,
+  Zap,
+  Palette,
+  Video,
+  Building,
+  Monitor,
+  Drama,
+  Brain,
+  Code,
+  Shirt,
+  Heart,
+  Flower,
+  Languages,
+  Gamepad2,
+  Mic,
+} from "lucide-react";
 import styles from "./AddSkillModal.module.css";
 import { SKILL_ICONS } from "@/components/ui/SkillIconsMap";
 
@@ -14,71 +36,25 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
 
   // ✅ Lista completa di skills disponibili
   const allSkillsData = [
-    // { id: "writing", name: "Scrittura", IconComponent: SKILL_ICONS.writing },
-    // { id: "cooking", name: "Cucina", IconComponent: SKILL_ICONS.cooking },
-    // {
-    //   id: "photography",
-    //   name: "Fotografia",
-    //   IconComponent: SKILL_ICONS.photography,
-    // },
-    // { id: "writing", name: "Scrittura", icon: "✍️" },
-    // { id: "cooking", name: "Cucina", icon: "🍳" },
-    // { id: "photography", name: "Fotografia", icon: "📸" },
-    // { id: "history", name: "Storia", IconComponent: SKILL_ICONS.history },
-    // { id: "music", name: "Musica", IconComponent: SKILL_ICONS.music },
-    // { id: "dance", name: "Danza", IconComponent: SKILL_ICONS.dance },
-    // { id: "painting", name: "Pittura", IconComponent: SKILL_ICONS.painting },
-    // { id: "video", name: "Video", IconComponent: SKILL_ICONS.video },
-    // {
-    //   id: "programming",
-    //   name: "Programmazione",
-    //   IconComponent: SKILL_ICONS.programming,
-    // },
-    // {
-    //   id: "architecture",
-    //   name: "Architettura",
-    //   IconComponent: SKILL_ICONS.architecture,
-    // },
-    // { id: "graphics", name: "Grafica", IconComponent: SKILL_ICONS.graphics },
-    // { id: "theater", name: "Teatro", IconComponent: SKILL_ICONS.theater },
-    // {
-    //   id: "psychology",
-    //   name: "Psicologia",
-    //   IconComponent: SKILL_ICONS.psychology,
-    // },
-    // { id: "fashion", name: "Fashion", IconComponent: SKILL_ICONS.fashion },
-    // { id: "health", name: "Salute", IconComponent: SKILL_ICONS.health },
-    // {
-    //   id: "gardening",
-    //   name: "Giardinaggio",
-    //   IconComponent: SKILL_ICONS.gardening,
-    // },
-    // { id: "languages", name: "Lingue", IconComponent: SKILL_ICONS.languages },
-    // {
-    //   id: "videogames",
-    //   name: "Videogiochi",
-    //   IconComponent: SKILL_ICONS.videogames,
-    // },
-    // { id: "podcast", name: "Podcast", IconComponent: SKILL_ICONS.podcast },
-    { id: "writing", name: "Scrittura", icon: "✍️" },
-    { id: "cooking", name: "Cucina", icon: "🍳" },
-    { id: "photography", name: "Fotografia", icon: "📸" },
-    { id: "history", name: "Storia", icon: "📚" },
-    { id: "music", name: "Musica", icon: "🎵" },
-    { id: "dance", name: "Danza", icon: "💃" },
-    { id: "painting", name: "Pittura", icon: "🎨" },
-    { id: "video", name: "Video", icon: "🎬" },
-    { id: "architecture", name: "Architettura", icon: "🏛️" },
-    { id: "graphics", name: "Grafica", icon: "🎭" },
-    { id: "theater", name: "Teatro", icon: "🎪" },
-    { id: "psychology", name: "Psicologia", icon: "🧠" },
-    { id: "programming", name: "coding", icon: "💻" },
-    { id: "fashion", name: "Fashion", icon: "👗" },
-    { id: "health", name: "Salute", icon: "💪" },
-    { id: "gardening", name: "Giardinaggio", icon: "🌱" },
-    { id: "languages", name: "Lingue", icon: "🗣️" },
-    { id: "videogames", name: "Videogiochi", icon: "🎮" },
-    { id: "podcast", name: "Podcast", icon: "🎙️" },
+    { id: "writing", name: "Scrittura", icon: BookOpen },
+    { id: "cooking", name: "Cucina", icon: ChefHat },
+    { id: "photography", name: "Fotografia", icon: Camera },
+    { id: "history", name: "Storia", icon: GraduationCap },
+    { id: "music", name: "Musica", icon: Music },
+    { id: "dance", name: "Danza", icon: Zap },
+    { id: "painting", name: "Pittura", icon: Palette },
+    { id: "video", name: "Video", icon: Video },
+    { id: "architecture", name: "Architettura", icon: Building },
+    { id: "graphics", name: "Grafica", icon: Monitor },
+    { id: "theater", name: "Teatro", icon: Drama },
+    { id: "psychology", name: "Psicologia", icon: Brain },
+    { id: "programming", name: "Programmazione", icon: Code },
+    { id: "fashion", name: "Fashion", icon: Shirt },
+    { id: "health", name: "Salute", icon: Heart },
+    { id: "gardening", name: "Giardinaggio", icon: Flower },
+    { id: "languages", name: "Lingue", icon: Languages },
+    { id: "videogames", name: "Videogiochi", icon: Gamepad2 },
+    { id: "podcast", name: "Podcast", icon: Mic },
   ];
   // ✅ FILTRO: Mostra solo le skills NON ancora aggiunte
   const getAvailableSkills = () => {
@@ -250,17 +226,8 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
                               onClick={() => setSelectedIndex(index)}
                             >
                               <div className={styles.skillContent}>
-                                <span
-                                  className={`${styles.skillIcon} ${
-                                    isSelected ? styles.selected : ""
-                                  }`}
-                                >
-                                  {/* {skill.IconComponent ? (
-                                    <skill.IconComponent size={24} />
-                                  ) : (
-                                    skill.icon
-                                  )} */}
-                                  {skill.icon}
+                                <span className={styles.skillIcon}>
+                                  {skill.icon ? <skill.icon size={24} /> : "⚡"}
                                 </span>
                                 <span
                                   className={`${styles.skillName} ${
@@ -322,12 +289,12 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
               <div className={styles.stepHeader}>
                 <div className={styles.iconContainer}>
                   {/* <span>{selectedSkill.icon}</span> */}
-                  {/* {selectedSkill.IconComponent ? (
+                  {selectedSkill.IconComponent ? (
                     <selectedSkill.IconComponent size={24} />
                   ) : (
                     "⚡"
-                  )} */}
-                  <span>{selectedSkill.icon}</span>
+                  )}
+                  {/* <span>{selectedSkill.icon}</span> */}
                 </div>
                 <h3 className={styles.stepTitle}>{selectedSkill.name}</h3>
               </div>
@@ -365,8 +332,13 @@ const AddSkillModal = ({ isOpen, onClose, onSave, formData }) => {
             <div className={styles.stepContent}>
               <div className={styles.summary}>
                 <div className={styles.summaryHeader}>
-                  <span className={styles.summaryIcon}>
+                  {/* <span className={styles.summaryIcon}>
                     {selectedSkill.icon}
+                  </span> */}
+                  <span className={styles.summaryIcon}>
+                    {selectedSkill.IconComponent && (
+                      <selectedSkill.IconComponent size={24} />
+                    )}
                   </span>
                   <h3>{selectedSkill.name}</h3>
                 </div>

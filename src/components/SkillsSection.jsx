@@ -189,14 +189,19 @@ const SkillsSection = () => {
                   className={styles.skillCard}
                 >
                   <div className={styles.skillInfo}>
-                    {/* <span className={styles.skillIcon}>{skill.icon}</span> */}
-                    {/* {skill.IconComponent ? (
-                      <skill.IconComponent size={24} />
-                    ) : (
-                      skill.icon
-                    )} */}
-                    {/* {IconComponent ? <IconComponent size={24} /> : skill.icon} */}
-                    {skill.icon}
+                    <span className={styles.skillIcon}>
+                      {skill.IconComponent ? (
+                        <skill.IconComponent size={24} />
+                      ) : skill.icon ? (
+                        typeof skill.icon === "string" ? (
+                          skill.icon
+                        ) : (
+                          <skill.icon size={24} />
+                        )
+                      ) : (
+                        "⚡" // fallback
+                      )}
+                    </span>
                     <div className={styles.skillName}>
                       {skill.detail || skill.name}
                     </div>

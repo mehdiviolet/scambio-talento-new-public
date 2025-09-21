@@ -7,7 +7,7 @@
   --text-secondary: #f59e0b;
   --text-primary-light: #3a8ba3;
   --text-primary-dark: #1a4d5c;
-  --text-secondary-light: #fbbf24;
+  --text-secondary-light: var(--secondary-350);
   --text-secondary-dark: #d97706;
   --progress-blue: #3b82f6;
   --progress-blue-dark: #1d4ed8;

@@ -1069,7 +1069,8 @@
 
 .rejectModalContent,
 .feedbackModalContent {
-  background: var(--bg--esperienza);
+  /* background: var(--bg--esperienza); */
+  background: var(--primary-200);
   backdrop-filter: var(--backdrop-blur);
   border-radius: var(--radius-xl);
   padding: var(--space-2xl);

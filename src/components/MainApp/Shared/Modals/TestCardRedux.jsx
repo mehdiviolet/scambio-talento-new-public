@@ -151,32 +151,6 @@ function TestCardRedux({
       }
   );
 
-  // const { showSuccessToast, showErrorToast, addCourseNotification } =
-  //   useNotifications();
-
-  // 🎯 MEMOIZZA I SELECTORS PROBLEMATICI
-  // const instructorNotifications = useSelector(
-  //   useMemo(
-  //     () =>
-  //       createSelector(
-  //         [selectNotificationsByRole("instructor")],
-  //         (notifications) => notifications
-  //       ),
-  //     []
-  //   )
-  // );
-
-  // const studentNotifications = useSelector(
-  //   useMemo(
-  //     () =>
-  //       createSelector(
-  //         [selectNotificationsByRole("student")],
-  //         (notifications) => notifications
-  //       ),
-  //     []
-  //   )
-  // );
-
   const instructorNotification = useSelector(
     (state) => state.experienceSliceTest.instructorNotifications[experienceId]
     // این ربطی به تفکیک نوتیف ها نداره
@@ -1246,28 +1220,28 @@ function TestCardRedux({
 
                 {/* STATO: pending_feedback - Messaggi */}
                 {courseState.status === "pending_feedback" && (
-                  <>
+                  <div className={styles.messageRow}>
                     {!isInstructor ? (
-                      <div className={styles.pendingFeedbackMessage}>
+                      <div className={styles.studentWaiting}>
                         <CheckCircle size={20} />
-                        <span>🎉 Corso completato!</span>
+                        <span> Corso completato!</span>
                       </div>
                     ) : (
-                      <div className={styles.instructorWaitingMessage}>
+                      <div className={styles.studentWaiting}>
                         <CheckCircle size={20} />
                         <span>
-                          🎉 Complimenti! Aspetti feedback dello studente.
+                          Complimenti! Aspetti feedback dello studente.
                         </span>
                       </div>
                     )}
-                  </>
+                  </div>
                 )}
 
                 {/* STATO: completed - Messaggi */}
                 {courseState.status === "completed" && (
-                  <div className={styles.completedMessage}>
+                  <div className={styles.studentWaiting}>
                     <CheckCircle size={20} />
-                    <span>🎉 Corso completato con successo!</span>
+                    <span> Corso completato con successo!</span>
                     {/* {isInstructor && (
                       <p className={styles.completedNote}>
                         📈 Complimenti per aver completato un altro corso!
@@ -1511,12 +1485,19 @@ function TestCardRedux({
 
                 {/* STATO: pending_feedback - Pulsanti */}
                 {courseState.status === "pending_feedback" && !isInstructor && (
-                  <button
-                    className={styles.openFeedbackButton}
+                  // <button
+                  //   className={styles.openFeedbackButton}
+                  //   onClick={() => setShowFeedbackModal(true)}
+                  // >
+                  //   📝 Lascia Feedback
+                  // </button>
+
+                  <Button
+                    variant="gray"
                     onClick={() => setShowFeedbackModal(true)}
                   >
-                    📝 Lascia Feedback
-                  </button>
+                    Lascia Feedback
+                  </Button>
                 )}
               </div>
             </div>

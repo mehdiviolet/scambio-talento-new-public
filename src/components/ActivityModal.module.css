@@ -144,7 +144,7 @@
 }
 
 .progressGold {
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  background: linear-gradient(90deg, #f59e0b, var(--secondary-350));
 } */
 
 .progressTeal {
