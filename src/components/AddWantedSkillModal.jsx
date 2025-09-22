@@ -1,6 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
-import { X, ArrowLeft } from "lucide-react";
-import styles from "./AddWantedSkillModal.module.css";
+import {
+  X,
+  ArrowLeft,
+  BookOpen,
+  ChefHat,
+  Camera,
+  GraduationCap,
+  Music,
+  Zap,
+  Palette,
+  Video,
+  Building,
+  Monitor,
+  Drama,
+  Brain,
+  Code,
+  Shirt,
+  Heart,
+  Flower,
+  Languages,
+  Gamepad2,
+  Mic,
+  ArrowUp,
+  ArrowDown,
+  ArrowRight,
+} from "lucide-react";
+import baseStyles from "../components/MainApp/Shared/Modals/AddSkillModal.module.css";
+import extendedStyles from "./AddWantedSkillModal.module.css";
+import IconButton from "./ui/IconButton";
+
+const styles = { ...baseStyles, ...extendedStyles };
 
 const AddWantedSkillModal = ({
   isOpen,
@@ -17,25 +46,25 @@ const AddWantedSkillModal = ({
 
   // ✅ Lista completa di skills disponibili
   const allSkillsData = [
-    { id: "writing", name: "Scrittura", icon: "✍️" },
-    { id: "cooking", name: "Cucina", icon: "🍳" },
-    { id: "photography", name: "Fotografia", icon: "📸" },
-    { id: "history", name: "Storia", icon: "📚" },
-    { id: "music", name: "Musica", icon: "🎵" },
-    { id: "dance", name: "Danza", icon: "💃" },
-    { id: "painting", name: "Pittura", icon: "🎨" },
-    { id: "video", name: "Video", icon: "🎬" },
-    { id: "programming", name: "Programmazione", icon: "💻" },
-    { id: "architecture", name: "Architettura", icon: "🏛️" },
-    { id: "graphics", name: "Grafica", icon: "🎭" },
-    { id: "theater", name: "Teatro", icon: "🎪" },
-    { id: "psychology", name: "Psicologia", icon: "🧠" },
-    { id: "fashion", name: "Fashion", icon: "👗" },
-    { id: "health", name: "Salute", icon: "💪" },
-    { id: "gardening", name: "Giardinaggio", icon: "🌱" },
-    { id: "languages", name: "Lingue", icon: "🗣️" },
-    { id: "videogames", name: "Videogiochi", icon: "🎮" },
-    { id: "podcast", name: "Podcast", icon: "🎙️" },
+    { id: "writing", name: "Scrittura", icon: BookOpen },
+    { id: "cooking", name: "Cucina", icon: ChefHat },
+    { id: "photography", name: "Fotografia", icon: Camera },
+    { id: "history", name: "Storia", icon: GraduationCap },
+    { id: "music", name: "Musica", icon: Music },
+    { id: "dance", name: "Danza", icon: Zap },
+    { id: "painting", name: "Pittura", icon: Palette },
+    { id: "video", name: "Video", icon: Video },
+    { id: "architecture", name: "Architettura", icon: Building },
+    { id: "graphics", name: "Grafica", icon: Monitor },
+    { id: "theater", name: "Teatro", icon: Drama },
+    { id: "psychology", name: "Psicologia", icon: Brain },
+    { id: "programming", name: "Programmazione", icon: Code },
+    { id: "fashion", name: "Fashion", icon: Shirt },
+    { id: "health", name: "Salute", icon: Heart },
+    { id: "gardening", name: "Giardinaggio", icon: Flower },
+    { id: "languages", name: "Lingue", icon: Languages },
+    { id: "videogames", name: "Videogiochi", icon: Gamepad2 },
+    { id: "podcast", name: "Podcast", icon: Mic },
   ];
 
   // ✅ Filtra skills già aggiunte
@@ -124,12 +153,12 @@ const AddWantedSkillModal = ({
     switch (currentStep) {
       case 1:
         return hasAvailableSkills
-          ? "🎯 Scegli una competenza"
-          : "🎉 Tutte le skills aggiunte!";
+          ? "Scegli una competenza"
+          : "Tutte le skills aggiunte!";
       case 2:
-        return "📝 Descrivi la tua motivazione";
+        return "Descrivi la tua motivazione";
       case 3:
-        return "📋 Riassunto finale";
+        return "Riassunto finale";
       default:
         return "";
     }
@@ -140,9 +169,7 @@ const AddWantedSkillModal = ({
       <div className={`${styles.modal} ${styles.modalSkill}`}>
         <div className={styles.header}>
           <h2>{getStepTitle()}</h2>
-          <button onClick={onClose} className={styles.closeButton}>
-            <X />
-          </button>
+          <IconButton icon={X} onClick={onClose} />
         </div>
 
         <div className={styles.content}>
@@ -184,7 +211,7 @@ const AddWantedSkillModal = ({
                                     isSelected ? styles.selected : ""
                                   }`}
                                 >
-                                  {skill.icon}
+                                  {skill.icon ? <skill.icon size={24} /> : "⚡"}
                                 </span>
                                 <span
                                   className={`${styles.skillName} ${
@@ -202,25 +229,26 @@ const AddWantedSkillModal = ({
                   </div>
 
                   <div className={styles.controls}>
-                    <button
+                    <IconButton
+                      icon={ArrowUp}
+                      position="relative"
+                      // className={styles.controlButton}
                       onClick={() => handleWheelSpin("up")}
-                      className={styles.controlButton}
-                    >
-                      ↑ Su
-                    </button>
-                    <button
+                    />
+
+                    <IconButton
+                      icon={ArrowDown}
+                      position="relative"
+                      // className={styles.controlButton}
                       onClick={() => handleWheelSpin("down")}
-                      className={styles.controlButton}
-                    >
-                      ↓ Giù
-                    </button>
+                    />
                   </div>
 
                   <button
                     onClick={handleSkillSelect}
                     className={styles.primaryButton}
                   >
-                    ✨ Seleziona {skillsData[selectedIndex]?.name}
+                    Seleziona {skillsData[selectedIndex]?.name}
                   </button>
                 </>
               ) : (
@@ -244,7 +272,13 @@ const AddWantedSkillModal = ({
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
                 <div className={styles.iconContainer}>
-                  <span>{selectedSkill.icon}</span>
+                  <span className={styles.skillIcon}>
+                    {selectedSkill.icon ? (
+                      <selectedSkill.icon size={24} />
+                    ) : (
+                      "⚡"
+                    )}
+                  </span>
                 </div>
                 <h3 className={styles.stepTitle}>{selectedSkill.name}</h3>
               </div>
@@ -262,14 +296,25 @@ const AddWantedSkillModal = ({
               </div>
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  {/* <ArrowLeft size={16} /> Indietro */}
+                  <ArrowLeft size={20} />
                 </button>
-                <button
+                {/* <button
                   onClick={handleDescriptionSubmit}
                   className={styles.continueButton}
                 >
                   Continua →
+                </button> */}
+                <button
+                  onClick={handleDescriptionSubmit}
+                  disabled={!description.trim()}
+                  className={`${styles.continueButton} ${
+                    description.trim() ? styles.enabled : styles.disabled
+                  }`}
+                >
+                  <span>Continua</span>
+                  <ArrowRight size={20} />
                 </button>
               </div>
             </div>
@@ -281,7 +326,11 @@ const AddWantedSkillModal = ({
               <div className={styles.summary}>
                 <div className={styles.summaryHeader}>
                   <span className={styles.summaryIcon}>
-                    {selectedSkill.icon}
+                    {selectedSkill.icon ? (
+                      <selectedSkill.icon size={24} />
+                    ) : (
+                      "⚡"
+                    )}
                   </span>
                   <h3>{selectedSkill.name}</h3>
                 </div>
@@ -294,14 +343,14 @@ const AddWantedSkillModal = ({
               </div>
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
                 <button
                   onClick={handleFinalSubmit}
                   className={styles.primaryButton}
                 >
-                  🎯 Aggiungi alla Lista
+                  Aggiungi alla Lista
                 </button>
               </div>
             </div>

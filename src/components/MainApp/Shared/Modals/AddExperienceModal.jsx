@@ -1,7 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { X, ArrowLeft } from "lucide-react";
-import styles from "./AddExperienceModal.module.css";
+import {
+  X,
+  ArrowLeft,
+  ArrowUp,
+  ArrowDown,
+  ArrowRight,
+  Settings,
+} from "lucide-react";
+import baseStyles from "./AddSkillModal.module.css";
+import extendedStyles from "./AddExperienceModal.module.css";
 import { Globe, Building, Users, BookOpen, Clock, Gem } from "lucide-react";
+import IconButton from "@/components/ui/IconButton";
+const styles = { ...baseStyles, ...extendedStyles };
 
 const AddExperienceModal = ({
   isOpen,
@@ -280,7 +290,7 @@ const AddExperienceModal = ({
 
     switch (currentStep) {
       case 1:
-        return `${prefix} - Scegli un skill`;
+        return `${prefix} - Scegli uno skill`;
       case 2:
         return `${prefix} - Dettaglio`;
       case 3:
@@ -303,9 +313,10 @@ const AddExperienceModal = ({
       <div className={styles.modal}>
         <div className={styles.header}>
           <h3>{getStepTitle()}</h3>
-          <button onClick={onClose} className={styles.closeButton}>
+          {/* <button onClick={onClose} className={styles.closeButton}>
             <X />
-          </button>
+          </button> */}
+          <IconButton icon={X} onClick={onClose} />
         </div>
 
         <div className={styles.content}>
@@ -363,18 +374,18 @@ const AddExperienceModal = ({
               </div>
 
               <div className={styles.controls}>
-                <button
+                <IconButton
+                  icon={ArrowUp}
+                  position="relative"
+                  // className={styles.controlButton}
                   onClick={() => handleWheelSpin("up")}
-                  className={styles.controlButton}
-                >
-                  ↑ Su
-                </button>
-                <button
+                />
+                <IconButton
+                  icon={ArrowDown}
+                  position="relative"
+                  // className={styles.controlButton}
                   onClick={() => handleWheelSpin("down")}
-                  className={styles.controlButton}
-                >
-                  ↓ Giù
-                </button>
+                />
               </div>
 
               <button
@@ -391,7 +402,7 @@ const AddExperienceModal = ({
               <div className={styles.stepHeader}>
                 <div className={styles.iconContainer}>
                   {/* <span>{selectedSkill.icon}</span> */}
-                  <span>
+                  <span className={styles.skillIcon}>
                     {selectedSkill.icon ? (
                       <selectedSkill.icon size={24} />
                     ) : (
@@ -432,8 +443,8 @@ const AddExperienceModal = ({
               </div>
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
                 <button
                   onClick={handleDetailSubmit}
@@ -442,7 +453,8 @@ const AddExperienceModal = ({
                     skillDetail.trim() ? styles.enabled : styles.disabled
                   }`}
                 >
-                  Continua →
+                  <span>Continua</span>
+                  <ArrowRight size={20} />
                 </button>
               </div>
             </div>
@@ -477,8 +489,8 @@ const AddExperienceModal = ({
               </div>
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
                 <button
                   onClick={handleDescriptionSubmit}
@@ -487,7 +499,8 @@ const AddExperienceModal = ({
                     description.trim() ? styles.enabled : styles.disabled
                   }`}
                 >
-                  Continua →
+                  <span>Continua</span>
+                  <ArrowRight size={20} />
                 </button>
               </div>
             </div>
@@ -497,7 +510,9 @@ const AddExperienceModal = ({
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
                 <div className={styles.iconContainer}>
-                  <span>⚙️</span>
+                  <span>
+                    <Settings />
+                  </span>
                 </div>
                 <h3 className={styles.stepTitle}>Configura la lezione</h3>
               </div>
@@ -633,14 +648,15 @@ const AddExperienceModal = ({
               </div>
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
                 <button
                   onClick={handleConfigSubmit}
                   className={`${styles.continueButton} ${styles.enabled}`}
                 >
-                  Continua →
+                  <span>Continua</span>
+                  <ArrowRight size={20} />
                 </button>
               </div>
             </div>
@@ -654,7 +670,12 @@ const AddExperienceModal = ({
                     onClick={() => setCurrentStep(4)}
                     className={styles.navButton}
                   >
-                    ⚙️ Config
+                    <div className={styles.iconContainer}>
+                      <span>
+                        <Settings />
+                      </span>
+                    </div>
+                    <h3 className={styles.stepTitle}>Configura la lezione</h3>
                   </button>
                   <div className={styles.navButtons}>
                     <button
@@ -763,7 +784,7 @@ const AddExperienceModal = ({
                     <div>
                       <strong>Costo:</strong>
                       <br />
-                      <span className={styles.costHighlight}>
+                      <span>
                         {
                           configOptions.costo.find(
                             (opt) => opt.value === lessonConfig.costo
@@ -776,12 +797,12 @@ const AddExperienceModal = ({
               </div>
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
                 <button
                   onClick={handleFinalSubmit}
-                  className={`${styles.createButton} ${styles.enabled}`}
+                  className={`${styles.continueButton} ${styles.enabled}`}
                 >
                   {getFinalButtonText()}
                 </button>
