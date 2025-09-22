@@ -31,7 +31,7 @@ const initialState = {
     confirmPassword: "",
     profilePhoto: null,
     skills: [],
-    seekingSkills: [],
+    // seekingSkills: [],
     languages: [],
     aboutMe: "",
     location: "",

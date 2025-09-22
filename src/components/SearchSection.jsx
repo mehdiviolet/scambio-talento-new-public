@@ -324,8 +324,8 @@ const SearchSection = () => {
                             }`}
                             style={{ cursor: isOwner ? "pointer" : "default" }}
                           >
-                            {skill.description ? (
-                              skill.description
+                            {wantedSkill?.description ? (
+                              wantedSkill?.description
                             ) : isOwner ? (
                               <span className={styles.descriptionPlaceholder}>
                                 Clicca per aggiungere una descrizione.
