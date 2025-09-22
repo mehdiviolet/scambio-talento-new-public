@@ -243,9 +243,11 @@ const SkillsSection = () => {
                             <div className={styles.actions}>
                               <div className={styles.actionButtons}>
                                 <Button
-                                  className={`${styles.actionButton} ${styles.actionButtonDelete}`}
+                                  className={styles.actionButtonDelete}
+                                  //  className={`${styles.actionButton} ${styles.actionButtonDelete}`}
                                   onClick={(e) => handleDeleteClick(skill, e)}
                                   title="Elimina esperienza"
+                                  // variant="gray"
                                 >
                                   {" "}
                                   <Trash2 size={16} />
@@ -254,7 +256,7 @@ const SkillsSection = () => {
 
                                 <Button
                                   onClick={handleEditCancel}
-                                  className={styles.editCancelButton}
+                                  // className={styles.editCancelButton}
                                 >
                                   <X size={14} />
                                   Annulla
@@ -262,7 +264,9 @@ const SkillsSection = () => {
                                 <Button
                                   onClick={handleEditSave}
                                   disabled={!editedDescription.trim()}
-                                  className={styles.editSaveButton}
+                                  // className={styles.editSaveButton}
+                                  variant="primary"
+                                  mode="solid"
                                 >
                                   <Save size={14} />
                                   Salva

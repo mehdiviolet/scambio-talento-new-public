@@ -1,6 +1,35 @@
 import React, { useState } from "react";
-import { ChevronDown, Edit, Trash2, X, Save } from "lucide-react";
-import styles from "./SearchSection.module.css";
+import {
+  ChevronDown,
+  Edit,
+  Trash2,
+  X,
+  Save,
+  Gem,
+  BookOpen,
+  ChefHat,
+  Camera,
+  GraduationCap,
+  Music,
+  Zap,
+  Palette,
+  Video,
+  Building,
+  Monitor,
+  Drama,
+  Brain,
+  Code,
+  Shirt,
+  Heart,
+  Flower,
+  Languages,
+  Gamepad2,
+  Mic,
+  ArrowUp,
+  ArrowDown,
+  ArrowRight,
+} from "lucide-react";
+import styles from "./SkillsSection.module.css";
 import { useAppSelector, useAppDispatch } from "../hooks/redux";
 import AddWantedSkillModal from "./AddWantedSkillModal";
 // ✅ IMPORTA LE ACTIONS REDUX
@@ -10,6 +39,7 @@ import {
   removeWantedSkill,
 } from "../store/slices/onboardingSlice";
 import { HeaderAddButton } from "./ui/AddButtons";
+import { Button } from "./ui/Button";
 
 const SearchSection = () => {
   const [localExpandedSkillId, setLocalExpandedSkillId] = useState(null);
@@ -25,25 +55,25 @@ const SearchSection = () => {
 
   // ✅ Skills data statici
   const skillsData = [
-    { id: "writing", name: "Scrittura", icon: "✍️" },
-    { id: "cooking", name: "Cucina", icon: "🍳" },
-    { id: "photography", name: "Fotografia", icon: "📸" },
-    { id: "history", name: "Storia", icon: "📚" },
-    { id: "music", name: "Musica", icon: "🎵" },
-    { id: "dance", name: "Danza", icon: "💃" },
-    { id: "painting", name: "Pittura", icon: "🎨" },
-    { id: "video", name: "Video", icon: "🎬" },
-    { id: "architecture", name: "Architettura", icon: "🏛️" },
-    { id: "graphics", name: "Grafica", icon: "🎭" },
-    { id: "theater", name: "Teatro", icon: "🎪" },
-    { id: "psychology", name: "Psicologia", icon: "🧠" },
-    { id: "programming", name: "coding", icon: "💻" },
-    { id: "fashion", name: "Fashion", icon: "👗" },
-    { id: "health", name: "Salute", icon: "💪" },
-    { id: "gardening", name: "Giardinaggio", icon: "🌱" },
-    { id: "languages", name: "Lingue", icon: "🗣️" },
-    { id: "videogames", name: "Videogiochi", icon: "🎮" },
-    { id: "podcast", name: "Podcast", icon: "🎙️" },
+    { id: "writing", name: "Scrittura", icon: BookOpen },
+    { id: "cooking", name: "Cucina", icon: ChefHat },
+    { id: "photography", name: "Fotografia", icon: Camera },
+    { id: "history", name: "Storia", icon: GraduationCap },
+    { id: "music", name: "Musica", icon: Music },
+    { id: "dance", name: "Danza", icon: Zap },
+    { id: "painting", name: "Pittura", icon: Palette },
+    { id: "video", name: "Video", icon: Video },
+    { id: "architecture", name: "Architettura", icon: Building },
+    { id: "graphics", name: "Grafica", icon: Monitor },
+    { id: "theater", name: "Teatro", icon: Drama },
+    { id: "psychology", name: "Psicologia", icon: Brain },
+    { id: "programming", name: "Programmazione", icon: Code },
+    { id: "fashion", name: "Fashion", icon: Shirt },
+    { id: "health", name: "Salute", icon: Heart },
+    { id: "gardening", name: "Giardinaggio", icon: Flower },
+    { id: "languages", name: "Lingue", icon: Languages },
+    { id: "videogames", name: "Videogiochi", icon: Gamepad2 },
+    { id: "podcast", name: "Podcast", icon: Mic },
   ];
 
   // Ottieni le wantedSkills con i dati completi
@@ -175,7 +205,7 @@ const SearchSection = () => {
                     onClick={() => handleSkillToggle(skill)}
                     className={styles.skillCard}
                   >
-                    <div className={styles.skillInfo}>
+                    {/* <div className={styles.skillInfo}>
                       <span className={styles.skillIcon}>{skill.icon}</span>
                       <div className={styles.skillName}>{skill.name}</div>
                     </div>
@@ -188,12 +218,46 @@ const SearchSection = () => {
                         }`}
                       />
                     </div>
+                    */}
+                    <div className={styles.skillInfo}>
+                      <span className={styles.skillIcon}>
+                        {skill.IconComponent ? (
+                          <skill.IconComponent size={24} />
+                        ) : skill.icon ? (
+                          typeof skill.icon === "string" ? (
+                            skill.icon
+                          ) : (
+                            <skill.icon size={24} />
+                          )
+                        ) : (
+                          "⚡" // fallback
+                        )}
+                      </span>
+                      <div className={styles.skillName}>
+                        {skill.detail || skill.name}
+                      </div>
+                    </div>
+
+                    <div className={styles.skillMeta}>
+                      {/* <span className={styles.skillGems}>
+                        <Gem size={20} />
+                        <span className={styles.gemsCount}>
+                          {skill.gems || 0}
+                        </span>
+                      </span> */}
+                      <ChevronDown
+                        size={16}
+                        className={`${styles.expandIcon} ${
+                          isSkillExpanded ? styles.expanded : ""
+                        }`}
+                      />
+                    </div>
                   </button>
 
                   {/* Expanded Content */}
                   {isSkillExpanded && (
                     <div className={styles.skillExpanded}>
-                      {/* Description Box */}
+                      {/* Description Box - conditional editing for owner only */}
                       {isEditing && isOwner ? (
                         <div className={styles.editDescriptionContainer}>
                           <textarea
@@ -203,7 +267,7 @@ const SearchSection = () => {
                             }
                             rows={4}
                             className={styles.editDescriptionTextarea}
-                            placeholder="Perché vuoi imparare questa skill?"
+                            placeholder="Descrivi come hai ottenuto questo skill"
                             autoFocus
                           />
                           <div className={styles.editActions}>
@@ -211,32 +275,38 @@ const SearchSection = () => {
                             {isOwner && (
                               <div className={styles.actions}>
                                 <div className={styles.actionButtons}>
-                                  <button
-                                    className={`${styles.actionButton} ${styles.actionButtonDelete}`}
+                                  <Button
+                                    className={styles.actionButtonDelete}
+                                    //  className={`${styles.actionButton} ${styles.actionButtonDelete}`}
                                     onClick={(e) => handleDeleteClick(skill, e)}
-                                    title="Rimuovi dalla ricerca"
+                                    title="Elimina esperienza"
+                                    // variant="gray"
                                   >
+                                    {" "}
                                     <Trash2 size={16} />
-                                    <span>Rimuovi</span>
-                                  </button>
+                                    <span>Elimina</span>
+                                  </Button>
+
+                                  <Button
+                                    onClick={handleEditCancel}
+                                    // className={styles.editCancelButton}
+                                  >
+                                    <X size={14} />
+                                    Annulla
+                                  </Button>
+                                  <Button
+                                    onClick={handleEditSave}
+                                    disabled={!editedDescription.trim()}
+                                    // className={styles.editSaveButton}
+                                    variant="primary"
+                                    mode="solid"
+                                  >
+                                    <Save size={14} />
+                                    Salva
+                                  </Button>
                                 </div>
                               </div>
                             )}
-                            <button
-                              onClick={handleEditCancel}
-                              className={styles.editCancelButton}
-                            >
-                              <X size={14} />
-                              Annulla
-                            </button>
-                            <button
-                              onClick={handleEditSave}
-                              disabled={!editedDescription.trim()}
-                              className={styles.editSaveButton}
-                            >
-                              <Save size={14} />
-                              Salva
-                            </button>
                           </div>
                         </div>
                       ) : (
@@ -254,12 +324,11 @@ const SearchSection = () => {
                             }`}
                             style={{ cursor: isOwner ? "pointer" : "default" }}
                           >
-                            {wantedSkill?.description ? (
-                              wantedSkill.description
+                            {skill.description ? (
+                              skill.description
                             ) : isOwner ? (
                               <span className={styles.descriptionPlaceholder}>
-                                Nessuna descrizione. Clicca per aggiungere
-                                perché vuoi imparare questa skill.
+                                Clicca per aggiungere una descrizione.
                               </span>
                             ) : (
                               <span className={styles.descriptionPlaceholder}>
@@ -269,6 +338,37 @@ const SearchSection = () => {
                           </p>
                         </div>
                       )}
+
+                      {/* Divider - same as ShareModal */}
+                      {/* <div className={styles.divider}></div> */}
+
+                      {/* Footer - same as ShareModal */}
+                      {/* <div className={styles.footer}>
+                                       <div className={styles.userInfo}>
+                                         <div className={styles.avatar}>
+                                           {currentProfile?.profilePhoto ? (
+                                             <img
+                                               src={
+                                                 currentProfile.profilePhoto instanceof File
+                                                   ? URL.createObjectURL(
+                                                       currentProfile.profilePhoto
+                                                     )
+                                                   : currentProfile.profilePhoto
+                                               }
+                                               alt={`${currentProfile?.firstName || "Sara"} ${
+                                                 currentProfile?.lastName || "Dormand"
+                                               }`}
+                                             />
+                                           ) : (
+                                             <User2 />
+                                           )}
+                                         </div>
+                                         <span className={styles.userName}>
+                                           {currentProfile?.firstName || "Sara"}{" "}
+                                           {currentProfile?.lastName || "Dormand"}
+                                         </span>
+                                       </div>
+                                     </div> */}
                     </div>
                   )}
                 </div>
