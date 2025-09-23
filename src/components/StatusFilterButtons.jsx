@@ -1,23 +1,5 @@
-import React from "react";
-import {
-  BookmarkCheckIcon,
-  Flag,
-  Flame,
-  Hourglass,
-  X,
-  Grid3X3,
-} from "lucide-react";
+import React, { useRef, useState, useEffect } from "react";
 import styles from "./StatusFilter.module.css";
-
-// Mapping degli icon
-const iconMap = {
-  BookmarkCheckIcon,
-  Flame,
-  Hourglass,
-  X,
-  Flag,
-  Grid3X3, // Per "Tutti"
-};
 
 /**
  * Componente per i bottoni di filtro per stato
@@ -38,53 +20,86 @@ const StatusFilterButtons = ({
   showAllFilter = true,
   totalCount = 0,
 }) => {
-  const renderIcon = (iconName) => {
-    if (!iconName) return null;
-    const IconComponent = iconMap[iconName];
-    return IconComponent ? <IconComponent size={16} /> : null;
+  const containerRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  // Gestione mouse events per desktop
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - containerRef.current.offsetLeft);
+    setScrollLeft(containerRef.current.scrollLeft);
+    containerRef.current.style.cursor = "grabbing";
   };
 
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+    containerRef.current.style.cursor = "grab";
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    containerRef.current.style.cursor = "grab";
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    containerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  // Previeni click sui bottoni durante drag
+  const handleButtonClick = (callback) => (e) => {
+    if (isDragging) {
+      e.preventDefault();
+      return;
+    }
+    callback();
+  };
   const getFilterButtonClass = (filterKey, config, count) => {
     let classes = [styles.filterButton];
 
-    // Stato attivo
-    if (activeFilter === filterKey) {
-      classes.push(styles.active);
-    }
+    // Dimensione (sempre md per i filtri)
+    classes.push(styles.md);
 
-    // Stati speciali basati su config
-    if (config.variant) {
-      classes.push(styles[config.variant]);
-    }
+    // Variant dal config o default neutral
+    const variant = config.variant || "neutral";
+    classes.push(styles[variant]);
 
-    // Disabilitato se count = 0 (eccetto "tutti")
-    if (count === 0 && filterKey !== "all") {
-      classes.push(styles.disabled);
-    }
+    // Mode sempre outline per i filtri non attivi, solid per quello attivo
+    const mode = activeFilter === filterKey ? "solid" : "outline";
+    classes.push(styles[mode]);
 
     return classes.join(" ");
   };
 
   return (
     <div className={styles.statusFilterContainer}>
-      <div className={`${styles.filterButtons} ${className}`}>
+      <div
+        ref={containerRef}
+        className={`${styles.filterButtons} ${className}`}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+      >
         {/* Filtro "Tutti" */}
-        {/* {showAllFilter && (
+        {showAllFilter && (
           <button
             className={getFilterButtonClass(
               "all",
-              { icon: "Grid3X3", label: "Tutti" },
+              { label: "Tutti", variant: "neutral" },
               totalCount
             )}
-            onClick={() => onFilterChange("all")}
+            onClick={handleButtonClick(() => onFilterChange("all"))}
+            disabled={totalCount === 0}
           >
-            <div className={styles.filterIconWrapper}>
-              {renderIcon("Grid3X3")}
-            </div>
-            <span className={styles.filterLabel}>Tutti</span>
-            <span className={styles.filterCount}>({totalCount})</span>
+            Tutti: {totalCount}
           </button>
-        )} */}
+        )}
 
         {/* Filtri configurati */}
         {Object.entries(filterConfig).map(([filterKey, config]) => {
@@ -94,14 +109,11 @@ const StatusFilterButtons = ({
             <button
               key={filterKey}
               className={getFilterButtonClass(filterKey, config, count)}
-              onClick={() => onFilterChange(filterKey)}
+              onClick={handleButtonClick(() => onFilterChange(filterKey))}
               disabled={count === 0}
+              data-disabled-message={count === 0 ? "Nessun elemento" : ""}
             >
-              <div className={styles.filterIconWrapper}>
-                {renderIcon(config.icon)}
-              </div>
-              <span className={styles.filterLabel}>{config.label}</span>
-              <span className={styles.filterCount}>({count})</span>
+              {config.label}: {count}
             </button>
           );
         })}

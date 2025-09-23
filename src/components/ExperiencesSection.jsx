@@ -223,7 +223,11 @@ const ExperiencesSection = () => {
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
-          <div>
+          <div
+            className={`${styles.filtersContainer} ${
+              showFilters ? styles.expanded : ""
+            }`}
+          >
             <div className={styles.filtersContainer}>
               <button
                 className={styles.toggleFiltersBtn}
@@ -248,12 +252,16 @@ const ExperiencesSection = () => {
           {isOwner && (
             <>
               {skills && experiences.length > 0 && (
-                <>
+                <div
+                  className={`${styles.addButtonContainer} ${
+                    showFilters ? styles.hidden : ""
+                  }`}
+                >
                   <HeaderAddButton
                     onClick={handleAddExperience}
                     title="Crea nuova esperienza"
                   />
-                </>
+                </div>
               )}
             </>
           )}
