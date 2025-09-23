@@ -25,6 +25,7 @@ import {
   User2,
 } from "lucide-react";
 import styles from "./TestCard.module.css";
+import { Button } from "@/components/ui/Button";
 
 function TestCard({
   title = "Cinema / Base",
@@ -362,7 +363,7 @@ function TestCard({
   console.log(icon);
 
   return (
-    <div className={styles.testCard}>
+    <div className={`${styles.testCard} ${isExpanded ? styles.expanded : ""}`}>
       <div className={styles.nav} onClick={toggleExpanded}>
         {icon && (
           <span className={styles.experienceIcon}>
@@ -374,28 +375,26 @@ function TestCard({
         <h4 className={styles.navTitle}>{title}</h4>
         <div className={styles.navRight}>
           <div className={styles.actionSpacer}></div>
-          <button
-            className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
-            onClick={handleShareClick}
-            title="Condividi"
-          >
-            <Share size={16} />
-          </button>
+          <div className={styles.hoverButtons}>
+            <button
+              className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
+              onClick={handleShareClick}
+              title="Condividi"
+            >
+              <Share size={16} />
+            </button>
 
-          <button
-            className={`${styles.actionButton} ${
-              styles.actionButtonSecondary
-            } ${isBookmarked ? styles.bookmarked : ""}`}
-            onClick={handleBookmarkClick}
-            title={isBookmarked ? "Rimuovi dai salvati" : "Salva"}
-          >
-            <Bookmark
-              size={16}
-              className={
-                isBookmarked ? styles.bookmarkFilled : styles.bookmarkEmpty
-              }
-            />
-          </button>
+            <button
+              className={`${styles.actionButton} ${
+                styles.actionButtonSecondary
+              } ${isBookmarked ? styles.bookmarked : ""}`}
+              onClick={handleBookmarkClick}
+              title={isBookmarked ? "Rimuovi dai salvati" : "Salva"}
+            >
+              <Bookmark size={16} />
+            </button>
+          </div>
+          {!isExpanded && <div className={styles.userGem}>{costo} XP</div>}
         </div>
       </div>
 
@@ -425,38 +424,36 @@ function TestCard({
           </div>
 
           <div className={styles.descAvat}>
-            <div
-              className={`${styles.cardDescrizioneTextBox} ${
-                !isdescrizioneExpanded ? styles.cardDescrizioneCollapsed : ""
-              }`}
-            >
-              {descrizione}
-            </div>
-            {/* <ul className={styles.avatarList}>{generateAvatars()}</ul> */}
-            {/* SOSTITUITO: <ul className={styles.avatarList}>{generateAvatars()}</ul> */}
+            <div className={styles.descriptionBox}>{descrizione}</div>
+
             <div className={styles.requestSection}>
               {!isRequestSent && !isOwner ? (
                 // Stato 1: Bottone richiesta iniziale
-                <button
-                  className={styles.requestButton}
+                <Button
+                  // className={styles.requestButton}
                   onClick={handleRequestClick}
                 >
                   <Send size={16} />
-                </button>
+                </Button>
               ) : (
-                // Stato 3: Richiesta inviata, in attesa owner
-                <div className={styles.ownerPhotoContainer}>
-                  {/* {ownerPhoto ? (
-                    <img
-                      src={ownerPhoto}
-                      alt={`Foto profilo ${istruttore}`}
-                      className={styles.ownerPhotoSmall}
-                    />
-                  ) : ( */}
-                  <div className={styles.ownerPlaceholder}>
-                    <User size={20} />
-                  </div>
-                  {/* )} */}
+                <div className={styles.actionButtons}>
+                  {isOwner && (
+                    <>
+                      <Button
+                        title="Elimina esperienza"
+                        variant="gray"
+                        onClick={handleDeleteClick}
+                      >
+                        Elimina
+                      </Button>
+                      <Button
+                        title="Modifica esperienza"
+                        onClick={handleEditClick}
+                      >
+                        Modifica
+                      </Button>
+                    </>
+                  )}
                 </div>
               )}
             </div>
@@ -793,17 +790,15 @@ function TestCard({
               )}
             </div>
           )}
-          {descrizione.length > 150 && (
+          {/* {descrizione.length > 150 && (
             <button
               className={styles.cardDescrizioneExpandButton}
               onClick={() => setIsdescrizioneExpanded(!isdescrizioneExpanded)}
             >
               {isdescrizioneExpanded ? "Mostra meno" : "Mostra tutto..."}
             </button>
-          )}
+          )} */}
           <div className={styles.divider}></div>
-
-          {/* ✅ FOOTER USER AGGIORNATO */}
           <div className={styles.footerUser}>
             <ul className={styles.userInfo}>
               <li>
@@ -814,7 +809,7 @@ function TestCard({
                     className={styles.ownerPhoto}
                   />
                 ) : (
-                  <User2 />
+                  <User />
                 )}
               </li>
               <p>{istruttore}</p>
@@ -826,7 +821,7 @@ function TestCard({
           </div>
 
           {/* Action Buttons */}
-          <div className={styles.actionButtons}>
+          {/* <div className={styles.actionButtons}>
             {isOwner ? (
               // OWNER MODE: [Modifica] [Delete] - Solo se corso non è attivo
               courseStatus === "idle" ? (
@@ -863,13 +858,6 @@ function TestCard({
                 >
                   <Share size={16} />
                 </button>
-                {/* <button
-                  className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
-                  onClick={handleLikeClick}
-                  title="Mi piace"
-                >
-                  <Heart size={16} />
-                </button> */}
                 <button
                   className={`${styles.actionButton} ${
                     styles.actionButtonSecondary
@@ -888,7 +876,7 @@ function TestCard({
                 </button>
               </>
             )}
-          </div>
+          </div> */}
         </div>
       )}
     </div>

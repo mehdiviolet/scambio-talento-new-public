@@ -223,10 +223,28 @@ const ExperiencesSection = () => {
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
-          {/* <h3 className={styles.title}>
-          Esperienze Offerte ({experiences.length})
-          </h3> */}
-
+          <div>
+            <div className={styles.filtersContainer}>
+              <button
+                className={styles.toggleFiltersBtn}
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                Filtri {showFilters ? "↑" : "↓"}
+              </button>
+              <div
+                className={`${styles.filterContent} ${
+                  showFilters ? styles.open : ""
+                }`}
+              >
+                <StatusFilterButtons
+                  activeFilter={statusFilter}
+                  onFilterChange={setStatusFilter}
+                  filterCounts={filterCounts}
+                  filterConfig={filterConfig}
+                />
+              </div>
+            </div>
+          </div>
           {isOwner && (
             <>
               {skills && experiences.length > 0 && (
@@ -240,33 +258,10 @@ const ExperiencesSection = () => {
             </>
           )}
         </div>
-        <div>
-          <div className={styles.filtersContainer}>
-            <div
-              className={`${styles.filterContent} ${
-                showFilters ? styles.open : ""
-              }`}
-            >
-              <StatusFilterButtons
-                activeFilter={statusFilter}
-                onFilterChange={setStatusFilter}
-                filterCounts={filterCounts}
-                filterConfig={filterConfig}
-              />
-            </div>
-          </div>
-        </div>
-
         {/* Content */}
         <div className={styles.content}>
           {experiences.length > 0 ? (
             <div className={styles.experiencesGrid}>
-              <button
-                className={styles.toggleFiltersBtn}
-                onClick={() => setShowFilters(!showFilters)}
-              >
-                Filtri {showFilters ? "↑" : "↓"}
-              </button>
               {experiences.map((experience) => {
                 // ✅ Trova la skill associata per ottenere i gem corretti
                 const associatedSkill = findSkillForExperience(experience);
@@ -311,18 +306,6 @@ const ExperiencesSection = () => {
               {isOwner ? (
                 // Owner Mode - Empty State
                 skills && skills.length > 0 ? (
-                  // (
-                  //   <>
-                  //     <div className={styles.emptyIcon}>🎓</div>
-                  //     <h4 className={styles.emptyTitle}>
-                  //       Nessuna esperienza creata
-                  //     </h4>
-                  //     <p className={styles.emptyDescription}>
-                  //       Clicca + per creare la tua prima esperienza
-                  //     </p>
-                  //   </>
-                  // )
-                  // <AddExperienceButton onClick={handleAddExperience} />
                   <HeaderAddButton
                     onClick={handleAddExperience}
                     title="Crea nuova esperienza"
@@ -330,37 +313,14 @@ const ExperiencesSection = () => {
                   />
                 ) : (
                   <>
-                    {/* <div className={styles.emptyIcon}>🎯</div>
-                  <h4 className={styles.emptyTitle}>
-                  Aggiungi prima una skill
-                  </h4>
-                  <p className={styles.emptyDescription}>
-                  Le esperienze si basano sulle tue competenze
-                  </p> */}
                     <AddSkillFirstButton />
                   </>
                 )
               ) : (
-                // Viewer Mode - Empty State
-                <>
-                  {/* <div className={styles.emptyIcon}>👀</div>
-                <h4 className={styles.emptyTitle}>
-                Nessuna esperienza disponibile
-                </h4>
-                <p className={styles.emptyDescription}>
-                Questo utente non ha ancora pubblicato esperienze
-                </p> */}
-                  <p>Nessuna esperienza</p>
-                </>
+                <p>Nessuna esperienza</p>
               )}
             </div>
           )}
-          {/* <h3 className={styles.title}>
-          <span className={styles.experiencesIcon}>🌊</span>
-          Esperienze fatte (0) | Esperienze in corso (4)
-          </h3>
-          <p>QUI...</p>
-          <CompletionCardsTest data={userCompletionCards} /> */}
         </div>
       </div>
     </>

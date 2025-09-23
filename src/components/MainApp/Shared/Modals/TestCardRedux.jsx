@@ -1544,7 +1544,8 @@ function TestCardRedux({
                     className={styles.instructorPhoto}
                   />
                 ) : (
-                  <div className={styles.userAvatar}>👨‍🎤</div>
+                  // <div className={styles.userAvatar}>👨‍🎤</div>
+                  <User />
                 )}
               </li>
               <p>{istruttore}</p>
