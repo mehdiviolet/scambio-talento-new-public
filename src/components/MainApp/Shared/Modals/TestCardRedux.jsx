@@ -960,29 +960,14 @@ function TestCardRedux({
             <div className={styles.descriptionBox}>{descrizione}</div>
             <div className={styles.requestSection}>
               {!courseState.isRequestSent && !isInstructor ? (
-                // <button
-                //   className={styles.requestButton}
-                //   onClick={handleRequestClick}
-                //   disabled={!canAffordFullCourse()} // ← AGGIUNGI QUESTO
-                // >
-                //   <Send size={16} />
-                // </button>
-                <Button
-                  // className={styles.requestButton}
+                <button
+                  className={styles.requestButton}
                   onClick={handleRequestClick}
-                  disabled={!canAffordFullCourse()}
-                  disabledMessage="XP insufficienti!" // ✅ MESSAGGIO PERSONALIZZATO
+                  disabled={!canAffordFullCourse()} // ← AGGIUNGI QUESTO
                 >
                   <Send size={16} />
-                </Button>
+                </button>
               ) : (
-                // <Button
-                //   className={styles.requestButton}
-                //   onClick={handleRequestClick}
-                //   disabled={!canAffordFullCourse()}
-                // >
-                //   <Send size={16} />
-                // </Button>
                 <div className={styles.actionButtons}>
                   {isInstructor &&
                     (courseState.status === "idle" ? (
