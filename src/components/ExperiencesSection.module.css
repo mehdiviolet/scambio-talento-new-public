@@ -27,10 +27,12 @@
 /* Header */
 .header {
   display: flex;
-  align-items: flex-start;
+  /* align-items: flex-start; */
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
   /* rimuovi grid-template-columns */
+  margin-bottom: 10px;
 }
 
 .title {
@@ -400,7 +402,7 @@
 } */
 
 .filtersContainer {
-  flex: 1 1 25%; /* 1/4 della larghezza normalmente */
+  flex: 1 1 20%; /* 1/4 della larghezza normalmente */
   /* margin: 1rem 0; */
   overflow: hidden;
   transition: flex 0.3s ease; /* animazione smooth */
@@ -444,7 +446,7 @@
 }
 
 .addButtonContainer {
-  flex: 1 1 75%; /* occupa il resto normalmente */
+  flex: 1 1 80%; /* occupa il resto normalmente */
   display: flex;
   justify-content: flex-end;
   /* opacity: 1; */
