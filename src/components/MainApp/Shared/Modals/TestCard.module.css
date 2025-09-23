@@ -61,15 +61,46 @@
   display: flex;
   gap: var(--space-sm);
   align-items: center;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
   transition: all 0.2s ease;
-  pointer-events: none;
+  pointer-events: auto;
   position: absolute;
   right: 10px;
+  /* ✅ AGGIUNGI: Altezza fissa per evitare layout shift */
+  height: 40px;
 }
 
-.nav:hover .navRight {
+/* ✅ NUOVO: Container per i bottoni hover */
+.navRight .hoverButtons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+/* ✅ STATO NORMALE: Mostra Gem */
+.navRight .userGem {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+/* ✅ STATO HOVER: Nasconde Gem, mostra bottoni */
+.nav:hover .navRight .userGem {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.nav:hover .navRight .hoverButtons {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -191,6 +222,7 @@
   /* margin-bottom: var(--space-md); */
   margin: var(--space-md) 0;
   justify-content: space-between;
+  flex-direction: column;
 }
 
 .descriptionBox {

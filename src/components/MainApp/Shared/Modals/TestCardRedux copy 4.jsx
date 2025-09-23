@@ -131,15 +131,6 @@ function TestCardRedux({
   // ✅ AGGIUNGI questi selectors Redux:
   const currentUserData = useSelector(selectCurrentUser);
   const currentUserProfile = useSelector(selectCurrentUserProfile);
-  // console.log(currentUserData, currentUserProfile, selectCurrentUserXP);
-  console.log(
-    "XP Current User:",
-    useSelector((state) => state.xp.currentUserId)
-  );
-  console.log(
-    "Users Current User:",
-    useSelector((state) => state.users.currentUserId)
-  );
 
   const skillGemTotals = useSelector(
     (state) => state.experienceSliceTest.skillGemBonus
@@ -166,13 +157,7 @@ function TestCardRedux({
     // این ربطی به تفکیک نوتیف ها نداره
   );
   // const userXP = useSelector((state) => state.experienceSliceTest.userXP);
-  // const currentXP = useSelector(selectCurrentUserXP);
-  const currentUserId = useSelector((state) => state.users.currentUserId); // "currentUser"
-  const currentXP = useSelector(
-    (state) => state.xp.users[currentUserId]?.xp || 0
-  );
-
-  console.log(currentXP);
+  const currentXP = useSelector(selectCurrentUserXP);
 
   // const userXP = useSelector((state) => state.quickSetup.xp);
   // 🎯 NUOVO: Controllo GEM già date a questo instructor
@@ -321,8 +306,6 @@ function TestCardRedux({
   // 🎯 REDUX ACTIONS - sostituiscono le funzioni locali
 
   const canAffordFullCourse = () => {
-    console.log(`XP: ${currentXP}, Costo: ${costo}, Può permetterselo: `);
-
     return currentXP >= costo; // Controllo XP totale del corso
   };
   const handleRequestClick = () => {
@@ -960,50 +943,37 @@ function TestCardRedux({
             <div className={styles.descriptionBox}>{descrizione}</div>
             <div className={styles.requestSection}>
               {!courseState.isRequestSent && !isInstructor ? (
-                // <button
-                //   className={styles.requestButton}
-                //   onClick={handleRequestClick}
-                //   disabled={!canAffordFullCourse()} // ← AGGIUNGI QUESTO
-                // >
-                //   <Send size={16} />
-                // </button>
-                <Button
-                  // className={styles.requestButton}
+                <button
+                  className={styles.requestButton}
                   onClick={handleRequestClick}
-                  disabled={!canAffordFullCourse()}
-                  disabledMessage="XP insufficienti!" // ✅ MESSAGGIO PERSONALIZZATO
+                  disabled={!canAffordFullCourse()} // ← AGGIUNGI QUESTO
                 >
                   <Send size={16} />
-                </Button>
+                </button>
               ) : (
-                // <Button
-                //   className={styles.requestButton}
-                //   onClick={handleRequestClick}
-                //   disabled={!canAffordFullCourse()}
-                // >
-                //   <Send size={16} />
-                // </Button>
-                <div className={styles.actionButtons}>
-                  {isInstructor &&
-                    (courseState.status === "idle" ? (
-                      <>
-                        <Button
-                          title="Elimina esperienza"
-                          variant="gray"
-                          onClick={handleDeleteClick}
-                        >
-                          Elimina
-                        </Button>
-                        <Button
-                          title="Modifica esperienza"
-                          onClick={handleEditClick}
-                        >
-                          Modifica
-                        </Button>
-                      </>
+                <div className={styles.ownerPhotoContainer}>
+                  {courseState.status === "active" ||
+                  courseState.status === "rejected" ||
+                  courseState.status === "pending_feedback" ||
+                  courseState.status === "completed" ? (
+                    profileData.profilePhoto ? (
+                      <img
+                        src={profileData.profilePhoto}
+                        alt={`Foto profilo ${profileData.firstName}`}
+                        className={styles.ownerPhotoSmall}
+                      />
                     ) : (
-                      <div className={styles.actionSpacer}></div>
-                    ))}
+                      <div className={styles.ownerPlaceholder}>
+                        {profileData.firstName?.charAt(0).toUpperCase() || (
+                          <User size={20} />
+                        )}
+                      </div>
+                    )
+                  ) : (
+                    <div className={styles.ownerPlaceholder}>
+                      <User size={20} />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -1556,7 +1526,7 @@ function TestCardRedux({
             </div>
           </div> */}
           {/* ACTION BUTTONS (invariati) */}
-          {/* <div className={styles.actionButtons}>
+          <div className={styles.actionButtons}>
             {isInstructor &&
               (courseState.status === "idle" ? (
                 <>
@@ -1574,7 +1544,7 @@ function TestCardRedux({
               ) : (
                 <div className={styles.actionSpacer}></div>
               ))}
-          </div> */}
+          </div>
         </div>
       )}
     </div>

@@ -364,26 +364,29 @@ function TestCard({
       <div className={styles.nav} onClick={toggleExpanded}>
         <h4 className={styles.navTitle}>{title}</h4>
         <div className={styles.navRight}>
-          <ul className={styles.navUl}>
-            <li>
-              {modalita === "online" ? (
-                <>
-                  <GlobeIcon size={20} />
-                  {/* <p>Online</p> */}
-                </>
-              ) : (
-                <>
-                  <Home size={20} />
-                  {/* <p>presenza</p> */}
-                </>
-              )}
-            </li>
+          <div className={styles.actionSpacer}></div>
+          <button
+            className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
+            onClick={handleShareClick}
+            title="Condividi"
+          >
+            <Share size={16} />
+          </button>
 
-            <li>{lingua}</li>
-            {/* <li>
-              <Clock size={20} />
-            </li> */}
-          </ul>
+          <button
+            className={`${styles.actionButton} ${
+              styles.actionButtonSecondary
+            } ${isBookmarked ? styles.bookmarked : ""}`}
+            onClick={handleBookmarkClick}
+            title={isBookmarked ? "Rimuovi dai salvati" : "Salva"}
+          >
+            <Bookmark
+              size={16}
+              className={
+                isBookmarked ? styles.bookmarkFilled : styles.bookmarkEmpty
+              }
+            />
+          </button>
         </div>
       </div>
 
@@ -395,12 +398,20 @@ function TestCard({
               <span className={styles.infoValue}>{lezioni}</span>
             </div>
             <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Durata lezione:</span>
+              <span className={styles.infoLabel}>Durata:</span>
               <span className={styles.infoValue}>{durataLezione}</span>
             </div>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>Costo:</span>
               <span className={styles.infoValue}>{costo} XP</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>Lingua:</span>
+              <span className={styles.infoValue}>{lingua}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>Modalità:</span>
+              <span className={styles.infoValue}>{modalita}</span>
             </div>
           </div>
 
@@ -787,7 +798,6 @@ function TestCard({
           <div className={styles.footerUser}>
             <ul className={styles.userInfo}>
               <li>
-                {/* ✅ FOTO PROFILO OWNER invece di avatar generico */}
                 {ownerPhoto ? (
                   <img
                     src={ownerPhoto}
@@ -795,20 +805,14 @@ function TestCard({
                     className={styles.ownerPhoto}
                   />
                 ) : (
-                  // Fallback se non c'è foto
-                  // <div className={styles.userAvatar}>👨‍🎤</div>
                   <User2 />
                 )}
               </li>
               <p>{istruttore}</p>
             </ul>
             <div className={styles.userGem}>
-              {/* <Gem size={16} /> */}
               <Gem size={20} />
-              {/* ✅ GEM DALLA SKILL invece che dall'esperienza */}
-              {/* <span>{getDisplayGems()}</span> */}
               <span>{skillGems}</span>
-              {/* <div className={styles.iconclass}>{icon}</div> */}
             </div>
           </div>
 

@@ -131,15 +131,6 @@ function TestCardRedux({
   // ✅ AGGIUNGI questi selectors Redux:
   const currentUserData = useSelector(selectCurrentUser);
   const currentUserProfile = useSelector(selectCurrentUserProfile);
-  // console.log(currentUserData, currentUserProfile, selectCurrentUserXP);
-  console.log(
-    "XP Current User:",
-    useSelector((state) => state.xp.currentUserId)
-  );
-  console.log(
-    "Users Current User:",
-    useSelector((state) => state.users.currentUserId)
-  );
 
   const skillGemTotals = useSelector(
     (state) => state.experienceSliceTest.skillGemBonus
@@ -166,13 +157,7 @@ function TestCardRedux({
     // این ربطی به تفکیک نوتیف ها نداره
   );
   // const userXP = useSelector((state) => state.experienceSliceTest.userXP);
-  // const currentXP = useSelector(selectCurrentUserXP);
-  const currentUserId = useSelector((state) => state.users.currentUserId); // "currentUser"
-  const currentXP = useSelector(
-    (state) => state.xp.users[currentUserId]?.xp || 0
-  );
-
-  console.log(currentXP);
+  const currentXP = useSelector(selectCurrentUserXP);
 
   // const userXP = useSelector((state) => state.quickSetup.xp);
   // 🎯 NUOVO: Controllo GEM già date a questo instructor
@@ -321,8 +306,6 @@ function TestCardRedux({
   // 🎯 REDUX ACTIONS - sostituiscono le funzioni locali
 
   const canAffordFullCourse = () => {
-    console.log(`XP: ${currentXP}, Costo: ${costo}, Può permetterselo: `);
-
     return currentXP >= costo; // Controllo XP totale del corso
   };
   const handleRequestClick = () => {
@@ -335,6 +318,73 @@ function TestCardRedux({
     }, 0);
   };
 
+  // const handleSendRequest = () => {
+  //   console.log("SEND REqUest", currentUser);
+
+  //   if (requestMessage.trim()) {
+  //     // 🎯 1. Invia richiesta (tuo slice esistente)
+  //     dispatch(
+  //       sendRequest({
+  //         experienceId,
+  //         message: requestMessage,
+  //       })
+  //     );
+
+  //     // 🎯 2. Toast immediato per feedback locale
+  //     showSuccessToast("Richiesta inviata con successo!", 3000, "student");
+
+  //     dispatch(
+  //       bookmarkCourse({
+  //         experienceId,
+  //         userId: currentUser.id,
+  //         experienceData: experienceData,
+  //         istruttore: istruttore,
+  //         instructorPhoto: instructorPhoto,
+  //         skillGems: skillGems,
+  //         selectedPersonData: selectedPersonData, // 🆕 PASSA TUTTI I DATI PERSONA
+  //       })
+  //     );
+
+  //     showSuccessToast(
+  //       "Richiesta inviata e corso salvato nei bookmark! 📩💾",
+  //       4000,
+  //       "student"
+  //     );
+
+  //     // 🎯 3. Crea conversazione in chat automaticamente
+  //     dispatch(
+  //       createConversationFromRequest({
+  //         experienceId,
+  //         experienceTitle: title,
+  //         studentName: currentUser.name,
+  //         studentAvatar: currentUser.avatar,
+  //         message: requestMessage,
+  //       })
+  //     );
+
+  //     // 🎯 4. Crea notifica asincrona per instructor usando il NUOVO sistema
+  //     dispatch(
+  //       addAsyncNotification({
+  //         title: "Nuova richiesta ricevuta! 📩",
+  //         message: `${currentUser.name} vuole partecipare a "${title}"`,
+  //         type: "info",
+  //         category: "course",
+  //         targetRole: "instructor", // 👈 SOLO instructor VEDRÀ QUESTA
+  //         fromRole: "student",
+  //         experienceId: experienceId,
+  //         conversationId: `exp-${experienceId}`, // 🆕 AGGIUNGI QUESTO
+  //         actionData: { experienceId, action: "review_request" },
+  //         requiresAction: true,
+  //       })
+  //     );
+
+  //     // 🎯 5. Cleanup UI
+  //     setIsRequestOpen(false);
+  //     setRequestMessage("");
+
+  //     console.log("Richiesta inviata via Redux:", requestMessage);
+  //   }
+  // };
   const handleSendRequest = () => {
     console.log("SEND Request", currentUser);
 
@@ -409,6 +459,21 @@ function TestCardRedux({
           .toLowerCase()
           .replace(/\s+/g, "_")
           .replace(/[^a-z0-9_]/g, "");
+
+      // dispatch(
+      //   addAsyncNotification({
+      //     title: "Nuova richiesta ricevuta! 📩",
+      //     message: `${currentUser.name} vuole partecipare a "${title}"`,
+      //     type: "info",
+      //     category: "course",
+      //     targetRole: "instructor",
+      //     fromRole: "student",
+      //     experienceId: experienceId,
+      //     conversationId: conversationId, // ✅ ID CORRETTO
+      //     actionData: { experienceId, action: "review_request" },
+      //     requiresAction: true,
+      //   })
+      // );
 
       // 🎯 5. Cleanup UI
       setIsRequestOpen(false);
@@ -900,34 +965,36 @@ function TestCardRedux({
       <div className={styles.nav} onClick={toggleExpanded}>
         <h4 className={styles.navTitle}>{title}</h4>
         <div className={styles.navRight}>
+          {/* <ul className={styles.navUl}>
+            <li>
+              {modalita === "online" ? <GlobeIcon size={20} /> : <Home />}
+            </li>
+            <li>{lingua}</li>
+          </ul> */}
+
           <div className={styles.actionSpacer}></div>
+          <button
+            className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
+            onClick={handleShareClick}
+            title="Condividi"
+          >
+            <Share size={16} />
+          </button>
 
-          {/* ✅ NUOVO: Wrapper per bottoni hover */}
-          <div className={styles.hoverButtons}>
-            <button
-              className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
-              onClick={handleShareClick}
-              title="Condividi"
-            >
-              <Share size={16} />
-            </button>
-
-            <button
-              className={`${styles.actionButton} ${
-                styles.actionButtonSecondary
-              } ${isBookmarked ? styles.bookmarked : ""}`}
-              onClick={handleBookmarkClick}
-              title={isBookmarked ? "Rimuovi dai salvati" : "Salva"}
-            >
-              <Bookmark size={16} />
-            </button>
-          </div>
-
-          {/* ✅ Gem rimane fuori dal wrapper */}
-          <div className={styles.userGem}>
-            <Gem size={18} />
-            <span>{skillGems}</span>
-          </div>
+          <button
+            className={`${styles.actionButton} ${
+              styles.actionButtonSecondary
+            } ${isBookmarked ? styles.bookmarked : ""}`}
+            onClick={handleBookmarkClick}
+            title={isBookmarked ? "Rimuovi dai salvati" : "Salva"}
+          >
+            <Bookmark
+              size={16}
+              className={
+                isBookmarked ? styles.bookmarkFilled : styles.bookmarkEmpty
+              }
+            />
+          </button>
         </div>
       </div>
 
@@ -960,50 +1027,37 @@ function TestCardRedux({
             <div className={styles.descriptionBox}>{descrizione}</div>
             <div className={styles.requestSection}>
               {!courseState.isRequestSent && !isInstructor ? (
-                // <button
-                //   className={styles.requestButton}
-                //   onClick={handleRequestClick}
-                //   disabled={!canAffordFullCourse()} // ← AGGIUNGI QUESTO
-                // >
-                //   <Send size={16} />
-                // </button>
-                <Button
-                  // className={styles.requestButton}
+                <button
+                  className={styles.requestButton}
                   onClick={handleRequestClick}
-                  disabled={!canAffordFullCourse()}
-                  disabledMessage="XP insufficienti!" // ✅ MESSAGGIO PERSONALIZZATO
+                  disabled={!canAffordFullCourse()} // ← AGGIUNGI QUESTO
                 >
                   <Send size={16} />
-                </Button>
+                </button>
               ) : (
-                // <Button
-                //   className={styles.requestButton}
-                //   onClick={handleRequestClick}
-                //   disabled={!canAffordFullCourse()}
-                // >
-                //   <Send size={16} />
-                // </Button>
-                <div className={styles.actionButtons}>
-                  {isInstructor &&
-                    (courseState.status === "idle" ? (
-                      <>
-                        <Button
-                          title="Elimina esperienza"
-                          variant="gray"
-                          onClick={handleDeleteClick}
-                        >
-                          Elimina
-                        </Button>
-                        <Button
-                          title="Modifica esperienza"
-                          onClick={handleEditClick}
-                        >
-                          Modifica
-                        </Button>
-                      </>
+                <div className={styles.ownerPhotoContainer}>
+                  {courseState.status === "active" ||
+                  courseState.status === "rejected" ||
+                  courseState.status === "pending_feedback" ||
+                  courseState.status === "completed" ? (
+                    profileData.profilePhoto ? (
+                      <img
+                        src={profileData.profilePhoto}
+                        alt={`Foto profilo ${profileData.firstName}`}
+                        className={styles.ownerPhotoSmall}
+                      />
                     ) : (
-                      <div className={styles.actionSpacer}></div>
-                    ))}
+                      <div className={styles.ownerPlaceholder}>
+                        {profileData.firstName?.charAt(0).toUpperCase() || (
+                          <User size={20} />
+                        )}
+                      </div>
+                    )
+                  ) : (
+                    <div className={styles.ownerPlaceholder}>
+                      <User size={20} />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -1039,6 +1093,14 @@ function TestCardRedux({
                   >
                     <Send size={14} /> Invia
                   </Button>
+
+                  {/* <button
+                    onClick={handleSendRequest}
+                    className={styles.requestSend}
+                    disabled={!requestMessage.trim()}
+                  >
+                    <Send size={14} /> Invia
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -1088,6 +1150,52 @@ function TestCardRedux({
                   </div>
                 )}
 
+                {/* STATO: active - Messaggi */}
+                {/* {courseState.status === "active" && (
+                  <>
+                    {courseState.showFinishWaiting ? (
+                      <div className={styles.finishWaiting}>
+                        <p>
+                          {courseState.finishClicks.includes(
+                            isInstructor ? "instructor" : "student"
+                          )
+                            ? "⏳ In attesa che l'altro utente clicchi Conclude..."
+                            : "⏳ L'altro utente ha cliccato Conclude. Clicca anche tu!"}
+                        </p>
+                        <div className={styles.finishStatus}>
+                          <span
+                            className={
+                              courseState.finishClicks.includes("instructor")
+                                ? styles.clicked
+                                : styles.pending
+                            }
+                          >
+                            instructor:{" "}
+                            {courseState.finishClicks.includes("instructor")
+                              ? "✅"
+                              : "⏳"}
+                          </span>
+                          <span
+                            className={
+                              courseState.finishClicks.includes("student")
+                                ? styles.clicked
+                                : styles.pending
+                            }
+                          >
+                            student:{" "}
+                            {courseState.finishClicks.includes("student")
+                              ? "✅"
+                              : "⏳"}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={styles.activeMessage}>
+                        <span>🎓 Corso in sessione!</span>
+                      </div>
+                    )}
+                  </>
+                )} */}
                 {courseState.status === "active" && (
                   <>
                     {courseState.showFinishWaiting ? (
@@ -1105,7 +1213,7 @@ function TestCardRedux({
                       </div>
                     ) : (
                       <div className={styles.studentWaiting}>
-                        <span>Corso in sessione!</span>
+                        <span>🎓 Corso in sessione!</span>
                       </div>
                     )}
                   </>
@@ -1143,6 +1251,35 @@ function TestCardRedux({
                   </div>
                 )}
 
+                {/* STATO: rejected - Commenti */}
+                {/* {courseState.status === "rejected" &&
+                  courseState.rejectComments?.length > 0 && (
+                    <div className={styles.rejectCommentsSection}>
+                      <h5>💬 Commenti sul rifiuto:</h5>
+                      {courseState.rejectComments.map((comment, index) => (
+                        <div key={index} className={styles.rejectCommentItem}>
+                          <div className={styles.commentHeader}>
+                            <strong>
+                              {comment.author === "instructor"
+                                ? "Istruttore"
+                                : "Studente"}
+                            </strong>
+                            <span className={styles.commentTime}>
+                              {new Date(comment.timestamp).toLocaleTimeString()}
+                            </span>
+                            {comment.isResponse && (
+                              <span className={styles.responseTag}>
+                                Risposta
+                              </span>
+                            )}
+                          </div>
+                          <p className={styles.commentText}>
+                            {comment.comment}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )} */}
                 {courseState.status === "rejected" &&
                   courseState.rejectComments?.length > 0 && (
                     <div className={styles.rejectCommentsSection}>
@@ -1222,6 +1359,13 @@ function TestCardRedux({
                       Accetto
                     </Button>
 
+                    {/* <button
+                      className={`${styles.actionButton} ${styles.rejectRequestButton}`}
+                      onClick={handleInstructorRejectRequest}
+                    >
+                      ❌ Rifiuto
+                      </button> */}
+
                     <Button
                       variant="gray"
                       onClick={handleInstructorRejectRequest}
@@ -1233,6 +1377,12 @@ function TestCardRedux({
 
                 {/* STATO: ready - Pulsanti */}
                 {courseState.status === "ready" && isInstructor && (
+                  // <button
+                  //   className={styles.startCourseButton}
+                  //   onClick={handleStartCourse}
+                  // >
+                  //   🚀 Avvio Corso!
+                  // </button>
                   <Button
                     variant="primary"
                     mode="solid"
@@ -1246,6 +1396,15 @@ function TestCardRedux({
 
                 {/* STATO: waiting - Pulsanti */}
                 {courseState.status === "waiting" && !isInstructor && (
+                  // <button
+                  //   className={styles.acceptCourseButton}
+                  //   onClick={handleStudentAccepts}
+                  //   disabled={!canAffordCourse()}
+                  // >
+                  //   ✅ Accetta Corso - {getXPCosts().firstPayment} XP ora +{" "}
+                  //   {getXPCosts().secondPayment} XP dopo
+                  // </button>
+
                   <div className={styles.buttonContainer}>
                     <Button
                       className={styles.flex25}
@@ -1270,6 +1429,21 @@ function TestCardRedux({
                 {/* STATO: active - Pulsanti */}
                 {courseState.status === "active" && (
                   <div className={styles.buttonContainer}>
+                    {/* <button
+                      className={styles.rejectCourseButton}
+                      onClick={handleRejectCourse}
+                      >
+                      ❌ Rifiuta
+                    </button> */}
+
+                    {/* <Button
+                      variant="tertiary"
+                      mode="outline"
+                      onClick={handleRejectCourse}
+                      >
+                      Rifiuto
+                      </Button> */}
+
                     <Button
                       variant="gray"
                       className={styles.flex25}
@@ -1277,6 +1451,20 @@ function TestCardRedux({
                     >
                       Rifiuto
                     </Button>
+
+                    {/* <button
+                      className={styles.finishCourseButton}
+                      onClick={handleFinishCourse}
+                      disabled={courseState.finishClicks.includes(
+                        isInstructor ? "instructor" : "student"
+                      )}
+                    >
+                      {courseState.finishClicks.includes(
+                        isInstructor ? "instructor" : "student"
+                      )
+                        ? "concluso!"
+                        : "Conclude"}
+                    </button> */}
 
                     <Button
                       className={styles.flex75}
@@ -1299,6 +1487,13 @@ function TestCardRedux({
 
                 {/* STATO: pending_feedback - Pulsanti */}
                 {courseState.status === "pending_feedback" && !isInstructor && (
+                  // <button
+                  //   className={styles.openFeedbackButton}
+                  //   onClick={() => setShowFeedbackModal(true)}
+                  // >
+                  //   📝 Lascia Feedback
+                  // </button>
+
                   <Button
                     variant="gray"
                     onClick={() => setShowFeedbackModal(true)}
@@ -1344,7 +1539,78 @@ function TestCardRedux({
               </div>
             </div>
           )}
+          {/* {showInitiateRejectModal && (
+            <div
+              className={styles.overlay}
+              onClick={(e) => {
+                if (e.target === e.currentTarget) {
+                  handleCancelReject();
+                }
+              }}
+            >
+              <div
+                className={styles.modal}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className={styles.header}>
+                  <h3>Rifiuta Corso</h3>
+                  <button
+                    className={styles.closeButton}
+                    onClick={handleCancelReject}
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
 
+                <div className={styles.content}>
+                  <div className={styles.xpDisplay}>
+                    <AlertTriangle
+                      size={32}
+                      className={styles.xpIcon}
+                      style={{ color: "var(--triangle-err)" }}
+                    />
+
+                    <h4 className={styles.xpTitle}>
+                      Perché vuoi rifiutare il corso?
+                    </h4>
+
+                    <textarea
+                      value={rejectComment}
+                      onChange={(e) => setRejectComment(e.target.value)}
+                      placeholder="Spiega il motivo del rifiuto (opzionale)..."
+                      className={styles.rejectTextarea}
+                      rows={4}
+                    />
+
+                    <div className={styles.statsGrid}>
+                      <button
+                        onClick={handleCancelReject}
+                        className={styles.rejectCancel}
+                      >
+                        Annulla
+                      </button>
+                      <button
+                        onClick={() => handleConfirmReject(false)}
+                        className={styles.rejectNoComment}
+                      >
+                        Rifiuta (-10 XP)
+                      </button>
+                    </div>
+
+                    {rejectComment.trim() && (
+                      <button
+                        onClick={() => handleConfirmReject(true)}
+                        className={styles.rejectConfirm}
+                        style={{ width: "100%", marginTop: "0.5rem" }}
+                      >
+                        Conferma con commento
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )} */}
           {/* MODAL PER CHI RICEVE LA NOTIFICA DEL RIFIUTO */}
           {showRejectResponseModal && (
             <div className={styles.rejectResponseModal}>
@@ -1402,6 +1668,108 @@ function TestCardRedux({
               </div>
             </div>
           )}
+          {/* {showRejectResponseModal && (
+            <div
+              className={styles.overlay}
+              onClick={(e) => {
+                if (e.target === e.currentTarget) {
+                  handleSkipResponse();
+                }
+              }}
+            >
+              <div
+                className={styles.modal}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className={styles.header}>
+                  <h3>Corso Rifiutato</h3>
+                  <button
+                    className={styles.closeButton}
+                    onClick={handleSkipResponse}
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+
+                <div className={styles.content}>
+                  <div className={styles.xpDisplay}>
+                    <AlertTriangle
+                      size={32}
+                      className={styles.xpIcon}
+                      style={{ color: "#ef4444" }}
+                    />
+
+                    <h4 className={styles.xpTitle}>
+                      Rifiutato da{" "}
+                      {courseState.rejectionInitiatedBy === "instructor"
+                        ? "istruttore"
+                        : "studente"}
+                    </h4>
+
+                    {courseState.rejectComments?.[0] && (
+                      <div className={styles.infoGuide}>
+                        <p className={styles.guideText}>
+                          <strong>Motivo del rifiuto:</strong>
+                          <br />"{courseState.rejectComments[0].comment}"
+                        </p>
+                      </div>
+                    )}
+
+                    <div className={styles.progressContainer}>
+                      <label
+                        style={{
+                          fontSize: "0.9rem",
+                          color: "var(--text-primary)",
+                          fontWeight: "600",
+                          marginBottom: "0.5rem",
+                          display: "block",
+                        }}
+                      >
+                        La tua risposta (facoltativa):
+                      </label>
+                      <textarea
+                        value={responseToRejectComment}
+                        onChange={(e) =>
+                          setResponseToRejectComment(e.target.value)
+                        }
+                        placeholder="Vuoi aggiungere un commento in risposta?"
+                        className={styles.rejectTextarea}
+                        rows={4}
+                      />
+                    </div>
+
+                    <div className={styles.statsGrid}>
+                      <button
+                        onClick={handleSkipResponse}
+                        className={styles.rejectCancel}
+                      >
+                        Chiudi
+                      </button>
+                      <button
+                        onClick={() => {
+                          setResponseToRejectComment("");
+                          handleRespondToRejection();
+                        }}
+                        className={styles.rejectNoComment}
+                      >
+                        No comment (-10 XP)
+                      </button>
+                    </div>
+
+                    {responseToRejectComment.trim() && (
+                      <button
+                        onClick={handleRespondToRejection}
+                        className={styles.rejectConfirm}
+                        style={{ width: "100%", marginTop: "0.5rem" }}
+                      >
+                        Invia Risposta
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )} */}
 
           {showFeedbackModal && (
             <div
@@ -1417,7 +1785,23 @@ function TestCardRedux({
                       <br />
                       Lascia un feedback
                     </h4>
-                    <div className={styles.ratingSection}></div>
+                    <div className={styles.ratingSection}>
+                      {/* <label>Valutazione:</label> */}
+                      {/* <div className={styles.starRating}>
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star
+                            key={star}
+                            size={24}
+                            className={`${styles.starClickable} ${
+                              star <= feedbackRating
+                                ? styles.starFilled
+                                : styles.starEmpty
+                            }`}
+                            onClick={() => setFeedbackRating(star)}
+                          />
+                        ))}
+                      </div> */}
+                    </div>
                     <div className={styles.commentSection}>
                       <label>Recensione (+5 XP):</label>
                       <textarea
@@ -1535,7 +1919,8 @@ function TestCardRedux({
             </div>
           )}
           <div className={styles.dividere}></div>
-          {/* <div className={styles.footerUser}>
+          {/* FOOTER USER (invariato) */}
+          <div className={styles.footerUser}>
             <ul className={styles.userInfo}>
               <li>
                 {instructorPhoto ? (
@@ -1551,15 +1936,35 @@ function TestCardRedux({
               <p>{istruttore}</p>
             </ul>
             <div className={styles.userGem}>
-              <Gem size={20} />
+              {/* <Gem size={16} /> */}
+              <Gem size={18} />
               <span>{skillGems}</span>
+              {/* <div className={styles.iconclass}>{icon}</div> */}
             </div>
-          </div> */}
+          </div>
           {/* ACTION BUTTONS (invariati) */}
-          {/* <div className={styles.actionButtons}>
+          <div className={styles.actionButtons}>
             {isInstructor &&
               (courseState.status === "idle" ? (
                 <>
+                  {/* <button
+                    className={`${styles.actionButton} ${styles.actionButtonEdit}`}
+                    onClick={handleEditClick}
+                    title="Modifica esperienza"
+                    >
+                    <Edit size={16} />
+                    <span>Modifica</span>
+                    </button> */}
+
+                  {/* <button
+                    className={`${styles.actionButton} ${styles.actionButtonDelete}`}
+                    onClick={handleDeleteClick}
+                    title="Elimina esperienza"
+                    >
+                    <Trash2 size={16} />
+                    <span>Elimina</span>
+                    </button> */}
+
                   <Button
                     title="Elimina esperienza"
                     variant="gray"
@@ -1574,7 +1979,7 @@ function TestCardRedux({
               ) : (
                 <div className={styles.actionSpacer}></div>
               ))}
-          </div> */}
+          </div>
         </div>
       )}
     </div>

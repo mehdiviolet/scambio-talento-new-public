@@ -9,6 +9,7 @@ export const Button = ({
   disabled = false,
   onClick,
   className = "",
+  disabledMessage = "Azione non disponibile", // ✅ NUOVO PROP
   ...props
 }) => {
   return (
@@ -16,6 +17,7 @@ export const Button = ({
       className={`${styles.btn} ${styles[size]} ${styles[mode]} ${styles[variant]} ${className}`}
       disabled={disabled}
       onClick={onClick}
+      data-disabled-message={disabled ? disabledMessage : ""} // ✅ PASSA IL MESSAGGIO
       {...props}
     >
       {children}
