@@ -1,5 +1,6 @@
 // store/experienceSliceTest.js
 import { createSlice } from "@reduxjs/toolkit";
+import { Camera, ChefHat, Code, Languages, Palette } from "lucide-react";
 
 // 🆕 FUNZIONE HELPER per dati mock dinamici
 const getPeopleMockData = (personName) => {
@@ -9,7 +10,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "photography-sara",
           name: "Fotografia",
-          icon: "📸",
+          icon: Camera,
           detail: "Street Photography Avanzata",
           description: "Esperta in fotografia urbana e ritratti spontanei.",
           gems: 45,
@@ -20,7 +21,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "cooking-sara",
           name: "Cucina",
-          icon: "🍳",
+          icon: ChefHat,
           detail: "Cucina Francese",
           description: "Specialista in cucina francese e pasticceria.",
           gems: 120,
@@ -32,7 +33,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "exp-photography-sara-001",
           skillId: "photography-sara",
-          icon: "📸",
+          icon: Camera,
           title: "Fotografia / Street Avanzata",
           modalita: "presenza",
           lingua: "🇮🇹",
@@ -46,7 +47,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "exp-cooking-sara-002",
           skillId: "cooking-sara",
-          icon: "🍳",
+          icon: ChefHat,
           title: "Cucina / Francese",
           modalita: "presenza",
           lingua: "🇫🇷",
@@ -329,7 +330,7 @@ const experienceSliceTest = createSlice({
         {
           id: "photography",
           name: "Fotografia",
-          icon: "📸",
+          icon: Camera,
           detail: "Street Photography",
           description:
             "Ho iniziato a fotografare 3 anni fa durante un viaggio a Parigi. Mi affascina catturare momenti spontanei della vita urbana, dalle espressioni delle persone ai giochi di luce sui palazzi. Ho sviluppato un occhio particolare per la composizione e l'uso della luce naturale.",
@@ -340,7 +341,7 @@ const experienceSliceTest = createSlice({
         {
           id: "cooking",
           name: "Cucina",
-          icon: "🍳",
+          icon: ChefHat,
           detail: "Cucina Italiana Tradizionale",
           description:
             "La passione per la cucina nasce in famiglia. Ho imparato i segreti della pasta fresca dalla nonna e ho perfezionato le tecniche dei risotti piemontesi. Amo sperimentare con ingredienti locali e creare piatti che raccontano il territorio.",
@@ -351,7 +352,7 @@ const experienceSliceTest = createSlice({
         {
           id: "programming",
           name: "Coding",
-          icon: "💻",
+          icon: Code,
           detail: "Frontend Development",
           description:
             "Specializzata in React e JavaScript moderno. Mi piace creare interfacce intuitive e responsive che offrono un'esperienza utente eccellente. Ho lavorato su diversi progetti web, dalla progettazione UI/UX all'implementazione completa.",
@@ -362,7 +363,7 @@ const experienceSliceTest = createSlice({
         {
           id: "painting",
           name: "Pittura",
-          icon: "🎨",
+          icon: Palette,
           detail: "Acquerello e Tecniche Miste",
           description:
             "L'arte è sempre stata la mia forma di espressione preferita. Dipingo principalmente con acquerelli, catturando paesaggi urbani e nature morte. Ogni dipinto racconta una storia e trasmette emozioni attraverso colori e forme.",
@@ -373,7 +374,7 @@ const experienceSliceTest = createSlice({
         {
           id: "languages",
           name: "Lingue",
-          icon: "🗣️",
+          icon: Languages,
           detail: "Inglese e Francese",
           description:
             "Parlo fluentemente inglese e francese oltre all'italiano. Ho vissuto 6 mesi a Londra per migliorare il mio inglese e frequento regolarmente corsi di conversazione francese. Le lingue aprono porte a nuove culture e opportunità.",

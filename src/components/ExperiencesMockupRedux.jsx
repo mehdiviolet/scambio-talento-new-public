@@ -5,6 +5,7 @@ import { useStatusFilter } from "./useStatusFilter.js";
 import styles from "./ExperiencesSection.module.css";
 import { useSelector } from "react-redux";
 import { HeaderAddButton } from "./ui/AddButtons.jsx";
+import { Camera, ChefHat } from "lucide-react";
 
 const ExperiencesMockupRedux = ({
   isInstructorPanel,
@@ -15,7 +16,9 @@ const ExperiencesMockupRedux = ({
     {
       id: "exp-photography-001",
       skillId: "photography",
-      icon: "📸",
+      // icon: "📸",
+      icon: Camera,
+
       title: "Fotografia / Ritratti",
       modalita: "presenza",
       lingua: "🇮🇹",
@@ -31,7 +34,9 @@ const ExperiencesMockupRedux = ({
     {
       id: "exp-cooking-002",
       skillId: "cooking",
-      icon: "🍳",
+      // icon: "🍳",
+      icon: ChefHat,
+
       title: "cooking / Italiana",
       modalita: "presenza",
       lingua: "🇮🇹",
@@ -44,38 +49,38 @@ const ExperiencesMockupRedux = ({
       createdAt: "2024-01-18T16:45:00Z",
       updatedAt: "2024-01-23T11:20:00Z",
     },
-    {
-      id: "exp-programming-003",
-      skillId: "programming",
-      icon: "💻",
-      title: "programming / Web",
-      modalita: "online",
-      lingua: "🇬🇧",
-      partecipanti: 4,
-      lezioni: 4,
-      durataLezione: "2 Ore",
-      costo: 70,
-      descrizione:
-        "Corso intensivo per imparare React da zero. Copriamo componenti, hooks, state management e deploy. Perfetto per chi vuole iniziare nel frontend development moderno con progetti pratici.",
-      createdAt: "2024-01-15T09:00:00Z",
-      updatedAt: "2024-01-22T15:30:00Z",
-    },
-    {
-      id: "exp-painting-004",
-      skillId: "painting",
-      icon: "🎨",
-      title: "Pittura / Olio",
-      modalita: "presenza",
-      lingua: "🇮🇹",
-      partecipanti: 3,
-      lezioni: 3,
-      durataLezione: "2 Ore",
-      costo: 10,
-      descrizione:
-        "Scopri la magia dell'acquerello attraverso tecniche base e avanzate. Imparerai a controllare l'acqua, miscelare i colori e creare effetti unici per paesaggi e nature morte.",
-      createdAt: "2024-01-12T18:20:00Z",
-      updatedAt: "2024-01-19T14:10:00Z",
-    },
+    // {
+    //   id: "exp-programming-003",
+    //   skillId: "programming",
+    //   icon: "💻",
+    //   title: "programming / Web",
+    //   modalita: "online",
+    //   lingua: "🇬🇧",
+    //   partecipanti: 4,
+    //   lezioni: 4,
+    //   durataLezione: "2 Ore",
+    //   costo: 70,
+    //   descrizione:
+    //     "Corso intensivo per imparare React da zero. Copriamo componenti, hooks, state management e deploy. Perfetto per chi vuole iniziare nel frontend development moderno con progetti pratici.",
+    //   createdAt: "2024-01-15T09:00:00Z",
+    //   updatedAt: "2024-01-22T15:30:00Z",
+    // },
+    // {
+    //   id: "exp-painting-004",
+    //   skillId: "painting",
+    //   icon: "🎨",
+    //   title: "Pittura / Olio",
+    //   modalita: "presenza",
+    //   lingua: "🇮🇹",
+    //   partecipanti: 3,
+    //   lezioni: 3,
+    //   durataLezione: "2 Ore",
+    //   costo: 10,
+    //   descrizione:
+    //     "Scopri la magia dell'acquerello attraverso tecniche base e avanzate. Imparerai a controllare l'acqua, miscelare i colori e creare effetti unici per paesaggi e nature morte.",
+    //   createdAt: "2024-01-12T18:20:00Z",
+    //   updatedAt: "2024-01-19T14:10:00Z",
+    // },
   ];
 
   const expFilterConfig = {

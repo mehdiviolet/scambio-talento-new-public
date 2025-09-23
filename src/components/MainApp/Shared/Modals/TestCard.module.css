@@ -33,7 +33,8 @@
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 10px;
   cursor: pointer;
   transition: var(--transition-normal);
   border-radius: var(--radius-md);

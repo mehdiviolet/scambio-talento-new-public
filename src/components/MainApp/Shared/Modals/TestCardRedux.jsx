@@ -48,6 +48,7 @@ import {
   X,
   AlertTriangle,
   Rocket,
+  Camera,
 } from "lucide-react";
 import styles from "./TestCard.module.css";
 import {
@@ -896,12 +897,23 @@ function TestCardRedux({
   };
 
   return (
-    <div className={styles.testCard} style={getStatusStyles()}>
+    // <div className={styles.testCard} style={getStatusStyles()}>
+    <div
+      className={`${styles.testCard} ${isExpanded ? styles.expanded : ""}`}
+      style={getStatusStyles()}
+    >
       <div className={styles.nav} onClick={toggleExpanded}>
+        {/* <Camera /> */}
+        {icon && (
+          <span className={styles.experienceIcon}>
+            {typeof icon === "string"
+              ? icon
+              : React.createElement(icon, { size: 18 })}
+          </span>
+        )}
         <h4 className={styles.navTitle}>{title}</h4>
         <div className={styles.navRight}>
           <div className={styles.actionSpacer}></div>
-
           {/* ✅ NUOVO: Wrapper per bottoni hover */}
           <div className={styles.hoverButtons}>
             <button
@@ -922,12 +934,7 @@ function TestCardRedux({
               <Bookmark size={16} />
             </button>
           </div>
-
-          {/* ✅ Gem rimane fuori dal wrapper */}
-          <div className={styles.userGem}>
-            <Gem size={18} />
-            <span>{skillGems}</span>
-          </div>
+          {!isExpanded && <div className={styles.userGem}>{costo} XP</div>}
         </div>
       </div>
 
@@ -960,13 +967,20 @@ function TestCardRedux({
             <div className={styles.descriptionBox}>{descrizione}</div>
             <div className={styles.requestSection}>
               {!courseState.isRequestSent && !isInstructor ? (
-                <button
-                  className={styles.requestButton}
+                // <button
+                //   className={styles.requestButton}
+                //   onClick={handleRequestClick}
+                //   disabled={!canAffordFullCourse()} // ← AGGIUNGI QUESTO
+                // >
+                //   <Send size={16} />
+                // </button>
+                <Button
                   onClick={handleRequestClick}
-                  disabled={!canAffordFullCourse()} // ← AGGIUNGI QUESTO
+                  disabled={!canAffordFullCourse()}
+                  disabledMessage="XP insufficienti!" // ✅ MESSAGGIO PERSONALIZZATO
                 >
                   <Send size={16} />
-                </button>
+                </Button>
               ) : (
                 <div className={styles.actionButtons}>
                   {isInstructor &&
@@ -1520,7 +1534,7 @@ function TestCardRedux({
             </div>
           )}
           <div className={styles.dividere}></div>
-          {/* <div className={styles.footerUser}>
+          <div className={styles.footerUser}>
             <ul className={styles.userInfo}>
               <li>
                 {instructorPhoto ? (
@@ -1539,7 +1553,7 @@ function TestCardRedux({
               <Gem size={20} />
               <span>{skillGems}</span>
             </div>
-          </div> */}
+          </div>
           {/* ACTION BUTTONS (invariati) */}
           {/* <div className={styles.actionButtons}>
             {isInstructor &&

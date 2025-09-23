@@ -59,7 +59,14 @@ const SkillMockup = ({ mockSkills, selectedPersonData, isInstructorPanel }) => {
                 className={styles.skillCard}
               >
                 <div className={styles.skillInfo}>
-                  <span className={styles.skillIcon}>{skill.icon}</span>
+                  {/* <span className={styles.skillIcon}>{skill.icon}</span> */}
+                  {skill.icon && (
+                    <span className={styles.experienceIcon}>
+                      {typeof skill.icon === "string"
+                        ? skill.icon
+                        : React.createElement(skill.icon, { size: 18 })}
+                    </span>
+                  )}
                   <div className={styles.skillName}>
                     {skill.name || skill.name}
                   </div>

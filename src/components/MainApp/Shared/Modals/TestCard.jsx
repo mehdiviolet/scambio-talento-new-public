@@ -359,9 +359,18 @@ function TestCard({
     return skillGems !== undefined && skillGems !== null ? skillGems : 0;
   };
 
+  console.log(icon);
+
   return (
     <div className={styles.testCard}>
       <div className={styles.nav} onClick={toggleExpanded}>
+        {icon && (
+          <span className={styles.experienceIcon}>
+            {typeof icon === "string"
+              ? icon
+              : React.createElement(icon, { size: 18 })}
+          </span>
+        )}
         <h4 className={styles.navTitle}>{title}</h4>
         <div className={styles.navRight}>
           <div className={styles.actionSpacer}></div>
