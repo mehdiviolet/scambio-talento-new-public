@@ -59,12 +59,16 @@
   height: 844px;
   /* background: var(--glass-bg); */
   /* background: linear-gradient(135deg, #457fa8 50%, #3b82f6 100%); */
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
     var(--text-tertiary) 50%,
     var(--text-primary) 100%
+  ); */
+  background: linear-gradient(
+    135deg,
+    /* var(--text-tertiary) 50%, */ var(--primary-600) 50%,
+    var(--primary-900) 100%
   );
-
   backdrop-filter: var(--backdrop-blur);
   border-radius: var(--card-border-radius);
   box-shadow: var(--shadow-strong);

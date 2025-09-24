@@ -60,11 +60,11 @@ body {
   border-radius: var(--card-border-radius);
   /* border: none; */
   /* background: linear-gradient(135deg, #6366f1 50%, #3b82f6 100%); */
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
     var(--text-tertiary) 50%,
     var(--text-primary) 100%
-  );
+  ); */
 }
 
 /* CSS per .screen--test aggiornato */

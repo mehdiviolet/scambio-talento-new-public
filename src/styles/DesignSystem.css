@@ -7,7 +7,8 @@
   /* --text-primary: #3b82f6; */
   --text-primary: #1d4ed8;
   --text-secondary: #f59e0b; /* Arancione accento */
-  --text-tertiary: #6366f1; /* Azzurro principale */
+  --text-tertiary: #6366f1;
+  /* --text-tertiary: #22d3ee; */
   /* --text-tertiary: ##5763c1; */
   /* --gem: #6366f1; */
   --gem: #1d4ed8;
@@ -19,7 +20,6 @@
   --text-primary-darkLight: rgba(16, 185, 129, 0.3); /* Verde scuro */
   --text-primaryDark: #1a4d5c; /* Azzurro scuro */
 
-  /* --cyan: #22d3ee */
   /* Varianti PRIMARY (blu #3b82f6) */
   --primary-50: #eff6ff; /* Backgrounds molto leggeri */
   --primary-100: #dbeafe; /* Cards e containers */
