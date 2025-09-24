@@ -61,7 +61,8 @@ const ProfileTabs = () => {
                 }`}
                 onClick={() => setExperienceMode("offer")}
               >
-                Offro
+                {/* Offro */}
+                Cerco
               </button>
               <button
                 className={`${styles.toggleButton} ${
@@ -69,7 +70,8 @@ const ProfileTabs = () => {
                 }`}
                 onClick={() => setExperienceMode("seek")}
               >
-                Cerco
+                Offro
+                {/* Cerco */}
               </button>
             </div>{" "}
             {/* <div className={styles.experienceContent}> */}

@@ -19,7 +19,7 @@ import {
   addUserSkill,
 } from "@/services/userService";
 import AddSkillModal from "@/components/MainApp/Shared/Modals/AddSkillModal";
-import { AddSkillButton, HeaderAddButton } from "./ui/AddButtons";
+import { HeaderAddButton } from "./ui/AddButtons";
 import { Button } from "./ui/Button";
 import { SKILL_ICONS } from "./ui/SkillIconsMap";
 
@@ -156,7 +156,7 @@ const SkillsSection = () => {
       {/* Header - conditional add button for owner only */}
       <div className={styles.header}>
         {/* <h2 className={styles.title}>Skills ({skills.length})</h2> */}
-        {isOwner && skills.length !== 0 && (
+        {isOwner && (
           <>
             <HeaderAddButton
               onClick={handleAddSkill}
@@ -305,37 +305,6 @@ const SkillsSection = () => {
                         </p>
                       </div>
                     )}
-
-                    {/* Divider - same as ShareModal */}
-                    {/* <div className={styles.divider}></div> */}
-
-                    {/* Footer - same as ShareModal */}
-                    {/* <div className={styles.footer}>
-                      <div className={styles.userInfo}>
-                        <div className={styles.avatar}>
-                          {currentProfile?.profilePhoto ? (
-                            <img
-                              src={
-                                currentProfile.profilePhoto instanceof File
-                                  ? URL.createObjectURL(
-                                      currentProfile.profilePhoto
-                                    )
-                                  : currentProfile.profilePhoto
-                              }
-                              alt={`${currentProfile?.firstName || "Sara"} ${
-                                currentProfile?.lastName || "Dormand"
-                              }`}
-                            />
-                          ) : (
-                            <User2 />
-                          )}
-                        </div>
-                        <span className={styles.userName}>
-                          {currentProfile?.firstName || "Sara"}{" "}
-                          {currentProfile?.lastName || "Dormand"}
-                        </span>
-                      </div>
-                    </div> */}
                   </div>
                 )}
               </div>
@@ -343,16 +312,7 @@ const SkillsSection = () => {
           })
         ) : (
           <div className={styles.emptyState}>
-            {/* <div className={styles.emptyIcon}>🎯</div>
-            <p className={styles.emptyTitle}>Nessuna skill aggiunta ancora</p>
-            <p className={styles.emptyDescription}>
-            Clicca il pulsante + per aggiungere la tua prima competenza
-            </p> */}
-            {isOwner ? (
-              <AddSkillButton onClick={handleAddSkill} />
-            ) : (
-              <p className={styles.emptyDescription}> nessun skill aggiunto</p>
-            )}
+            <p className={styles.emptyDescription}> nessun skill aggiunto</p>
           </div>
         )}
       </div>

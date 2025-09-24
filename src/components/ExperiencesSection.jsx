@@ -13,11 +13,7 @@ import AddExperienceModal from "@/components/MainApp/Shared/Modals/AddExperience
 import ExperiencesSectionStudente from "./ExperiencesSectionStudente";
 import { useStatusFilter } from "./useStatusFilter";
 import StatusFilterButtons from "./StatusFilterButtons";
-import {
-  AddExperienceButton,
-  AddSkillFirstButton,
-  HeaderAddButton,
-} from "./ui/AddButtons";
+import { HeaderAddButton } from "./ui/AddButtons";
 import { DropdownFilters } from "./ui/SmartFilters";
 
 const ExperiencesSection = () => {
@@ -321,7 +317,8 @@ const ExperiencesSection = () => {
                   />
                 ) : (
                   <>
-                    <AddSkillFirstButton />
+                    {/* <AddSkillFirstButton /> */}
+                    <p>Aggiungi prima uno skill</p>
                   </>
                 )
               ) : (

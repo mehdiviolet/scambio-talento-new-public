@@ -10,6 +10,7 @@ import { Button } from "./ui/Button";
 
 const ExperiencesSectionStudente = () => {
   const [visibleCount, setVisibleCount] = useState(3);
+  const [showFilters, setShowFilters] = useState(false);
 
   // Redux selectors
   const userCompletionCards = useSelector((state) => {
@@ -48,11 +49,11 @@ const ExperiencesSectionStudente = () => {
       icon: "Flame",
       statuses: ["completed", "rejected"],
     },
-    all: {
-      label: "Tutti",
-      icon: null,
-      statuses: null,
-    },
+    // all: {
+    //   label: "Tutti",
+    //   icon: null,
+    //   statuses: null,
+    // },
   };
 
   // 🎯 PREPARA DATI UNIFICATI
@@ -182,18 +183,37 @@ const ExperiencesSectionStudente = () => {
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        <h3 className={styles.title}>Le Mie Esperienze</h3>
+        <div
+          className={`${styles.filtersContainer} ${
+            showFilters ? styles.expanded : ""
+          }`}
+        >
+          <div className={styles.filtersContainer}>
+            <button
+              className={styles.toggleFiltersBtn}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              Filtri {showFilters ? "↑" : "↓"}
+            </button>
+            <div
+              className={`${styles.filterContent} ${
+                showFilters ? styles.open : ""
+              }`}
+            >
+              {/* Filtri */}
+              <StatusFilterButtons
+                activeFilter={statusFilter}
+                onFilterChange={setStatusFilter}
+                filterCounts={filterCounts}
+                filterConfig={filterConfig}
+                totalCount={allUserExperiences.length}
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Filtri */}
-      {/* <StatusFilterButtons
-        activeFilter={statusFilter}
-        onFilterChange={setStatusFilter}
-        filterCounts={filterCounts}
-        filterConfig={filterConfig}
-      /> */}
-
-      <DropdownFilters
+      {/* <DropdownFilters
         filters={Object.entries(filterConfig).map(([key, config]) => ({
           key,
           label: config.label,
@@ -201,7 +221,7 @@ const ExperiencesSectionStudente = () => {
         }))}
         activeFilter={statusFilter}
         onFilterChange={setStatusFilter}
-      />
+      /> */}
 
       {/* Contenuto */}
       <div className={styles.content}>
