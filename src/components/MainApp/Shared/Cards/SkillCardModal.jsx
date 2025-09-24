@@ -98,7 +98,7 @@ const SkillCardModal = ({
     },
     {
       id: "programming",
-      name: "Programmazione",
+      name: "Coding",
       icon: "💻",
       suggestions: ["Web", "Mobile", "AI"],
     },

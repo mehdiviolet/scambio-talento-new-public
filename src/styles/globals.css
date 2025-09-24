@@ -517,13 +517,17 @@ body {
 
   /* Colori Stato */
   --success-color: #10b981;
-  --warning-color: #f59e0b;
+  --warning-color: var(--secondary-500);
   --error-color: #ef4444;
   --info-color: var(--azure-cyan);
 
   /* Gradienti Stato */
   --gradient-success: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
-  --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+  --gradient-warning: linear-gradient(
+    135deg,
+    var(--secondary-500) 0%,
+    var(--secondary-600) 100%
+  );
   --gradient-error: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
 
   /* Testi */
@@ -605,9 +609,18 @@ body {
     #6366f1 50%,
     #22d3ee 100%
   );
-  --card-gradient: linear-gradient(135deg, #3b82f6, #6366f1);
+  /* --card-gradient: linear-gradient(135deg, #3b82f6, #6366f1); */
+  --card-gradient: linear-gradient(
+    135deg,
+    var(--primary-500),
+    var(--primary-600)
+  );
   --success-gradient: linear-gradient(135deg, #22d3ee, #3b82f6);
-  --warning-gradient: linear-gradient(135deg, #f59e0b, #f97316);
+  --warning-gradient: linear-gradient(
+    135deg,
+    var(--secondary-500),
+    var(--secondary-600)
+  );
   --achievement-gradient: linear-gradient(
     145deg,
     rgba(255, 215, 0, 0.95) 0%,
@@ -907,8 +920,8 @@ body {
 .progress-fill {
   background: linear-gradient(
     to right,
-    #fbbf24,
-    #f97316
+    var(--secondary-350),
+    var(--secondary-600)
   ); /* yellow-400 to orange-500 */
   height: 100%;
   border-radius: 9999px;
@@ -1371,7 +1384,7 @@ body {
 
 .completion-icon {
   margin: 0 auto 1rem;
-  color: #fbbf24; /* yellow-400 */
+  color: var(--secondary-350); /* yellow-400 */
 }
 
 .completion-title {
@@ -1530,7 +1543,7 @@ body {
 }
 
 .text-yellow-400 {
-  color: #fbbf24;
+  color: var(--secondary-350);
 }
 
 .text-cyan-400 {
@@ -1542,7 +1555,7 @@ body {
 }
 
 .text-yellow-300 {
-  color: #fde047;
+  color: var(--secondary-300);
 }
 
 /* ===== ANIMAZIONI ===== */

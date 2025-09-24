@@ -2026,7 +2026,7 @@
 }
 
 .textYellow300 {
-  color: #fde047;
+  color: var(--secondary-300);
 }
 
 /* Animazioni */
@@ -2042,7 +2042,7 @@
 
 @keyframes cherry-glow {
   0% {
-    filter: drop-shadow(0 0 12px #f97316);
+    filter: drop-shadow(0 0 12pxvar (--secondary-600));
     transform: scale(1.3);
   }
   100% {
@@ -2087,7 +2087,7 @@
   position: absolute;
   width: 4px;
   height: 4px;
-  background: #fbbf24;
+  background: var(--secondary-350);
   border-radius: 50%;
   animation: spark-burst 0.6s ease-out forwards;
 }
@@ -3141,12 +3141,16 @@
 }
 
 .ownerButton {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  background: linear-gradient(
+    135deg,
+    var(--secondary-350) 0%,
+    var(--secondary-500) 100%
+  );
   color: white;
 }
 
 .ownerButton:hover {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, var(--secondary-500) 0%, #d97706 100%);
   transform: translateY(-2px);
 }
 

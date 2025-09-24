@@ -67,7 +67,7 @@
   --primary-muted: #7ba8b5; /* Per testi secondari e icone passive */
 
   --secondary-light: #f6b332; /* Per hover su elementi secondary */
-  --secondary-lighter: #fbbf24; /* Per backgrounds e badge */
+  --secondary-lighter: var(--secondary-350); /* Per backgrounds e badge */
   --secondary-dark: #d97706; /* Per CTA importanti */
   --secondary-darker: #92400e; /* Per stati pressed e focus */
   --secondary-muted: #fcd34d; /* Per notifiche soft */
@@ -98,7 +98,7 @@
 
   /* Tonalità Gold estese */
   --gold-primary: #f59e0b; /* Il tuo secondary esistente */
-  --gold-light: #fbbf24; /* Oro chiaro */
+  --gold-light: var(--secondary-350); /* Oro chiaro */
   --gold-dark: #d97706; /* Oro scuro */
   --gold-lighter: #fef3c7; /* Oro molto chiaro per backgrounds */
 

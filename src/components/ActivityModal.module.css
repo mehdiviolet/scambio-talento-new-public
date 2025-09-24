@@ -144,7 +144,7 @@
 }
 
 .progressGold {
-  background: linear-gradient(90deg, #f59e0b, var(--secondary-350));
+  background: linear-gradient(90deg, var(--secondary-500), var(--secondary-350));
 } */
 
 .progressTeal {
@@ -186,7 +186,7 @@
 }
 
 .targetIcon {
-  color: #f59e0b;
+  color: var(--secondary-500);
 }
 
 .goalTitle {
@@ -211,7 +211,7 @@
 }
 
 .badgeIcon {
-  color: #f59e0b;
+  color: var(--secondary-500);
 }
 
 .badgeNumber {

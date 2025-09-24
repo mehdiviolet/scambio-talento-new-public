@@ -185,7 +185,11 @@
 }
 
 .stateButton.selected {
-  background: linear-gradient(135deg, #f59e0b, #f97316);
+  background: linear-gradient(
+    135deg,
+    var(--secondary-500),
+    var(--secondary-600)
+  );
   color: white;
   border-color: rgba(245, 158, 11, 0.5);
   box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);

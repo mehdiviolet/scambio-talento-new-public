@@ -5,7 +5,7 @@
   /* --text-primary: #256679; Azzurro principale */
   /* --text-primary: #1e40af; /* */
   --text-primary: #3b82f6;
-  --text-secondary: #f59e0b; /* Arancione accento */
+  --text-secondary: var(--secondary-500); /* Arancione accento */
   /* --text-tertiary: #6366f1;  */
   --text-tertiary: ##5763c1; /* Azzurro principale */
   --gem: #6366f1;
@@ -28,12 +28,12 @@
   --primary-700: #1d4ed8; /* Active/pressed */
   --primary-900: #1e3a8a; /* Testi scuri su sfondi chiari */
 
-  /* Varianti SECONDARY (arancione #f59e0b) */
+  /* Varianti SECONDARY (arancione var(--secondary-500)) */
   --secondary-50: #fffbeb; /* Backgrounds molto leggeri */
   --secondary-100: #fef3c7; /* Cards e containers */
   --secondary-200: #fde68a; /* Borders leggeri */
   --secondary-300: #fcd34d; /* Placeholder e disabled */
-  --secondary-500: #f59e0b; /* Il tuo colore base */
+  --secondary-500: var(--secondary-500); /* Il tuo colore base */
   --secondary-600: #d97706; /* Hover states */
   --secondary-700: #b45309; /* Active/pressed */
   --secondary-900: #92400e; /* Testi scuri su sfondi chiari */
@@ -46,7 +46,7 @@
   --primary-muted: #7ba8b5; /* Per testi secondari e icone passive */
 
   --secondary-light: #f6b332; /* Per hover su elementi secondary */
-  --secondary-lighter: #fbbf24; /* Per backgrounds e badge */
+  --secondary-lighter: var(--secondary-350); /* Per backgrounds e badge */
   --secondary-dark: #d97706; /* Per CTA importanti */
   --secondary-darker: #92400e; /* Per stati pressed e focus */
   --secondary-muted: #fcd34d; /* Per notifiche soft */
@@ -76,8 +76,8 @@
   --teal-muted: #7dd3d3; /* Versione soft per backgrounds */
 
   /* Tonalità Gold estese */
-  --gold-primary: #f59e0b; /* Il tuo secondary esistente */
-  --gold-light: #fbbf24; /* Oro chiaro */
+  --gold-primary: var(--secondary-500); /* Il tuo secondary esistente */
+  --gold-light: var(--secondary-350); /* Oro chiaro */
   --gold-dark: #d97706; /* Oro scuro */
   --gold-lighter: #fef3c7; /* Oro molto chiaro per backgrounds */
 

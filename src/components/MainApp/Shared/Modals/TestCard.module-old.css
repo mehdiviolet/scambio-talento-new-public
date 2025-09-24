@@ -564,8 +564,8 @@
 }
 
 .starFilled {
-  color: #fbbf24;
-  fill: #fbbf24;
+  color: var(--secondary-350);
+  fill: var(--secondary-350);
 }
 
 .starEmpty {

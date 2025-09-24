@@ -520,7 +520,7 @@
 
 /* SKILL CARD */
 .skill-card {
-  /* background: linear-gradient(135deg, #fed7aa, #fbbf24, #f3e8ff); */
+  /* background: linear-gradient(135deg, #fed7aa, var(--secondary-350), #f3e8ff); */
   border-radius: 1.5rem;
   /* padding: 1.5rem; */
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);

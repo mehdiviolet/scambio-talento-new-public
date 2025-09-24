@@ -4,7 +4,7 @@
   --black: #000;
   --white: #fff;
   --text-primary: #256679;
-  --text-secondary: #f59e0b;
+  --text-secondary: var(--secondary-500);
   --text-primary-light: #3a8ba3;
   --text-primary-dark: #1a4d5c;
   --text-secondary-light: var(--secondary-350);

@@ -155,7 +155,7 @@
 .conversationItem.unread {
   /* background: var(--bg--esperienza, #d8cda3); */
   background: var(--text-secondaryLight);
-  border-left: 3px solid #f59e0b;
+  border-left: 3px solid var(--secondary-500);
 }
 
 .conversationContent {

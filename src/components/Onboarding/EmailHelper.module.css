@@ -29,7 +29,7 @@
   height: 36px;
   background: rgba(251, 191, 36, 0.2);
   border-radius: 8px;
-  color: #fbbf24;
+  color: var(--secondary-350);
   flex-shrink: 0;
 }
 
@@ -44,7 +44,7 @@
 .emailTitle {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #fbbf24;
+  color: var(--secondary-350);
   line-height: 1;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .emailText strong {
-  color: #fbbf24;
+  color: var(--secondary-350);
   font-weight: 600;
 }
 

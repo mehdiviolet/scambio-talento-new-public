@@ -46,7 +46,7 @@ export const extendedMockupExperiences = [
   },
   {
     id: "exp_1753957192843",
-    title: "Programmazione / Web",
+    title: "Coding / Web",
     lezioni: 4,
     durataLezione: "3 ore",
     costo: 80,
@@ -55,7 +55,7 @@ export const extendedMockupExperiences = [
     partecipanti: 1,
     gemDisponibili: 80,
     skillId: "programming",
-    skillName: "Programmazione",
+    skillName: "Coding",
     skillDetail: "Web",
     icon: "💻",
     modalita: "online",

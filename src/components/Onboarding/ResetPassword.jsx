@@ -45,7 +45,7 @@ const ResetPassword = forwardRef(({ onBackToLogin }, ref) => {
     if (password.length < 6)
       return { strength: 1, label: "Debole", color: "#ef4444" };
     if (password.length < 8)
-      return { strength: 2, label: "Media", color: "#f59e0b" };
+      return { strength: 2, label: "Media", color: "var(--secondary-500)" };
     if (
       password.length >= 8 &&
       /[A-Z]/.test(password) &&

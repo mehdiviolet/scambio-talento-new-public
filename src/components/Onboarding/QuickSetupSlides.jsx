@@ -346,23 +346,22 @@ const QuickSetupSlides = ({ onComplete }) => {
 
   const renderSkillsStep = () => (
     <div className={styles.formSection}>
-      {/* <div className={styles.skillsIntro}>
-        <p>Seleziona le tue competenze! 🎯</p>
-      </div> */}
-
       <div className={styles.skillsGrid}>
         {skillsData.map((skill) => {
           const isSelected = profileData.skills?.find((s) => s.id === skill.id);
           return (
             <div
               key={skill.id}
-              className={`${styles.skillCard} ${
+              className={`${styles.skillCard} ${styles.learning} ${
                 isSelected ? styles.selected : ""
               }`}
               onClick={() => toggleSkill(skill)}
             >
               <div className={styles.skillContent}>
-                <span className={styles.skillIcon}>{skill.icon}</span>
+                {/* <span className={styles.skillIcon}>{skill.icon}</span> */}
+                <span className={styles.skillIcon}>
+                  {skill.icon ? <skill.icon size={24} /> : "⚡"}
+                </span>
                 <span className={styles.skillName}>{skill.name}</span>
               </div>
             </div>
@@ -400,7 +399,10 @@ const QuickSetupSlides = ({ onComplete }) => {
               onClick={() => toggleWantedSkill(skill)}
             >
               <div className={styles.skillContent}>
-                <span className={styles.skillIcon}>{skill.icon}</span>
+                {/* <span className={styles.skillIcon}>{skill.icon}</span> */}
+                <span className={styles.skillIcon}>
+                  {skill.icon ? <skill.icon size={24} /> : "⚡"}
+                </span>
                 <span className={styles.skillName}>{skill.name}</span>
                 {/* {isSelected && (
                   <Heart className={`${styles.iconSm} ${styles.textRed500}`} />
@@ -453,24 +455,6 @@ const QuickSetupSlides = ({ onComplete }) => {
           })}
         </div>
       </div>
-
-      <div className={styles.locationSection}>
-        <h3 className={styles.sectionTitle}>
-          <Target className={`${styles.iconMd} ${styles.textPurple400}`} />
-          Dove ti trovi?
-        </h3>
-        <input
-          type="text"
-          value={profileData.location || ""}
-          onChange={(e) =>
-            updateProfileData({
-              location: e.target.value,
-            })
-          }
-          className={styles.formInput}
-          placeholder="Torino"
-        />
-      </div>
     </div>
   );
 
@@ -478,7 +462,7 @@ const QuickSetupSlides = ({ onComplete }) => {
     <div className={styles.finalSection}>
       <div>
         <h3 className={styles.sectionTitle}>
-          <Sparkles className={`${styles.iconMd} ${styles.textYellow400}`} />
+          {/* <Sparkles className={`${styles.iconMd} ${styles.textYellow400}`} /> */}
           Raccontaci di te!
         </h3>
         <textarea
@@ -494,7 +478,7 @@ const QuickSetupSlides = ({ onComplete }) => {
         />
       </div>
 
-      <div className={styles.settingsCard}>
+      {/* <div className={styles.settingsCard}>
         <div className={styles.settingsContent}>
           <h4>Suggerimenti eventi 🎪</h4>
           <p>Ricevi notifiche su eventi!</p>
@@ -515,16 +499,33 @@ const QuickSetupSlides = ({ onComplete }) => {
             }`}
           />
         </button>
+      </div> */}
+      <div className={styles.locationSection}>
+        <h3 className={styles.sectionTitle}>
+          {/* <Target className={`${styles.iconMd} ${styles.textPurple400}`} /> */}
+          Dove ti trovi?
+        </h3>
+        <input
+          type="text"
+          value={profileData.location || ""}
+          onChange={(e) =>
+            updateProfileData({
+              location: e.target.value,
+            })
+          }
+          className={styles.formInput}
+          placeholder="Torino"
+        />
       </div>
 
-      {currentStep === steps.length - 1 && (
+      {/* {currentStep === steps.length - 1 && (
         <div className={styles.completionCard}>
           <Sparkles
             className={`${styles.iconXl} ${styles.textYellow400} ${styles.completionIcon}`}
           />
           <h3 className={styles.completionTitle}>Quasi pronto! 🎉</h3>
         </div>
-      )}
+      )} */}
     </div>
   );
 
@@ -580,50 +581,50 @@ const QuickSetupSlides = ({ onComplete }) => {
 
           {/* Navigation */}
           <div className={styles.navigation}>
-            <div className={styles.navigationContent}>
-              <button
-                onClick={handlePrev}
-                disabled={currentStep === 0}
-                className={`${styles.navButton} ${styles.prev} ${
-                  currentStep === 0 ? styles.disabled : ""
-                }`}
-              >
-                <ChevronLeft className={styles.iconSm} />
-                {/* <span>Indietro</span> */}
-              </button>
+            {/* <div className={styles.navigationContent}> */}
+            <button
+              onClick={handlePrev}
+              disabled={currentStep === 0}
+              className={`${styles.navButton} ${styles.prev} ${
+                currentStep === 0 ? styles.disabled : ""
+              }`}
+            >
+              <ChevronLeft className={styles.iconSm} />
+              <span>Indietro</span>
+            </button>
 
-              <div className={styles.progressDots}>
-                {steps.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`${styles.progressDot} ${
-                      index === currentStep
-                        ? styles.current
-                        : index < currentStep
-                        ? styles.completed
-                        : styles.pending
-                    }`}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={handleNext}
-                disabled={!canContinue()}
-                className={`${styles.navButton} ${styles.next} ${
-                  !canContinue() ? styles.disabled : ""
-                }`}
-              >
-                {/* <span>
-                  {currentStep === steps.length - 1 ? "Finito!" : "Avanti"}
-                </span> */}
-                {currentStep === steps.length - 1 ? (
-                  <Flame className={styles.iconSm} />
-                ) : (
-                  <ChevronRight className={styles.iconSm} />
-                )}
-              </button>
+            <div className={styles.progressDots}>
+              {steps.map((_, index) => (
+                <div
+                  key={index}
+                  className={`${styles.progressDot} ${
+                    index === currentStep
+                      ? styles.current
+                      : index < currentStep
+                      ? styles.completed
+                      : styles.pending
+                  }`}
+                />
+              ))}
             </div>
+
+            <button
+              onClick={handleNext}
+              disabled={!canContinue()}
+              className={`${styles.navButton} ${styles.next} ${
+                !canContinue() ? styles.disabled : ""
+              }`}
+            >
+              <span>
+                {currentStep === steps.length - 1 ? "Finito!" : "Avanti"}
+              </span>
+              {currentStep === steps.length - 1 ? (
+                <Flame className={styles.iconSm} />
+              ) : (
+                <ChevronRight className={styles.iconSm} />
+              )}
+            </button>
+            {/* </div> */}
           </div>
         </div>
       </div>

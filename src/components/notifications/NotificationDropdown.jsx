@@ -98,7 +98,7 @@ const NotificationDropdown = ({ currentRole, notifications }) => {
         : notification.category === "event"
         ? "#10b981"
         : notification.category === "social"
-        ? "#f59e0b"
+        ? "var(--secondary-500)"
         : "#6b7280";
 
     return (

@@ -16,7 +16,7 @@ const RegisterDemoHelper = ({ onDemoFill }) => {
           height: "36px",
           background: "rgba(251, 191, 36, 0.2)",
           borderRadius: "8px",
-          color: "#fbbf24",
+          color: "var(--secondary-350)",
           flexShrink: 0,
         }}
       >
@@ -39,7 +39,7 @@ const RegisterDemoHelper = ({ onDemoFill }) => {
           style={{
             fontSize: "0.875rem",
             fontWeight: 600,
-            color: "#fbbf24",
+            color: "var(--secondary-350)",
             lineHeight: 1,
           }}
         >

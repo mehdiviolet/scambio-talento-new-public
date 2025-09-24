@@ -26,12 +26,16 @@
 }
 
 .ownerButton {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  background: linear-gradient(
+    135deg,
+    var(--secondary-350) 0%,
+    var(--secondary-500) 100%
+  );
   color: white;
 }
 
 .ownerButton:hover {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, var(--secondary-500) 0%, #d97706 100%);
   transform: translateY(-2px);
 }
 
@@ -120,7 +124,7 @@
 }
 
 .ownerButton:hover {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, var(--secondary-500) 0%, #d97706 100%);
   border-color: rgba(251, 191, 36, 0.5);
 }
 

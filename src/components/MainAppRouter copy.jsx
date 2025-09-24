@@ -220,7 +220,7 @@ const MainAppRouter = () => {
                       lastXpReward >= 30
                         ? "#b81313"
                         : lastXpReward >= 10
-                        ? "#fde047"
+                        ? "var(--secondary-300)"
                         : "rgb(19, 200, 255)",
                     transition: "all 0.3s ease",
                     // animation: xpJustChanged
@@ -263,7 +263,7 @@ const MainAppRouter = () => {
                 // Aggiunge un effetto visivo quando si avvicina al completamento
                 background:
                   percentualeProgress >= 90
-                    ? "linear-gradient(to right, #f59e0b, #fbbf24)"
+                    ? "linear-gradient(to right, var(--secondary-500), var(--secondary-350))"
                     : "linear-gradient(to right, #2e9688, #aaebe2)",
               }}
             />

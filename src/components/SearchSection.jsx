@@ -67,7 +67,7 @@ const SearchSection = () => {
     { id: "graphics", name: "Grafica", icon: Monitor },
     { id: "theater", name: "Teatro", icon: Drama },
     { id: "psychology", name: "Psicologia", icon: Brain },
-    { id: "programming", name: "Programmazione", icon: Code },
+    { id: "programming", name: "Coding", icon: Code },
     { id: "fashion", name: "Fashion", icon: Shirt },
     { id: "health", name: "Salute", icon: Heart },
     { id: "gardening", name: "Giardinaggio", icon: Flower },
