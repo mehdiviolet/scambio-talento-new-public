@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CreateEventModal from "@/components/MainApp/Shared/Modals/CreateEventModal";
 import EventCard from "./EventCard";
-import styles from "./EventsSection.module.css";
 import { useAppSelector } from "../hooks/redux";
 import { selectCurrentUserProfile } from "@/services/userService";
 import { useEvents } from "../hooks/useEvents";
@@ -17,6 +16,11 @@ import { DropdownFilters } from "./ui/SmartFilters";
 import RealEventSlideCard from "./RealEventSlideCard";
 import SlideEventCard from "./SlideEventCard";
 import MyEventCard from "./MyEventCard ";
+
+import baseStyles from "./ExperiencesSection.module.css";
+import extendedStyles from "./EventsSection.module.css";
+
+const styles = { ...baseStyles, ...extendedStyles };
 
 const EventsSection = () => {
   // State per il modal eventi
@@ -123,11 +127,11 @@ const EventsSection = () => {
       icon: "Flame",
       statuses: ["completed"],
     },
-    all: {
-      label: "Tutti",
-      icon: null,
-      statuses: null,
-    },
+    // all: {
+    //   label: "Tutti",
+    //   icon: null,
+    //   statuses: null,
+    // },
   };
 
   // 🎯 USA IL CUSTOM HOOK
@@ -150,47 +154,55 @@ const EventsSection = () => {
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        {/* <h3 className={styles.title}>Eventi Creati ({events.length})</h3> */}
-        <button
-          className={styles.toggleFiltersBtn}
-          onClick={() => setShowFilters(!showFilters)}
-        >
-          Filtri {showFilters ? "↑" : "↓"}
-        </button>
-        {isOwner && events.length !== 0 && (
-          <>
-            <HeaderAddButton
-              onClick={handleOpenCreateModal}
-              title="Crea nuovo evento"
-            />
-          </>
-        )}
-      </div>
-      <div className={styles.filtersContainer}>
         {/* <button
           className={styles.toggleFiltersBtn}
           onClick={() => setShowFilters(!showFilters)}
         >
           Filtri {showFilters ? "↑" : "↓"}
-        </button> */}
-
+        </button>
+      */}
         <div
-          className={`${styles.filterContent} ${
-            showFilters ? styles.open : ""
+          className={`${styles.filtersContainer} ${
+            showFilters ? styles.expanded : ""
           }`}
         >
-          <StatusFilterButtons
-            activeFilter={statusFilter}
-            onFilterChange={setStatusFilter}
-            filterCounts={filterCounts}
-            filterConfig={filterConfig}
-          />
+          <div className={styles.filtersContainer}>
+            <button
+              className={styles.toggleFiltersBtn}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              Filtri {showFilters ? "↑" : "↓"}
+            </button>
+            <div
+              className={`${styles.filterContent} ${
+                showFilters ? styles.open : ""
+              }`}
+            >
+              <StatusFilterButtons
+                activeFilter={statusFilter}
+                onFilterChange={setStatusFilter}
+                filterCounts={filterCounts}
+                filterConfig={filterConfig}
+              />
+            </div>
+          </div>
         </div>
+        {isOwner && (
+          <>
+            <div
+              className={`${styles.addButtonContainer} ${
+                showFilters ? styles.hidden : ""
+              }`}
+            >
+              <HeaderAddButton
+                onClick={handleOpenCreateModal}
+                title="Crea nuovo evento"
+              />
+            </div>
+          </>
+        )}
       </div>
-      {/* <div>
-        <span>Now/</span>
-        <span>past</span>
-      </div> */}
+
       {/* Content */}
       <div className={styles.content}>
         {events.length > 0 ? (
@@ -266,7 +278,7 @@ const EventsSection = () => {
                 <p className={styles.emptyDescription}>
                   Clicca + per creare il tuo primo evento
                 </p> */}
-                <AddEventButton onClick={handleOpenCreateModal} />
+                {/* <AddEventButton onClick={handleOpenCreateModal} /> */}
               </>
             ) : (
               // Viewer Mode - Empty State

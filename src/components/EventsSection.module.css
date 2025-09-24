@@ -1,150 +1,38 @@
-/* EventsSection.module.css - Aggiornato con design system */
+/* EventsSection.module.css - Solo stili specifici/diversi */
 
-.container {
-  width: 355px;
-  position: relative;
-  /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
-  border-bottom: 1px solid #e5e7eb;
-  margin-bottom: 1.25rem;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* padding: 1rem 0; */
-}
-
-.title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
+/* Icona specifica per events */
 .eventsIcon {
   font-size: 1.125rem;
 }
 
-.addButton {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 2rem;
-  width: 2.25rem;
-  height: 2.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: var(--text-primary);
-  font-size: 1.125rem;
-  font-weight: 700;
-}
-
-.addButton:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: var(--text-primary);
-  transform: translateY(-1px);
-}
-
-.addButton:active {
-  transform: scale(0.95);
-}
-
-.disabledMessage {
-  font-size: 0.875rem;
-  color: var(--text-primary-light);
-  font-style: italic;
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  padding: 0 0 1.25rem 0;
-}
-
+/* Grid specifico per events (diverso da experiences) */
 .eventsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
 }
 
-/* Empty State */
-.emptyState {
-  text-align: center;
-  color: var(--text-primary-light);
-}
-
-.emptyIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  opacity: 0.5;
-}
-
-.emptyTitle {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-}
-
-.emptyDescription {
-  font-size: 0.875rem;
-  line-height: 1.4;
-  color: var(--text-primary-light);
-}
-
-/* Filters Container */
-.filtersContainer {
-  /* margin: 1rem 0; */
-  margin: 0.5rem 0;
-  overflow: hidden;
-}
-
-.toggleFiltersBtn {
+/* Bottone toggle filtri con stile specifico */
+/* .toggleFiltersBtn {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 1rem;
-  /* padding: 0.75rem 1rem; */
   color: var(--text-primary);
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.2s ease;
-  /* margin-bottom: 0.75rem; */
   width: auto;
 }
 
 .toggleFiltersBtn:hover {
   color: var(--text-secondary);
   background: rgba(255, 255, 255, 0.15);
-  /* border-color: var(--text-primary); */
-}
+} */
 
-/* Animazione tendina per filtri */
-.filterContent {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-}
-
-.filterContent.open {
-  max-height: 200px;
-}
-
-/* Override per filtri in una riga */
-.filterContent .filterButtons {
+/* Override specifici per filtri in Events */
+/* .filterContent .filterButtons {
   display: flex;
   gap: 0.5rem;
   flex-wrap: nowrap;
@@ -221,4 +109,4 @@
 .filterContent .filterButton.active .filterIconWrapper {
   background: var(--text-primary);
   color: white;
-}
+} */

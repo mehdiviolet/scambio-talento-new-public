@@ -241,13 +241,14 @@ const ExperiencesSection = () => {
                   onFilterChange={setStatusFilter}
                   filterCounts={filterCounts}
                   filterConfig={filterConfig}
+                  totalCount={experiences.length} // ← AGGIUNGI QUESTA LINEA
                 />
               </div>
             </div>
           </div>
           {isOwner && (
             <>
-              {skills && experiences.length > 0 && (
+              {skills && skills.length > 0 && (
                 <div
                   className={`${styles.addButtonContainer} ${
                     showFilters ? styles.hidden : ""
@@ -307,20 +308,8 @@ const ExperiencesSection = () => {
             </div>
           ) : (
             <div className={styles.emptyState}>
-              {isOwner ? (
-                // Owner Mode - Empty State
-                skills && skills.length > 0 ? (
-                  <HeaderAddButton
-                    onClick={handleAddExperience}
-                    title="Crea nuova esperienza"
-                    txt="esperienze"
-                  />
-                ) : (
-                  <>
-                    {/* <AddSkillFirstButton /> */}
-                    <p>Aggiungi prima uno skill</p>
-                  </>
-                )
+              {isOwner && skills.length === 0 ? (
+                <p>Aggiungi prima uno skill</p>
               ) : (
                 <p>Nessuna esperienza</p>
               )}
