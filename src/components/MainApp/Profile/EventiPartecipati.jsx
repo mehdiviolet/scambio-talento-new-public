@@ -1,5 +1,4 @@
-import React from "react";
-import styles from "./ProfilePage.module.css";
+import React, { useState } from "react";
 import MockEventCard from "@/components/MockEventCard";
 import { useSelector } from "react-redux";
 import {
@@ -13,6 +12,11 @@ import StatusFilterButtons from "@/components/StatusFilterButtons";
 import { DropdownFilters } from "@/components/ui/SmartFilters";
 import SlideEventCard from "@/components/SlideEventCard";
 
+import extendedStyles from "./EventiPartecipanti.module.css";
+import baseStyles from "../../../components/ExperiencesSection.module.css";
+
+const styles = { ...baseStyles, ...extendedStyles };
+
 const EventiPartecipati = () => {
   const selectedPersonData = useSelector(
     (state) => state.experienceSliceTest.selectedPersonData
@@ -20,6 +24,7 @@ const EventiPartecipati = () => {
   const isParticipating = useSelector(selectIsParticipating);
 
   const eventState = useAppSelector(selectEventStats);
+  const [showFilters, setShowFilters] = useState(false);
 
   const eventFilterConfig = {
     waiting: {
@@ -38,17 +43,17 @@ const EventiPartecipati = () => {
       statuses: ["completed", "fatto"],
     },
 
-    all: {
-      label: "Tutti",
-      icon: null,
-      statuses: [
-        "waiting",
-        "confirmed",
-        "in svolgimento",
-        "completed",
-        "fatto",
-      ],
-    },
+    // all: {
+    //   label: "Tutti",
+    //   icon: null,
+    //   statuses: [
+    //     "waiting",
+    //     "confirmed",
+    //     "in svolgimento",
+    //     "completed",
+    //     "fatto",
+    //   ],
+    // },
   };
 
   // 🎯 Eventi unificati con status dinamici
@@ -72,8 +77,8 @@ const EventiPartecipati = () => {
   } = useStatusFilter(allEvents, null, eventFilterConfig);
 
   return (
-    <div className={styles.eventsSection}>
-      <h3 className={styles.eventsTitle}>Eventi Partecipati</h3>
+    <div className={styles.container}>
+      {/* <h3 className={styles.eventsTitle}>Eventi Partecipati</h3> */}
 
       {/* <StatusFilterButtons
         activeFilter={statusFilter}
@@ -81,7 +86,7 @@ const EventiPartecipati = () => {
         filterCounts={filterCounts}
         filterConfig={filterConfig}
       /> */}
-      <DropdownFilters
+      {/* <DropdownFilters
         filters={Object.entries(filterConfig).map(([key, config]) => ({
           key,
           label: config.label,
@@ -89,7 +94,37 @@ const EventiPartecipati = () => {
         }))}
         activeFilter={statusFilter}
         onFilterChange={setStatusFilter}
-      />
+      /> */}
+      <div className={styles.header}>
+        <div
+          className={`${styles.filtersContainer} ${
+            showFilters ? styles.expanded : ""
+          }`}
+        >
+          <div className={styles.filtersContainer}>
+            <button
+              className={styles.toggleFiltersBtn}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              Filtri {showFilters ? "↑" : "↓"}
+            </button>
+            <div
+              className={`${styles.filterContent} ${
+                showFilters ? styles.open : ""
+              }`}
+            >
+              {/* Filtri */}
+              <StatusFilterButtons
+                activeFilter={statusFilter}
+                onFilterChange={setStatusFilter}
+                filterCounts={filterCounts}
+                filterConfig={filterConfig}
+                totalCount={allEvents.length}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
       {isParticipating && filteredEvents.length > 0 ? (
         <div className={styles.eventsContainer}>

@@ -86,7 +86,7 @@ const ProfileTabs = () => {
         );
       case "events":
         return (
-          <div className={styles.content}>
+          <>
             <div className={styles.toggleContainer}>
               <button
                 className={`${styles.toggleButton} ${
@@ -113,7 +113,7 @@ const ProfileTabs = () => {
                 <EventsSection />
               )}
             </div>
-          </div>
+          </>
         );
       default:
         return null;

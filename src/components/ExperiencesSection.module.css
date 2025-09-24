@@ -261,25 +261,6 @@
   border-color: #9ca3af;
 }
 
-/* 🆕 RESPONSIVE */
-@media (max-width: 768px) {
-  .showMoreSection {
-    margin-top: 16px;
-    padding: 16px;
-  }
-
-  .showMoreButton {
-    padding: 10px 20px;
-    font-size: 13px;
-    min-width: 180px;
-  }
-
-  .showLessButton {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-}
-
 /* 🆕 ANIMAZIONE FADE-IN per nuove carte */
 .experiencesGrid {
   animation: fadeIn 0.3s ease-in-out;
