@@ -151,63 +151,75 @@ const EventsSection = () => {
   console.log(currentProfile);
 
   return (
-    <div className={styles.container}>
-      {/* Header */}
-      <div className={styles.header}>
-        {/* <button
+    <>
+      {/* Modal per creare/modificare eventi */}
+      <CreateEventModal
+        isOpen={isEventModalOpen}
+        onClose={() => {
+          setIsEventModalOpen(false);
+          setEditingEvent(null);
+        }}
+        onSave={handleSaveEvent}
+        editMode={!!editingEvent}
+        initialData={editingEvent}
+      />
+      <div className={styles.container}>
+        {/* Header */}
+        <div className={styles.header}>
+          {/* <button
           className={styles.toggleFiltersBtn}
           onClick={() => setShowFilters(!showFilters)}
         >
           Filtri {showFilters ? "↑" : "↓"}
         </button>
       */}
-        <div
-          className={`${styles.filtersContainer} ${
-            showFilters ? styles.expanded : ""
-          }`}
-        >
-          <div className={styles.filtersContainer}>
-            <button
-              className={styles.toggleFiltersBtn}
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              Filtri {showFilters ? "↑" : "↓"}
-            </button>
-            <div
-              className={`${styles.filterContent} ${
-                showFilters ? styles.open : ""
-              }`}
-            >
-              <StatusFilterButtons
-                activeFilter={statusFilter}
-                onFilterChange={setStatusFilter}
-                filterCounts={filterCounts}
-                filterConfig={filterConfig}
-              />
+          <div
+            className={`${styles.filtersContainer} ${
+              showFilters ? styles.expanded : ""
+            }`}
+          >
+            <div className={styles.filtersContainer}>
+              <button
+                className={styles.toggleFiltersBtn}
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                Filtri {showFilters ? "↑" : "↓"}
+              </button>
+              <div
+                className={`${styles.filterContent} ${
+                  showFilters ? styles.open : ""
+                }`}
+              >
+                <StatusFilterButtons
+                  activeFilter={statusFilter}
+                  onFilterChange={setStatusFilter}
+                  filterCounts={filterCounts}
+                  filterConfig={filterConfig}
+                />
+              </div>
             </div>
           </div>
+          {isOwner && (
+            <>
+              <div
+                className={`${styles.addButtonContainer} ${
+                  showFilters ? styles.hidden : ""
+                }`}
+              >
+                <HeaderAddButton
+                  onClick={handleOpenCreateModal}
+                  title="Crea nuovo evento"
+                />
+              </div>
+            </>
+          )}
         </div>
-        {isOwner && (
-          <>
-            <div
-              className={`${styles.addButtonContainer} ${
-                showFilters ? styles.hidden : ""
-              }`}
-            >
-              <HeaderAddButton
-                onClick={handleOpenCreateModal}
-                title="Crea nuovo evento"
-              />
-            </div>
-          </>
-        )}
-      </div>
 
-      {/* Content */}
-      <div className={styles.content}>
-        {events.length > 0 ? (
-          <div className={styles.eventsGrid}>
-            {/* {events.map((event) => {
+        {/* Content */}
+        <div className={styles.content}>
+          {events.length > 0 ? (
+            <div className={styles.eventsGrid}>
+              {/* {events.map((event) => {
               const ownerPhoto = getOwnerPhoto();
 
               return (
@@ -228,85 +240,74 @@ const EventsSection = () => {
               );
             })} */}
 
-            {filteredEvents.map((event, i) => {
-              const ownerPhoto = getOwnerPhoto();
-              return (
-                // <RealEventSlideCard
-                //   key={event.id}
-                //   event={event}
-                //   organizer={`${currentProfile?.firstName || "Tu"} ${
-                //     currentProfile?.lastName || ""
-                //   }`}
-                //   organizerPhoto={ownerPhoto}
-                //   isOwner={isOwner}
-                //   onEdit={isOwner ? () => handleEditEvent(event) : undefined}
-                //   onDelete={
-                //     isOwner ? () => handleDeleteEvent(event.id) : undefined
-                //   }
-                //   currentUserEvent={currentUserEvent}
-                // />
-                // <SlideEventCard
-                //   key={event.id}
-                //   isOwner={isOwner}
-                //   selectedPersonData={currentProfile}
-                //   eventId={event.id}
-                //   onEdit={isOwner ? () => handleEditEvent(event) : undefined}
-                //   onDelete={
-                //     isOwner ? () => handleDeleteEvent(event.id) : undefined
-                //   }
-                // />
-                <MyEventCard
-                  isOwner={true}
-                  key={event.id}
-                  eventId={event.id}
-                  // selectedPersonData={currentProfile}
-                  onEdit={isOwner ? () => handleEditEvent(event) : undefined}
-                  onDelete={
-                    isOwner ? () => handleDeleteEvent(event.id) : undefined
-                  }
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <div className={styles.emptyState}>
-            {isOwner ? (
-              // Owner Mode - Empty State
-              <>
-                {/* <div className={styles.emptyIcon}>🎪</div>
+              {filteredEvents.map((event, i) => {
+                const ownerPhoto = getOwnerPhoto();
+                return (
+                  // <RealEventSlideCard
+                  //   key={event.id}
+                  //   event={event}
+                  //   organizer={`${currentProfile?.firstName || "Tu"} ${
+                  //     currentProfile?.lastName || ""
+                  //   }`}
+                  //   organizerPhoto={ownerPhoto}
+                  //   isOwner={isOwner}
+                  //   onEdit={isOwner ? () => handleEditEvent(event) : undefined}
+                  //   onDelete={
+                  //     isOwner ? () => handleDeleteEvent(event.id) : undefined
+                  //   }
+                  //   currentUserEvent={currentUserEvent}
+                  // />
+                  // <SlideEventCard
+                  //   key={event.id}
+                  //   isOwner={isOwner}
+                  //   selectedPersonData={currentProfile}
+                  //   eventId={event.id}
+                  //   onEdit={isOwner ? () => handleEditEvent(event) : undefined}
+                  //   onDelete={
+                  //     isOwner ? () => handleDeleteEvent(event.id) : undefined
+                  //   }
+                  // />
+                  <MyEventCard
+                    isOwner={true}
+                    key={event.id}
+                    eventId={event.id}
+                    // selectedPersonData={currentProfile}
+                    onEdit={isOwner ? () => handleEditEvent(event) : undefined}
+                    onDelete={
+                      isOwner ? () => handleDeleteEvent(event.id) : undefined
+                    }
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <div className={styles.emptyState}>
+              {isOwner ? (
+                // Owner Mode - Empty State
+                <>
+                  {/* <div className={styles.emptyIcon}>🎪</div>
                 <h4 className={styles.emptyTitle}>Nessun evento creato</h4>
                 <p className={styles.emptyDescription}>
                   Clicca + per creare il tuo primo evento
                 </p> */}
-                {/* <AddEventButton onClick={handleOpenCreateModal} /> */}
-              </>
-            ) : (
-              // Viewer Mode - Empty State
-              <>
-                {/* <div className={styles.emptyIcon}>👀</div>
+                  {/* <AddEventButton onClick={handleOpenCreateModal} /> */}
+                </>
+              ) : (
+                // Viewer Mode - Empty State
+                <>
+                  {/* <div className={styles.emptyIcon}>👀</div>
                 <h4 className={styles.emptyTitle}>Nessun evento disponibile</h4>
                 <p className={styles.emptyDescription}>
                   Questo utente non ha ancora creato eventi
                 </p> */}
-                <p className={styles.emptyTitle}>Nessun evento disponibile</p>
-              </>
-            )}
-          </div>
-        )}
+                  <p className={styles.emptyTitle}>Nessun evento disponibile</p>
+                </>
+              )}
+            </div>
+          )}
+        </div>
       </div>
-
-      {/* Modal per creare/modificare eventi */}
-      <CreateEventModal
-        isOpen={isEventModalOpen}
-        onClose={() => {
-          setIsEventModalOpen(false);
-          setEditingEvent(null);
-        }}
-        onSave={handleSaveEvent}
-        editMode={!!editingEvent}
-        initialData={editingEvent}
-      />
-    </div>
+    </>
   );
 };
 

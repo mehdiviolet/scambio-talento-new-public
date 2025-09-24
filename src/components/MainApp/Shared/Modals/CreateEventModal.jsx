@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { X, ArrowLeft, Upload } from "lucide-react";
-import styles from "./CreateEventModal.module.css";
 import { Calendar, Clock, MapPin, Users, Globe, Languages } from "lucide-react";
+
+import baseStyles from "./AddSkillModal.module.css";
+import extendedStyles from "./CreateEventModal.module.css";
+
+const styles = { ...baseStyles, ...extendedStyles };
 
 const CreateEventModal = ({
   isOpen,
