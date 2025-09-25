@@ -574,7 +574,7 @@ const QuickSetupSlides = ({ onComplete }) => {
             return (
               <div
                 key={language.name}
-                className={`${styles.languageCard} ${
+                className={`${styles.skillCard} ${styles.learning} ${
                   isSelected ? styles.selected : ""
                 }`}
                 onClick={() => toggleLanguage(language)}

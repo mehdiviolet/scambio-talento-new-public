@@ -14,13 +14,13 @@
   /* background: linear-gradient(135deg, #6366f1 50%, #3b82f6 100%); */
   /* background: linear-gradient(
     135deg,
-    var(--text-tertiary) 50%,
+    var(--on-surface-variant) 50%,
     var(--text-primary) 100%
   ); */
   background: linear-gradient(
     135deg,
-    /* var(--text-tertiary) 50%, */ var(--primary-600) 50%,
-    var(--primary-900) 100%
+    /* var(--on-surface-variant) 50%, */ var(--primary-container) 50%,
+    var(--primary-container) 100%
   );
 }
 
@@ -31,63 +31,10 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  /* background: radial-gradient(
-      circle at 20% 80%,
-      rgba(59, 130, 246, 0.3) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(34, 211, 238, 0.3) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 40% 40%,
-      rgba(99, 102, 241, 0.2) 0%,
-      transparent 70%
-    ); */
-  /* background: radial-gradient(
-      circle at 25% 25%,
-      rgba(168, 85, 247, 0.3) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 75% 75%,
-      rgba(59, 130, 246, 0.3) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(236, 72, 153, 0.2) 0%,
-      transparent 70%
-    ); */
+
   animation: bgFloat 10s ease-in-out infinite;
 }
 
-/* @keyframes bgFloat {
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  50% {
-    transform: translate(-30px, -30px) rotate(2deg);
-  }
-} */
-
-/* .registerCard {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  max-width: 420px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(25px);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  padding: 3rem 2.5rem;
-  animation: cardFloat 6s ease-in-out infinite;
-} */
 .registerCard {
   position: relative;
   z-index: 10;
@@ -112,36 +59,10 @@
   }
 } */
 
-.cardHeader {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.title {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 0.5rem 0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  letter-spacing: -0.02em;
-}
-
 .subtitle {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: color-mix(in srgb, var(--on-primary-container) 80%, transparent);
   margin: 0 0 1rem 0;
-  font-weight: 500;
-}
-
-.errorMessage {
-  background: rgba(239, 68, 68, 0.15);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 12px;
-  color: #fca5a5;
-  padding: 0.75rem 1rem;
-  margin-top: 1rem;
-  font-size: 0.875rem;
   font-weight: 500;
 }
 
@@ -151,92 +72,8 @@
   gap: 1.25rem;
 }
 
-.inputGroup {
-  position: relative;
-}
-
-.inputWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
-
-.inputWrapper:focus-within {
-  border-color: rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-.inputWrapper.error {
-  border-color: rgba(239, 68, 68, 0.7);
-  background: rgba(239, 68, 68, 0.1);
-}
-
-.formInput {
-  flex: 1;
-  padding: 1rem 1.25rem;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  color: #ffffff;
-  font-weight: 500;
-}
-
-.formInput::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 400;
-}
-
-.formInput:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.formInput:-webkit-autofill,
-.formInput:-webkit-autofill:hover,
-.formInput:-webkit-autofill:focus,
-.formInput:-webkit-autofill:active {
-  transition: background-color 5000s ease-in-out 0s;
-  -webkit-text-fill-color: #ffffff !important;
-  background-color: transparent !important;
-}
-
-.inputIcon {
-  padding: 0 1.25rem;
-  color: rgba(255, 255, 255, 0.7);
-  display: flex;
-  align-items: center;
-}
-
-.passwordToggle {
-  padding: 0 1.25rem;
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: color 0.3s ease;
-}
-
-.passwordToggle:hover:not(:disabled) {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.passwordToggle:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
 .errorText {
-  color: #fca5a5;
+  color: var(--on-error-container);
   font-size: 0.875rem;
   margin-top: 0.5rem;
   display: block;
@@ -253,7 +90,7 @@
 .strengthMeter {
   flex: 1;
   height: 4px;
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--on-primary-container) 20%, transparent);
   border-radius: 2px;
   overflow: hidden;
 }
@@ -274,70 +111,10 @@
   margin: 0.5rem 0;
 }
 
-.checkboxLabel {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  /* font-size: 0.875rem; */
-  font-size: 0.83rem;
-  color: rgba(255, 255, 255, 0.9);
-  cursor: pointer;
-  position: relative;
-  line-height: 1.5;
-}
-
-.checkboxLabel.error {
-  color: #fca5a5;
-}
-
-.checkbox {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.checkbox:checked {
-  background: linear-gradient(135deg, #22d3ee, #3b82f6);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-.checkbox:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.checkmark {
-  position: absolute;
-  left: 0;
-  top: 2px;
-  width: 18px;
-  height: 18px;
-  pointer-events: none;
-}
-
-.checkbox:checked + .checkmark::after {
-  content: "✓";
-  position: absolute;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .linkButton {
   background: none;
   border: none;
-  color: #22d3ee;
+  color: var(--on-primary-container);
   text-decoration: underline;
   cursor: pointer;
   font-size: inherit;
@@ -346,25 +123,26 @@
 }
 
 .linkButton:hover {
-  color: #60a5fa;
+  color: var(--on-primary-container);
 }
 
-.registerButton {
+/* .registerButton {
   width: 100%;
   padding: 1.125rem;
   background: linear-gradient(
     135deg,
-    #ffffff 0%,
-    rgba(255, 255, 255, 0.9) 100%
+    var(--on-primary-container) 0%,
+    color-mix(in srgb, var(--on-primary-container) 90%, transparent) 100%
   );
   border: none;
   border-radius: 16px;
   font-size: 1rem;
   font-weight: 600;
-  color: #3b82f6;
+  color: var(--on-primary-container);
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px
+    color-mix(in srgb, var(--on-primary-container) 20%, transparent);
   margin-top: 1rem;
   display: flex;
   align-items: center;
@@ -374,47 +152,34 @@
 
 .registerButton:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 8px 25px
+    color-mix(in srgb, var(--on-primary-container) 30%, transparent);
+  background: linear-gradient(
+    135deg,
+    var(--on-primary-container) 0%,
+    var(--surface) 100%
+  );
 }
 
 .registerButton:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
-  background: rgba(107, 114, 128, 0.3);
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid transparent;
-  border-top: 2px solid #3b82f6;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-/* @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  background: color-mix(in srgb, var(--on-surface-variant) 30%, transparent);
+  color: color-mix(in srgb, var(--on-primary-container) 50%, transparent);
 } */
 
 .loginPrompt {
   text-align: center;
   margin-top: 1.5rem;
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: color-mix(in srgb, var(--on-primary-container) 80%, transparent);
 }
 
 .loginLink {
   background: none;
   border: none;
-  color: #22d3ee;
+  color: var(--primary);
   font-weight: 600;
   cursor: pointer;
   text-decoration: underline;
@@ -423,7 +188,7 @@
 }
 
 .loginLink:hover:not(:disabled) {
-  color: #60a5fa;
+  color: var(--on-primary-container);
 }
 
 .loginLink:disabled {
@@ -436,31 +201,31 @@
   text-align: center;
   margin-top: 1rem;
   padding: 0.75rem;
-  background: rgba(34, 211, 238, 0.1);
-  border: 1px solid rgba(34, 211, 238, 0.2);
+  background: color-mix(in srgb, var(--tertiary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tertiary) 20%, transparent);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .demoHelper:hover {
-  background: rgba(34, 211, 238, 0.15);
-  border-color: rgba(34, 211, 238, 0.3);
+  background: color-mix(in srgb, var(--tertiary) 15%, transparent);
+  border-color: color-mix(in srgb, var(--tertiary) 30%, transparent);
   /* transform: translateY(-1px); */
 }
 
 .demoHelper small {
-  color: rgba(255, 255, 255, 0.8);
+  color: color-mix(in srgb, var(--on-primary-container) 80%, transparent);
   font-size: 0.75rem;
   line-height: 1.4;
 }
 
 .demoHelper strong {
-  color: #22d3ee;
+  color: var(--tertiary);
 }
 
 .clickHint {
-  color: rgba(255, 255, 255, 0.6);
+  color: color-mix(in srgb, var(--on-primary-container) 60%, transparent);
   font-size: 0.7rem;
   font-style: italic;
 }

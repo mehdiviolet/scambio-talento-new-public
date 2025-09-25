@@ -176,7 +176,7 @@ const MainAppRouter = () => {
               <div style={{ fontWeight: "600", color: "var(--text-primary)" }}>
                 {selectedChat?.name || "Chat"}
               </div>
-              <div style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
+              <div style={{ fontSize: "14px", color: "var(--secondary)" }}>
                 Online ora
               </div>
             </div>
@@ -354,7 +354,7 @@ const MainAppRouter = () => {
                 onClick={() => setIsCookieModalOpen(true)}
                 style={{ cursor: "pointer" }}
               >
-                <Cookie style={{ color: "var(--text-secondary)" }} />
+                <Cookie style={{ color: "var(--secondary)" }} />
               </div>
             </div>
 
@@ -363,7 +363,7 @@ const MainAppRouter = () => {
               onClick={() => setsStarteModalOpen(true)}
               style={{ cursor: "pointer" }}
             >
-              <Star style={{ color: "var(--text-secondary)" }} />
+              <Star style={{ color: "var(--secondary)" }} />
             </div>
 
             <div
@@ -371,7 +371,7 @@ const MainAppRouter = () => {
               onClick={() => setIsActivityModalOpen(true)}
               style={{ cursor: "pointer" }}
             >
-              <Activity style={{ color: "var(--text-secondary)" }} />
+              <Activity style={{ color: "var(--secondary)" }} />
             </div>
           </div>
 
@@ -381,7 +381,7 @@ const MainAppRouter = () => {
               onClick={() => setIsChatModalOpen(true)}
               style={{ cursor: "pointer" }}
             >
-              <Bell style={{ color: "var(--text-secondary)" }} />
+              <Bell style={{ color: "var(--secondary)" }} />
               {allNotifications.hasUnread && (
                 <div
                   className={`${styles.notificationBadge} ${

@@ -1,7 +1,10 @@
 /* MainAppRouter.module.css - CSS isolato */
 .screen {
   /* background: #cab9b9; */
+  background: var(--background);
   overflow: hidden;
+  color: var(--on-background);
+  /* color: yellowgreen; */
 }
 
 .screenBg {

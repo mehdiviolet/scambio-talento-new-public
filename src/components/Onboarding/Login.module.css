@@ -37,11 +37,12 @@
     ); */
   animation: bgFloat 8s ease-in-out infinite;
   /* background: linear-gradient(135deg, #6366f1 50%, #3b82f6 100%); */
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
-    /* var(--text-tertiary) 50%, */ var(--primary-600) 50%,
-    var(--primary-900) 100%
-  );
+    var(--primary-container) 50%,
+    var(--primary-container) 100%
+  ); */
+  background-color: var(--primary-container);
 }
 
 /* @keyframes bgFloat {
@@ -90,9 +91,10 @@
 .title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--on-primary-container);
   margin: 0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 8px
+    color-mix(in srgb, var(--on-background) 30%, transparent);
   letter-spacing: -0.02em;
 }
 
@@ -110,18 +112,24 @@
   position: relative;
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
   backdrop-filter: blur(15px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid
+    color-mix(in srgb, var(--on-primary-container) 20%, transparent);
   border-radius: 16px;
   transition: all 0.3s ease;
   overflow: hidden;
 }
 
 .inputWrapper:focus-within {
-  border-color: rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  border-color: color-mix(
+    in srgb,
+    var(--on-primary-container) 40%,
+    transparent
+  );
+  background: color-mix(in srgb, var(--on-primary) 30%, transparent);
+  box-shadow: 0 0 20px
+    color-mix(in srgb, var(--on-primary-container) 10%, transparent);
 }
 
 .formInput {
@@ -131,12 +139,12 @@
   border: none;
   outline: none;
   font-size: 1rem;
-  color: #ffffff;
+  color: var(--on-primary-container);
   font-weight: 500;
 }
 
 .formInput::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: color-mix(in srgb, var(--on-primary-container) 60%, transparent);
   font-weight: 400;
 }
 
@@ -145,13 +153,13 @@
 .formInput:-webkit-autofill:focus,
 .formInput:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
-  -webkit-text-fill-color: #ffffff !important;
+  -webkit-text-fill-color: var(--on-primary-container) !important;
   background-color: transparent !important;
 }
 
 .inputIcon {
   padding: 0 1.25rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: color-mix(in srgb, var(--on-primary-container) 70%, transparent);
   display: flex;
   align-items: center;
 }
@@ -160,7 +168,7 @@
   padding: 0 1.25rem;
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: color-mix(in srgb, var(--on-primary-container) 70%, transparent);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -168,7 +176,7 @@
 }
 
 .passwordToggle:hover {
-  color: rgba(255, 255, 255, 0.9);
+  color: color-mix(in srgb, var(--on-primary-container) 90%, transparent);
 }
 
 .formOptions {
@@ -184,7 +192,7 @@
   align-items: center;
   gap: 0.75rem;
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: color-mix(in srgb, var(--on-primary-container) 90%, transparent);
   cursor: pointer;
   position: relative;
 }
@@ -193,17 +201,22 @@
   appearance: none;
   width: 18px;
   height: 18px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid
+    color-mix(in srgb, var(--on-primary-container) 30%, transparent);
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--on-primary-container) 10%, transparent);
   cursor: pointer;
   position: relative;
   transition: all 0.3s ease;
 }
 
 .checkbox:checked {
-  background: linear-gradient(135deg, #22d3ee, #3b82f6);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(135deg, var(--primary), var(--primary));
+  border-color: color-mix(
+    in srgb,
+    var(--on-primary-container) 50%,
+    transparent
+  );
 }
 
 .checkmark {
@@ -229,7 +242,7 @@
 .forgotPassword {
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.8);
+  color: color-mix(in srgb, var(--primary) 80%, transparent);
   font-size: 0.875rem;
   cursor: pointer;
   text-decoration: underline;
@@ -237,35 +250,49 @@
 }
 
 .forgotPassword:hover {
-  color: #22d3ee;
+  color: var(--on-tertiary-container);
 }
 
-.loginButton {
+.loginButton,
+.registerButton {
   width: 100%;
   padding: 1.125rem;
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
-    #ffffff 0%,
-    rgba(255, 255, 255, 0.9) 100%
-  );
+    var(--on-primary-container) 0%,
+    color-mix(in srgb, var(--on-primary-container) 90%, transparent) 100%
+  ); */
   border: none;
   border-radius: 16px;
   font-size: 1rem;
   font-weight: 600;
-  color: #3b82f6;
+  /* color: var(--primary); */
+  background: var(--primary);
+  color: var(--on-primary);
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px
+    color-mix(in srgb, var(--on-primary-container) 20%, transparent);
   margin-top: 1rem;
 }
 
-.loginButton:hover {
+.loginButton:hover,
+.registerButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 8px 25px
+    color-mix(in srgb, var(--on-primary-container) 30%, transparent);
+  /* background: linear-gradient(
+    135deg,
+    var(--on-primary-container) 0%,
+    var(--surface) 100%
+  ); */
+
+  background: color-mix(in srgb, var(--primary) 92%, var(--on-primary) 8%);
+  color: var(--on-primary);
 }
 
-.loginButton:active {
+.loginButton:active,
+.registerButton:active {
   transform: translateY(0);
 }
 
@@ -273,13 +300,13 @@
   text-align: center;
   margin-top: 1.5rem;
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: color-mix(in srgb, var(--on-primary-container) 80%, transparent);
 }
 
 .registerLink {
   background: none;
   border: none;
-  color: #22d3ee;
+  color: var(--primary);
   font-weight: 600;
   cursor: pointer;
   text-decoration: underline;
@@ -288,7 +315,7 @@
 }
 
 .registerLink:hover {
-  color: #60a5fa;
+  color: var(--on-tertiary-container);
 }
 
 /* Responsive Design */
@@ -329,7 +356,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.1),
+    color-mix(in srgb, var(--on-primary-container) 10%, transparent),
     transparent
   );
   transition: left 0.5s ease;
@@ -341,11 +368,11 @@
 
 /* Nuovi stili per errori e loading */
 .errorMessage {
-  background: rgba(239, 68, 68, 0.15);
+  background: color-mix(in srgb, var(--error) 15%, transparent);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  border: 1px solid color-mix(in srgb, var(--error) 30%, transparent);
   border-radius: 12px;
-  color: #fca5a5;
+  color: var(--on-error-container);
   padding: 0.75rem 1rem;
   margin-top: 1rem;
   font-size: 0.875rem;
@@ -354,8 +381,8 @@
 }
 
 .inputWrapper.error {
-  border-color: rgba(239, 68, 68, 0.7);
-  background: rgba(239, 68, 68, 0.1);
+  border-color: color-mix(in srgb, var(--error) 70%, transparent);
+  background: color-mix(in srgb, var(--error) 10%, transparent);
 }
 
 .formInput:disabled {
@@ -383,18 +410,19 @@
   cursor: not-allowed;
 }
 
-.loginButton:disabled {
+.loginButton:disabled,
+.registerButton:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
-  background: rgba(107, 114, 128, 0.3);
+  background: color-mix(in srgb, var(--on-surface-variant) 30%, transparent);
 }
 
 .spinner {
   width: 20px;
   height: 20px;
   border: 2px solid transparent;
-  border-top: 2px solid #3b82f6;
+  border-top: 2px solid var(--primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin-right: 0.5rem;
@@ -409,7 +437,8 @@
   }
 }
 
-.loginButton {
+.loginButton,
+.registerButton {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -420,27 +449,27 @@
   text-align: center;
   margin-top: 1rem;
   padding: 0.75rem;
-  background: rgba(34, 211, 238, 0.1);
-  border: 1px solid rgba(34, 211, 238, 0.2);
+  background: color-mix(in srgb, var(--tertiary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tertiary) 20%, transparent);
   border-radius: 12px;
 }
 
 .demoCredentials small {
-  color: rgba(255, 255, 255, 0.8);
+  color: color-mix(in srgb, var(--on-primary-container) 80%, transparent);
   font-size: 0.75rem;
   line-height: 1.4;
 }
 
 .demoCredentials strong {
-  color: #22d3ee;
+  color: var(--tertiary);
 }
 
 .demoCredentials {
   text-align: center;
   margin-top: 1rem;
   padding: 0.75rem;
-  background: rgba(34, 211, 238, 0.1);
-  border: 1px solid rgba(34, 211, 238, 0.2);
+  background: color-mix(in srgb, var(--tertiary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tertiary) 20%, transparent);
   border-radius: 12px;
   cursor: pointer; /* ✅ Aggiunto */
   transition: all 0.3s ease; /* ✅ Aggiunto */
@@ -448,14 +477,14 @@
 
 .demoCredentials:hover {
   /* ✅ Aggiunto */
-  background: rgba(34, 211, 238, 0.15);
-  border-color: rgba(34, 211, 238, 0.3);
+  background: color-mix(in srgb, var(--tertiary) 15%, transparent);
+  border-color: color-mix(in srgb, var(--tertiary) 30%, transparent);
   transform: translateY(-1px);
 }
 
 .clickHint {
   /* ✅ Aggiunto */
-  color: rgba(255, 255, 255, 0.6);
+  color: color-mix(in srgb, var(--on-primary-container) 60%, transparent);
   font-size: 0.7rem;
   font-style: italic;
 }

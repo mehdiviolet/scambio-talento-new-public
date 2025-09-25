@@ -26,8 +26,9 @@ const CookieModal = ({ isOpen, onClose, userXP }) => {
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
-          {/* <h3>Experience Points</h3> */}
           <h3>XP Totali</h3>
+          {/* <h3>XP</h3> */}
+          {/* <Cookie size={32} className={styles.xpIcon} /> */}
           {/* <button className={styles.closeButton} onClick={onClose}>
             <X size={20} />
           </button> */}
@@ -41,9 +42,10 @@ const CookieModal = ({ isOpen, onClose, userXP }) => {
             <div className={styles.xpValue}>
               <span className={styles.valueNumber}>{userXP}</span>
               <Cookie size={32} className={styles.xpIcon} />
+              {/* <h1>XP</h1> */}
             </div>
 
-            <h4 className={styles.xpTitle}>XP Totali</h4>
+            {/* <h4 className={styles.xpTitle}>XP Totali</h4> */}
 
             {/* Progress Bar */}
             {/* <div className={styles.progressContainer}>

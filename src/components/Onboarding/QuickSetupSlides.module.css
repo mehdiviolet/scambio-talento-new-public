@@ -22,13 +22,13 @@
 .bgCircle1 {
   top: 5rem;
   left: 5rem;
-  background: linear-gradient(135deg, #22d3ee, #60a5fa);
+  background: linear-gradient(135deg, var(--tertiary), var(--primary));
 }
 
 .bgCircle2 {
   bottom: 5rem;
   right: 5rem;
-  background: linear-gradient(135deg, #3b82f6, #22d3ee);
+  background: linear-gradient(135deg, var(--primary), var(--tertiary));
   animation-delay: 2s;
 }
 
@@ -61,13 +61,13 @@
   /* background: linear-gradient(135deg, #457fa8 50%, #3b82f6 100%); */
   /* background: linear-gradient(
     135deg,
-    var(--text-tertiary) 50%,
+    var(--on-surface-variant) 50%,
     var(--text-primary) 100%
   ); */
   background: linear-gradient(
     135deg,
-    /* var(--text-tertiary) 50%, */ var(--primary-600) 50%,
-    var(--primary-900) 100%
+    var(--primary-container) 50%,
+    var(--primary-container) 100%
   );
   backdrop-filter: var(--backdrop-blur);
   border-radius: var(--card-border-radius);
@@ -88,7 +88,7 @@
 /* Welcome Screen */
 .welcomeContent {
   text-align: center;
-  color: var(--bianco);
+  color: var(--on-primary-container);
   z-index: 10;
   padding: 2rem;
   margin: auto;
@@ -97,6 +97,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+  color: var(--primary);
 }
 
 .welcomeIcon {
@@ -107,13 +108,15 @@
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  color: var(--bianco);
+  text-shadow: 0 2px 4px
+    color-mix(in srgb, var(--on-background) 30%, transparent);
+  /* color: var(--on-primary-container); */
+  /* color: var(--primary); */
 }
 
 .welcomeSubtitle {
   font-size: 1.5rem;
-  color: var(--text-secondary);
+  /* color: var(--text-secondary); */
 }
 
 /* Achievement Popup */
@@ -124,10 +127,11 @@
   z-index: 100;
   background: var(--achievement-gradient);
   backdrop-filter: blur(20px) saturate(180%);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid color-mix(in srgb, var(--on-primary) 30%, transparent);
   border-radius: var(--border-radius-large);
-  box-shadow: 0 20px 40px rgba(255, 165, 0, 0.4), 0 10px 20px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 0 20px 40px color-mix(in srgb, var(--secondary) 40%, transparent),
+    0 10px 20px color-mix(in srgb, var(--on-background) 20%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--on-primary) 40%, transparent);
   padding: 1rem 1.5rem;
   animation: achievementEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
     achievementBounce 1s ease-in-out infinite alternate;
@@ -143,19 +147,21 @@
 
 .achievementIcon {
   font-size: 1.875rem;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(
+    0 4px 8px color-mix(in srgb, var(--on-background) 30%, transparent)
+  );
 }
 
 .achievementText {
   flex: 1;
-  color: #1a1a1a;
+  color: var(--on-background);
 }
 
 .achievementText h4 {
   font-weight: 700;
   font-size: 1.125rem;
   margin-bottom: 0.25rem;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 2px color-mix(in srgb, var(--on-primary) 50%, transparent);
   letter-spacing: 0.5px;
 }
 
@@ -164,15 +170,15 @@
   margin: 0;
   opacity: 0.8;
   font-weight: 500;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 1px color-mix(in srgb, var(--on-primary) 30%, transparent);
 }
 
 /* Game HUD */
 .gameHud {
   flex-shrink: 0;
   width: 100%;
-  /* color: var(--bianco); */
-  color: var(--bianco);
+  /* color: var(--on-primary-container); */
+  color: var(--on-primary-container);
   padding: 1.25rem 1.5rem;
   position: sticky;
   z-index: 3;
@@ -199,6 +205,7 @@
   align-items: center;
   gap: 0.5rem;
   font-weight: 600;
+  color: var(--secondary);
 }
 
 .hudLevel {
@@ -222,12 +229,12 @@
   justify-content: space-between;
   font-size: 0.875rem;
   margin-bottom: 0.5rem;
-  color: rgba(191, 219, 254, 1);
+  color: var(--on-primary-container);
 }
 
 .progressBar {
   width: 100%;
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--secondary) 10%, transparent);
   border-radius: 9999px;
   height: 0.5rem;
   overflow: hidden;
@@ -236,8 +243,8 @@
 .progressFill {
   background: linear-gradient(
     to right,
-    var(--secondary-350),
-    var(--secondary-600)
+    var(--secondary),
+    color-mix(in srgb, var(--secondary) 50%, transparent)
   );
   height: 100%;
   border-radius: 9999px;
@@ -272,16 +279,17 @@
   /* font-size: 2.25rem; */
   font-size: 2rem;
   font-weight: 700;
-  /* color: var(--bianco); */
-  color: var(--bianco);
+  /* color: var(--on-primary-container); */
+  color: var(--on-primary-container);
 
   margin-bottom: 0.5rem;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 8px
+    color-mix(in srgb, var(--on-background) 30%, transparent);
 }
 
 .stepSubtitle {
   font-size: 1.25rem;
-  color: rgba(191, 219, 254, 1);
+  color: var(--on-primary-container);
 }
 
 /* Form Styles */
@@ -313,7 +321,9 @@
   justify-content: center;
   overflow: hidden;
   box-shadow: var(--shadow-medium);
-  border: 4px solid rgba(255, 255, 255, 0.3);
+  /* border: 4px solid color-mix(in srgb, var(--on-primary) 30%, transparent); */
+  border: 4px solid color-mix(in srgb, var(--primary) 20%, transparent);
+  color: var(--on-primary-container);
 }
 
 .avatar img {
@@ -326,8 +336,10 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background: linear-gradient(to right, #22d3ee, #3b82f6);
-  color: var(--bianco);
+  /* background: linear-gradient(to right, var(--tertiary), var(--primary)); */
+  background: color-mix(in srgb, var(--primary) 30%, transparent);
+  border: 2px solid color-mix(in srgb, var(--primary) 20%, transparent);
+  color: var(--on-primary-container);
   padding: 0.75rem;
   border-radius: 50%;
   cursor: pointer;
@@ -365,7 +377,7 @@
   gap: 0.75rem;
   padding: 1rem 1.25rem;
   background: var(--glass-bg);
-  border: 2px solid var(--glass-border);
+  border: 2px solid color-mix(in srgb, var(--primary) 20%, transparent);
   border-radius: var(--border-radius);
   transition: var(--transition-normal);
   backdrop-filter: var(--backdrop-blur);
@@ -375,19 +387,21 @@
   /* border-color: rgba(96, 165, 250, 0.7);
   background: var(--glass-bg-light); */
 
-  border-color: #22d3ee;
-  background: rgba(34, 211, 238, 0.2);
-  box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
+  border-color: var(--tertiary);
+  background: color-mix(in srgb, var(--tertiary) 20%, transparent);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--tertiary) 30%, transparent);
 }
 
 .formInput {
   width: 100%;
   padding: 1rem 1.25rem;
   background: var(--glass-bg);
-  border: 2px solid var(--glass-border);
+  /* border: 2px solid var(--glass-border); */
+  border: 2px solid color-mix(in srgb, var(--primary) 20%, transparent);
+
   border-radius: var(--border-radius);
   font-size: 1rem;
-  color: var(--bianco);
+  color: var(--on-primary-container);
   /* color: var(--gray-300); */
   transition: var(--transition-normal);
   outline: none;
@@ -395,15 +409,16 @@
 }
 
 .formInput::placeholder {
-  color: var(--text-muted);
+  /* color: var(--text-muted); */
+  color: var(--outline);
 }
 
 .formInput:focus {
   /* border-color: rgba(96, 165, 250, 0.7);
   background: var(--glass-bg-light); */
-  border-color: #22d3ee;
-  background: rgba(34, 211, 238, 0.2);
-  box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
+  border-color: var(--tertiary);
+  background: color-mix(in srgb, var(--tertiary) 20%, transparent);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--tertiary) 30%, transparent);
 }
 
 .inputGroup.withIcon .formInput {
@@ -418,7 +433,7 @@
   position: absolute;
   right: 1rem;
   top: 1rem;
-  color: #f87171;
+  color: var(--error);
   font-weight: bold;
 }
 
@@ -440,7 +455,7 @@
 
 .skillsIntro p {
   font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: color-mix(in srgb, var(--on-primary) 90%, transparent);
 }
 
 .skillsGrid {
@@ -455,7 +470,7 @@
 .skillCard {
   padding: 0.5rem;
   background: var(--glass-bg);
-  border: 2px solid var(--glass-border);
+  border: 2px solid color-mix(in srgb, var(--primary) 20%, transparent);
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: var(--transition-normal);
@@ -466,23 +481,23 @@
 }
 
 .skillCard:hover {
-  border-color: rgba(96, 165, 250, 0.5);
+  border-color: color-mix(in srgb, var(--primary) 50%, transparent);
   background: var(--glass-bg-light);
   transform: translateY(-2px);
   box-shadow: var(--shadow-medium);
 }
 
 .skillCard.selected {
-  border-color: #60a5fa;
-  background: rgba(59, 130, 246, 0.2);
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 20%, transparent);
   transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 25px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
 .skillCard.learning.selected {
-  border-color: #22d3ee;
-  background: rgba(34, 211, 238, 0.2);
-  box-shadow: 0 8px 25px rgba(34, 211, 238, 0.3);
+  border-color: var(--tertiary);
+  background: color-mix(in srgb, var(--tertiary) 20%, transparent);
+  box-shadow: 0 8px 25px color-mix(in srgb, var(--tertiary) 30%, transparent);
 }
 
 .skillContent {
@@ -496,12 +511,12 @@
 .skillIcon {
   font-size: 1.5rem;
   display: block;
-  color: var(--bianco);
+  color: var(--on-primary-container);
 }
 
 .skillName {
   font-weight: 500;
-  color: var(--bianco);
+  color: var(--on-primary-container);
   font-size: 0.875rem;
 }
 
@@ -525,7 +540,7 @@
 .sectionTitle {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--bianco);
+  color: var(--on-primary-container);
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
@@ -542,23 +557,23 @@
   /* padding: 0.75rem; */
   padding: 0.5rem;
   background: var(--glass-bg);
-  border: 2px solid var(--glass-border);
+  border: 2px solid color-mix(in srgb, var(--primary) 20%, transparent);
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: var(--transition-normal);
   backdrop-filter: var(--backdrop-blur);
-  color: var(--bianco);
+  color: var(--on-primary-container);
 }
 
 .languageCard:hover {
-  border-color: rgba(34, 211, 238, 0.5);
+  border-color: color-mix(in srgb, var(--tertiary) 50%, transparent);
   background: var(--glass-bg-light);
 }
 
 .languageCard.selected {
-  border-color: #22d3ee;
-  background: rgba(34, 211, 238, 0.2);
-  box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
+  border-color: var(--tertiary);
+  background: color-mix(in srgb, var(--tertiary) 20%, transparent);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--tertiary) 30%, transparent);
 }
 
 .languageContent {
@@ -573,7 +588,7 @@
 
 .languageName {
   font-weight: 500;
-  color: var(--bianco);
+  color: var(--on-primary-container);
   font-size: 0.875rem;
 }
 
@@ -588,10 +603,10 @@
   width: 100%;
   padding: 1rem 1.25rem;
   background: var(--glass-bg);
-  border: 2px solid var(--glass-border);
+  border: 2px solid color-mix(in srgb, var(--primary) 20%, transparent);
   border-radius: var(--border-radius);
   font-size: 1rem;
-  color: var(--bianco);
+  color: var(--on-primary-container);
   transition: var(--transition-normal);
   outline: none;
   resize: none;
@@ -600,7 +615,8 @@
 }
 
 .aboutTextarea::placeholder {
-  color: var(--text-muted);
+  /* color: var(--text-muted); */
+  color: var(--outline);
 }
 
 .aboutTextarea:focus {
@@ -608,9 +624,9 @@
   /* border-color: rgba(251, 191, 36, 0.7); */
   /* background: var(--glass-bg-light); */
 
-  border-color: #22d3ee;
-  background: rgba(34, 211, 238, 0.2);
-  box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
+  border-color: var(--tertiary);
+  background: color-mix(in srgb, var(--tertiary) 20%, transparent);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--tertiary) 30%, transparent);
 }
 
 .settingsCard {
@@ -626,7 +642,7 @@
 
 .settingsContent h4 {
   font-weight: 600;
-  color: var(--bianco);
+  color: var(--on-primary-container);
   margin-bottom: 0.25rem;
 }
 
@@ -647,22 +663,23 @@
 }
 
 .toggleSwitch.on {
-  background: linear-gradient(to right, #22d3ee, #3b82f6);
+  background: linear-gradient(to right, var(--tertiary), var(--primary));
 }
 
 .toggleSwitch.off {
-  background: rgba(255, 255, 255, 0.3);
+  background: color-mix(in srgb, var(--on-primary) 30%, transparent);
 }
 
 .toggleHandle {
   width: 1.25rem;
   height: 1.25rem;
-  background: var(--bianco);
+  background: var(--on-primary-container);
   border-radius: 50%;
   transition: var(--transition-normal);
   position: absolute;
   top: 0.125rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px
+    color-mix(in srgb, var(--on-background) 20%, transparent);
 }
 
 .toggleHandle.on {
@@ -690,7 +707,7 @@
 .completionTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--bianco);
+  color: var(--on-primary-container);
   margin-bottom: 0.5rem;
 }
 
@@ -731,12 +748,13 @@
   backdrop-filter: var(--backdrop-blur);
   margin: 0px 3px;
   width: 100%;
-  border: 1px solid var(--glass-border);
+  /* border: 1px solid var(--glass-border); */
+  border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
 }
 
 .navButton.prev {
   background: transparent;
-  color: rgba(255, 255, 255, 0.9);
+  color: color-mix(in srgb, var(--on-primary-container) 70%, transparent);
 }
 
 .navButton.prev:hover:not(.disabled) {
@@ -748,26 +766,34 @@
 .navButton.prev.disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  color: rgba(255, 255, 255, 0.5);
+  color: color-mix(in srgb, var(--outline) 50%, transparent);
 }
 
 .navButton.next {
-  background: var(--card-gradient);
-  color: var(--bianco);
+  /* background: var(--card-gradient);
+
+  color: var(--on-primary-container); */
+
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
 .navButton.next:hover:not(.disabled) {
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
-  background: linear-gradient(135deg, #2563eb, #1e40af);
+  box-shadow: 0 8px 25px color-mix(in srgb, var(--primary) 50%, transparent);
+  /* background: linear-gradient(135deg, var(--primary), var(--primary));
+  color: var(--primary-container); */
   transform: translateY(-2px) scale(1.02);
+
+  background: color-mix(in srgb, var(--primary) 92%, var(--on-primary) 8%);
+  color: var(--on-primary);
 }
 
 .navButton.next.disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.5);
+  background: color-mix(in srgb, var(--outline) 10%, transparent);
+  color: color-mix(in srgb, var(--on-primary) 50%, transparent);
 }
 
 .progressDots {
@@ -786,16 +812,16 @@
 }
 
 .progressDot.current {
-  background: #60a5fa;
+  background: var(--surface);
 }
 
 .progressDot.completed {
   /* background: #22d3ee; */
-  background: var(--bianco);
+  background: var(--primary);
 }
 
 .progressDot.pending {
-  background: rgba(255, 255, 255, 0.3);
+  background: color-mix(in srgb, var(--on-background) 20%, transparent);
 }
 
 /* Utility Classes */
@@ -826,7 +852,7 @@
 }
 
 .textBlue400 {
-  color: #60a5fa;
+  color: var(--primary);
 }
 
 .textPurple400 {
@@ -843,11 +869,11 @@
 }
 
 .textCyan400 {
-  color: #22d3ee;
+  color: var(--tertiary);
 }
 
 .textRed500 {
-  color: #ef4444;
+  color: var(--error);
 }
 
 /* Animazioni */
@@ -901,8 +927,8 @@
 .screenCelebration {
   background: linear-gradient(
     135deg,
-    var(--primary-600) 0%,
-    var(--primary-900) 50%,
+    var(--primary) 0%,
+    var(--primary) 50%,
     var(--gray-900) 100%
   );
 }
@@ -914,7 +940,7 @@
   justify-content: center;
   height: 100%;
   text-align: center;
-  color: var(--bianco);
+  color: var(--on-primary-container);
   padding: 2rem;
   position: relative;
   z-index: 10;
@@ -924,6 +950,7 @@
   position: relative;
   margin-bottom: 2rem;
   animation: xpIconBounce 2s ease-in-out infinite;
+  color: var(--on-primary-container);
 }
 
 .xpSparkles {
@@ -967,11 +994,7 @@
 
 .xpNumber {
   font-size: 4rem;
-  background: linear-gradient(
-    135deg,
-    var(--secondary-300),
-    var(--secondary-600)
-  );
+  background: linear-gradient(135deg, var(--secondary), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -980,7 +1003,7 @@
 
 .xpLabel {
   font-size: 1.5rem;
-  color: var(--secondary-350);
+  color: var(--secondary);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -989,7 +1012,8 @@
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 8px
+    color-mix(in srgb, var(--on-background) 30%, transparent);
   animation: titleSlideUp 1s ease-out 0.5s both;
 }
 
@@ -1003,7 +1027,7 @@
 .celebrationProgress {
   width: 80%;
   height: 8px;
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--on-primary) 20%, transparent);
   border-radius: 4px;
   overflow: hidden;
   animation: progressBarSlideUp 1s ease-out 1s both;
@@ -1011,18 +1035,14 @@
 
 .celebrationProgressBar {
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    var(--secondary-300),
-    var(--secondary-600)
-  );
+  background: linear-gradient(90deg, var(--secondary), var(--secondary));
   border-radius: 4px;
   transition: width 0.3s ease;
-  box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--secondary) 50%, transparent);
 }
 
 .textSecondary {
-  color: var(--secondary-350);
+  color: var(--secondary);
 }
 
 /* Animazioni per XP Celebration */

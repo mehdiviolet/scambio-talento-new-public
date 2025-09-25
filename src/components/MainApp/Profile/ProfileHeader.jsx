@@ -847,7 +847,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
           <div style={{ padding: "1rem", textAlign: "center" }}>
             <Gem
               size={48}
-              style={{ color: "var(--success-green)", marginBottom: "1rem" }}
+              style={{ color: "var(--tertiary)", marginBottom: "1rem" }}
             />
             <p style={{ color: "var(--text-primary)" }}>
               Skills drawer - Coming soon!
@@ -1015,10 +1015,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     {showSuccessMessage === "reported" ? (
                       // Mostra messaggio di successo al posto delle opzioni
                       <div className={styles.successMessage}>
-                        <Flag
-                          size={16}
-                          style={{ color: "var(--success-green)" }}
-                        />
+                        <Flag size={16} style={{ color: "var(--tertiary)" }} />
                         <span>Utente segnalato con successo</span>
                       </div>
                     ) : (
@@ -1056,10 +1053,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     {showSuccessMessage === "blocked" ? (
                       // Mostra messaggio di successo
                       <div className={styles.successMessage}>
-                        <Ban
-                          size={16}
-                          style={{ color: "var(--success-green)" }}
-                        />
+                        <Ban size={16} style={{ color: "var(--tertiary)" }} />
                         <span>Utente bloccato con successo</span>
                       </div>
                     ) : (
@@ -1296,7 +1290,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     borderRadius: "1rem",
                     border: `1px solid ${
                       followingList.has(following.id)
-                        ? "var(--success-green)"
+                        ? "var(--tertiary)"
                         : "rgba(255, 255, 255, 0.2)"
                     }`,
 
@@ -1304,7 +1298,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       ? "rgba(16, 185, 129, 0.15)"
                       : "rgba(255, 255, 255, 0.1)",
                     color: followingList.has(following.id)
-                      ? "var(--success-green-dark)"
+                      ? "var(--on-tertiary-container)"
                       : "var(--text-primary)",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
@@ -1356,12 +1350,12 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   <Settings
                     size={32}
                     className={styles.submenuIcon}
-                    style={{ color: "var(--success-green)" }}
+                    style={{ color: "var(--tertiary)" }}
                   />
                 </div>
                 <h4
                   className={styles.submenuTitle}
-                  style={{ color: "var(--success-green-dark)" }}
+                  style={{ color: "var(--on-tertiary-container)" }}
                 >
                   Profilo aggiornato!
                 </h4>
@@ -1603,7 +1597,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                         gap: "0.5rem",
                         padding: "0.5rem 0.75rem",
                         background: "rgba(16, 185, 129, 0.15)",
-                        border: "1px solid var(--success-green)",
+                        border: "1px solid var(--tertiary)",
                         borderRadius: "1rem",
                         fontSize: "0.75rem",
                       }}
@@ -1624,7 +1618,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                         style={{
                           background: "none",
                           border: "none",
-                          color: "var(--success-green-dark)",
+                          color: "var(--on-tertiary-container)",
                           cursor: "pointer",
                           padding: "0",
                           fontSize: "0.875rem",
@@ -1702,9 +1696,9 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     flex: 1,
                     padding: "0.75rem",
                     borderRadius: "1rem",
-                    border: "1px solid var(--success-green)",
+                    border: "1px solid var(--tertiary)",
                     background: "rgba(16, 185, 129, 0.2)",
-                    color: "var(--success-green-dark)",
+                    color: "var(--on-tertiary-container)",
                     fontSize: "0.875rem",
                     fontWeight: "600",
                     cursor: "pointer",
@@ -1727,7 +1721,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
               // Stato di successo - sostituisce tutto il contenuto del modal
               <div className={styles.successContent}>
                 <div className={styles.successIcon}>
-                  <Flag size={32} style={{ color: "var(--success-green)" }} />
+                  <Flag size={32} style={{ color: "var(--tertiary)" }} />
                 </div>
                 <h4 className={styles.successTitle}>Segnalazione inviata!</h4>
                 <p className={styles.successText}>
@@ -1807,7 +1801,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
               // Stato di successo - sostituisce tutto il contenuto del modal
               <div className={styles.successContent}>
                 <div className={styles.successIcon}>
-                  <Ban size={32} style={{ color: "var(--success-green)" }} />
+                  <Ban size={32} style={{ color: "var(--tertiary)" }} />
                 </div>
                 <h4 className={styles.successTitle}>Utente bloccato!</h4>
                 <p className={styles.successText}>

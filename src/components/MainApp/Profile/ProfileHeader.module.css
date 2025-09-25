@@ -551,19 +551,19 @@
   align-items: center;
   gap: 6px;
   font-size: 15px;
-  color: var(--text-primary);
+  color: var(--primary);
   font-weight: 500;
 }
 
 .statIcon {
   /* color: var(--text-terzo); */
-  color: var(--text-primary);
+  color: var(--primary);
   flex-shrink: 0;
 }
 
 .statValue {
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--primary);
   min-width: 20px; /* Assicura allineamento anche con numeri diversi */
 }
 
@@ -615,7 +615,7 @@
   border: none;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--primary);
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -666,7 +666,7 @@
 
 .drawerMenuItem.positive:hover {
   background: rgba(16, 185, 129, 0.1);
-  border-color: var(--success-green);
+  border-color: var(--tertiary);
 }
 
 .drawerMenuItem.warning:hover {
@@ -681,7 +681,7 @@
 
 .drawerMenuItem.selected {
   background: rgba(16, 185, 129, 0.15);
-  border-color: var(--success-green);
+  border-color: var(--tertiary);
 }
 
 .drawerMenuIcon {
@@ -694,7 +694,7 @@
   backdrop-filter: blur(8px);
   border-radius: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  color: var(--text-primary);
+  color: var(--primary);
   flex-shrink: 0;
   margin-top: 0.125rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -703,8 +703,8 @@
 
 .drawerMenuItem.positive .drawerMenuIcon {
   background: rgba(16, 185, 129, 0.2);
-  border-color: var(--success-green);
-  color: var(--success-green-dark);
+  border-color: var(--tertiary);
+  color: var(--on-tertiary-container);
 }
 
 .drawerMenuItem.warning .drawerMenuIcon {
@@ -721,8 +721,8 @@
 
 .drawerMenuItem.selected .drawerMenuIcon {
   background: rgba(16, 185, 129, 0.3);
-  border-color: var(--success-green);
-  color: var(--success-green-dark);
+  border-color: var(--tertiary);
+  color: var(--on-tertiary-container);
 }
 
 .drawerMenuText {
@@ -733,13 +733,13 @@
 .drawerMenuLabel {
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--primary);
   margin-bottom: 0.125rem;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
 }
 
 .drawerMenuItem.positive .drawerMenuLabel {
-  color: var(--success-green-dark);
+  color: var(--on-tertiary-container);
 }
 
 .drawerMenuItem.warning .drawerMenuLabel {
@@ -751,7 +751,7 @@
 }
 
 .drawerMenuItem.selected .drawerMenuLabel {
-  color: var(--success-green-dark);
+  color: var(--on-tertiary-container);
 }
 
 .drawerMenuDescription {
@@ -762,7 +762,7 @@
 }
 
 .drawerMenuItem.positive .drawerMenuDescription {
-  color: var(--success-green);
+  color: var(--tertiary);
 }
 
 .drawerMenuItem.warning .drawerMenuDescription {
@@ -774,7 +774,7 @@
 }
 
 .drawerMenuItem.selected .drawerMenuDescription {
-  color: var(--success-green);
+  color: var(--tertiary);
 }
 
 /* Submenu Styles */
@@ -802,13 +802,13 @@
 }
 
 .submenuIcon {
-  color: var(--success-green);
+  color: var(--tertiary);
 }
 
 .submenuTitle {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--primary);
   margin: 0;
 }
 
@@ -819,7 +819,7 @@
 .submenuSectionTitle {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--primary);
   margin: 0 0 1rem 0;
   padding: 0 0.5rem;
 }
@@ -842,28 +842,28 @@
 }
 
 .submenuInfoIcon {
-  color: var(--success-green);
+  color: var(--tertiary);
   flex-shrink: 0;
   margin-top: 0.125rem;
 }
 
 .submenuInfoText {
   font-size: 0.875rem;
-  color: var(--text-primary);
+  color: var(--primary);
   line-height: 1.4;
   margin: 0;
 }
 
 /* CSS Variables para cores (adicione ao topo do arquivo se não existir) */
 :root {
-  --text-primary: #256679;
+  --primary: #256679;
   --text-secondary: var(--secondary-500);
-  --text-primary-light: #3a8ba3;
-  --text-primary-dark: #1a4d5c;
+  --primary-light: #3a8ba3;
+  --primary-dark: #1a4d5c;
   --text-secondary-light: var(--secondary-350);
   --text-secondary-dark: #d97706;
-  --success-green: #10b981;
-  --success-green-dark: #059669;
+  --tertiary: #10b981;
+  --on-tertiary-container: #059669;
   --danger-red: #ef4444;
   --danger-red-dark: #dc2626;
 }
@@ -888,7 +888,7 @@
   margin-bottom: 0.25rem;
   cursor: pointer;
   font-size: 0.875rem;
-  color: var(--text-primary);
+  color: var(--primary);
   transition: all 0.2s ease;
 }
 
@@ -928,7 +928,7 @@
 .miniModalHeader h4 {
   margin: 0;
   font-size: 1rem;
-  color: var(--text-primary);
+  color: var(--primary);
 }
 
 .miniModalText {
@@ -956,7 +956,7 @@
 
 .miniModalCancel {
   background: rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
+  color: var(--primary);
 }
 
 .miniModalConfirm {
@@ -970,7 +970,7 @@
 .miniModalLabel {
   display: block;
   font-size: 0.875rem;
-  color: var(--text-primary);
+  color: var(--primary);
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
@@ -981,7 +981,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
+  color: var(--primary);
   font-size: 0.875rem;
   resize: vertical;
   min-height: 60px;
@@ -1005,7 +1005,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--success-green);
+  background: var(--tertiary);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 2rem;
@@ -1031,9 +1031,9 @@
   gap: 0.75rem;
   padding: 1rem;
   background: rgba(16, 185, 129, 0.1);
-  border: 1px solid var(--success-green);
+  border: 1px solid var(--tertiary);
   border-radius: 0.75rem;
-  color: var(--success-green-dark);
+  color: var(--on-tertiary-container);
   font-size: 0.875rem;
   font-weight: 500;
   animation: fadeIn 0.3s ease;
@@ -1063,7 +1063,7 @@
   margin: 0 0 0.5rem 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--success-green-dark);
+  color: var(--on-tertiary-container);
 }
 
 .successText {
@@ -1081,7 +1081,7 @@ select {
   padding: 0.75rem;
   background: rgba(255, 255, 255, 0.1);
   /* borderradius: 0.75rem; */
-  color: var(--text-primary);
+  color: var(--primary);
   fontsize: 0.875rem;
 }
 /* ******************** */
@@ -1209,12 +1209,12 @@ select {
   gap: 0.5rem;
   cursor: pointer;
   font-size: 15px;
-  color: var(--text-primary);
+  color: var(--primary);
   transition: color 0.2s ease;
 }
 
 .skillsBtn:hover {
-  color: var(--success-green);
+  color: var(--tertiary);
 }
 
 .skillsBtn span {

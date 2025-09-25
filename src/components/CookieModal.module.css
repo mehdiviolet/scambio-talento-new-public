@@ -16,8 +16,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: var(--bg--overlay);
-  /* border-radius: var(--radius-lgMe); */
+  /* background: var(--bg--overlay); */
   border-radius: var(--radius-lgMe);
   backdrop-filter: blur(5px);
   display: flex;
@@ -25,10 +24,14 @@
   justify-content: center;
   padding: 1rem;
   z-index: 500000000;
+  border-radius: var(--radius-lgMe);
+
+  /* border: 2px solid color-mix(in srgb, var(--primary) 20%, transparent); */
+  background: color-mix(in srgb, var(--primary) 50%, transparent);
 }
 
 .modal {
-  background: var(--bg-old);
+  /* background: var(--primary); */
   backdrop-filter: blur(20px) saturate(150%);
   border-radius: 2rem;
   max-width: 28rem;
@@ -38,22 +41,33 @@
   box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  /* background: color-mix(in srgb, var(--primary) 30%, transparent); */
+  /* background: color-mix(in srgb, var(--primary-container) 100%, transparent); */
+  background: color-mix(in srgb, var(--surface-variant) 100%, transparent);
+  color: var(--on-surface);
+  /* color: rebeccapurple; */
 }
 
 .header {
-  background-color: rgba(255, 255, 255, 0.1);
+  /* background-color: rgba(255, 255, 255, 0.1); */
   backdrop-filter: blur(8px);
   padding: 1.5rem;
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
   position: relative;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  /* color: var(--on-secondary-container); */
+  color: var(--secondary);
+  /* background-color: var(--on-secondary-container); */
 }
 
 .header h3 {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--on-surface);
+
   text-align: center;
   letter-spacing: -0.025em;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
@@ -85,7 +99,7 @@
 }
 
 .closeButton:hover svg {
-  color: var(--text-primary);
+  color: var(--on-surface);
 }
 
 .content {
@@ -108,6 +122,7 @@
   align-items: center;
   gap: 1rem;
   justify-content: center;
+  color: var(--secondary);
 }
 
 .valueNumber {
@@ -125,7 +140,7 @@
 .xpTitle {
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--on-surface);
   margin: 0;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
@@ -166,7 +181,7 @@
 }
 
 .progressText strong {
-  color: var(--text-primary);
+  color: var(--on-surface);
 }
 
 /* Stats Grid */
@@ -218,7 +233,9 @@
 }
 
 .weekIcon {
-  color: var(--text-primary);
+  /* color: var(--text-primary); */
+  color: var(--on-surface);
+
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
@@ -249,14 +266,14 @@
   background: rgba(255, 255, 255, 0.3);
   border-radius: 12px;
   backdrop-filter: blur(8px);
-  /* border: 3px solid var(--text-primary); */
+  /* border: 3px solid var(--on-surface); */
 }
 
 .guideText {
   margin: 0;
   /* font-size: 0.85rem; */
   font-size: 0.7rem;
-  color: var(--text-primary);
+  color: var(--on-surface);
   font-style: italic;
   font-weight: 400;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
