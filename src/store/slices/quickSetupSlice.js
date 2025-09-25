@@ -69,14 +69,15 @@ const skillsData = [
 const languagesData = [
   { name: "Italiano", flag: "🇮🇹" },
   { name: "Inglese", flag: "🇬🇧" },
+  { name: "Persiano", flag: "🇮🇷" },
+  { name: "Russo", flag: "🇷🇺" },
+  { name: "Giapponese", flag: "🇯🇵" },
   { name: "Francese", flag: "🇫🇷" },
-  { name: "Spagnolo", flag: "🇪🇸" },
   { name: "Tedesco", flag: "🇩🇪" },
   { name: "Portoghese", flag: "🇵🇹" },
-  { name: "Russo", flag: "🇷🇺" },
-  { name: "Cinese", flag: "🇨🇳" },
-  { name: "Giapponese", flag: "🇯🇵" },
+  { name: "Spagnolo", flag: "🇪🇸" },
   { name: "Arabo", flag: "🇸🇦" },
+  { name: "Cinese", flag: "🇨🇳" },
 ];
 
 const steps = [
@@ -148,6 +149,8 @@ const achievementsList = [
 const initialState = {
   // Stati del progress
   currentStep: 0,
+  showXPCelebration: false, // ✅ NUOVO
+  celebrationXP: 0,
   // xp: 0,
   level: 1,
   achievements: [],
@@ -384,6 +387,15 @@ const quickSetupSlice = createSlice({
     resetQuickSetup: (state) => {
       return { ...initialState };
     },
+
+    // ✅ NUOVI REDUCERS
+    setShowXPCelebration: (state, action) => {
+      state.showXPCelebration = action.payload;
+    },
+
+    setCelebrationXP: (state, action) => {
+      state.celebrationXP = action.payload;
+    },
   },
 });
 
@@ -433,6 +445,8 @@ export const {
   resetForEdit,
   resetQuickSetup,
   setLastXpReward,
+  setShowXPCelebration,
+  setCelebrationXP,
 } = quickSetupSlice.actions;
 
 export default quickSetupSlice.reducer;

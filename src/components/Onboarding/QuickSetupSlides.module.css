@@ -88,7 +88,7 @@
 /* Welcome Screen */
 .welcomeContent {
   text-align: center;
-  color: var(--bg);
+  color: var(--bianco);
   z-index: 10;
   padding: 2rem;
   margin: auto;
@@ -108,7 +108,7 @@
   font-weight: 700;
   margin-bottom: 1rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  color: var(--text-color);
+  color: var(--bianco);
 }
 
 .welcomeSubtitle {
@@ -171,8 +171,8 @@
 .gameHud {
   flex-shrink: 0;
   width: 100%;
-  /* color: var(--bg); */
-  color: var(--bg);
+  /* color: var(--bianco); */
+  color: var(--bianco);
   padding: 1.25rem 1.5rem;
   position: sticky;
   z-index: 3;
@@ -272,8 +272,8 @@
   /* font-size: 2.25rem; */
   font-size: 2rem;
   font-weight: 700;
-  /* color: var(--bg); */
-  color: var(--bg);
+  /* color: var(--bianco); */
+  color: var(--bianco);
 
   margin-bottom: 0.5rem;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -327,7 +327,7 @@
   bottom: 0;
   right: 0;
   background: linear-gradient(to right, #22d3ee, #3b82f6);
-  color: var(--bg);
+  color: var(--bianco);
   padding: 0.75rem;
   border-radius: 50%;
   cursor: pointer;
@@ -387,7 +387,7 @@
   border: 2px solid var(--glass-border);
   border-radius: var(--border-radius);
   font-size: 1rem;
-  color: var(--bg);
+  color: var(--bianco);
   /* color: var(--gray-300); */
   transition: var(--transition-normal);
   outline: none;
@@ -496,12 +496,12 @@
 .skillIcon {
   font-size: 1.5rem;
   display: block;
-  color: var(--bg);
+  color: var(--bianco);
 }
 
 .skillName {
   font-weight: 500;
-  color: var(--bg);
+  color: var(--bianco);
   font-size: 0.875rem;
 }
 
@@ -525,7 +525,7 @@
 .sectionTitle {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--bg);
+  color: var(--bianco);
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
@@ -547,7 +547,7 @@
   cursor: pointer;
   transition: var(--transition-normal);
   backdrop-filter: var(--backdrop-blur);
-  color: var(--bg);
+  color: var(--bianco);
 }
 
 .languageCard:hover {
@@ -573,7 +573,7 @@
 
 .languageName {
   font-weight: 500;
-  color: var(--bg);
+  color: var(--bianco);
   font-size: 0.875rem;
 }
 
@@ -591,7 +591,7 @@
   border: 2px solid var(--glass-border);
   border-radius: var(--border-radius);
   font-size: 1rem;
-  color: var(--bg);
+  color: var(--bianco);
   transition: var(--transition-normal);
   outline: none;
   resize: none;
@@ -626,7 +626,7 @@
 
 .settingsContent h4 {
   font-weight: 600;
-  color: var(--bg);
+  color: var(--bianco);
   margin-bottom: 0.25rem;
 }
 
@@ -657,7 +657,7 @@
 .toggleHandle {
   width: 1.25rem;
   height: 1.25rem;
-  background: var(--bg);
+  background: var(--bianco);
   border-radius: 50%;
   transition: var(--transition-normal);
   position: absolute;
@@ -690,7 +690,7 @@
 .completionTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--bg);
+  color: var(--bianco);
   margin-bottom: 0.5rem;
 }
 
@@ -753,7 +753,7 @@
 
 .navButton.next {
   background: var(--card-gradient);
-  color: var(--bg);
+  color: var(--bianco);
 }
 
 .navButton.next:hover:not(.disabled) {
@@ -894,4 +894,204 @@
   width: 1.25rem; /* Fissa la larghezza uguale all'icona */
   height: 1.25rem; /* Fissa l'altezza uguale all'icona */
   flex-shrink: 0; /* Non si riduce mai */
+}
+
+/* XP Celebration Screen */
+.screenCelebration {
+  background: linear-gradient(
+    135deg,
+    var(--primary-600) 0%,
+    var(--primary-900) 50%,
+    var(--gray-900) 100%
+  );
+}
+
+.xpCelebrationContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: var(--bianco);
+  padding: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.xpIconContainer {
+  position: relative;
+  margin-bottom: 2rem;
+  animation: xpIconBounce 2s ease-in-out infinite;
+}
+
+.xpSparkles {
+  position: absolute;
+  inset: -1rem;
+}
+
+.sparkle1,
+.sparkle2,
+.sparkle3 {
+  position: absolute;
+  animation: sparkleFloat 3s ease-in-out infinite;
+}
+
+.sparkle1 {
+  top: -0.5rem;
+  left: -0.5rem;
+  animation-delay: 0s;
+}
+
+.sparkle2 {
+  top: -0.5rem;
+  right: -0.5rem;
+  animation-delay: 0.5s;
+}
+
+.sparkle3 {
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 1s;
+}
+
+.xpCounter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.xpNumber {
+  font-size: 4rem;
+  background: linear-gradient(
+    135deg,
+    var(--secondary-300),
+    var(--secondary-600)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: xpNumberPulse 1.5s ease-in-out infinite;
+}
+
+.xpLabel {
+  font-size: 1.5rem;
+  color: var(--secondary-350);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.celebrationTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: titleSlideUp 1s ease-out 0.5s both;
+}
+
+.celebrationSubtitle {
+  font-size: 1.25rem;
+  color: var(--gray-300);
+  margin-bottom: 3rem;
+  animation: subtitleSlideUp 1s ease-out 0.7s both;
+}
+
+.celebrationProgress {
+  width: 80%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  animation: progressBarSlideUp 1s ease-out 1s both;
+}
+
+.celebrationProgressBar {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--secondary-300),
+    var(--secondary-600)
+  );
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}
+
+.textSecondary {
+  color: var(--secondary-350);
+}
+
+/* Animazioni per XP Celebration */
+@keyframes xpIconBounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes sparkleFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes xpNumberPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes titleSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtitleSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progressBarSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

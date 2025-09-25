@@ -21,6 +21,8 @@ import {
   resetForEdit,
   selectCanContinue,
   setLastXpReward,
+  setShowXPCelebration,
+  setCelebrationXP,
 } from "../store/slices/quickSetupSlice";
 
 import {
@@ -49,6 +51,10 @@ export const useQuickSetup = () => {
     setShowWelcome: (show) => dispatch(setShowWelcome(show)),
     setIsExiting: (exiting) => dispatch(setIsExiting(exiting)),
     setCompletedSteps: (steps) => dispatch(setCompletedSteps(steps)),
+
+    // ✅ NUOVE ACTIONS
+    setShowXPCelebration: (show) => dispatch(setShowXPCelebration(show)),
+    setCelebrationXP: (xp) => dispatch(setCelebrationXP(xp)),
 
     // Profile data
     updateProfileData: (data) => dispatch(updateProfileData(data)),

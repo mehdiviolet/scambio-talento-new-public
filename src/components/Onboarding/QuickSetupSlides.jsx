@@ -58,6 +58,12 @@ const QuickSetupSlides = ({ onComplete }) => {
     steps,
     achievementsList,
 
+    // ✅ STATI MANCANTI - Aggiungi questi
+    showXPCelebration,
+    celebrationXP,
+    setShowXPCelebration,
+    setCelebrationXP,
+
     // Functions
     triggerAchievement,
     // addXP,
@@ -78,6 +84,59 @@ const QuickSetupSlides = ({ onComplete }) => {
     );
   }, [currentStep]);
 
+  // const handleNext = () => {
+  //   console.log("🔍 DEBUG XP:", {
+  //     currentUserXP: currentXP,
+  //     completedSteps: completedSteps,
+  //     currentStep: currentStep,
+  //     willEnterIf: !completedSteps.includes(currentStep),
+  //   });
+  //   if (!completedSteps.includes(currentStep)) {
+  //     // addXP(steps[currentStep].xpReward);
+  //     console.log("✅ ENTRO NELL'IF - Aggiungo XP!"); // ← AGGIUNGI ANCHE QUESTO
+
+  //     dispatch(
+  //       addXPToUser({
+  //         userId: "currentUser",
+  //         amount: steps[currentStep].xpReward,
+  //         source: "onboarding",
+  //         metadata: { step: currentStep, stepName: steps[currentStep].title },
+  //       })
+  //     );
+  //     setCompletedSteps([...completedSteps, currentStep]);
+  //     checkAchievements();
+  //   }
+
+  //   if (currentStep < steps.length - 1) {
+  //     setCurrentStep(currentStep + 1);
+  //   } else {
+  //     triggerAchievement(achievementsList.find((a) => a.id === "complete"));
+  //     setIsExiting(true);
+
+  //     setTimeout(() => setShowWelcome(true), 500);
+  //     setTimeout(() => {
+  //       console.log(setShowAuth, 2 * 2);
+
+  //       const completeData = {
+  //         ...profileData,
+  //         xp: currentXP,
+  //         level,
+  //         achievements,
+  //       };
+
+  //       console.log("📦 Dati finali da trasferire:", completeData);
+  //       console.log(
+  //         "🎯 Skills da trasferire:",
+  //         completeData.skills?.length || 0,
+  //         "skills"
+  //       );
+
+  //       completeOnboarding(completeData);
+  //       onComplete && onComplete(completeData); // ✅ Usa callback
+  //     }, 3000000);
+  //   }
+  // };
+
   const handleNext = () => {
     console.log("🔍 DEBUG XP:", {
       currentUserXP: currentXP,
@@ -85,9 +144,10 @@ const QuickSetupSlides = ({ onComplete }) => {
       currentStep: currentStep,
       willEnterIf: !completedSteps.includes(currentStep),
     });
+
+    // Aggiungi XP se step non completato
     if (!completedSteps.includes(currentStep)) {
-      // addXP(steps[currentStep].xpReward);
-      console.log("✅ ENTRO NELL'IF - Aggiungo XP!"); // ← AGGIUNGI ANCHE QUESTO
+      console.log("✅ ENTRO NELL'IF - Aggiungo XP!");
 
       dispatch(
         addXPToUser({
@@ -101,42 +161,71 @@ const QuickSetupSlides = ({ onComplete }) => {
       checkAchievements();
     }
 
+    // Continua al prossimo step o completa
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      // console.log("🚀 Completando onboarding con i seguenti dati:");
-      // console.log("📊 ProfileData completo:", profileData);
-      // console.log("🎯 Skills selezionate:", profileData.skills);
-      // console.log("💎 XP totale:", currentXP);
-      // console.log("🏆 Achievement ottenuti:", achievements);
-      // console.log("❌ NON ENTRO NELL'IF - Step già completato!"); // ← E QUESTO
+      // ✅ NUOVO FLOW: XP Celebration prima di Welcome
+      console.log("🚀 Completando onboarding - nuovo flow con XP celebration");
 
       triggerAchievement(achievementsList.find((a) => a.id === "complete"));
       setIsExiting(true);
-      setTimeout(() => setShowWelcome(true), 500);
+
+      // FASE 1: Mostra XP Celebration dopo 500ms
       setTimeout(() => {
-        console.log(setShowAuth, 2 * 2);
+        setShowXPCelebration(true);
 
-        const completeData = {
-          ...profileData,
-          xp: currentXP,
-          level,
-          achievements,
-        };
+        // Animazione conteggio XP da 0 a 200
+        let currentXPCount = 0;
+        const targetXP = 200;
+        const increment = 8;
+        const duration = 2500; // 2.5 secondi
+        const intervalTime = duration / (targetXP / increment);
 
-        console.log("📦 Dati finali da trasferire:", completeData);
-        console.log(
-          "🎯 Skills da trasferire:",
-          completeData.skills?.length || 0,
-          "skills"
-        );
+        const countInterval = setInterval(() => {
+          currentXPCount += increment;
+          const displayXP = Math.min(currentXPCount, targetXP);
+          setCelebrationXP(displayXP);
 
-        completeOnboarding(completeData);
-        onComplete && onComplete(completeData); // ✅ Usa callback
-      }, 3000);
+          if (currentXPCount >= targetXP) {
+            clearInterval(countInterval);
+          }
+        }, intervalTime);
+
+        // FASE 2: Dopo 4 secondi nascondi XP e mostra Welcome
+        setTimeout(() => {
+          setShowXPCelebration(false);
+          setShowWelcome(true);
+
+          // FASE 3: Dopo altri 3 secondi completa onboarding
+          setTimeout(() => {
+            console.log("🚀 Completando onboarding con i seguenti dati:");
+            console.log("📊 ProfileData completo:", profileData);
+            console.log("🎯 Skills selezionate:", profileData.skills);
+            console.log("💎 XP totale:", currentXP + 200); // XP esistente + bonus registrazione
+            console.log("🏆 Achievement ottenuti:", achievements);
+
+            const completeData = {
+              ...profileData,
+              xp: currentXP + 200, // Aggiungi bonus XP registrazione
+              level,
+              achievements,
+            };
+
+            console.log("📦 Dati finali da trasferire:", completeData);
+            console.log(
+              "🎯 Skills da trasferire:",
+              completeData.skills?.length || 0,
+              "skills"
+            );
+
+            completeOnboarding(completeData);
+            onComplete && onComplete(completeData);
+          }, 3000);
+        }, 4000);
+      }, 500);
     }
   };
-
   const handlePrev = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
@@ -151,16 +240,60 @@ const QuickSetupSlides = ({ onComplete }) => {
           <div className={styles.welcomeContent}>
             <div className={styles.welcomeIcon}>
               {/* <Crown className={`${styles.iconXxl} ${styles.textYellow300}`} /> */}
-              <Sparkles
+              {/* <Sparkles
                 className={`${styles.iconXxl} ${styles.textYellow300}`}
-              />
+              /> */}
             </div>
             <h1 className={styles.welcomeTitle}>
               Benvenut* {profileData.firstName}!
             </h1>
-            <p className={styles.welcomeSubtitle}>
-              Il tuo profilo è pronto! 🎉
-            </p>
+            <p className={styles.welcomeSubtitle}>Il tuo profilo è pronto!</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (showXPCelebration) {
+    return (
+      <div className={`${styles.screen} ${styles.screenCelebration}`}>
+        <div className={styles.card}>
+          <div className={styles.xpCelebrationContent}>
+            <div className={styles.xpIconContainer}>
+              <Cookie className={`${styles.iconXxl} ${styles.textSecondary}`} />
+              {/* <div className={styles.xpSparkles}>
+                <Sparkles
+                  className={`${styles.sparkle1} ${styles.textYellow300}`}
+                />
+                <Sparkles
+                  className={`${styles.sparkle2} ${styles.textYellow300}`}
+                />
+                <Sparkles
+                  className={`${styles.sparkle3} ${styles.textYellow300}`}
+                />
+              </div> */}
+            </div>
+
+            <div className={styles.xpCounter}>
+              <span className={styles.xpNumber}>+{celebrationXP} XP</span>
+              {/* <span className={styles.xpLabel}>XP</span> */}
+            </div>
+
+            {/* <h2 className={styles.celebrationTitle}>
+              Registrazione Completata!
+            </h2> */}
+
+            <div className={styles.celebrationProgress}>
+              <div
+                className={styles.celebrationProgressBar}
+                style={{ width: `${(celebrationXP / 200) * 100}%` }}
+              />
+            </div>
+            {/* <p className={styles.welcomeSubtitle}>Il tuo profilo è pronto!</p> */}
+
+            {/* <p className={styles.celebrationSubtitle}>
+              Hai guadagnato i tuoi primi punti esperienza
+            </p> */}
           </div>
         </div>
       </div>

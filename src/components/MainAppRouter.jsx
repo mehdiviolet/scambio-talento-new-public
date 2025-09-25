@@ -249,7 +249,7 @@ const MainAppRouter = () => {
               padding: "12px 16px",
               border: "1px solid var(--border-color)",
               borderRadius: "24px",
-              background: "var(--bg)",
+              background: "var(--bianco)",
               color: "var(--text-primary)",
               fontSize: "14px",
             }}

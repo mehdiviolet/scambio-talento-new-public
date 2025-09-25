@@ -72,6 +72,7 @@
   --secondary-darker: #92400e; /* Per stati pressed e focus */
   --secondary-muted: #fcd34d; /* Per notifiche soft */
 
+  --bianco: #ffffff;
   --gray-50: #f8fafc; /* Backgrounds molto leggeri */
   --gray-100: #f1f5f9; /* Separatori e cards */
   --gray-200: #e2e8f0; /* Borders */

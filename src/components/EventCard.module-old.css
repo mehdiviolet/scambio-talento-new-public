@@ -1388,7 +1388,7 @@
   width: 100%;
   height: 100%;
   /* background: rgba(255, 255, 255, 0.95); */
-  background: var(--bg);
+  background: var(--bianco);
   backdrop-filter: blur(20px);
   z-index: 1000;
   transform: translateX(100%);
