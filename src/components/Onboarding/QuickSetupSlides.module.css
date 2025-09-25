@@ -790,7 +790,8 @@
 }
 
 .progressDot.completed {
-  background: #22d3ee;
+  /* background: #22d3ee; */
+  background: var(--bianco);
 }
 
 .progressDot.pending {

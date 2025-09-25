@@ -53,7 +53,8 @@ const ActivityModal = ({
                 />
               </div>
               <p className={styles.progressText}>
-                Progresso: <strong>{percentualeProgress}%</strong>
+                Progresso verso 20 giorni:{" "}
+                <strong>{percentualeProgress}%</strong>
               </p>
             </div>
 

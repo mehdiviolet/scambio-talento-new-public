@@ -60,7 +60,7 @@ const ActivityModalTest = ({ isOpen, onClose }) => {
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
-          <h3>Giorni Consecutivi Attivi</h3>
+          <h3>Giorni Consecutivi </h3>
           <button className={styles.closeButton} onClick={onClose}>
             <X size={20} />
           </button>
@@ -82,7 +82,7 @@ const ActivityModalTest = ({ isOpen, onClose }) => {
             </h4>
 
             {/* Message dinamico */}
-            <p className={styles.dynamicMessage}>{messaggioGiorni}</p>
+            {/* <p className={styles.dynamicMessage}>{messaggioGiorni}</p> */}
 
             {/* Progress Bar */}
             <div className={styles.progressContainer}>
@@ -125,32 +125,35 @@ const ActivityModalTest = ({ isOpen, onClose }) => {
                   </div>
                 )}
 
-                {/* Prossimo obiettivo */}
-                <div className={styles.nextGoal}>
-                  {/* <span className={styles.goalTitle}>
-                    {giorniConsecutivi < 21
-                      ? "Primo badge:"
-                      : "Prossimo badge:"}
-                  </span> */}
+                {/* Sezione guida/regole - FISSA */}
+                <div className={styles.goalHeader}>
+                  <span className={styles.goalTitle}>
+                    21 giorni consecutivi:
+                  </span>
+                  <span className={styles.badgeNumber}>1</span>
+                  <Activity size={20} className={styles.badgeIcon} />
+                </div>
+
+                <div className={styles.goalHeader}>
+                  <span className={styles.badgeNumber}>1</span>
+                  <Activity size={20} className={styles.badgeIcon} />
+                  <span className={styles.badgeNumber}>
+                    {" "}
+                    = 50 <strong>XP</strong>{" "}
+                  </span>
+                  {/* <Cookie size={20} className={styles.badgeIcon} /> */}
+                </div>
+
+                {/* Prossimo obiettivo - dinamico */}
+                {/* <div className={styles.nextGoal}>
                   <span className={styles.goalSubtext}>
                     {giorniConsecutivi < 21
                       ? `Ancora ${21 - giorniConsecutivi} giorni per 50 XP`
                       : `Ancora ${giorniRimasti} giorni per +50 XP`}
                   </span>
-                </div>
-
-                {/* Sistema rewards */}
-                {/* <div className={styles.rewardSystem}>
-                  <div className={styles.rewardItem}>
-                    <span className={styles.badgeNumber}>21</span>
-                    <Activity size={16} className={styles.badgeIcon} />
-                    <span className={styles.rewardText}>= 50</span>
-                    <Cookie size={16} className={styles.badgeIcon} />
-                  </div>
                 </div> */}
               </div>
             </div>
-
             {/* Motivational message */}
             {giorniConsecutivi === 0 && (
               <div className={styles.motivationalBox}>
