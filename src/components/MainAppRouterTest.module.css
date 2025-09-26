@@ -539,77 +539,6 @@
   }
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 640px) {
-  .container {
-    padding: 16px;
-    min-height: 400px;
-  }
-
-  .slotMachine {
-    padding: 24px 16px;
-    border-radius: 24px;
-  }
-
-  .slotBase {
-    padding: 24px;
-    border-radius: 20px;
-    margin-bottom: 24px;
-  }
-
-  .slotsContainer {
-    gap: 12px;
-  }
-
-  .slot {
-    width: 80px;
-    height: 110px;
-    border-radius: 16px;
-  }
-
-  .symbol {
-    font-size: 40px;
-  }
-
-  .editProfileBtn {
-    padding: 14px 20px;
-    font-size: 15px;
-    border-radius: 20px;
-    min-height: 52px;
-  }
-
-  .rewardMessage {
-    margin-top: 24px;
-    padding: 20px;
-    border-radius: 20px;
-  }
-
-  .xpAmount {
-    font-size: 32px;
-    gap: 10px;
-  }
-
-  .trophy {
-    font-size: 36px;
-  }
-}
-
-@media (max-width: 480px) {
-  .slot {
-    width: 70px;
-    height: 100px;
-  }
-
-  .symbol {
-    font-size: 36px;
-  }
-
-  .editProfileBtn {
-    padding: 12px 16px;
-    font-size: 14px;
-    gap: 8px;
-  }
-}
 .toggleContainer {
   display: flex;
   position: absolute;
@@ -927,48 +856,6 @@
 .card:hover .coverImg {
   transform: scale(1.05);
 }
-
-/* Responsive */
-/* @media (max-width: 640px) {
-  .card {
-    border-radius: 1rem;
-  }
-
-  .cardHeader,
-  .cardContent,
-  .cardFooter {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .eventInfo {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .actionButtons {
-    align-self: flex-end;
-  }
-
-  .eventTitle {
-    font-size: 1.125rem;
-  }
-
-  .organizerInfo {
-    gap: 0.5rem;
-  }
-
-  .organizerAvatar {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  .coverImage {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    height: 150px;
-  }
-} */
 
 /* Card expand animations */
 .card {
@@ -3115,18 +3002,6 @@
   transform: translateX(-140px); /* Li porta dentro schermo */
 }
 
-/* Su desktop sempre visibili */
-@media (min-width: 768px) {
-  .toggleContainer {
-    right: 20px; /* Sempre visibili su desktop */
-    transform: none;
-  }
-
-  .toggleContainer:hover {
-    transform: none;
-  }
-}
-
 .toggleButton {
   padding: 12px 16px;
   border: none;
@@ -3197,10 +3072,4 @@
   border-radius: 4px 0 0 4px;
   font-size: 12px;
   cursor: pointer;
-}
-
-@media (min-width: 768px) {
-  .toggleContainer::before {
-    display: none;
-  }
 }

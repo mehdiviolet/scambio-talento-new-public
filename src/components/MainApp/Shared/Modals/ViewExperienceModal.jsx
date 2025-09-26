@@ -703,33 +703,6 @@ const ViewExperienceModal = ({
           background: rgba(239, 68, 68, 0.3);
           transform: translateY(-1px);
         }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-          .experience-card-header {
-            flex-direction: column;
-            gap: 1rem;
-          }
-
-          .experience-icons {
-            align-self: flex-start;
-          }
-
-          .experience-info-row {
-            flex-direction: column;
-            gap: 0.5rem;
-          }
-
-          .experience-card-footer {
-            flex-direction: column;
-            gap: 1rem;
-            align-items: stretch;
-          }
-
-          .experience-actions {
-            flex-direction: column;
-          }
-        }
       `}</style>
     </div>
   );

@@ -118,27 +118,6 @@
   opacity: 0.7;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  .toggleContainer {
-    left: 10px;
-    top: 10px;
-    padding: 6px;
-    gap: 1px;
-    min-width: 120px;
-  }
-
-  .toggleButton {
-    padding: 6px 8px;
-    font-size: 11px;
-  }
-
-  .statusIndicator {
-    padding: 4px 6px;
-    font-size: 9px;
-  }
-}
-
 /* Varianti tematiche */
 .toggleContainer.morning {
   background: linear-gradient(

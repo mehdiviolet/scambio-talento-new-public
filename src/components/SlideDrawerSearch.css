@@ -160,22 +160,6 @@
   }
 }
 
-/* Responsive - Desktop */
-/* @media (min-width: 768px) {
-  .slide-drawer {
-    width: 480px;
-    max-width: 90vw;
-  }
-} */
-
-/* Responsive - Mobile landscape */
-@media (max-width: 767px) and (orientation: landscape) {
-  .slide-drawer__header {
-    padding: 16px 20px;
-    min-height: 60px;
-  }
-}
-
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .slide-drawer {

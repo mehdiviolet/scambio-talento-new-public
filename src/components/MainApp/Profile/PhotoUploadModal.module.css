@@ -296,32 +296,3 @@
   cursor: not-allowed;
   transform: none;
 }
-
-/* Responsive */
-@media (max-width: 640px) {
-  .modal {
-    width: 95%;
-    margin: 20px;
-  }
-
-  .header,
-  .content,
-  .footer {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .actions {
-    flex-direction: column;
-  }
-
-  .footer {
-    flex-direction: column;
-  }
-
-  .previewImage,
-  .placeholderPhoto {
-    width: 120px;
-    height: 120px;
-  }
-}

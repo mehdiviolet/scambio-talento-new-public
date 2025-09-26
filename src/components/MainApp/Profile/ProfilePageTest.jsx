@@ -76,7 +76,7 @@ const ProfilePageTest = () => {
               isOwner={true}
               selectedPersonData={selectedPersonData}
             />
-            <ExperiencesSectionStudenteTest />
+            {/* <ExperiencesSectionStudenteTest /> */}
           </>
         ) : (
           <div>

@@ -1,4 +1,4 @@
-/* ProfileTabs.module.css */
+/* ProfileTabs.module.css - Aggiornato con Design System */
 
 .tabsContainer {
   width: 100%;
@@ -7,70 +7,60 @@
 
 .tabsNavigation {
   display: flex;
-  /* background: rgba(37, 102, 121, 0.08); */
-  border-radius: 16px;
-  /* padding: 6px; */
+  /* border-radius: var(--radius-lg); */
   backdrop-filter: blur(10px);
 }
 
 .tabButton {
   flex: 1;
-  padding: 14px 18px;
+  /* padding: var(--space-lg) var(--space-xl); */
+  padding: var(--space-md) var(--space-lg);
   border: none;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--gray-500);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--on-surface-variant);
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: var(--transition);
   position: relative;
-  /* background: transparent; */
-  background: var(--gray-100);
+  background: var(--surface);
+  /* border-radius: var(--radius-lg); */
 }
 
 .tabButton:hover {
-  background: var(--primary-100); /* container blu chiaro */
-  /* color: var(--text-primary);  */
-  color: var(--primary-700);
+  background: var(--primary-container);
+  color: var(--on-primary-container);
   transform: translateY(-1px);
 }
 
 .tabButton.active {
-  /* background: rgba(59, 130, 246, 0.15); */
-  /* background: var(--gray-100); */
+  /* background: var(--primary-container); */
   background: transparent;
-  /* color: var(--text-primary);  */
-  color: var(--primary-700);
-  font-weight: 600;
+  /* color: var(--on-primary-container); */
+  color: var(--primary);
+  font-weight: var(--font-semibold);
 }
 
-/* .tabContent {
-  margin-top: 24px;
-} */
+.tabContent {
+  /* margin-top: var(--space-lg); */
+  /* margin-top: var(--space-sm); */
+}
 
 .content {
-  /* padding: 24px; */
-  /* background: rgba(37, 102, 121, 0.04); */
-
-  /* background: rgba(59, 130, 246, 0.15);  */
-  /* background: var(--gray-100); */
-  /* border-radius: 16px; */
-  /* border: 1px solid rgba(37, 102, 121, 0.08); */
   backdrop-filter: blur(8px);
   animation: slideIn 0.3s ease-out;
 }
 
 .content p {
   margin: 0;
-  color: var(--gray-600);
-  /* color: var(--primary-900); */
-  font-size: 14px;
+  color: var(--on-surface-variant);
+  font-size: var(--text-sm);
   line-height: 1.6;
 }
 
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(var(--space-md));
   }
   to {
     opacity: 1;
@@ -78,55 +68,56 @@
   }
 }
 
-/* ------------------------ */
-
+/* Toggle Container per Esperienze ed Eventi */
 .toggleContainer {
   display: flex;
-  /* background: rgba(37, 102, 121, 0.1); */
-  /* border-radius: 8px; */
-  /* padding: 2px; */
-  margin-bottom: 16px;
-  /* width: fit-content; */
+  margin-bottom: var(--space-lg);
   justify-content: center;
+  gap: var(--space-xs);
+  background: var(--surface-variant);
+  /* border-radius: var(--radius-lg); */
+  padding: var(--space-xs);
 }
 
 .toggleButton {
-  /* padding: 8px 16px; */
-  padding: 14px 16px;
-  /* background: transparent; */
-  background: var(--gray-100);
+  padding: var(--space-lg) var(--space-lg);
+  background: transparent;
   border: none;
-  /* border-radius: 6px; */
-  font-size: 13px;
-  font-weight: 500;
-  /* color: rgba(37, 102, 121, 0.7); */
-  color: var(--gray-500);
+  /* border-radius: var(--radius-md); */
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--on-surface-variant);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition);
   width: 100%;
+}
+
+.toggleButton:hover {
+  background: var(--surface);
+  color: var(--on-surface);
 }
 
 .toggleButton.toggleActive {
-  /* background: rgba(255, 255, 255, 0.9); */
-  background: transparent;
-  color: var(--primary-700);
-  /* color: #256679; */
-  font-weight: 600;
+  background: var(--surface);
+  color: var(--primary);
+  font-weight: var(--font-semibold);
+  box-shadow: var(--shadow);
 }
 
 .experienceContent {
-  margin-top: 8px;
+  margin-top: var(--space-sm);
 }
+
+/* Sezione About */
 .aboutSection {
   width: 100%;
-  /* margin-bottom: 1rem; */
-  margin: 1rem 0;
+  margin: var(--space-lg) 0;
 }
 
 .aboutText {
-  font-size: 14px;
+  font-size: var(--text-sm);
   line-height: 1.4;
-  color: #666;
+  color: var(--on-surface-variant);
   margin: 0;
   word-wrap: break-word;
   word-break: break-word;

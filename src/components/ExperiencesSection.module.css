@@ -1,6 +1,5 @@
 /* ExperiencesSection.module.css - Minimal Design */
-/* Following SkillsSection structure for consistency */
-/* Aggiungi nel :root se mancanti */
+
 :root {
   --border-radius: 0.75rem;
   --border-radius-large: 1.5rem;
@@ -17,8 +16,6 @@
 }
 .container {
   width: 355px;
-  /* overflow: hidden; */
-  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; */
   position: relative;
   border-bottom: 1px solid #e5e7eb;
   margin-bottom: 20px;
@@ -27,11 +24,9 @@
 /* Header */
 .header {
   display: flex;
-  /* align-items: flex-start; */
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  /* rimuovi grid-template-columns */
   margin-bottom: 10px;
 }
 
@@ -89,14 +84,11 @@
 .content {
   display: flex;
   flex-direction: column;
-  /* padding: 0 0px 20px 0px; */
 }
 
 /* Experiences Grid */
 .experiencesGrid {
   display: grid;
-  /* gap: 1.5rem; */
-  /* gap: 0.5rem; */
   grid-template-columns: 1fr;
   width: 100%;
 }
@@ -124,42 +116,6 @@
 .emptyDescription {
   font-size: 14px;
   line-height: 1.4;
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .container {
-    background-color: #1a1a1a;
-    border-bottom-color: #333;
-  }
-
-  .title {
-    color: #ffffff;
-  }
-
-  .addButton {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .addButton:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .disabledMessage {
-    color: #6b7280;
-    background: rgba(156, 163, 175, 0.05);
-    border-color: rgba(156, 163, 175, 0.1);
-  }
-
-  .emptyTitle {
-    color: #ffffff;
-  }
-
-  .emptyDescription {
-    color: #9ca3af;
-  }
 }
 
 .filterButtons {
@@ -279,29 +235,13 @@
 
 /* ********************* */
 
-/* 🆕 HEADER MIGLIORATO */
-/* .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  background: var(--glass-bg);
-  backdrop-filter: var(--backdrop-blur);
-  border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
-  border-bottom: 1px solid var(--glass-border);
-  margin-bottom: 0;
-} */
-
 /* 🆕 FILTRI CON GLASSMORPHISM */
 .filterItems {
   display: flex;
   gap: 8px;
-  /* background: rgba(255, 255, 255, 0.1); */
   padding: 6px;
   border-radius: var(--border-radius);
-  /* backdrop-filter: blur(10px); */
-  /* border: 1px solid var(--glass-border); */
-  /* margin: 0 auto; */
+
   justify-content: center;
   margin: 14px 0 12px 0;
 }
@@ -336,16 +276,6 @@
   transform: translateY(-2px);
 }
 
-/* 🆕 CONTENUTO CON BACKGROUND COERENTE */
-/* .content {
-  background: var(--surface-glass);
-  backdrop-filter: var(--backdrop-blur);
-  border-radius: 0 0 var(--border-radius-large) var(--border-radius-large);
-  padding: 20px;
-  border: 1px solid var(--glass-border);
-  border-top: none;
-} */
-
 /* 🆕 BOTTONE MOSTRA ALTRE - STILE COERENTE */
 .showMoreButton {
   display: flex;
@@ -371,16 +301,6 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
 }
-
-/* 🆕 CONTAINER PRINCIPALE */
-/* .container {
-  background: transparent;
-  border-radius: var(--border-radius-large);
-  overflow: hidden;
-  box-shadow: var(--shadow-medium);
-  border: 1px solid var(--glass-border);
-  margin-bottom: 24px;
-} */
 
 .filtersContainer {
   flex: 1 1 20%; /* 1/4 della larghezza normalmente */

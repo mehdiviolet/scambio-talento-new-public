@@ -350,48 +350,6 @@
   transform: scale(1.05);
 }
 
-/* Responsive */
-/* @media (max-width: 640px) {
-  .card {
-    border-radius: 1rem;
-  }
-
-  .cardHeader,
-  .cardContent,
-  .cardFooter {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .eventInfo {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .actionButtons {
-    align-self: flex-end;
-  }
-
-  .eventTitle {
-    font-size: 1.125rem;
-  }
-
-  .organizerInfo {
-    gap: 0.5rem;
-  }
-
-  .organizerAvatar {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  .coverImage {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    height: 150px;
-  }
-} */
-
 /* Card expand animations */
 .card {
   cursor: pointer;
@@ -1698,19 +1656,4 @@
 .statusBadge.waiting {
   background: rgba(245, 158, 11, 0.1);
   color: var(--secondary-500);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .eventDetails {
-    padding: 0.5rem;
-  }
-
-  .ownerActionsSection {
-    flex-direction: column;
-  }
-
-  .infoGrid {
-    gap: 0.75rem;
-  }
 }

@@ -146,35 +146,3 @@
   background: #b91c1c;
   transform: translateY(-1px);
 }
-
-/* Responsive */
-@media (max-width: 640px) {
-  .modal {
-    width: 95%;
-    margin: 20px;
-  }
-
-  .header,
-  .content,
-  .footer {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .footer {
-    flex-direction: column;
-  }
-
-  .titleSection {
-    gap: 8px;
-  }
-
-  .iconContainer {
-    width: 36px;
-    height: 36px;
-  }
-
-  .header h3 {
-    font-size: 1.1rem;
-  }
-}

@@ -196,69 +196,6 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .modal {
-    max-width: 95vw;
-    max-height: 95vh;
-    border-radius: 1.5rem;
-  }
-
-  .closeButton {
-    right: 0.75rem;
-    top: 0.75rem;
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
-  .closeButton svg {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-
-  .navButton {
-    width: 3rem;
-    height: 3rem;
-    padding: 0.5rem;
-  }
-
-  .navButton svg {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  .prevButton {
-    left: 0.75rem;
-  }
-
-  .nextButton {
-    right: 0.75rem;
-  }
-
-  .imageContainer {
-    padding: 1.5rem;
-  }
-
-  .modalImage {
-    max-width: calc(100% - 3rem);
-    max-height: calc(100% - 3rem);
-    border-radius: 0.75rem;
-  }
-
-  .imageInfo {
-    bottom: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: 0.75rem;
-    max-width: calc(100% - 1.5rem);
-  }
-
-  .imageCounter {
-    font-size: 0.8rem;
-  }
-
-  .imageCaption {
-    font-size: 0.85rem;
-  }
-}
 
 /* Animation for smooth appearance */
 @keyframes modalFadeIn {

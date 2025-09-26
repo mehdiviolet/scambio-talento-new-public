@@ -76,17 +76,3 @@
 .toggleButton:active {
   transform: scale(0.98);
 }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .toggleContainer {
-    left: 10px;
-    padding: 6px;
-  }
-
-  .toggleButton {
-    padding: 8px 10px;
-    font-size: 11px;
-    min-width: 70px;
-  }
-}

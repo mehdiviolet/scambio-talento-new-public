@@ -98,55 +98,16 @@ const SlideEventCard = ({
         onClick={handleCardClick}
         style={{ cursor: "pointer" }}
       >
-        <div className={styles.flexCard}>
-          <div className={styles.flexCardMe}>
-            <div className={styles.cardImage}>
-              {mockEvent.coverImage ? (
-                <img
-                  src={mockEvent.coverImage}
-                  alt={mockEvent.title}
-                  className={styles.eventImage}
-                />
-              ) : (
-                <div className={styles.imagePlaceholder}>📅</div>
-              )}
-            </div>
-            <h4 className={styles.eventTitle}>{mockEvent.title}</h4>
-          </div>
-
-          <div className={styles.cardPreviewContent}>
-            <div className={styles.eventMeta}>
-              <div className={styles.metaItem}>
-                <Calendar size={14} />
-                <span>{mockEvent.startDate}</span>
-              </div>
-              <div className={styles.metaItem}>
-                <Clock size={14} />
-                <span>{mockEvent.startTime}</span>
-              </div>
-              <div className={styles.metaItem}>
-                <Users size={14} />
-                <span>
-                  {mockEvent.participants}/{mockEvent.maxParticipants}
-                </span>
-              </div>
-              <div className={styles.metaItemIcon}>
-                <span>{getCategoryIcon("Hobby e passioni")}</span>
-              </div>
-            </div>
-
-            <div className={styles.metaItem}>
-              <MapPin size={14} />
-              <span>{mockEvent.placeName}</span>
-            </div>
-          </div>
-        </div>
-        {/* <hr /> */}
-
         {/* Footer con organizzatore */}
         <div className={styles.cardFooterPiccolo}>
           <div className={styles.organizerInfoPiccolo}>
-            <div className={styles.avatar}>
+            <div
+              className={styles.statusBadge}
+              style={{ backgroundColor: "#28a745" }}
+            >
+              Aperto
+            </div>
+            {/* <div className={styles.avatar}>
               {selectedPersonData?.profile?.profilePhoto ? (
                 <img
                   src={
@@ -167,7 +128,7 @@ const SlideEventCard = ({
             <div className={styles.organizerDetails}>
               <span className={styles.organizerLabel}>Organizzato da</span>
               <span className={styles.organizerName}>{organizer.name}</span>
-            </div>
+            </div> */}
             <span className={styles.categoryIcons}>
               <span>
                 {" "}
@@ -217,6 +178,48 @@ const SlideEventCard = ({
             )}
           </div>
         </div>
+
+        <div className={styles.flexCard}>
+          <div className={styles.flexCardMe}>
+            <div className={styles.cardImage}>
+              {mockEvent.coverImage ? (
+                <img
+                  src={mockEvent.coverImage}
+                  alt={mockEvent.title}
+                  className={styles.eventImage}
+                />
+              ) : (
+                <div className={styles.imagePlaceholder}>📅</div>
+              )}
+            </div>
+            <h4 className={styles.eventTitle}>{mockEvent.title}</h4>
+          </div>
+
+          <div className={styles.cardPreviewContent}>
+            <div className={styles.eventMeta}>
+              <div className={styles.metaItem}>
+                <Calendar size={14} />
+                <span>{mockEvent.startDate}</span>
+              </div>
+              <div className={styles.metaItem}>
+                <Clock size={14} />
+                <span>{mockEvent.startTime}</span>
+              </div>
+              <div className={styles.metaItem}>
+                <Users size={14} />
+                <span>
+                  {mockEvent.participants}/{mockEvent.maxParticipants}
+                </span>
+              </div>
+            </div>
+
+            <div className={styles.metaItem}>
+              <MapPin size={14} />
+              <span>{mockEvent.placeName}</span>
+            </div>
+          </div>
+        </div>
+        {/* <hr /> */}
       </div>
 
       {/* Event Slide Drawer */}

@@ -54,10 +54,10 @@ const ProfileTabs = () => {
         return (
           <>
             {/* <div className={styles.content}> */}
-            <div className={styles.toggleContainer}>
+            <div className={styles.tabsNavigation}>
               <button
-                className={`${styles.toggleButton} ${
-                  experienceMode === "offer" ? styles.toggleActive : ""
+                className={`${styles.tabButton} ${
+                  experienceMode === "offer" ? styles.active : ""
                 }`}
                 onClick={() => setExperienceMode("offer")}
               >
@@ -65,8 +65,8 @@ const ProfileTabs = () => {
                 Cerco
               </button>
               <button
-                className={`${styles.toggleButton} ${
-                  experienceMode === "seek" ? styles.toggleActive : ""
+                className={`${styles.tabButton} ${
+                  experienceMode === "seek" ? styles.active : ""
                 }`}
                 onClick={() => setExperienceMode("seek")}
               >
@@ -87,18 +87,18 @@ const ProfileTabs = () => {
       case "events":
         return (
           <>
-            <div className={styles.toggleContainer}>
+            <div className={styles.tabsNavigation}>
               <button
-                className={`${styles.toggleButton} ${
-                  eventMode === "joined" ? styles.toggleActive : ""
+                className={`${styles.tabButton} ${
+                  eventMode === "joined" ? styles.active : ""
                 }`}
                 onClick={() => setEventMode("joined")}
               >
                 Partecipati
               </button>
               <button
-                className={`${styles.toggleButton} ${
-                  eventMode === "created" ? styles.toggleActive : ""
+                className={`${styles.tabButton} ${
+                  eventMode === "created" ? styles.active : ""
                 }`}
                 onClick={() => setEventMode("created")}
               >

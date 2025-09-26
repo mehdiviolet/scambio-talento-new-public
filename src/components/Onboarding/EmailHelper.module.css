@@ -261,23 +261,3 @@
     transform: scale(1);
   }
 }
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 640px) {
-  .emailModal {
-    width: 95%;
-    margin: 20px;
-  }
-
-  .emailHeaderTop,
-  .emailMeta,
-  .emailBody {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .resetLink {
-    padding: 14px 24px;
-    font-size: 0.9rem;
-  }
-}

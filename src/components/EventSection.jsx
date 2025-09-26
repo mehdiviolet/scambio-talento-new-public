@@ -173,32 +173,7 @@ const EventsSection = () => {
           Filtri {showFilters ? "↑" : "↓"}
         </button>
       */}
-          <div
-            className={`${styles.filtersContainer} ${
-              showFilters ? styles.expanded : ""
-            }`}
-          >
-            <div className={styles.filtersContainer}>
-              <button
-                className={styles.toggleFiltersBtn}
-                onClick={() => setShowFilters(!showFilters)}
-              >
-                Filtri {showFilters ? "↑" : "↓"}
-              </button>
-              <div
-                className={`${styles.filterContent} ${
-                  showFilters ? styles.open : ""
-                }`}
-              >
-                <StatusFilterButtons
-                  activeFilter={statusFilter}
-                  onFilterChange={setStatusFilter}
-                  filterCounts={filterCounts}
-                  filterConfig={filterConfig}
-                />
-              </div>
-            </div>
-          </div>
+
           {isOwner && (
             <>
               <div
@@ -218,8 +193,35 @@ const EventsSection = () => {
         {/* Content */}
         <div className={styles.content}>
           {events.length > 0 ? (
-            <div className={styles.eventsGrid}>
-              {/* {events.map((event) => {
+            <>
+              <div
+                className={`${styles.filtersContainer} ${
+                  showFilters ? styles.expanded : ""
+                }`}
+              >
+                <div className={styles.filtersContainer}>
+                  <button
+                    className={styles.toggleFiltersBtn}
+                    onClick={() => setShowFilters(!showFilters)}
+                  >
+                    Filtri {showFilters ? "↑" : "↓"}
+                  </button>
+                  <div
+                    className={`${styles.filterContent} ${
+                      showFilters ? styles.open : ""
+                    }`}
+                  >
+                    <StatusFilterButtons
+                      activeFilter={statusFilter}
+                      onFilterChange={setStatusFilter}
+                      filterCounts={filterCounts}
+                      filterConfig={filterConfig}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className={styles.eventsGrid}>
+                {/* {events.map((event) => {
               const ownerPhoto = getOwnerPhoto();
 
               return (
@@ -240,46 +242,25 @@ const EventsSection = () => {
               );
             })} */}
 
-              {filteredEvents.map((event, i) => {
-                const ownerPhoto = getOwnerPhoto();
-                return (
-                  // <RealEventSlideCard
-                  //   key={event.id}
-                  //   event={event}
-                  //   organizer={`${currentProfile?.firstName || "Tu"} ${
-                  //     currentProfile?.lastName || ""
-                  //   }`}
-                  //   organizerPhoto={ownerPhoto}
-                  //   isOwner={isOwner}
-                  //   onEdit={isOwner ? () => handleEditEvent(event) : undefined}
-                  //   onDelete={
-                  //     isOwner ? () => handleDeleteEvent(event.id) : undefined
-                  //   }
-                  //   currentUserEvent={currentUserEvent}
-                  // />
-                  // <SlideEventCard
-                  //   key={event.id}
-                  //   isOwner={isOwner}
-                  //   selectedPersonData={currentProfile}
-                  //   eventId={event.id}
-                  //   onEdit={isOwner ? () => handleEditEvent(event) : undefined}
-                  //   onDelete={
-                  //     isOwner ? () => handleDeleteEvent(event.id) : undefined
-                  //   }
-                  // />
-                  <MyEventCard
-                    isOwner={true}
-                    key={event.id}
-                    eventId={event.id}
-                    // selectedPersonData={currentProfile}
-                    onEdit={isOwner ? () => handleEditEvent(event) : undefined}
-                    onDelete={
-                      isOwner ? () => handleDeleteEvent(event.id) : undefined
-                    }
-                  />
-                );
-              })}
-            </div>
+                {filteredEvents.map((event, i) => {
+                  const ownerPhoto = getOwnerPhoto();
+                  return (
+                    <MyEventCard
+                      isOwner={true}
+                      key={event.id}
+                      eventId={event.id}
+                      // selectedPersonData={currentProfile}
+                      onEdit={
+                        isOwner ? () => handleEditEvent(event) : undefined
+                      }
+                      onDelete={
+                        isOwner ? () => handleDeleteEvent(event.id) : undefined
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </>
           ) : (
             <div className={styles.emptyState}>
               {isOwner ? (

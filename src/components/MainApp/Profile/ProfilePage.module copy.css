@@ -271,12 +271,6 @@
   gap: 1.5rem;
 }
 
-/* @media (min-width: 768px) {
-  .experiencesGrid {
-    grid-template-columns: 1fr 1fr;
-  }
-} */
-
 /* Experiences Titles */
 .experiencesTitle {
   font-weight: 600;

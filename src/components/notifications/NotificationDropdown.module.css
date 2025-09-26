@@ -214,15 +214,3 @@
 .removeButton:hover {
   background-color: rgba(239, 68, 68, 0.1);
 }
-
-/* Media query per mobile */
-@media (max-width: 640px) {
-  .dropdown {
-    width: calc(100vw - 20px);
-    right: -10px;
-  }
-
-  .notificationActions {
-    opacity: 1;
-  }
-}

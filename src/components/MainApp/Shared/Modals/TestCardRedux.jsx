@@ -1533,7 +1533,7 @@ function TestCardRedux({
               )}
             </div>
           )}
-          <div className={styles.dividere}></div>
+          {/* <div className={styles.dividere}></div> */}
           <div className={styles.footerUser}>
             <ul className={styles.userInfo}>
               <li>

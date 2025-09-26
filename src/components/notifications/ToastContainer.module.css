@@ -16,12 +16,3 @@
 .toastContainer > * {
   pointer-events: auto;
 }
-
-/* Media query per mobile */
-@media (max-width: 640px) {
-  .toastContainer {
-    top: 10px;
-    right: 10px;
-    left: 10px;
-  }
-}

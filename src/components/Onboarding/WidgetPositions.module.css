@@ -137,21 +137,3 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
 }
-
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-  .leftOfMobile,
-  .rightOfMobile {
-    display: none; /* Nascondi sui dispositivi piccoli */
-  }
-
-  .belowOwnerViewer {
-    top: 120px;
-    width: 180px;
-  }
-
-  .aboveMobile,
-  .belowMobile {
-    width: 250px;
-  }
-}

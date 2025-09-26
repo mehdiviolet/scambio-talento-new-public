@@ -42,7 +42,7 @@ const SlideEventCard = ({
   const myCurrentUser = useSelector(selectCurrentUser);
 
   console.log(event, myProfile, myCurrentUser);
-  console.log(event.coverImage.name);
+  // console.log(event.coverImage.name);
 
   const {
     id = eventId,

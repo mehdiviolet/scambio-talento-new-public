@@ -798,7 +798,7 @@ function TestCard({
               {isdescrizioneExpanded ? "Mostra meno" : "Mostra tutto..."}
             </button>
           )} */}
-          <div className={styles.divider}></div>
+          {/* <div className={styles.divider}></div> */}
           <div className={styles.footerUser}>
             <ul className={styles.userInfo}>
               <li>

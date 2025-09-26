@@ -219,33 +219,6 @@ const ExperiencesSection = () => {
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
-          <div
-            className={`${styles.filtersContainer} ${
-              showFilters ? styles.expanded : ""
-            }`}
-          >
-            <div className={styles.filtersContainer}>
-              <button
-                className={styles.toggleFiltersBtn}
-                onClick={() => setShowFilters(!showFilters)}
-              >
-                Filtri {showFilters ? "↑" : "↓"}
-              </button>
-              <div
-                className={`${styles.filterContent} ${
-                  showFilters ? styles.open : ""
-                }`}
-              >
-                <StatusFilterButtons
-                  activeFilter={statusFilter}
-                  onFilterChange={setStatusFilter}
-                  filterCounts={filterCounts}
-                  filterConfig={filterConfig}
-                  totalCount={experiences.length} // ← AGGIUNGI QUESTA LINEA
-                />
-              </div>
-            </div>
-          </div>
           {isOwner && (
             <>
               {skills && skills.length > 0 && (
@@ -266,46 +239,75 @@ const ExperiencesSection = () => {
         {/* Content */}
         <div className={styles.content}>
           {experiences.length > 0 ? (
-            <div className={styles.experiencesGrid}>
-              {experiences.map((experience) => {
-                // ✅ Trova la skill associata per ottenere i gem corretti
-                const associatedSkill = findSkillForExperience(experience);
-                const skillGems = associatedSkill?.gems || 0;
-
-                // ✅ Ottieni foto profilo owner
-                const ownerPhoto = getOwnerPhoto();
-
-                return (
-                  <TestCard
-                    key={experience.id}
-                    lingua={experience.lingua}
-                    modalita={experience.modalita}
-                    icon={experience.icon}
-                    title={experience.title}
-                    lezioni={experience.lezioni}
-                    durataLezione={experience.durataLezione}
-                    costo={experience.costo}
-                    descrizione={experience.descrizione}
-                    istruttore={`${currentProfile?.firstName || "Tu"} ${
-                      currentProfile?.lastName || ""
+            <>
+              <div
+                className={`${styles.filtersContainer} ${
+                  showFilters ? styles.expanded : ""
+                }`}
+              >
+                <div className={styles.filtersContainer}>
+                  <button
+                    className={styles.toggleFiltersBtn}
+                    onClick={() => setShowFilters(!showFilters)}
+                  >
+                    Filtri {showFilters ? "↑" : "↓"}
+                  </button>
+                  <div
+                    className={`${styles.filterContent} ${
+                      showFilters ? styles.open : ""
                     }`}
-                    // ✅ Passa foto profilo owner
-                    ownerPhoto={ownerPhoto}
-                    // ✅ Usa gem della skill invece di esperienza
-                    skillGems={skillGems}
-                    partecipanti={experience.partecipanti}
-                    experienceData={experience}
-                    isOwner={isOwner}
-                    onEdit={isOwner ? handleEditExperience : undefined}
-                    onDelete={isOwner ? handleDeleteExperience : undefined}
-                    userXP={100}
-                    onXPChange={(amount) =>
-                      console.log(`XP changed: ${amount}`)
-                    }
-                  />
-                );
-              })}
-            </div>
+                  >
+                    <StatusFilterButtons
+                      activeFilter={statusFilter}
+                      onFilterChange={setStatusFilter}
+                      filterCounts={filterCounts}
+                      filterConfig={filterConfig}
+                      totalCount={experiences.length} // ← AGGIUNGI QUESTA LINEA
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className={styles.experiencesGrid}>
+                {experiences.map((experience) => {
+                  // ✅ Trova la skill associata per ottenere i gem corretti
+                  const associatedSkill = findSkillForExperience(experience);
+                  const skillGems = associatedSkill?.gems || 0;
+
+                  // ✅ Ottieni foto profilo owner
+                  const ownerPhoto = getOwnerPhoto();
+
+                  return (
+                    <TestCard
+                      key={experience.id}
+                      lingua={experience.lingua}
+                      modalita={experience.modalita}
+                      icon={experience.icon}
+                      title={experience.title}
+                      lezioni={experience.lezioni}
+                      durataLezione={experience.durataLezione}
+                      costo={experience.costo}
+                      descrizione={experience.descrizione}
+                      istruttore={`${currentProfile?.firstName || "Tu"} ${
+                        currentProfile?.lastName || ""
+                      }`}
+                      // ✅ Passa foto profilo owner
+                      ownerPhoto={ownerPhoto}
+                      // ✅ Usa gem della skill invece di esperienza
+                      skillGems={skillGems}
+                      partecipanti={experience.partecipanti}
+                      experienceData={experience}
+                      isOwner={isOwner}
+                      onEdit={isOwner ? handleEditExperience : undefined}
+                      onDelete={isOwner ? handleDeleteExperience : undefined}
+                      userXP={100}
+                      onXPChange={(amount) =>
+                        console.log(`XP changed: ${amount}`)
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </>
           ) : (
             <div className={styles.emptyState}>
               {isOwner && skills.length === 0 ? (
