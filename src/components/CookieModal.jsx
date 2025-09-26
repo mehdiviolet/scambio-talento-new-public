@@ -41,7 +41,9 @@ const CookieModal = ({ isOpen, onClose, userXP }) => {
           <div className={styles.xpDisplay}>
             <div className={styles.xpValue}>
               <span className={styles.valueNumber}>{userXP}</span>
-              <Cookie size={32} className={styles.xpIcon} />
+              {/* <Cookie size={32} className={styles.xpIcon} /> */}
+              <h1 style={{ color: "var(--secondary)" }}>XP</h1>
+
               {/* <h1>XP</h1> */}
             </div>
 

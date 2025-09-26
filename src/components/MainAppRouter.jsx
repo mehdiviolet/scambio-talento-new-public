@@ -354,7 +354,9 @@ const MainAppRouter = () => {
                 onClick={() => setIsCookieModalOpen(true)}
                 style={{ cursor: "pointer" }}
               >
-                <Cookie style={{ color: "var(--secondary)" }} />
+                {/* <Cookie style={{ color: "var(--secondary)" }} /> */}
+                <h1 style={{ color: "var(--secondary)" }}>XP</h1>
+                <p className={styles.userXP}>{userXP}</p>
               </div>
             </div>
 
@@ -363,7 +365,8 @@ const MainAppRouter = () => {
               onClick={() => setsStarteModalOpen(true)}
               style={{ cursor: "pointer" }}
             >
-              <Star style={{ color: "var(--secondary)" }} />
+              <Star style={{ color: "var(--secondary)" }} size={20} />
+              <p className={styles.userXP}>35</p>
             </div>
 
             <div
@@ -371,7 +374,8 @@ const MainAppRouter = () => {
               onClick={() => setIsActivityModalOpen(true)}
               style={{ cursor: "pointer" }}
             >
-              <Activity style={{ color: "var(--secondary)" }} />
+              <Activity style={{ color: "var(--secondary)" }} size={20} />
+              <p className={styles.userXP}>0</p>
             </div>
           </div>
 
