@@ -1,6 +1,9 @@
 import React from "react";
 import { Activity, X, Trophy, Target, Cookie } from "lucide-react";
-import styles from "./ActivityModal.module.css";
+import extendedStyles from "./ActivityModal.module.css";
+import baseStyles from "./CookieModal.module.css";
+
+const styles = { ...baseStyles, ...extendedStyles };
 
 const ActivityModal = ({
   isOpen,

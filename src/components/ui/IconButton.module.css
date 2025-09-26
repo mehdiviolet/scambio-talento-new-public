@@ -5,6 +5,7 @@
   padding: 0.5rem;
   border-radius: 9999px;
   background-color: rgba(255, 255, 255, 0.2);
+  /* background-color: var(--secondary-container); */
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
@@ -24,9 +25,10 @@
 .iconButton svg {
   width: 1.25rem;
   height: 1.25rem;
-  color: var(--gray-800);
+  color: var(--on-surface);
+  /* color: var(--on-secondary-container); */
 }
 
 .iconButton:hover svg {
-  color: var(--text-secondary);
+  color: var(--secondary);
 }

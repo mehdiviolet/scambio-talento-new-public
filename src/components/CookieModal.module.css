@@ -104,7 +104,8 @@
 
 .content {
   padding: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.05);
+  /* background-color: rgba(125, 85, 85, 0.05); */
+  /* background-color: var(--primary-container); */
   backdrop-filter: blur(8px);
 }
 
@@ -128,12 +129,12 @@
 .valueNumber {
   font-size: 3rem;
   font-weight: 700;
-  color: var(--text-secondary);
+  color: var(--secondary);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .xpIcon {
-  color: var(--text-secondary);
+  color: var(--secondary);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
@@ -176,7 +177,7 @@
 .progressText {
   text-align: center;
   margin: 0;
-  color: var(--text-primary-light);
+  /* color: var(--text-primary-light); */
   font-size: 0.9rem;
 }
 
@@ -248,7 +249,8 @@
 .statValue {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--text-primary-dark);
+  /* color: var(--text-primary-dark); */
+  color: var(--on-tertiary-container);
   margin: 0;
 }
 
