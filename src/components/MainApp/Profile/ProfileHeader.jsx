@@ -38,6 +38,8 @@ import {
   Facebook,
   Key,
   Gem,
+  UserPlus,
+  UserCheck,
 } from "lucide-react";
 import styles from "./ProfileHeader.module.css";
 import { useQuickSetup } from "../../../hooks/useQuickSetup";
@@ -764,6 +766,28 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                 </button>
               </>
             )}
+            <div className={styles.actionBtn}>
+              {isOwner ? (
+                <motion.button
+                  className={`${styles.cherryBtn} ${styles.liquidButton}`}
+                  onClick={() => setIsCherryDrawerOpen(true)}
+                  title="Ruota della fortuna!"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Cherry size={16} />
+                </motion.button>
+              ) : (
+                <button className={styles.followBtn} onClick={handleFollow}>
+                  {/* {isFollowing ? "FOLLOWING" : "FOLLOW"} */}
+                  {isFollowing ? (
+                    <UserPlus size={17} />
+                  ) : (
+                    <UserCheck size={17} />
+                  )}
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Riga 2 - Username */}
@@ -785,24 +809,6 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
             </div>
           </div>
 
-          <div className={styles.gridSpecialAction}>
-            {isOwner ? (
-              <motion.button
-                className={`${styles.cherryBtn} ${styles.liquidButton}`}
-                onClick={() => setIsCherryDrawerOpen(true)}
-                title="Ruota della fortuna!"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Cherry size={16} />
-              </motion.button>
-            ) : (
-              <button className={styles.followBtn} onClick={handleFollow}>
-                {isFollowing ? "FOLLOWING" : "FOLLOW"}
-              </button>
-            )}
-          </div>
-
           {/* Riga 4 - Following/Followers | Skills */}
           <div className={styles.gridStats}>
             <button
@@ -817,13 +823,10 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
             >
               <strong>{user.followers ? user.followers : 0}</strong> followers
             </button>
-          </div>
-
-          <div className={styles.gridSkills}>
-            <button className={styles.skillsBtn} onClick={handleSkillsClick}>
+            {/* <button className={styles.skillsBtn} onClick={handleSkillsClick}>
               <Gem size={16} />
               <span>5</span>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

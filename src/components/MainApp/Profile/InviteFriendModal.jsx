@@ -9,7 +9,10 @@ import {
   CheckCircle,
   Star,
 } from "lucide-react";
-import styles from "./InviteFriendModal.module.css";
+import extendedStyles from "../../MainApp/Profile/InviteFriendModal.module.css";
+import baseStyles from "../../../components/CookieModal.module.css";
+
+const styles = { ...baseStyles, ...extendedStyles };
 
 const InviteFriendModal = ({ isOpen, onClose }) => {
   const modalRef = useRef(null);
