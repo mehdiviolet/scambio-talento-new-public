@@ -50,6 +50,8 @@ import MapComponent from "./MapComponent";
 import SimpleImageModal from "./SimpleImageModal";
 import LoadingSpinner from "./LoadingSpinner";
 import { useAppSelector } from "@/hooks/redux";
+import { Button } from "./ui/Button";
+import { ButtonEdit, ButtonTrash } from "./ui/ButtonActions";
 
 const MyEventCardDetails = ({
   onEdit,
@@ -876,30 +878,20 @@ const MyEventCardDetails = ({
           {isOwner && (
             <>
               <div className={styles.actionButtons}>
-                <button
-                  className={`${styles.actionButton} ${styles.actionButtonEdit}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onEdit && onEdit(mockEvent);
-                    console.log("🔧 DEMO: Modifica evento", mockEvent.title);
-                  }}
-                  title="Modifica evento"
-                >
-                  <Edit size={16} />
-                  <span>Modifica</span>
-                </button>
-                <button
-                  className={`${styles.actionButton} ${styles.actionButtonDelete}`}
+                <ButtonTrash
                   onClick={(e) => {
                     e.stopPropagation();
                     onDelete && onDelete(mockEvent.id);
                     console.log("🗑️ DEMO: Elimina evento", mockEvent.title);
                   }}
-                  title="Elimina evento"
-                >
-                  <Trash2 size={16} />
-                  <span>Elimina</span>
-                </button>
+                />
+                <ButtonEdit
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onEdit && onEdit(mockEvent);
+                    console.log("🔧 DEMO: Modifica evento", mockEvent.title);
+                  }}
+                />
               </div>
             </>
           )}

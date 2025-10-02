@@ -184,6 +184,7 @@ const EventsSection = () => {
                 <HeaderAddButton
                   onClick={handleOpenCreateModal}
                   title="Crea nuovo evento"
+                  txt="EVENT"
                 />
               </div>
             </>

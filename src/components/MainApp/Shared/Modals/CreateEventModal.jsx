@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { X, ArrowLeft, Upload } from "lucide-react";
+import { X, ArrowLeft, Upload, ArrowRight } from "lucide-react";
 import { Calendar, Clock, MapPin, Users, Globe, Languages } from "lucide-react";
 
 import baseStyles from "./AddSkillModal.module.css";
 import extendedStyles from "./CreateEventModal.module.css";
+import IconButton from "@/components/ui/IconButton";
 
 const styles = { ...baseStyles, ...extendedStyles };
 
@@ -283,7 +284,7 @@ const CreateEventModal = ({
         return `Immagine`;
       // return `${prefix} - Immagine`;
       case 7:
-        return "✅ Conferma evento";
+        return "Conferma evento";
       // return "✅ Conferma evento";
       default:
         return "";
@@ -307,7 +308,7 @@ const CreateEventModal = ({
         <div className={styles.modal}>
           <div className={styles.header}>
             <h3>{getStepTitle()}</h3>
-            <div className={styles.progressBar}>
+            {/* <div className={styles.progressBar}>
               <div
                 className={styles.progressFill}
                 style={{ width: getProgressWidth() }}
@@ -315,15 +316,16 @@ const CreateEventModal = ({
             </div>
             <button onClick={onClose} className={styles.closeButton}>
               <X />
-            </button>
+            </button> */}
+            <IconButton icon={X} onClick={onClose} />
           </div>
 
           <div className={styles.content}>
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
-                <div className={styles.iconContainer}>
+                {/* <div className={styles.iconContainer}>
                   <span>✏️</span>
-                </div>
+                </div> */}
                 <h3 className={styles.stepTitle}>
                   Modifica evento: {initialData.title}
                 </h3>
@@ -359,12 +361,12 @@ const CreateEventModal = ({
                     checked={acceptTerms}
                     onChange={(e) => setAcceptTerms(e.target.checked)}
                   />
-                  <span>☑️ Confermo le modifiche</span>
+                  <span>Confermo le modifiche</span>
                 </label>
               </div>
 
               <div className={styles.controls}>
-                <button onClick={onClose} className={styles.controlButton}>
+                <button onClick={onClose} className={styles.secondaryButton}>
                   Annulla
                 </button>
                 <button
@@ -376,7 +378,7 @@ const CreateEventModal = ({
                       : styles.disabled
                   }`}
                 >
-                  💾 Salva Modifiche
+                  Salva Modifiche
                 </button>
               </div>
             </div>
@@ -391,7 +393,7 @@ const CreateEventModal = ({
       <div className={styles.modal}>
         <div className={styles.header}>
           <h3>{getStepTitle()}</h3>
-          <div className={styles.progressBar}>
+          {/* <div className={styles.progressBar}>
             <div
               className={styles.progressFill}
               style={{ width: getProgressWidth() }}
@@ -399,7 +401,8 @@ const CreateEventModal = ({
           </div>
           <button onClick={onClose} className={styles.closeButton}>
             <X />
-          </button>
+          </button> */}
+          <IconButton icon={X} onClick={onClose} />
         </div>
 
         <div className={styles.content}>
@@ -407,9 +410,9 @@ const CreateEventModal = ({
           {currentStep === 1 && (
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
-                <div className={styles.iconContainer}>
+                {/* <div className={styles.iconContainer}>
                   <span>🪄</span>
-                </div>
+                </div> */}
                 <h3 className={styles.stepTitle}>Scegli la Categoria</h3>
               </div>
 
@@ -431,11 +434,12 @@ const CreateEventModal = ({
                 <button
                   onClick={handleNext}
                   disabled={isNextDisabled()}
-                  className={`${styles.continueButton} ${
+                  className={`${styles.primaryButton} ${
                     isNextDisabled() ? styles.disabled : styles.enabled
                   }`}
                 >
-                  Avanti →
+                  <span>Continua</span>
+                  <ArrowRight size={20} />
                 </button>
               </div>
             </div>
@@ -445,9 +449,9 @@ const CreateEventModal = ({
           {currentStep === 2 && (
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
-                <div className={styles.iconContainer}>
+                {/* <div className={styles.iconContainer}>
                   <span>✍️</span>
-                </div>
+                </div> */}
                 <h3 className={styles.stepTitle}>Titolo e Descrizione</h3>
               </div>
 
@@ -496,17 +500,18 @@ const CreateEventModal = ({
               </div>
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
                 <button
                   onClick={handleNext}
                   disabled={isNextDisabled()}
-                  className={`${styles.continueButton} ${
+                  className={`${styles.primaryButton} ${
                     isNextDisabled() ? styles.disabled : styles.enabled
                   }`}
                 >
-                  Avanti →
+                  <span>Continua</span>
+                  <ArrowRight size={20} />
                 </button>
               </div>
             </div>
@@ -516,9 +521,9 @@ const CreateEventModal = ({
           {currentStep === 3 && (
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
-                <div className={styles.iconContainer}>
+                {/* <div className={styles.iconContainer}>
                   <span>📅</span>
-                </div>
+                </div> */}
                 <h3 className={styles.stepTitle}>Data, Ora, Partecipanti</h3>
               </div>
 
@@ -589,13 +594,13 @@ const CreateEventModal = ({
               </div>
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
                 <button
                   onClick={handleNext}
                   disabled={isNextDisabled()}
-                  className={`${styles.continueButton} ${
+                  className={`${styles.primaryButton} ${
                     isNextDisabled() ? styles.disabled : styles.enabled
                   }`}
                 >
@@ -609,9 +614,9 @@ const CreateEventModal = ({
           {currentStep === 4 && (
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
-                <div className={styles.iconContainer}>
+                {/* <div className={styles.iconContainer}>
                   <span>📍</span>
-                </div>
+                </div> */}
                 <h3 className={styles.stepTitle}>Luogo dell'evento</h3>
               </div>
 
@@ -675,13 +680,13 @@ const CreateEventModal = ({
               )}
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
                 <button
                   onClick={handleNext}
                   disabled={isNextDisabled()}
-                  className={`${styles.continueButton} ${
+                  className={`${styles.primaryButton} ${
                     isNextDisabled() ? styles.disabled : styles.enabled
                   }`}
                 >
@@ -695,9 +700,9 @@ const CreateEventModal = ({
           {currentStep === 5 && (
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
-                <div className={styles.iconContainer}>
+                {/* <div className={styles.iconContainer}>
                   <span>🗣️</span>
-                </div>
+                </div> */}
                 <h3 className={styles.stepTitle}>Lingua</h3>
               </div>
 
@@ -732,13 +737,13 @@ const CreateEventModal = ({
               )}
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
                 <button
                   onClick={handleNext}
                   disabled={isNextDisabled()}
-                  className={`${styles.continueButton} ${
+                  className={`${styles.primaryButton} ${
                     isNextDisabled() ? styles.disabled : styles.enabled
                   }`}
                 >
@@ -752,9 +757,9 @@ const CreateEventModal = ({
           {currentStep === 6 && (
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
-                <div className={styles.iconContainer}>
+                {/* <div className={styles.iconContainer}>
                   <span>📸</span>
-                </div>
+                </div> */}
                 <h3 className={styles.stepTitle}>Immagine copertina</h3>
               </div>
 
@@ -776,13 +781,13 @@ const CreateEventModal = ({
               </div>
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
                 <button
                   onClick={handleNext}
                   disabled={isNextDisabled()}
-                  className={`${styles.continueButton} ${
+                  className={`${styles.primaryButton} ${
                     isNextDisabled() ? styles.disabled : styles.enabled
                   }`}
                 >
@@ -796,53 +801,51 @@ const CreateEventModal = ({
           {currentStep === 7 && (
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
-                <div className={styles.iconContainer}>
+                {/* <div className={styles.iconContainer}>
                   <span>✅</span>
-                </div>
+                </div> */}
                 <h3 className={styles.stepTitle}>Conferma evento</h3>
               </div>
 
               <div className={styles.previewCard}>
                 <div className={styles.previewPadding}>
                   <div className={styles.previewHeader}>
-                    <div className={styles.previewIconContainer}>
-                      <span className={styles.previewIconLarge}>🎉</span>
-                    </div>
-                    <div>
-                      <h4 className={styles.previewTitle}>{eventTitle}</h4>
-                      <p className={styles.previewDescription}>
-                        {eventDescription.substring(0, 60)}...
-                      </p>
-                    </div>
-                  </div>
+                    <div className={styles.eventSummary}>
+                      <div className={styles.eventSummaryDesc}>
+                        <h4 className={styles.previewTitle}>{eventTitle}</h4>
+                        <p className={styles.previewDescription}>
+                          {/* {eventDescription.substring(0, 60)}... */}
+                          {eventDescription}
+                        </p>
+                      </div>
 
-                  <div className={styles.eventSummary}>
-                    <div className={styles.eventSummaryCategory}>
-                      <strong>Categoria:</strong>
-                      <br />
-                      {selectedCategory}
-                    </div>
-                    <div className={styles.eventSummaryData}>
-                      <strong>Data:</strong>
-                      <br />
-                      {startDate} {startTime}-{endTime}
-                    </div>
-                    <div className={styles.eventSummaryPArtecipanti}>
-                      <strong>Partecipanti:</strong>
-                      <br />
-                      {maxParticipants || "Illimitato"}
-                    </div>
-                    <div>
-                      <strong>Tipo:</strong>
-                      <br />
-                      {eventType === "presenza" ? "In presenza" : "Online"}
-                    </div>
-                    <div>
-                      <strong>Lingua:</strong>
-                      <br />
-                      {eventLanguage === "altro"
-                        ? customLanguage
-                        : eventLanguage}
+                      <div className={styles.eventSummaryCategory}>
+                        <strong>Categoria:</strong>
+                        <br />
+                        {selectedCategory}
+                      </div>
+                      <div className={styles.eventSummaryData}>
+                        <strong>Data:</strong>
+                        <br />
+                        {startDate} {startTime}-{endTime}
+                      </div>
+                      <div className={styles.eventSummaryPArtecipanti}>
+                        <strong>Partecipanti:</strong>
+                        <br />
+                        {maxParticipants || "Illimitato"}
+                      </div>
+                      <div>
+                        <strong>Tipo:</strong>
+                        <br />
+                        {eventType === "presenza" ? "In presenza" : "Online"}
+                      </div>
+                      <div>
+                        <strong>Lingua:</strong>
+                        <br />
+                        {eventLanguage === "altro"
+                          ? customLanguage
+                          : eventLanguage}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -855,11 +858,11 @@ const CreateEventModal = ({
                     checked={acceptTerms}
                     onChange={(e) => setAcceptTerms(e.target.checked)}
                   />
-                  <span>☑️ Accetto i termini e condizioni</span>
+                  <span>Accetto i termini e condizioni</span>
                 </label>
               </div>
 
-              <div className={styles.formGroup}>
+              {/* <div className={styles.formGroup}>
                 <label className={styles.checkboxLabel}>
                   <input
                     type="checkbox"
@@ -868,20 +871,20 @@ const CreateEventModal = ({
                   />
                   <span>🔔 Voglio ricevere notifiche per le iscrizioni</span>
                 </label>
-              </div>
+              </div> */}
 
               <div className={styles.controls}>
-                <button onClick={handleBack} className={styles.controlButton}>
-                  <ArrowLeft size={16} /> Indietro
+                <button onClick={handleBack} className={styles.secondaryButton}>
+                  <ArrowLeft size={20} />
                 </button>
                 <button
                   onClick={handleFinalSubmit}
                   disabled={!acceptTerms}
-                  className={`${styles.createButton} ${
+                  className={`${styles.primaryButton} ${
                     acceptTerms ? styles.enabled : styles.disabled
                   }`}
                 >
-                  🎉 Pubblica evento
+                  Pubblica evento
                 </button>
               </div>
             </div>

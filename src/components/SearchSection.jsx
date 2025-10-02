@@ -40,6 +40,7 @@ import {
 } from "../store/slices/onboardingSlice";
 import { HeaderAddButton } from "./ui/AddButtons";
 import { Button } from "./ui/Button";
+import { ButtonCancel, ButtonSave, ButtonTrash } from "./ui/ButtonActions";
 
 const SearchSection = () => {
   const [localExpandedSkillId, setLocalExpandedSkillId] = useState(null);
@@ -183,7 +184,9 @@ const SearchSection = () => {
             // >
             //   +
             // </button>
-            <HeaderAddButton onClick={handleAddSkill} />
+            <div className={styles.header}>
+              <HeaderAddButton onClick={handleAddSkill} />
+            </div>
           )}
           {selectedSkills.length > 0 ? (
             selectedSkills.map((skill, index) => {
@@ -275,35 +278,17 @@ const SearchSection = () => {
                             {isOwner && (
                               <div className={styles.actions}>
                                 <div className={styles.actionButtons}>
-                                  <Button
-                                    className={styles.actionButtonDelete}
-                                    //  className={`${styles.actionButton} ${styles.actionButtonDelete}`}
+                                  <ButtonTrash
                                     onClick={(e) => handleDeleteClick(skill, e)}
-                                    title="Elimina esperienza"
-                                    // variant="gray"
-                                  >
-                                    {" "}
-                                    <Trash2 size={16} />
-                                    <span>Elimina</span>
-                                  </Button>
+                                  />
 
-                                  <Button
-                                    onClick={handleEditCancel}
-                                    // className={styles.editCancelButton}
-                                  >
-                                    <X size={14} />
-                                    Annulla
-                                  </Button>
-                                  <Button
+                                  <ButtonCancel onClick={handleEditCancel} />
+
+                                  <ButtonSave
                                     onClick={handleEditSave}
                                     disabled={!editedDescription.trim()}
-                                    // className={styles.editSaveButton}
-                                    variant="primary"
-                                    mode="solid"
-                                  >
-                                    <Save size={14} />
-                                    Salva
-                                  </Button>
+                                    disabledMessage="Inserisci una descrizione"
+                                  />
                                 </div>
                               </div>
                             )}

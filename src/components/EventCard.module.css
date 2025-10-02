@@ -2,9 +2,10 @@
 
 /* === CARD BASE === */
 .card {
-  background: var(--surface);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--outline);
+  /* background: var(--surface); */
+  background: var(--primary-container);
+  /* border-radius: var(--radius-xl); */
+  /* border: 1px solid var(--outline); */
   box-shadow: var(--shadow);
   transition: var(--transition);
   overflow: hidden;
@@ -13,6 +14,7 @@
   min-height: 400px;
   display: flex;
   flex-direction: column;
+  color: var(--on-primary-container);
 }
 
 .card:hover {
@@ -24,7 +26,7 @@
 .card.expanded {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--primary);
+  /* border-color: var(--primary); */
   cursor: default;
   height: 100%;
 }
@@ -193,7 +195,7 @@
   font-weight: var(--font-bold);
   margin: 0 0 var(--space-lg) 0;
   line-height: 1.3;
-  color: var(--on-surface);
+  /* color: var(--on-surface); */
 }
 
 .eventMeta {
@@ -315,7 +317,7 @@
   top: 0;
   left: var(--space-sm);
   z-index: 10;
-  color: var(--on-primary);
+  /* color: var(--on-primary); */
   background: var(--primary);
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-md);
@@ -328,7 +330,7 @@
   position: relative;
   height: 200px;
   overflow: hidden;
-  border: 1px solid var(--outline);
+  /* border: 1px solid var(--outline); */
 }
 
 .coverImg {
@@ -369,6 +371,7 @@
   gap: var(--space-sm);
   align-self: flex-end;
   margin-top: auto;
+  color: var(--tertiary);
 }
 
 .overlayIcon {
@@ -377,7 +380,7 @@
   border-radius: var(--radius-full);
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid var(--outline);
-  color: var(--on-primary);
+  /* color: var(--on-primary); */
   cursor: pointer;
   transition: var(--transition);
   display: flex;
@@ -406,7 +409,7 @@
 .eventTitleOverlay {
   font-size: var(--text-xl);
   font-weight: var(--font-bold);
-  color: var(--on-primary);
+  /* color: var(--on-primary); */
   margin: 0 0 var(--space-md) 0;
   line-height: 1.3;
   word-wrap: break-word;
@@ -433,11 +436,11 @@
   align-items: center;
   gap: var(--space-sm);
   font-size: var(--text-sm);
-  color: var(--on-primary);
+  /* color: var(--on-primary); */
 }
 
 .metaIconOverlay {
-  color: var(--on-primary);
+  /* color: var(--on-primary); */
   flex-shrink: 0;
 }
 
@@ -468,7 +471,7 @@
 
 .participantCount {
   font-size: var(--text-sm);
-  color: var(--on-primary);
+  /* color: var(--on-primary); */
   font-weight: var(--font-medium);
 }
 
@@ -757,7 +760,7 @@
 
 .galleryIcon {
   font-size: var(--text-xl);
-  color: var(--on-primary);
+  /* color: var(--on-primary); */
 }
 
 .galleryLoading {
@@ -853,7 +856,7 @@
 
 .commentBtn:hover {
   background: var(--primary);
-  color: var(--on-primary);
+  /* color: var(--on-primary); */
 }
 
 /* === FOOTER === */

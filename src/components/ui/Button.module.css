@@ -1,4 +1,4 @@
-/* Button.module.css */
+/* Button.module.css - Allineato al Design System con CSS Variables */
 
 .btn {
   display: flex;
@@ -6,7 +6,6 @@
   justify-content: center;
   gap: 0.375rem;
   padding: 0.5rem 0.75rem;
-  /* border-radius: 0.75rem; */
   border: 1px solid;
   backdrop-filter: blur(8px);
   font-size: 0.75rem;
@@ -20,8 +19,6 @@
   color: var(--btn-color);
   text-decoration: none;
   flex: 1;
-
-  /* margin: 12px 8px; */
 }
 
 .btn:hover:not(:disabled) {
@@ -42,12 +39,13 @@
   transform: none;
 }
 
-/* Dimensioni */
+/* === DIMENSIONI === */
 .xs {
   padding: 0.5rem 0.75rem;
   font-size: 0.625rem;
   min-width: 60px;
 }
+
 .sm {
   padding: 0.375rem 0.5rem;
   font-size: 0.625rem;
@@ -67,185 +65,187 @@
   flex: 1;
 }
 
-/* SUCCESS/EDIT VARIANTS */
-.success.solid {
-  --btn-bg: rgba(34, 197, 94, 0.2);
-  --btn-border: rgba(34, 197, 94, 0.4);
-  --btn-color: rgb(15, 118, 110);
-  --btn-hover-bg: rgba(34, 197, 94, 0.3);
-  --btn-hover-border: rgba(34, 197, 94, 0.6);
-  --btn-hover-color: rgb(6, 95, 70);
-}
-
-.success.outline {
-  --btn-bg: transparent;
-  --btn-border: rgba(34, 197, 94, 0.4);
-  --btn-color: rgb(15, 118, 110);
-  --btn-hover-bg: rgba(34, 197, 94, 0.1);
-  --btn-hover-border: rgba(34, 197, 94, 0.6);
-  --btn-hover-color: rgb(6, 95, 70);
-}
-
-.success.ghost {
-  --btn-bg: transparent;
-  --btn-border: transparent;
-  --btn-color: rgb(15, 118, 110);
-  --btn-hover-bg: rgba(34, 197, 94, 0.1);
-  --btn-hover-border: transparent;
-  --btn-hover-color: rgb(6, 95, 70);
-}
-
-/* DANGER/DELETE VARIANTS */
-.danger.solid {
-  --btn-bg: rgba(239, 68, 68, 0.2);
-  --btn-border: rgba(239, 68, 68, 0.4);
-  --btn-color: rgb(153, 27, 27);
-  --btn-hover-bg: rgba(239, 68, 68, 0.3);
-  --btn-hover-border: rgba(239, 68, 68, 0.6);
-  --btn-hover-color: rgb(127, 29, 29);
-}
-
-.danger.outline {
-  --btn-bg: transparent;
-  --btn-border: rgba(239, 68, 68, 0.4);
-  --btn-color: rgb(153, 27, 27);
-  --btn-hover-bg: rgba(239, 68, 68, 0.1);
-  --btn-hover-border: rgba(239, 68, 68, 0.6);
-  --btn-hover-color: rgb(127, 29, 29);
-}
-
-.danger.ghost {
-  --btn-bg: transparent;
-  --btn-border: transparent;
-  --btn-color: rgb(153, 27, 27);
-  --btn-hover-bg: rgba(239, 68, 68, 0.1);
-  --btn-hover-border: transparent;
-  --btn-hover-color: rgb(127, 29, 29);
-}
-
-/* PRIMARY VARIANTS (usando text-primary) */
+/* === PRIMARY VARIANTS === */
 .primary.solid {
-  --btn-bg: rgba(59, 130, 246, 0.2);
-  --btn-border: rgba(59, 130, 246, 0.4);
-  --btn-color: var(--text-primary);
-  --btn-hover-bg: rgba(59, 130, 246, 0.3);
-  --btn-hover-border: rgba(59, 130, 246, 0.6);
-  --btn-hover-color: var(--text-primary);
+  --btn-bg: var(--primary-container);
+  --btn-border: var(--primary);
+  --btn-color: var(--primary);
+  --btn-hover-bg: var(--primary);
+  --btn-hover-border: var(--primary);
+  --btn-hover-color: var(--on-primary);
 }
 
 .primary.outline {
   --btn-bg: transparent;
-  --btn-border: rgba(59, 130, 246, 0.4);
-  --btn-color: var(--text-primary);
-  --btn-hover-bg: rgba(59, 130, 246, 0.1);
-  --btn-hover-border: rgba(59, 130, 246, 0.6);
-  --btn-hover-color: var(--text-primary);
+  --btn-border: var(--primary);
+  --btn-color: var(--primary);
+  --btn-hover-bg: var(--primary-container);
+  --btn-hover-border: var(--primary);
+  --btn-hover-color: var(--on-primary-container);
 }
 
 .primary.ghost {
   --btn-bg: transparent;
   --btn-border: transparent;
-  --btn-color: var(--text-primary);
-  --btn-hover-bg: rgba(59, 130, 246, 0.1);
+  --btn-color: var(--primary);
+  --btn-hover-bg: var(--primary-container);
   --btn-hover-border: transparent;
-  --btn-hover-color: var(--text-primary);
+  --btn-hover-color: var(--primary);
 }
 
-/* SECONDARY VARIANTS (usando text-secondary) */
+/* === SECONDARY VARIANTS === */
 .secondary.solid {
-  --btn-bg: rgba(245, 158, 11, 0.2);
-  --btn-border: rgba(245, 158, 11, 0.4);
-  --btn-color: var(--text-secondary);
-  --btn-hover-bg: rgba(245, 158, 11, 0.3);
-  --btn-hover-border: rgba(245, 158, 11, 0.6);
-  --btn-hover-color: var(--text-secondary);
+  --btn-bg: var(--secondary-container);
+  --btn-border: var(--secondary);
+  --btn-color: var(--secondary);
+  --btn-hover-bg: var(--secondary);
+  --btn-hover-border: var(--secondary);
+  --btn-hover-color: var(--on-secondary);
 }
 
 .secondary.outline {
   --btn-bg: transparent;
-  --btn-border: rgba(245, 158, 11, 0.4);
-  --btn-color: var(--text-secondary);
-  --btn-hover-bg: rgba(245, 158, 11, 0.1);
-  --btn-hover-border: rgba(245, 158, 11, 0.6);
-  --btn-hover-color: var(--text-secondary);
+  --btn-border: var(--secondary);
+  --btn-color: var(--secondary);
+  --btn-hover-bg: var(--secondary-container);
+  --btn-hover-border: var(--secondary);
+  --btn-hover-color: var(--on-secondary-container);
 }
 
 .secondary.ghost {
   --btn-bg: transparent;
   --btn-border: transparent;
-  --btn-color: var(--text-secondary);
-  --btn-hover-bg: rgba(245, 158, 11, 0.1);
+  --btn-color: var(--secondary);
+  --btn-hover-bg: var(--secondary-container);
   --btn-hover-border: transparent;
-  --btn-hover-color: var(--text-secondary);
+  --btn-hover-color: var(--secondary);
 }
 
-/* NEUTRAL/GRAY VARIANTS */
+/* === TERTIARY VARIANTS === */
+.tertiary.solid {
+  --btn-bg: var(--tertiary-container);
+  --btn-border: var(--tertiary);
+  --btn-color: var(--tertiary);
+  --btn-hover-bg: var(--tertiary);
+  --btn-hover-border: var(--tertiary);
+  --btn-hover-color: var(--on-tertiary);
+  color: var(--on-tertiary-container);
+}
+
+.tertiary.outline {
+  --btn-bg: transparent;
+  --btn-border: var(--tertiary);
+  --btn-color: var(--tertiary);
+  --btn-hover-bg: var(--tertiary-container);
+  --btn-hover-border: var(--tertiary);
+  --btn-hover-color: var(--on-tertiary-container);
+}
+
+.tertiary.ghost {
+  --btn-bg: transparent;
+  --btn-border: transparent;
+  --btn-color: var(--tertiary);
+  --btn-hover-bg: var(--tertiary-container);
+  --btn-hover-border: transparent;
+  --btn-hover-color: var(--tertiary);
+}
+
+/* === ERROR VARIANTS (per pulsante Elimina) === */
+.error.solid {
+  --btn-bg: var(--error-container);
+  --btn-border: var(--error);
+  --btn-color: var(--error);
+  --btn-hover-bg: var(--error);
+  --btn-hover-border: var(--error);
+  --btn-hover-color: var(--on-error);
+}
+
+.error.outline {
+  --btn-bg: transparent;
+  --btn-border: var(--error);
+  --btn-color: var(--error);
+  --btn-hover-bg: var(--error-container);
+  --btn-hover-border: var(--error);
+  --btn-hover-color: var(--on-error-container);
+}
+
+.error.ghost {
+  --btn-bg: transparent;
+  --btn-border: transparent;
+  --btn-color: var(--error);
+  --btn-hover-bg: var(--error-container);
+  --btn-hover-border: transparent;
+  --btn-hover-color: var(--error);
+}
+
+/* === NEUTRAL/GRAY VARIANTS === */
 .neutral.solid {
-  --btn-bg: rgba(255, 255, 255, 0.15);
-  --btn-border: rgba(255, 255, 255, 0.3);
-  --btn-color: rgb(55, 65, 81);
-  --btn-hover-bg: rgba(255, 255, 255, 0.25);
-  --btn-hover-border: rgba(255, 255, 255, 0.4);
-  --btn-hover-color: rgb(17, 24, 39);
+  --btn-bg: var(--surface-variant);
+  --btn-border: var(--outline);
+  --btn-color: var(--on-surface-variant);
+  --btn-hover-bg: var(--surface);
+  --btn-hover-border: var(--outline);
+  --btn-hover-color: var(--on-surface);
 }
 
 .neutral.outline {
   --btn-bg: transparent;
-  --btn-border: rgba(255, 255, 255, 0.2);
-  --btn-color: rgb(55, 65, 81);
-  --btn-hover-bg: rgba(255, 255, 255, 0.1);
-  --btn-hover-border: rgba(255, 255, 255, 0.3);
-  --btn-hover-color: rgb(17, 24, 39);
+  --btn-border: var(--outline);
+  --btn-color: var(--on-surface-variant);
+  --btn-hover-bg: var(--surface-variant);
+  --btn-hover-border: var(--outline);
+  --btn-hover-color: var(--on-surface);
 }
 
 .neutral.ghost {
   --btn-bg: transparent;
   --btn-border: transparent;
-  --btn-color: rgb(55, 65, 81);
-  --btn-hover-bg: rgba(255, 255, 255, 0.1);
+  --btn-color: var(--on-surface-variant);
+  --btn-hover-bg: var(--surface-variant);
   --btn-hover-border: transparent;
-  --btn-hover-color: rgb(17, 24, 39);
+  --btn-hover-color: var(--on-surface);
 }
 
+/* === LAYOUT === */
 .buttonContainer {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
   flex-wrap: nowrap;
-  width: 100%; /* Assicura larghezza piena */
-  min-width: 0; /* Previene overflow */
+  width: 100%;
+  min-width: 0;
 }
 
 .flex75 {
-  flex: 3; /* 75% dello spazio */
+  flex: 3;
   white-space: nowrap;
 }
 
 .flex25 {
-  flex: 1; /* 25% dello spazio */
+  flex: 1;
   white-space: nowrap;
 }
 
-/* Tooltip per bottoni disabilitati */
+/* === TOOLTIP PER DISABLED === */
 .btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
-  position: relative; /* ✅ Necessario per positioning */
+  position: relative;
 }
 
 .btn:disabled::after {
-  content: attr(data-disabled-message); /* ✅ Legge da attributo */
+  content: attr(data-disabled-message);
   position: absolute;
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(-8px);
-  background-color: rgba(239, 68, 68, 0.9);
-  color: white;
+  background-color: var(--error);
+  color: var(--on-error);
   padding: 0.5rem 0.75rem;
-  border-radius: 0.375rem;
-  font-size: 0.75rem;
-  font-weight: 600;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;

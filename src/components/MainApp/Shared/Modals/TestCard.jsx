@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import styles from "./TestCard.module.css";
 import { Button } from "@/components/ui/Button";
+import { ButtonEdit, ButtonTrash } from "@/components/ui/ButtonActions";
 
 function TestCard({
   title = "Cinema / Base",
@@ -439,19 +440,23 @@ function TestCard({
                 <div className={styles.actionButtons}>
                   {isOwner && (
                     <>
-                      <Button
-                        title="Elimina esperienza"
-                        variant="gray"
-                        onClick={handleDeleteClick}
-                      >
-                        Elimina
-                      </Button>
-                      <Button
+                      {/* <Button
+                          title="Elimina esperienza"
+                          variant="gray"
+                          onClick={handleDeleteClick}
+                          >
+                          onClick={handleDeleteClick}
+                          Elimina
+                        </Button> */}
+                      <ButtonTrash />
+                      {/* <Button
                         title="Modifica esperienza"
                         onClick={handleEditClick}
-                      >
+                        >
                         Modifica
-                      </Button>
+                        </Button> */}
+
+                      <ButtonEdit onClick={handleEditClick} />
                     </>
                   )}
                 </div>

@@ -1,0 +1,136 @@
+import React from "react";
+import { Trash2, X, Save, Edit2 } from "lucide-react";
+import styles from "./Button.module.css";
+
+// ===== COMPONENTE BASE BUTTON =====
+export const Button = ({
+  children,
+  variant = "primary",
+  mode = "solid",
+  size = "md",
+  disabled = false,
+  onClick,
+  className = "",
+  disabledMessage = "Azione non disponibile",
+  ...props
+}) => {
+  return (
+    <button
+      className={`${styles.btn} ${styles[size]} ${styles[mode]} ${styles[variant]} ${className}`}
+      disabled={disabled}
+      onClick={onClick}
+      data-disabled-message={disabled ? disabledMessage : ""}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+// ===== BUTTON ELIMINA =====
+export const ButtonTrash = ({
+  onClick,
+  disabled = false,
+  disabledMessage = "Impossibile eliminare",
+  size = "md",
+  mode = "solid",
+  children = "Elimina",
+  ...props
+}) => {
+  return (
+    <Button
+      variant="error" // ✅ Rosso --error dal design system (#dc2626)
+      mode={mode}
+      size={size}
+      onClick={onClick}
+      disabled={disabled}
+      disabledMessage={disabledMessage}
+      title="Elimina"
+      {...props}
+    >
+      <Trash2 size={16} />
+      <span>{children}</span>
+    </Button>
+  );
+};
+
+// ===== BUTTON ANNULLA =====
+export const ButtonCancel = ({
+  onClick,
+  disabled = false,
+  disabledMessage = "Impossibile annullare",
+  size = "md",
+  mode = "outline",
+  children = "Annulla",
+  ...props
+}) => {
+  return (
+    <Button
+      variant="neutral" // ✅ Grigio neutro esistente
+      mode={mode}
+      size={size}
+      onClick={onClick}
+      disabled={disabled}
+      disabledMessage={disabledMessage}
+      title="Annulla modifiche"
+      {...props}
+    >
+      <X size={14} />
+      <span>{children}</span>
+    </Button>
+  );
+};
+
+// ===== BUTTON SALVA =====
+export const ButtonSave = ({
+  onClick,
+  disabled = false,
+  disabledMessage = "Compila tutti i campi obbligatori",
+  size = "md",
+  mode = "solid",
+  children = "Salva",
+  ...props
+}) => {
+  return (
+    <Button
+      variant="tertiary" // ✅ Teal (#22d3ee) dal design system
+      mode={mode}
+      size={size}
+      onClick={onClick}
+      disabled={disabled}
+      disabledMessage={disabledMessage}
+      title="Salva modifiche"
+      {...props}
+    >
+      <Save size={14} />
+      <span>{children}</span>
+    </Button>
+  );
+};
+
+// ===== BUTTON MODIFICA =====
+export const ButtonEdit = ({
+  onClick,
+  disabled = false,
+  disabledMessage = "Impossibile modificare",
+  size = "md",
+  mode = "outline",
+  children = "Modifica",
+  ...props
+}) => {
+  return (
+    <Button
+      variant="primary" // ✅ Blu --primary dal design system
+      mode={mode}
+      size={size}
+      onClick={onClick}
+      disabled={disabled}
+      disabledMessage={disabledMessage}
+      title="Modifica"
+      {...props}
+    >
+      <Edit2 size={14} />
+      <span>{children}</span>
+    </Button>
+  );
+};

@@ -219,21 +219,18 @@ const ExperiencesSection = () => {
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
-          {isOwner && (
-            <>
-              {skills && skills.length > 0 && (
-                <div
-                  className={`${styles.addButtonContainer} ${
-                    showFilters ? styles.hidden : ""
-                  }`}
-                >
-                  <HeaderAddButton
-                    onClick={handleAddExperience}
-                    title="Crea nuova esperienza"
-                  />
-                </div>
-              )}
-            </>
+          {isOwner && skills?.length > 0 && (
+            <div
+              className={`${styles.addButtonContainer} ${
+                showFilters ? styles.hidden : ""
+              }`}
+            >
+              <HeaderAddButton
+                onClick={handleAddExperience}
+                title="Crea nuova esperienza"
+                txt="EXPERIENCE"
+              />
+            </div>
           )}
         </div>
         {/* Content */}

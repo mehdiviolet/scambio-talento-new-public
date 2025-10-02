@@ -56,6 +56,7 @@ import InviteFriendModal from "./InviteFriendModal";
 import { selectFeedbacks } from "@/store/slices/sharedEventSlice";
 import CherryComp from "@/components/CherryComp";
 import { followUser } from "@/store/slices/experienceSliceTest";
+import { ButtonCancel, ButtonSave } from "@/components/ui/ButtonActions";
 
 const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
   const { profileData, level, achievements, updateProfileData, languagesData } =
@@ -1668,25 +1669,13 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
 
               {/* Pulsanti */}
               <div style={{ display: "flex", gap: "0.75rem" }}>
-                <button
+                <ButtonCancel
                   onClick={() => {
                     setEditFormData({});
                     setIsEditDrawerOpen(false);
                   }}
-                  style={{
-                    flex: 1,
-                    padding: "0.75rem",
-                    borderRadius: "1rem",
-                    border: "1px solid var(--gray-300)",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    color: "var(--text-primary)",
-                    fontSize: "0.875rem",
-                    cursor: "pointer",
-                  }}
-                >
-                  Annulla
-                </button>
-                <button
+                />
+                <ButtonSave
                   onClick={() => {
                     updateProfileData(editFormData);
                     setShowEditSuccess(true);
@@ -1695,20 +1684,9 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       setIsEditDrawerOpen(false);
                     }, 3000);
                   }}
-                  style={{
-                    flex: 1,
-                    padding: "0.75rem",
-                    borderRadius: "1rem",
-                    border: "1px solid var(--tertiary)",
-                    background: "rgba(16, 185, 129, 0.2)",
-                    color: "var(--on-tertiary-container)",
-                    fontSize: "0.875rem",
-                    fontWeight: "600",
-                    cursor: "pointer",
-                  }}
                 >
                   Salva modifiche
-                </button>
+                </ButtonSave>
               </div>
             </div>
           )}

@@ -1,126 +1,7 @@
-/* InviteFriendModal.module.css - Following modal design pattern */
+/* InviteFriendModal.module.css - Estende CookieModal.module.css */
+/* Solo classi uniche per InviteFriend, tutto il resto ereditato da CookieModal */
 
-:root {
-  --black: #000;
-  --white: #fff;
-  --text-primary: #256679;
-  --text-secondary: var(--secondary-500);
-  --text-primary-light: #3a8ba3;
-  --text-primaryLight: #3a8ba3;
-  --text-primary-dark: #1a4d5c;
-  --text-secondary-light: var(--secondary-350);
-  --text-secondary-dark: #d97706;
-  --progress-blue: #3b82f6;
-  --progress-blue-dark: #1d4ed8;
-  --danger-red: #ef4444;
-  --danger-red-dark: #dc2626;
-  --success-green: #10b981;
-  --success-green-dark: #059669;
-}
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: var(--bg--overlay);
-  backdrop-filter: blur(5px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5000000;
-  padding: 1rem;
-  animation: overlayFadeIn 0.3s ease-out;
-}
-
-@keyframes overlayFadeIn {
-  from {
-    opacity: 0;
-    backdrop-filter: blur(0px);
-  }
-  to {
-    opacity: 1;
-    backdrop-filter: blur(5px);
-  }
-}
-
-.modal {
-  background: var(--bg-old);
-  backdrop-filter: blur(20px) saturate(150%);
-  border-radius: 2rem;
-  max-width: 28rem;
-  width: 100%;
-  max-height: 90vh;
-  overflow: hidden;
-  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.header {
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  padding: 1.5rem;
-  border-top-left-radius: 2rem;
-  border-top-right-radius: 2rem;
-  position: relative;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.header h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  text-align: center;
-  letter-spacing: -0.025em;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-  margin: 0;
-}
-
-.closeButton {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-  padding: 0.5rem;
-  border-radius: 9999px;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.closeButton:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-.closeButton svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--text-secondary);
-}
-
-.closeButton:hover svg {
-  color: var(--text-primary);
-}
-
-.content {
-  padding: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-}
-
-/* Main Invite Display */
+/* === INVITE DISPLAY === */
 .inviteDisplay {
   display: flex;
   flex-direction: column;
@@ -156,7 +37,7 @@
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
-/* Sections */
+/* === SECTIONS === */
 .section {
   width: 100%;
   margin-bottom: 1.5rem;
@@ -174,7 +55,7 @@
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
 }
 
-/* Link Container */
+/* === LINK CONTAINER === */
 .linkContainer {
   display: flex;
   gap: 0.5rem;
@@ -200,7 +81,7 @@
   box-shadow: 0 0 0 3px rgba(37, 102, 121, 0.1);
 }
 
-/* Email Container */
+/* === EMAIL CONTAINER === */
 .emailContainer {
   display: flex;
   gap: 0.5rem;
@@ -225,7 +106,7 @@
   box-shadow: 0 0 0 3px rgba(37, 102, 121, 0.1);
 }
 
-/* Action Buttons */
+/* === ACTION BUTTONS === */
 .actionBtn {
   display: flex;
   align-items: center;
@@ -260,22 +141,18 @@
   color: var(--success-green-dark);
 }
 
-/* Share Buttons */
+/* === SHARE BUTTONS === */
 .shareButtons {
   display: flex;
   gap: 0.75rem;
-  /* flex-wrap: wrap; */
   justify-content: center;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
 .shareButtonsLogOut {
   display: flex;
   gap: 0.75rem;
-  /* flex-wrap: wrap; */
-  justify-content: center;
   justify-content: center;
   align-items: center;
   flex-direction: row;
@@ -286,14 +163,12 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  /* padding: 0.25rem 0.5rem; */
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 1rem;
   color: var(--text-primary);
   font-size: 0.875rem;
-  /* font-weight: 500; */
   font-weight: 400;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -306,17 +181,15 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Reward Info */
+/* === REWARD INFO === */
 .rewardInfo {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  /* padding: 1rem; */
   padding: 0.5rem;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   backdrop-filter: blur(8px);
-  /* border-left: 3px solid var(--success-green); */
   width: 100%;
 }
 
@@ -328,7 +201,6 @@
 
 .rewardText {
   margin: 0;
-  /* font-size: 0.85rem; */
   font-size: 0.85rem;
   color: var(--text-primary);
   font-weight: 500;
@@ -336,6 +208,7 @@
   line-height: 1.4;
 }
 
+/* === ANIMATIONS === */
 @keyframes spin {
   0% {
     transform: rotate(0deg);

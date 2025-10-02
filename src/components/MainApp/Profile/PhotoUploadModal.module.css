@@ -1,121 +1,7 @@
-/* PhotoUploadModal.module.css - Aligned with InviteFriendModal */
+/* PhotoUploadModal.module.css - Estende CookieModal.module.css */
+/* Solo classi uniche per PhotoUpload, tutto il resto ereditato da CookieModal */
 
-:root {
-  --black: #000;
-  --white: #fff;
-  --text-primary: #256679;
-  --text-secondary: var(--secondary-500);
-  --text-primary-light: #3a8ba3;
-  --text-primary-dark: #1a4d5c;
-  --text-secondary-light: var(--secondary-350);
-  --text-secondary-dark: #d97706;
-  --progress-blue: #3b82f6;
-  --progress-blue-dark: #1d4ed8;
-  --danger-red: #ef4444;
-  --danger-red-dark: #dc2626;
-  --success-green: #10b981;
-  --success-green-dark: #059669;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* background: rgba(0, 0, 0, 0.6); */
-  background: var(--bg--overlay);
-
-  backdrop-filter: blur(5px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5000000;
-  padding: 1rem;
-  animation: overlayFadeIn 0.3s ease-out;
-}
-
-@keyframes overlayFadeIn {
-  from {
-    opacity: 0;
-    backdrop-filter: blur(0px);
-  }
-  to {
-    opacity: 1;
-    backdrop-filter: blur(5px);
-  }
-}
-
-.modal {
-  /* background: #f8fafc; */
-  background: var(--bg-old);
-
-  backdrop-filter: blur(20px) saturate(150%);
-  border-radius: 2rem;
-  width: 90%;
-  max-width: 500px;
-  max-height: 90vh;
-  overflow: hidden;
-  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.header {
-  /* background-color: rgba(255, 255, 255, 0.4); */
-  backdrop-filter: blur(8px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem;
-  border-top-left-radius: 2rem;
-  border-top-right-radius: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  margin-bottom: 0;
-}
-
-.header h3 {
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-}
-
-.closeBtn {
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 0.5rem;
-  border-radius: 50%;
-  cursor: pointer;
-  color: var(--text-secondary);
-  transition: all 0.2s ease;
-}
-
-.closeBtn:hover {
-  background: rgba(255, 255, 255, 0.5);
-  color: var(--text-primary);
-}
-
-.content {
-  padding: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-}
-
+/* === PHOTO PREVIEW === */
 .photoPreview {
   display: flex;
   justify-content: center;
@@ -141,7 +27,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--primary-light);
+  color: var(--text-primary-light);
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
 }
@@ -150,8 +36,10 @@
   margin-top: 8px;
   font-size: 0.875rem;
   font-weight: 500;
+  color: var(--on-surface-variant);
 }
 
+/* === ACTION BUTTONS === */
 .actions {
   display: flex;
   gap: 0.75rem;
@@ -187,34 +75,7 @@
   transform: none;
 }
 
-.removeBtn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: rgba(239, 68, 68, 0.2);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--danger-red);
-  border-radius: 1rem;
-  color: var(--danger-red-dark);
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.875rem;
-  transition: all 0.2s ease;
-}
-
-.removeBtn:hover:not(:disabled) {
-  background: rgba(239, 68, 68, 0.3);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
-}
-
-.removeBtn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}
-
+/* === FILE INFO (Opzionale) === */
 .fileInfo {
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(8px);
@@ -238,6 +99,7 @@
   font-size: 0.75rem;
 }
 
+/* === FOOTER OVERRIDE (se necessario) === */
 .footer {
   display: flex;
   justify-content: flex-end;
@@ -246,53 +108,4 @@
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
-}
-
-.cancelBtn {
-  padding: 0.75rem 1.5rem;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  color: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 1rem;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.875rem;
-  transition: all 0.2s ease;
-}
-
-.cancelBtn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
-}
-
-.cancelBtn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.saveBtn {
-  padding: 0.75rem 1.5rem;
-  background: rgba(16, 185, 129, 0.2);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--success-green);
-  border-radius: 1rem;
-  color: var(--success-green-dark);
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.875rem;
-  transition: all 0.2s ease;
-  min-width: 120px;
-}
-
-.saveBtn:hover:not(:disabled) {
-  background: rgba(16, 185, 129, 0.3);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-}
-
-.saveBtn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
 }

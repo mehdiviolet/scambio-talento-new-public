@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CherryComp.module.css";
-import { BookOpen, Cherry, Clock, Cookie, Shield, X, Zap } from "lucide-react";
+import {
+  Bell,
+  BookOpen,
+  Cherry,
+  Clock,
+  Cookie,
+  Shield,
+  X,
+  Zap,
+} from "lucide-react";
 
 // XP Service
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +38,8 @@ const CherryComp = ({
 
   // console.log(currentUser);
   // Simboli disponibili nella slot machine
-  const symbols = ["🍒", "🍋", "🍊", "🍇", "💎", "⭐", "🍀"];
+  // const symbols = ["🍒", "🌴", "🍊", "🍇", "💎", "⭐", Bell];
+  const symbols = ["🍒", "🌴", "🍊", "🍇", "💎", "⭐", "🍀"];
 
   // Stati del componente
   const [hasSpunToday, setHasSpunToday] = useState(false);

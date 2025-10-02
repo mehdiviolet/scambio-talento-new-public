@@ -1,8 +1,19 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Upload, Camera, Trash2 } from "lucide-react";
-import styles from "./PhotoUploadModal.module.css";
-// import styles from "./InviteFriendModal.module.css";
+import { X, Upload, Camera } from "lucide-react";
+// import { ButtonCancel, ButtonSave, ButtonTrash } from "./";
+import extendedStyles from "./PhotoUploadModal.module.css";
+
+import baseStyles from "../../../components/CookieModal.module.css";
+import {
+  Button,
+  ButtonCancel,
+  ButtonSave,
+  ButtonTrash,
+} from "@/components/ui/ButtonActions";
+import { HeaderAddButton } from "@/components/ui/AddButtons";
+
+const styles = { ...baseStyles, ...extendedStyles };
 
 const PhotoUploadModal = ({ isOpen, onClose, currentPhoto, onPhotoUpdate }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -102,7 +113,7 @@ const PhotoUploadModal = ({ isOpen, onClose, currentPhoto, onPhotoUpdate }) => {
             {/* Header */}
             <div className={styles.header}>
               <h3>Update Profile Photo</h3>
-              <button className={styles.closeBtn} onClick={handleClose}>
+              <button className={styles.closeButton} onClick={handleClose}>
                 <X size={20} />
               </button>
             </div>
@@ -136,60 +147,41 @@ const PhotoUploadModal = ({ isOpen, onClose, currentPhoto, onPhotoUpdate }) => {
 
               {/* Action Buttons */}
               <div className={styles.actions}>
-                <motion.button
+                {/* <motion.button
                   className={styles.uploadBtn}
                   onClick={triggerFileInput}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={isUploading}
-                >
+                  >
                   <Upload size={16} />
                   Choose Photo
-                </motion.button>
+                  </motion.button> */}
+                <Button onClick={triggerFileInput}>Choose Photo</Button>
 
                 {currentPhoto && (
-                  <motion.button
-                    className={styles.removeBtn}
+                  <ButtonTrash
                     onClick={handleRemovePhoto}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
                     disabled={isUploading}
+                    mode="outline"
                   >
-                    <Trash2 size={16} />
-                    Remove Photo
-                  </motion.button>
+                    Elimina Photo
+                  </ButtonTrash>
                 )}
               </div>
-
-              {/* Selected file info */}
-              {/* {selectedFile && (
-                <div className={styles.fileInfo}>
-                  <p className={styles.fileName}>{selectedFile.name}</p>
-                  <p className={styles.fileSize}>
-                    {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
-                  </p>
-                </div>
-              )} */}
             </div>
 
             {/* Footer */}
             <div className={styles.footer}>
-              <button
-                className={styles.cancelBtn}
-                onClick={handleClose}
-                disabled={isUploading}
-              >
-                Cancel
-              </button>
-              <motion.button
-                className={styles.saveBtn}
+              <ButtonCancel onClick={handleClose} disabled={isUploading} />
+
+              <ButtonSave
                 onClick={handleUpload}
                 disabled={!selectedFile || isUploading}
-                whileHover={!selectedFile || isUploading ? {} : { scale: 1.02 }}
-                whileTap={!selectedFile || isUploading ? {} : { scale: 0.98 }}
+                disabledMessage="Seleziona una foto "
               >
                 {isUploading ? "Uploading..." : "Save Photo"}
-              </motion.button>
+              </ButtonSave>
             </div>
           </motion.div>
         </motion.div>
