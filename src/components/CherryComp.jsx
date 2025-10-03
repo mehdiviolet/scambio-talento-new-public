@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CherryComp.module.css";
 import {
+  AlertTriangle,
   Bell,
   BookOpen,
+  Calendar,
   Cherry,
   Clock,
   Cookie,
@@ -20,6 +22,7 @@ import {
   selectCurrentUserXP,
   setCurrentUser,
 } from "@/services/xpService";
+import IconButton from "./ui/IconButton";
 
 const CherryComp = ({
   currentUser = currentUser,
@@ -372,12 +375,13 @@ const CherryComp = ({
                     </p>
                   </div>
                 </div>
-                <button
-                  className={styles.closeButton}
-                  onClick={() => setShowInfoModal(false)}
-                >
-                  <X size={20} />
-                </button>
+                {/* <button
+                    className={styles.closeButton}
+                    onClick={() => setShowInfoModal(false)}
+                  >
+                    <X size={20} />
+                  </button> */}
+                <IconButton icon={X} onClick={() => setShowInfoModal(false)} />
               </div>
 
               {/* 📝 RIASSUNTO BREVE */}
@@ -385,7 +389,11 @@ const CherryComp = ({
                 <h3 className={styles.sectionTitle}>Riassunto Veloce:</h3>
                 <div className={styles.quickInfo}>
                   <div className={styles.quickInfoItem}>
-                    <span className={styles.quickInfoIcon}>🗓️</span>
+                    {/* <span className={styles.quickInfoIcon}>🗓️</span> */}
+                    <span className={styles.quickInfoIcon}>
+                      <Calendar />
+                    </span>
+
                     <span>
                       <strong>1 giro al giorno</strong>
                     </span>
@@ -397,7 +405,10 @@ const CherryComp = ({
                     </span>
                   </div> */}
                   <div className={styles.quickInfoItem}>
-                    <span className={styles.quickInfoIcon}>⚠️</span>
+                    {/* <span className={styles.quickInfoIcon}>⚠️</span> */}
+                    <span className={styles.quickInfoIcon}>
+                      <AlertTriangle />
+                    </span>
                     <span>
                       <strong>3 sconfitte</strong> = blocco 24h
                     </span>

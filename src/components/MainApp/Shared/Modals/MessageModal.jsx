@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { X, Send, MessageCircle } from "lucide-react";
-import styles from "../../Profile/InviteFriendModal.module.css";
+import extendedStyles from "../../Profile/InviteFriendModal.module.css";
+
+import baseStyles from "../../../CookieModal.module.css";
+import { ButtonCancel } from "@/components/ui/ButtonActions";
+import { Button } from "@/components/ui/Button";
+
+const styles = { ...baseStyles, ...extendedStyles };
 
 const MessageModal = ({ isOpen, onClose, userProfile }) => {
   const [message, setMessage] = useState("");
@@ -94,12 +100,12 @@ const MessageModal = ({ isOpen, onClose, userProfile }) => {
                   <Send
                     size={32}
                     className={styles.inviteIcon}
-                    style={{ color: "var(--success-green)" }}
+                    // style={{ color: "var(--success-green)" }}
                   />
                 </div>
                 <h4
                   className={styles.inviteTitle}
-                  style={{ color: "var(--success-green-dark)" }}
+                  // style={{ color: "var(--success-green-dark)" }}
                 >
                   Messaggio inviato!
                 </h4>
@@ -141,7 +147,7 @@ const MessageModal = ({ isOpen, onClose, userProfile }) => {
                     <div
                       style={{
                         fontSize: "0.75rem",
-                        color: "var(--text-primary-light)",
+                        // color: "var(--text-primary-light)",
                         textAlign: "right",
                         width: "100%",
                       }}
@@ -154,15 +160,30 @@ const MessageModal = ({ isOpen, onClose, userProfile }) => {
                 {/* Action Buttons */}
                 <div className={styles.section}>
                   <div className={styles.shareButtonsLogOut}>
-                    <button
+                    {/* <button
                       onClick={onClose}
                       disabled={isSending}
                       className={styles.shareBtn}
                     >
                       <X size={16} />
                       Annulla
-                    </button>
-                    <button
+                    </button> */}
+                    <ButtonCancel
+                      onClick={onClose}
+                      disabled={isSending}
+                      // className={`${styles.shareBtn} ${styles.cancelBtn}`}
+                    >
+                      Annulla
+                    </ButtonCancel>
+                    <Button
+                      onClick={handleSendMessage}
+                      // disabled={!isMessageValid || isSending}
+                      disabled={!isMessageValid}
+                    >
+                      {" "}
+                      {isSending ? "Invio in corso..." : "Invia Messaggio"}
+                    </Button>
+                    {/* <button
                       onClick={handleSendMessage}
                       disabled={!isMessageValid || isSending}
                       className={`${styles.actionBtn} ${
@@ -171,7 +192,7 @@ const MessageModal = ({ isOpen, onClose, userProfile }) => {
                     >
                       <Send size={16} />
                       {isSending ? "Invio in corso..." : "Invia Messaggio"}
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </>

@@ -3,7 +3,7 @@ import { LogOut, X, AlertTriangle } from "lucide-react";
 
 import extendedStyles from "./LogoutModal.module.css";
 import baseStyles from "../../../components/CookieModal.module.css";
-import { ButtonCancel } from "@/components/ui/ButtonActions";
+import { ButtonCancel, ButtonLogout } from "@/components/ui/ButtonActions";
 
 const styles = { ...baseStyles, ...extendedStyles };
 
@@ -83,28 +83,16 @@ const LogoutModal = ({ isOpen, onClose, onConfirm }) => {
                 <ButtonCancel
                   onClick={onClose}
                   disabled={isLoggingOut}
-                  className={`${styles.shareBtn} ${styles.cancelBtn}`}
+                  // className={`${styles.shareBtn} ${styles.cancelBtn}`}
                 >
                   Annulla
                 </ButtonCancel>
 
-                <button
+                <ButtonLogout
                   onClick={handleLogout}
-                  className={`${styles.actionBtn} ${styles.logoutBtn}`}
+                  isLoading={isLoggingOut}
                   disabled={isLoggingOut}
-                >
-                  {isLoggingOut ? (
-                    <>
-                      <div className={styles.spinner}></div>
-                      Disconnessione...
-                    </>
-                  ) : (
-                    <>
-                      <LogOut size={16} />
-                      Logout
-                    </>
-                  )}
-                </button>
+                />
               </div>
             </div>
 

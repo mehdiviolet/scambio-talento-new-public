@@ -553,7 +553,7 @@ const ChatComponentTest = ({ isOwner = true, currentRole }) => {
           onKeyPress={handleKeyPress}
           placeholder="Scrivi una risposta..."
           className={styles.messageTextarea}
-          rows={2}
+          rows={1}
         />
         <button
           onClick={handleSendMessage}

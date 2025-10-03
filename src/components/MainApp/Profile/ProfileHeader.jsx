@@ -770,7 +770,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
             <div className={styles.actionBtn}>
               {isOwner ? (
                 <motion.button
-                  className={`${styles.cherryBtn} ${styles.liquidButton}`}
+                  // className={`${styles.cherryBtn} ${styles.liquidButton}`}
                   onClick={() => setIsCherryDrawerOpen(true)}
                   title="Ruota della fortuna!"
                   whileHover={{ scale: 1.05 }}
@@ -853,7 +853,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
               size={48}
               style={{ color: "var(--tertiary)", marginBottom: "1rem" }}
             />
-            <p style={{ color: "var(--text-primary)" }}>
+            <p style={{ color: "var(--on-surface)" }}>
               Skills drawer - Coming soon!
             </p>
           </div>
@@ -1145,7 +1145,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     width: "40px",
                     height: "40px",
                     borderRadius: "50%",
-                    background: "var(--text-primary)",
+                    background: "var(--on-surface)",
                     color: "white",
                     display: "flex",
                     alignItems: "center",
@@ -1164,7 +1164,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     style={{
                       fontWeight: "600",
                       fontSize: "0.875rem",
-                      color: "var(--text-primary)",
+                      color: "var(--on-surface)",
                       marginBottom: "2px",
                     }}
                   >
@@ -1187,7 +1187,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     borderRadius: "1rem",
                     border: "1px solid rgba(255, 255, 255, 0.2)",
                     background: "rgba(255, 255, 255, 0.1)",
-                    color: "var(--text-primary)",
+                    color: "var(--on-surface)",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
                     flexShrink: 0,
@@ -1235,7 +1235,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     width: "40px",
                     height: "40px",
                     borderRadius: "50%",
-                    background: "var(--text-primary)",
+                    background: "var(--on-surface)",
                     color: "white",
                     display: "flex",
                     alignItems: "center",
@@ -1254,7 +1254,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     style={{
                       fontWeight: "600",
                       fontSize: "0.875rem",
-                      color: "var(--text-primary)",
+                      color: "var(--on-surface)",
                       marginBottom: "2px",
                     }}
                   >
@@ -1277,7 +1277,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     borderRadius: "1rem",
                     border: "1px solid rgba(255, 255, 255, 0.2)",
                     background: "rgba(255, 255, 255, 0.1)",
-                    color: "var(--text-primary)",
+                    color: "var(--on-surface)",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
                     flexShrink: 0,
@@ -1303,7 +1303,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       : "rgba(255, 255, 255, 0.1)",
                     color: followingList.has(following.id)
                       ? "var(--on-tertiary-container)"
-                      : "var(--text-primary)",
+                      : "var(--on-surface)",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
                     flexShrink: 0,
@@ -1354,7 +1354,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                   <Settings
                     size={32}
                     className={styles.submenuIcon}
-                    style={{ color: "var(--tertiary)" }}
+                    // style={{ color: "var(--tertiary)" }}
                   />
                 </div>
                 <h4
@@ -1389,7 +1389,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       marginBottom: "0.5rem",
                       fontSize: "0.875rem",
                       fontWeight: "600",
-                      color: "var(--text-primary)",
+                      color: "var(--on-surface)",
                     }}
                   >
                     Nome
@@ -1415,7 +1415,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       marginBottom: "0.5rem",
                       fontSize: "0.875rem",
                       fontWeight: "600",
-                      color: "var(--text-primary)",
+                      color: "var(--on-surface)",
                     }}
                   >
                     Cognome
@@ -1444,7 +1444,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     marginBottom: "0.5rem",
                     fontSize: "0.875rem",
                     fontWeight: "600",
-                    color: "var(--text-primary)",
+                    color: "var(--on-surface)",
                   }}
                 >
                   Email
@@ -1469,7 +1469,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     marginBottom: "0.5rem",
                     fontSize: "0.875rem",
                     fontWeight: "600",
-                    color: "var(--text-primary)",
+                    color: "var(--on-surface)",
                   }}
                 >
                   Telefono
@@ -1494,7 +1494,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     marginBottom: "0.5rem",
                     fontSize: "0.875rem",
                     fontWeight: "600",
-                    color: "var(--text-primary)",
+                    color: "var(--on-surface)",
                   }}
                 >
                   Data di nascita
@@ -1522,7 +1522,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     marginBottom: "0.5rem",
                     fontSize: "0.875rem",
                     fontWeight: "600",
-                    color: "var(--text-primary)",
+                    color: "var(--on-surface)",
                   }}
                 >
                   Posizione
@@ -1551,7 +1551,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     marginBottom: "0.5rem",
                     fontSize: "0.875rem",
                     fontWeight: "600",
-                    color: "var(--text-primary)",
+                    color: "var(--on-surface)",
                   }}
                 >
                   Descrizione
@@ -1579,7 +1579,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                     marginBottom: "0.5rem",
                     fontSize: "0.875rem",
                     fontWeight: "600",
-                    color: "var(--text-primary)",
+                    color: "var(--on-surface)",
                   }}
                 >
                   Lingue parlate
@@ -1600,8 +1600,9 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                         alignItems: "center",
                         gap: "0.5rem",
                         padding: "0.5rem 0.75rem",
-                        background: "rgba(16, 185, 129, 0.15)",
-                        border: "1px solid var(--tertiary)",
+                        background: "var(  --surface)",
+                        border: "1px solid var(--primary)",
+                        color: "var(--on-surface)",
                         borderRadius: "1rem",
                         fontSize: "0.75rem",
                       }}
@@ -1823,7 +1824,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
                       }, 3000);
                     }}
                     className={styles.miniModalConfirm}
-                    style={{ background: "var(--danger-red)", color: "white" }}
+                    // style={{ background: "var(--danger-red)", color: "white" }}
                   >
                     Blocca
                   </button>

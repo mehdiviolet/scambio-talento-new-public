@@ -1,5 +1,5 @@
 import React from "react";
-import { Trash2, X, Save, Edit2 } from "lucide-react";
+import { Trash2, X, Save, Edit2, LogOut } from "lucide-react";
 import styles from "./Button.module.css";
 
 // ===== COMPONENTE BASE BUTTON =====
@@ -39,7 +39,7 @@ export const ButtonTrash = ({
 }) => {
   return (
     <Button
-      variant="error" // ✅ Rosso --error dal design system (#dc2626)
+      variant="error"
       mode={mode}
       size={size}
       onClick={onClick}
@@ -66,7 +66,7 @@ export const ButtonCancel = ({
 }) => {
   return (
     <Button
-      variant="neutral" // ✅ Grigio neutro esistente
+      variant="neutral"
       mode={mode}
       size={size}
       onClick={onClick}
@@ -93,7 +93,7 @@ export const ButtonSave = ({
 }) => {
   return (
     <Button
-      variant="tertiary" // ✅ Teal (#22d3ee) dal design system
+      variant="primary"
       mode={mode}
       size={size}
       onClick={onClick}
@@ -120,7 +120,7 @@ export const ButtonEdit = ({
 }) => {
   return (
     <Button
-      variant="primary" // ✅ Blu --primary dal design system
+      variant="primary"
       mode={mode}
       size={size}
       onClick={onClick}
@@ -131,6 +131,44 @@ export const ButtonEdit = ({
     >
       <Edit2 size={14} />
       <span>{children}</span>
+    </Button>
+  );
+};
+
+// ===== BUTTON LOGOUT =====
+export const ButtonLogout = ({
+  onClick,
+  disabled = false,
+  isLoading = false,
+  disabledMessage = "Impossibile disconnettersi",
+  size = "md",
+  mode = "solid",
+  children = "Logout",
+  loadingText = "Disconnessione...",
+  ...props
+}) => {
+  return (
+    <Button
+      variant="error"
+      mode={mode}
+      size={size}
+      onClick={onClick}
+      disabled={disabled || isLoading}
+      disabledMessage={disabledMessage}
+      title="Disconnetti"
+      {...props}
+    >
+      {isLoading ? (
+        <>
+          <div className={styles.spinner}></div>
+          <span>{loadingText}</span>
+        </>
+      ) : (
+        <>
+          <LogOut size={16} />
+          <span>{children}</span>
+        </>
+      )}
     </Button>
   );
 };

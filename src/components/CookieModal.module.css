@@ -1,6 +1,6 @@
 /* CookieModal.module.css - Following ActivityModal design pattern */
 
-:root {
+/* :root {
   --black: #000;
   --white: #fff;
   --text-primary: #256679;
@@ -11,20 +11,19 @@
   --text-secondary-dark: #d97706;
   --progress-blue: #3b82f6;
   --progress-blue-dark: #1d4ed8;
-}
+} */
 
 .overlay {
   position: fixed;
   inset: 0;
-  /* background: var(--bg--overlay); */
-  border-radius: var(--radius-lgMe);
+  background: var(--bg--overlay);
+  border-radius: var(--radius-2xl);
   backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
   z-index: 500000000;
-  border-radius: var(--radius-lgMe);
 
   /* border: 2px solid color-mix(in srgb, var(--primary) 20%, transparent); */
   background: color-mix(in srgb, var(--primary) 50%, transparent);
@@ -250,7 +249,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   /* color: var(--text-primary-dark); */
-  color: var(--on-tertiary-container);
+  /* color: var(--on-tertiary-container); */
   margin: 0;
 }
 
