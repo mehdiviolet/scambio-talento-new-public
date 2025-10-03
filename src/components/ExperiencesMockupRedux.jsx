@@ -155,16 +155,10 @@ const ExperiencesMockupRedux = ({
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        <h3 className={styles.title}>
-          {/* Esperienze Offerte ({mockExperiences.length}) */}
+        {/* <h3 className={styles.title}>
           Esperienze Offerte
-        </h3>
-        <button
-          className={styles.toggleFiltersBtn}
-          onClick={() => setShowFilters(!showFilters)}
-        >
-          Filtri {showFilters ? "↑" : "↓"}
-        </button>
+        </h3> */}
+
         {isInstructorPanel && (
           <>
             <HeaderAddButton
@@ -177,7 +171,7 @@ const ExperiencesMockupRedux = ({
 
       <div>
         <div className={styles.filtersContainer}>
-          <div
+          {/* <div
             className={`${styles.filterContent} ${
               showFilters ? styles.open : ""
             }`}
@@ -188,12 +182,39 @@ const ExperiencesMockupRedux = ({
               filterCounts={filterCounts}
               filterConfig={filterConfig}
             />
-          </div>
+          </div> */}
         </div>
       </div>
 
       {/* Content */}
       <div className={styles.content}>
+        <div
+          className={`${styles.filtersContainer} ${
+            showFilters ? styles.expanded : ""
+          }`}
+        >
+          <div className={styles.filtersContainer}>
+            <button
+              className={styles.toggleFiltersBtn}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              Filtri {showFilters ? "↑" : "↓"}
+            </button>
+            <div
+              className={`${styles.filterContent} ${
+                showFilters ? styles.open : ""
+              }`}
+            >
+              <StatusFilterButtons
+                activeFilter={statusFilter}
+                onFilterChange={setStatusFilter}
+                filterCounts={filterCounts}
+                filterConfig={filterConfig}
+                totalCount={filteredExperiences.length}
+              />
+            </div>
+          </div>
+        </div>
         <div className={styles.experiencesGrid}>
           {filteredExperiences.map((experience) => {
             // Trova la skill associata per ottenere i gems corretti

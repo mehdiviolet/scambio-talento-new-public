@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 // import styles from "@/components/MainApp/Profile/ProfileHeader.module.css";
 import styles from "../components/MainApp/Profile/ProfileHeader.module.css";
-import shareStyles from "@/components/MainApp/Shared/Modals/ShareModal.module.css";
+// import shareStyles from "@/components/MainApp/Shared/Modals/ShareModal.module.css";
 import messageStyles from "@/components/MainApp/Shared/Modals/ViewSkillModal.module.css";
 import { useSelector, useDispatch } from "react-redux";
 // ✅ CORRETTO: importa solo followUser
@@ -190,8 +190,7 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
       selectedPerson.firstName.toLowerCase() +
       selectedPerson.lastName.toLowerCase().slice(0, 3),
     bio: "Digital Artist | UI/UX Designer | Creative Director",
-    aboutMe:
-      "..Passionate about creating beautiful digital experiences. I love exploring new design trends and bringing creative visions to life. When I'm not designing, you can find me painting or exploring the beautiful streets of Torino.",
+    aboutMe: "....................",
     location: `${selectedPerson.location}, ${selectedPerson.zone}`,
     profilePhoto: selectedPerson.profilePhoto,
     joinedDate: selectedPerson.joinedDate,

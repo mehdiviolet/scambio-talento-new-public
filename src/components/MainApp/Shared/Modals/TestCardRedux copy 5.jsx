@@ -536,17 +536,6 @@ function TestCardRedux({
     } else {
       dispatch(studentFinishCourse({ experienceId }));
     }
-
-    // ✅ CONTROLLA se entrambi hanno cliccato
-    const updatedClicks = [
-      ...courseState.finishClicks,
-      isInstructor ? "instructor" : "student",
-    ];
-
-    if (updatedClicks.length === 2 && !isInstructor) {
-      dispatch(markCourseAsCompleted({ experienceId }));
-      handleCompleteCourse(); // 👈 CHIAMA QUI
-    }
   };
 
   const handleCompleteCourse = useCallback(() => {
@@ -758,7 +747,7 @@ function TestCardRedux({
   };
 
   const handleSkipFeedback = () => {
-    // dispatch(markCourseAsCompleted({ experienceId }));
+    dispatch(markCourseAsCompleted({ experienceId }));
 
     setShowFeedbackModal(false);
     console.log("Feedback saltato - corso completato");
@@ -868,22 +857,24 @@ function TestCardRedux({
     return skillGems !== undefined && skillGems !== null ? skillGems : 0;
   };
 
-  // React.useEffect(() => {
-  //   if (
-  //     courseState.finishClicks.length === 2 &&
-  //     !courseState.completionTriggered &&
-  //     !isInstructor
-  //   ) {
-  //     handleCompleteCourse();
-  //   } else {
-  //     console.log("USEEFFECT NON PArte!");
-  //   }
-  // }, [
-  //   courseState.finishClicks.length,
-  //   courseState.completionTriggered,
-  //   isInstructor,
-  //   dispatch,
-  // ]);
+  React.useEffect(() => {
+    if (
+      // courseState.status === "completed" &&
+      courseState.finishClicks.length === 2 &&
+      !courseState.completionTriggered && // ← PREVIENE DOPPIO TRIGGER
+      !isInstructor
+    ) {
+      handleCompleteCourse();
+    } else {
+      console.log("USEEFFECT NON PArte!");
+    }
+  }, [
+    // courseState.status,
+    courseState.finishClicks.length,
+    courseState.completionTriggered,
+    isInstructor,
+    dispatch,
+  ]);
 
   const getStatusStyles = () => {
     switch (courseState.status) {

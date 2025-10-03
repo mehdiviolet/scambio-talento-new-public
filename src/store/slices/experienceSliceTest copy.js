@@ -848,7 +848,6 @@ const experienceSliceTest = createSlice({
 
       if (courseState && courseState.status === "pending_feedback") {
         courseState.status = "completed";
-        courseState.completionTriggered = true;
         // autoRemoveFromBookmarks(state, experienceId); // Ora rimuovi dai bookmark
       }
     },

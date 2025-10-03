@@ -49,11 +49,11 @@ const ExperiencesSectionStudente = () => {
       icon: "Flame",
       statuses: ["completed", "rejected"],
     },
-    // all: {
-    //   label: "Tutti",
-    //   icon: null,
-    //   statuses: null,
-    // },
+    all: {
+      label: "Tutti",
+      icon: null,
+      statuses: null,
+    },
   };
 
   // 🎯 PREPARA DATI UNIFICATI
@@ -74,21 +74,63 @@ const ExperiencesSectionStudente = () => {
   //   })),
   // ];
   // ✅ FIX: ID sempre unici
+  // const allUserExperiences = [
+  //   ...userBookmarks
+  //     .filter(
+  //       (bookmark) =>
+  //         !userCompletionCards.some(
+  //           (c) => c.experienceId === bookmark.experienceId
+  //         )
+  //     )
+  //     .map((bookmark) => ({
+  //       id: `bookmark-${bookmark.experienceId}`,
+  //       type: "bookmark",
+  //       status: allCourseStates[bookmark.experienceId]?.status || "idle",
+  //       data: bookmark,
+  //     })),
+  //   ...userCompletionCards.map((completion, index) => ({
+  //     id: `completion-${completion.completionId}-${index}`,
+  //     type: "completion",
+  //     status: "completed",
+  //     data: completion,
+  //   })),
+  // ];
   const allUserExperiences = [
-    // Bookmark con status da Redux
-    ...userBookmarks.map((bookmark) => ({
-      id: `bookmark-${bookmark.experienceId}`, // ← PREFISSO UNICO
-      type: "bookmark",
-      status: allCourseStates[bookmark.experienceId]?.status || "idle",
-      data: bookmark,
-    })),
-    // Completion cards - ID sempre unici
-    ...userCompletionCards.map((completion, index) => ({
-      id: `completion-${completion.completionId}-${index}`, // ← SEMPRE UNICO
-      type: "completion",
-      status: "completed",
-      data: completion,
-    })),
+    // ✅ ESCLUDI bookmark SOLO se hanno completion E non sono pending_feedback
+    ...userBookmarks
+      .filter((bookmark) => {
+        const hasCompletion = userCompletionCards.some(
+          (c) => c.experienceId === bookmark.experienceId
+        );
+        const isPendingFeedback =
+          allCourseStates[bookmark.experienceId]?.status === "pending_feedback";
+
+        // Mostra bookmark se:
+        // - Non ha completion, OPPURE
+        // - È in attesa di feedback
+        return !hasCompletion || isPendingFeedback;
+      })
+      .map((bookmark) => ({
+        id: `bookmark-${bookmark.experienceId}`,
+        type: "bookmark",
+        status: allCourseStates[bookmark.experienceId]?.status || "idle",
+        data: bookmark,
+      })),
+
+    // ✅ ESCLUDI completion se è ancora pending_feedback
+    ...userCompletionCards
+      .filter((completion) => {
+        const isPendingFeedback =
+          allCourseStates[completion.experienceId]?.status ===
+          "pending_feedback";
+        return !isPendingFeedback;
+      })
+      .map((completion, index) => ({
+        id: `completion-${completion.completionId}-${index}`,
+        type: "completion",
+        status: "completed",
+        data: completion,
+      })),
   ];
   // 🎯 HOOK FILTRI
   const {

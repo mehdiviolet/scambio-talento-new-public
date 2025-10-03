@@ -32,7 +32,7 @@ const SkillMockup = ({ mockSkills, selectedPersonData, isInstructorPanel }) => {
     <div className={styles.container}>
       {/* Header - NO add button (viewer mode) */}
       <div className={styles.header}>
-        <h2 className={styles.title}>Skills</h2>
+        {/* <h2 className={styles.title}>Skills</h2> */}
         {isInstructorPanel && (
           <HeaderAddButton
             // onClick={handleAddSkill}

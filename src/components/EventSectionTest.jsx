@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CreateEventModal from "@/components/MainApp/Shared/Modals/CreateEventModal";
 import EventCard from "./EventCard";
-import styles from "./EventsSection.module.css";
 import { useAppSelector } from "../hooks/redux";
 import { selectCurrentUserProfile } from "@/services/userService";
 import { useEvents } from "../hooks/useEvents";
@@ -17,6 +16,10 @@ import SlideEventCard from "./SlideEventCard";
 import { HeaderAddButton } from "./ui/AddButtons";
 import SlideEventCardCompleted from "./SlideEventCardCompleted";
 import SlideEventCardInCorso from "./SlideEventCardInCorso";
+import baseStyles from "./ExperiencesSection.module.css";
+import extendedStyles from "./EventsSection.module.css";
+
+const styles = { ...baseStyles, ...extendedStyles };
 
 const EventSectionTest = ({
   isOwner,
@@ -110,12 +113,7 @@ const EventSectionTest = ({
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        <h3 className={styles.title}>
-          {/* <span className={styles.eventsIcon}>🎉</span> */}
-          Eventi Creati ({events.length})
-        </h3>
-
-        <>
+        {/* <>
           <button
             className={styles.toggleFiltersBtn}
             onClick={() => setShowFilters(!showFilters)}
@@ -128,28 +126,22 @@ const EventSectionTest = ({
               title="Crea nuovo evento"
             />
           )}
-        </>
-      </div>
-      <div className={styles.filtersContainer}>
-        {/* <button
-            className={styles.toggleFiltersBtn}
-            onClick={() => setShowFilters(!showFilters)}
-          >
-            Filtri {showFilters ? "↑" : "↓"}
-          </button> */}
-
-        <div
-          className={`${styles.filterContent} ${
-            showFilters ? styles.open : ""
-          }`}
-        >
-          <StatusFilterButtons
-            activeFilter={statusFilter}
-            onFilterChange={setStatusFilter}
-            filterCounts={filterCounts}
-            filterConfig={filterConfig}
-          />
-        </div>
+        </> */}
+        {isOwner && (
+          <>
+            <div
+              className={`${styles.addButtonContainer} ${
+                showFilters ? styles.hidden : ""
+              }`}
+            >
+              <HeaderAddButton
+                onClick={handleOpenCreateModal}
+                title="Crea nuovo evento"
+                txt="EVENT"
+              />
+            </div>
+          </>
+        )}
       </div>
 
       {/* Content */}
@@ -160,6 +152,32 @@ const EventSectionTest = ({
             selectedPersonData={selectedPersonData}
           />
         </div> */}
+        <div
+          className={`${styles.filtersContainer} ${
+            showFilters ? styles.expanded : ""
+          }`}
+        >
+          <div className={styles.filtersContainer}>
+            <button
+              className={styles.toggleFiltersBtn}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              Filtri {showFilters ? "↑" : "↓"}
+            </button>
+            <div
+              className={`${styles.filterContent} ${
+                showFilters ? styles.open : ""
+              }`}
+            >
+              <StatusFilterButtons
+                activeFilter={statusFilter}
+                onFilterChange={setStatusFilter}
+                filterCounts={filterCounts}
+                filterConfig={filterConfig}
+              />
+            </div>
+          </div>
+        </div>
         {filteredEvents.map((event) => {
           if (event.type === "mock") {
             return (
@@ -177,41 +195,33 @@ const EventSectionTest = ({
             );
           }
 
-          if (event.type === "static") {
-            return (
-              // <StaticEventShowcase
-              //   key={event.id}
-              //   selectedPersonData={selectedPersonData}
-              // />
-              <>
-                <SlideEventCardInCorso
-                  key={event.id}
-                  isOwner={isOwner}
-                  selectedPersonData={selectedPersonData}
-                  stato={"inCorso"}
-                />
-                <SlideEventCardCompleted
-                  key={event.id}
-                  isOwner={isOwner}
-                  selectedPersonData={selectedPersonData}
-                />
+          // if (event.type === "static") {
+          //   return (
+          //     <>
+          //       <SlideEventCardInCorso
+          //         key={event.id}
+          //         isOwner={isOwner}
+          //         selectedPersonData={selectedPersonData}
+          //         stato={"inCorso"}
+          //       />
+          //       <SlideEventCardCompleted
+          //         key={event.id}
+          //         isOwner={isOwner}
+          //         selectedPersonData={selectedPersonData}
+          //       />
 
-                <SlideEventCardCompleted
-                  key={event.id}
-                  isOwner={isOwner}
-                  selectedPersonData={selectedPersonData}
-                />
-              </>
-            );
-          }
+          //       <SlideEventCardCompleted
+          //         key={event.id}
+          //         isOwner={isOwner}
+          //         selectedPersonData={selectedPersonData}
+          //       />
+          //     </>
+          //   );
+          // }
 
           return null;
         })}
       </div>
-      {/* <div>
-        <h2>Eventi creati ma passati</h2>
-        <StaticEventShowcase selectedPersonData={selectedPersonData} />
-      </div> */}
     </div>
   );
 };

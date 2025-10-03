@@ -22,6 +22,7 @@ import { setSelectedPersonData } from "@/store/slices/experienceSliceTest";
 import ExperiencesSectionStudente from "@/components/ExperiencesSectionStudente";
 import ExperiencesSectionStudenteTest from "@/components/ExperiencesSectionStudenteTest";
 import EventSectionTest from "@/components/EventSectionTest";
+import ProfileTabs from "./ProfileTabsTest";
 
 const ProfilePageTest = () => {
   // const selectedPerson = useSelector((state) => state.person.selectedPerson);
@@ -37,15 +38,7 @@ const ProfilePageTest = () => {
   //   (state) => state.experienceSliceTest.saraProfileData
   // );
 
-  const skillGemBonus = useSelector(
-    (state) => state.experienceSliceTest.skillGemBonus || {}
-  );
-
-  // Calcola skills con GEM aggiornati:
-  const updatedSkills = selectedPersonData.skills.map((skill) => ({
-    ...skill,
-    gems: skill.gems + (skillGemBonus[skill.id] || 0),
-  }));
+  console.log(selectedPersonData);
 
   // ===== RENDER - SOLO COMPOSIZIONE UI =====
   return (
@@ -59,24 +52,7 @@ const ProfilePageTest = () => {
               selectedPerson={selectedPersonData.profile}
               isInstructorPanel={true}
             />
-            <SkillMockup
-              mockSkills={updatedSkills}
-              selectedPersonData={selectedPersonData}
-              isInstructorPanel={true}
-            />
-            {/* <ExperiencesMockup /> */}
-            {/* <TestCard isOwner={true} /> */}
-            <ExperiencesMockupRedux
-              isInstructorPanel={true}
-              mockSkills={updatedSkills}
-              mockExperiencesNew={selectedPersonData.experiences}
-            />
-            <EventSectionTest
-              isInstructorPanel={true}
-              isOwner={true}
-              selectedPersonData={selectedPersonData}
-            />
-            {/* <ExperiencesSectionStudenteTest /> */}
+            <ProfileTabs selectedPersonData={selectedPersonData} />
           </>
         ) : (
           <div>
@@ -89,3 +65,10 @@ const ProfilePageTest = () => {
 };
 
 export default ProfilePageTest;
+
+{
+  /* <ExperiencesMockup /> */
+}
+{
+  /* <TestCard isOwner={true} /> */
+}
