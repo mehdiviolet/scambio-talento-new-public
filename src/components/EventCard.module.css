@@ -188,7 +188,7 @@
 /* === CONTENT === */
 .cardContent {
   flex: 1;
-  padding: var(--space-lg);
+  padding: 0 var(--space-lg);
 }
 
 .eventTitle {
@@ -314,8 +314,8 @@
 
 .statusBadge {
   position: absolute;
-  /* top: var(--space-sm); */
-  top: 0px;
+  top: var(--space-sm);
+  /* top: 0px; */
   left: var(--space-sm);
   /* z-index: 10; */
   z-index: 1;
@@ -402,7 +402,8 @@
   justify-content: space-between;
   align-items: flex-end;
   gap: var(--space-lg);
-  margin-bottom: 28px;
+  /* margin-bottom: 28px; */
+  margin-bottom: var(--space-sm);
 }
 
 .titleAndMeta {

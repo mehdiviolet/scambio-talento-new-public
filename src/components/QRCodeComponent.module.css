@@ -1,0 +1,91 @@
+/* QRCodeComponent.module.css */
+
+.qrContainer {
+  /* border-radius: var(--radius-md); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  user-select: none;
+  position: relative;
+}
+
+/* === VARIANTI STATO === */
+.waiting {
+  background: rgba(var(--tertiary-rgb), 0.1);
+  border: 2px solid var(--secondary);
+  color: var(--secondary);
+  backdrop-filter: blur(8px);
+}
+
+.active {
+  background: var(--background);
+  border: 2px solid var(--tertiary);
+  backdrop-filter: blur(8px);
+}
+
+.complete {
+  background: rgba(var(--tertiary-rgb), 0.1);
+  border: 2px solid var(--outline);
+  color: var(--on-surface-variant);
+  backdrop-filter: blur(8px);
+}
+
+.inactive {
+  background: rgba(var(--tertiary-rgb), 0.05);
+  border: 2px solid var(--outline);
+  color: var(--on-surface-variant);
+  backdrop-filter: blur(8px);
+}
+
+/* === INTERATTIVITÀ === */
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(var(--tertiary-rgb), 0.2);
+}
+
+.clickable:active {
+  transform: scale(0.98);
+}
+
+/* === PATTERN QR === */
+.qrPattern {
+  width: 90%;
+  height: 90%;
+  background: repeating-linear-gradient(
+      0deg,
+      var(--on-surface) 0px,
+      var(--on-surface) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--on-surface) 0px,
+      var(--on-surface) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  position: relative;
+}
+
+.corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--on-surface);
+  border: 1px solid var(--background);
+}
+
+/* === TESTO === */
+.qrText {
+  color: inherit;
+  font-weight: var(--font-semibold);
+  color: var(--secondary);
+}

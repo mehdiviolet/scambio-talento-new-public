@@ -47,7 +47,7 @@ const SlideEventCard = ({
     startTime: "19:30",
     endTime: "22:30",
     placeName: "Café Central",
-    placeAddress: "Via Madama Cristina 45, Torino",
+    placeAddress: "Via M.Cristina 45, Torino",
     coverImage: "/images/evento/azul-03.png",
     // participants: 11,
     participants: eventStats.participantsCount,

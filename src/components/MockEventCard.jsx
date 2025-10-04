@@ -138,6 +138,7 @@ const MockEventCard = ({
   };
   // console.log(currentUserEvent, checkInList);
   console.log(selectedPersonData?.profile);
+  // console.log(mockEvent);
 
   // ✅ TIMER PER AUTO-UPLOAD GALLERY
   useEffect(() => {
@@ -227,7 +228,7 @@ const MockEventCard = ({
         label: " In corso",
         color: "var(--on-secondary-container)",
       },
-      fatto: { label: "✅ Completato", color: "var(--on-surface-variant)" },
+      fatto: { label: "Completato", color: "var(--on-surface-variant)" },
     };
     return (
       stateLabels[eventState] || {
@@ -317,9 +318,11 @@ const MockEventCard = ({
               )}
             </div> */}
             <div className={styles.bottomRightIcons}>
-              {mockEvent.type === "presenza" && (
-                <QRCodeComponent isOwner={isOwner} size={80} />
-              )}
+              {mockEvent.type === "presenza" &&
+                (eventState === "confirmed" ||
+                  eventState === "in svolgimento") && (
+                  <QRCodeComponent isOwner={isOwner} size={60} />
+                )}
             </div>
           </div>
         </div>
@@ -486,7 +489,7 @@ const MockEventCard = ({
                     setShowNotifications(!showNotifications);
                   }}
                 >
-                  🔔 Notifiche ({notifications.length})
+                  Notifiche ({notifications.length})
                   {showNotifications ? (
                     <ChevronDown size={16} />
                   ) : (
@@ -500,7 +503,7 @@ const MockEventCard = ({
                   }}
                   className={styles.clearButton}
                 >
-                  Cancella tutto
+                  Cancella
                 </button>
               </div>
 
@@ -552,7 +555,7 @@ const MockEventCard = ({
                   setShowCheckIns(!showCheckIns);
                 }}
               >
-                ✅ Check-in ({checkInList.length}/{participants.length})
+                Check-in ({checkInList.length}/{participants.length})
                 {showCheckIns ? (
                   <ChevronDown size={16} />
                 ) : (
@@ -583,7 +586,7 @@ const MockEventCard = ({
                   setShowFeedbacks(!showFeedbacks);
                 }}
               >
-                ⭐ Feedback ricevuti ({feedbacks.length})
+                Feedback ricevuti ({feedbacks.length})
                 {showFeedbacks ? (
                   <ChevronDown size={16} />
                 ) : (
@@ -635,7 +638,7 @@ const MockEventCard = ({
                   setShowGallery(!showGallery);
                 }}
               >
-                📸 Gallery ({galleryPhotos.length} foto)
+                Gallery ({galleryPhotos.length} foto)
                 {showGallery ? (
                   <ChevronDown size={16} />
                 ) : (
@@ -687,43 +690,9 @@ const MockEventCard = ({
         </div>
 
         {/* Bottoni Owner */}
-        {isOwner && eventState !== "idle" && (
+        {isOwner && eventState !== "idle" && eventState !== "fatto" && (
           <div className={styles.confermButtonOwner}>
             {eventState === "waiting" && (
-              // <button
-              //   className={`${styles.actionButton} ${styles.actionButtonEdit}`}
-              //   disabled={isConfirmingEvent}
-              //   onClick={(e) => {
-              //     e.stopPropagation();
-              //     dispatch(
-              //       setLoading({ operation: "confirmEvent", isLoading: true })
-              //     );
-
-              //     setTimeout(() => {
-              //       dispatch(confirmEvent());
-              //       dispatch(
-              //         setLoading({
-              //           operation: "confirmEvent",
-              //           isLoading: false,
-              //         })
-              //       );
-              //     }, 1200);
-              //   }}
-              // >
-              //   {isConfirmingEvent ? (
-              //     <LoadingSpinner
-              //       size={16}
-              //       color="white"
-              //       text="Confermando..."
-              //       showText={true}
-              //     />
-              //   ) : (
-              //     <>
-              //       <CheckCircle size={16} />
-              //       <span>Conferma Evento</span>
-              //     </>
-              //   )}
-              // </button>
               <ButtonConfirmEvent
                 disabled={isConfirmingEvent}
                 isLoading={isConfirmingEvent}
@@ -764,37 +733,6 @@ const MockEventCard = ({
                   }, 1000);
                 }}
               />
-              // <button
-              //   className={`${styles.actionButton} ${styles.actionButtonDelete}`}
-              //   disabled={isEndingEvent}
-              //   onClick={(e) => {
-              //     e.stopPropagation();
-              //     dispatch(
-              //       setLoading({ operation: "endEvent", isLoading: true })
-              //     );
-
-              //     setTimeout(() => {
-              //       dispatch(endEvent());
-              //       dispatch(
-              //         setLoading({ operation: "endEvent", isLoading: false })
-              //       );
-              //     }, 1000);
-              //   }}
-              // >
-              //   {isEndingEvent ? (
-              //     <LoadingSpinner
-              //       size={16}
-              //       color="white"
-              //       text="Terminando..."
-              //       showText={true}
-              //     />
-              //   ) : (
-              //     <>
-              //       <CheckCircle size={16} />
-              //       <span>Termina Evento</span>
-              //     </>
-              //   )}
-              // </button>
             )}
           </div>
         )}
@@ -802,31 +740,6 @@ const MockEventCard = ({
         {/* Bottoni Participant */}
         {!isOwner && eventState !== "fatto" && (
           <div className={styles.actionButtons}>
-            {/* <button
-              disabled={
-                eventState === "confirmed" ||
-                eventState === "fatto" ||
-                eventState === "in svolgimento"
-              }
-              className={`${styles.actionButton} ${
-                isParticipating
-                  ? styles.actionButtonParticipating
-                  : styles.actionButtonValutando
-              }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                // ✅ PASSA FIRSTNAME NEL PAYLOAD
-                dispatch(toggleParticipation({ firstName }));
-              }}
-              title={
-                isParticipating
-                  ? "Rimuovi partecipazione"
-                  : "Partecipa all'evento"
-              }
-            >
-              <UserCheck size={16} />
-              <span>{isParticipating ? "Partecipo! ✓" : "Ci sono!"}</span>
-            </button> */}
             <ButtonParticipate
               disabled={
                 eventState === "confirmed" ||

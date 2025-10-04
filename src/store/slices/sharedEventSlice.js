@@ -7,7 +7,7 @@ const initialComments = [
     id: "c1",
     authorId: "mario_rossi",
     authorName: "Mario Rossi",
-    text: "Non vedo l'ora! Porterò Azul 🎲",
+    text: "Non vedo l'ora!",
     time: "18:30",
     timestamp: new Date().toISOString(),
   },
@@ -15,7 +15,7 @@ const initialComments = [
     id: "c2",
     authorId: "anna_bianchi",
     authorName: "Anna Bianchi",
-    text: "Perfetto, ci sarò! Qualcuno ha Wingspan?",
+    text: "Perfetto, ci sarò! ",
     time: "19:00",
     timestamp: new Date().toISOString(),
   },
@@ -238,7 +238,7 @@ const sharedEventSlice = createSlice({
         state.notifications.push({
           id: `notif_${Date.now()}`,
           type: "new_participant",
-          message: `🎉 ${userDisplayName} partecipa all'evento!`,
+          message: `${userDisplayName} partecipa all'evento!`,
           timestamp: new Date().toISOString(),
           metadata: {
             userId: currentUserId,
@@ -257,7 +257,7 @@ const sharedEventSlice = createSlice({
           state.notifications.push({
             id: `notif_${Date.now()}`,
             type: "event_full",
-            message: "🔥 Evento pieno! Conferma l'evento per procedere.",
+            message: "Evento pieno! Conferma l'evento per procedere.",
             timestamp: new Date().toISOString(),
           });
         }
@@ -277,7 +277,7 @@ const sharedEventSlice = createSlice({
         state.notifications.push({
           id: `notif_${Date.now()}`,
           type: "event_confirmed",
-          message: "✅ Evento confermato! QR Code attivo per check-in.",
+          message: "Evento confermato! QR Code attivo per check-in.",
           timestamp: new Date().toISOString(),
         });
       }
@@ -330,7 +330,7 @@ const sharedEventSlice = createSlice({
           state.notifications.push({
             id: `notif_${Date.now()}`,
             type: "participation_score",
-            message: `✅ Check-in completato! +2 punti partecipazione.`,
+            message: `Check-in completato! +2 punti partecipazione.`,
             timestamp: new Date().toISOString(),
           });
         }
@@ -344,7 +344,7 @@ const sharedEventSlice = createSlice({
           state.notifications.push({
             id: `notif_${Date.now()}`,
             type: "event_started",
-            message: "🚀 Evento iniziato!",
+            message: "Evento iniziato!",
             timestamp: new Date().toISOString(),
           });
         }
@@ -368,7 +368,7 @@ const sharedEventSlice = createSlice({
         state.notifications.push({
           id: `notif_${Date.now()}`,
           type: "event_ended",
-          message: "🏁 Evento terminato!",
+          message: "Evento terminato!",
           timestamp: new Date().toISOString(),
         });
       }
@@ -417,7 +417,7 @@ const sharedEventSlice = createSlice({
       state.notifications.push({
         id: `notif_${Date.now()}`,
         type: "feedback_sent",
-        message: `📝 Feedback inviato! +${
+        message: `Feedback inviato! +${
           state.checkInList.some(
             (c) => c.participantName === state.currentUser.name
           )
