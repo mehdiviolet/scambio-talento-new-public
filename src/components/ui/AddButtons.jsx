@@ -1,6 +1,6 @@
 import React from "react";
 import { Plus, Star, BookOpen, Users, Camera, Calendar } from "lucide-react";
-import styles from "../../components/GallerySection.module.css";
+import styles from "./AddButton.module.css";
 
 // Header Add Button - Piccolo per section headers
 export const HeaderAddButton = ({ onClick, className = "", txt }) => {

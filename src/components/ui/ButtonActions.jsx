@@ -7,7 +7,13 @@ import {
   LogOut,
   UserCheck,
   CheckCircle,
+  Cherry,
+  Lock,
+  Hourglass,
+  Check,
+  Dices,
 } from "lucide-react";
+
 import styles from "./Button.module.css";
 
 // ===== COMPONENTE BASE BUTTON =====
@@ -283,6 +289,59 @@ export const ButtonEndEvent = ({
           <span>{children}</span>
         </>
       )}
+    </Button>
+  );
+};
+
+// ===== BUTTON SPIN WHEEL =====
+
+// ===== BUTTON SPIN WHEEL =====
+export const ButtonSpinWheel = ({
+  onClick,
+  disabled = false,
+  isSpinning = false,
+  hasSpunToday = false,
+  isBlocked = false,
+  disabledMessage = "Azione non disponibile",
+  size = "lg",
+  mode = "solid",
+  ...props
+}) => {
+  const getButtonText = () => {
+    if (isSpinning) return "Girando...";
+    if (isBlocked) return "Bloccato per 1 giorno";
+    if (hasSpunToday) return "Torna domani!";
+    return "GIRA ORA";
+  };
+
+  const getButtonIcon = () => {
+    if (isBlocked) return <Lock size={16} />;
+    if (isSpinning) return <Hourglass size={16} />;
+    if (hasSpunToday) return <Check size={16} />;
+    return <Dices size={16} />;
+  };
+
+  const getTitle = () => {
+    if (isBlocked) return "Riprova tra 24 ore";
+    if (hasSpunToday) return "Hai già girato oggi, torna domani!";
+    if (isSpinning) return "La ruota sta girando...";
+    return "Clicca per girare la ruota della fortuna e vincere XP!";
+  };
+
+  return (
+    <Button
+      variant="primary"
+      mode={mode}
+      size={size}
+      onClick={onClick}
+      disabled={disabled || hasSpunToday || isSpinning || isBlocked}
+      disabledMessage={disabledMessage}
+      title={getTitle()}
+      {...props}
+    >
+      {getButtonIcon()}
+      <span>{getButtonText()}</span>
+      <Cherry size={16} />
     </Button>
   );
 };

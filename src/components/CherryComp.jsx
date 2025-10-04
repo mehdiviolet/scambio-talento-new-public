@@ -8,6 +8,8 @@ import {
   Cherry,
   Clock,
   Cookie,
+  Dices,
+  HelpCircle,
   Shield,
   X,
   Zap,
@@ -23,6 +25,7 @@ import {
   setCurrentUser,
 } from "@/services/xpService";
 import IconButton from "./ui/IconButton";
+import { ButtonSpinWheel } from "./ui/ButtonActions";
 
 const CherryComp = ({
   currentUser = currentUser,
@@ -48,6 +51,11 @@ const CherryComp = ({
   const [hasSpunToday, setHasSpunToday] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
   const [result, setResult] = useState(["❓", "❓", "❓"]);
+  // const [result, setResult] = useState([
+  //   <HelpCircle size={64} />,
+  //   <HelpCircle size={64} />,
+  //   <HelpCircle size={64} />,
+  // ]);
   const [xpRewarded, setXpRewarded] = useState(0);
   const [showReward, setShowReward] = useState(false);
   const [consecutiveFailures, setConsecutiveFailures] = useState(0);
@@ -258,7 +266,10 @@ const CherryComp = ({
             </div>
           ) : (
             <div className={styles.placeholder}>
-              <div className={styles.placeholderIcon}>🎲</div>
+              {/* <div className={styles.placeholderIcon}>🎲</div> */}
+              <div className={styles.placeholderIcon}>
+                <Dices size={80} />
+              </div>
               <div className={styles.placeholderText}>
                 {hasSpunToday ? "Completato per oggi!" : "Clicca per girare!"}
               </div>
@@ -282,7 +293,7 @@ const CherryComp = ({
         </div>
 
         {/* Pulsante */}
-        <button
+        {/* <button
           className={`${styles.editProfileBtn} ${styles.liquidButton}`}
           onClick={handleSpin}
           disabled={hasSpunToday || isSpinning || isBlocked}
@@ -317,8 +328,13 @@ const CherryComp = ({
 
             <Cherry size={16} />
           </div>
-        </button>
-
+        </button> */}
+        <ButtonSpinWheel
+          onClick={handleSpin}
+          isSpinning={isSpinning}
+          hasSpunToday={hasSpunToday}
+          isBlocked={isBlocked}
+        />
         <div className={styles.statusInfo}>
           <div className={styles.statusItem}>
             <span>Tentativi falliti: </span>

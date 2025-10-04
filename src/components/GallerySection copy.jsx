@@ -9,7 +9,6 @@ import {
 import GalleryModal from "./GalleryModal";
 import GallerySlider from "./GallerySlider";
 import styles from "./GallerySection.module.css";
-import { Button } from "./ui/Button";
 
 function GallerySection({ isOwner = true }) {
   const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
@@ -29,26 +28,27 @@ function GallerySection({ isOwner = true }) {
       <div className={styles.gallerySection}>
         {/* Header */}
         <div className={styles.galleryHeader}>
-          <div className={styles.galleryTitleWrapper}>
-            <h3 className={styles.galleryTitle}>Gallery</h3>
-            {/* <span className={styles.gallerySubtitle}>
-              (artworks • experiences • events)
-            </span> */}
-          </div>
+          <h3 className={styles.galleryTitle}>
+            {/* <span className={styles.galleryIcon}>🖼️</span> */}
+            Gallery
+          </h3>
 
           {isOwner && canAddPhotos && (
-            <Button
-              variant="primary"
-              mode="solid"
-              size="sm"
+            <motion.button
+              className={styles.addPhotosBtn}
               onClick={handleOpenGalleryModal}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               title="Add photos to gallery"
             >
               <Plus size={16} />
-              <span>Add Photos</span>
-            </Button>
+              Add Photos
+            </motion.button>
           )}
         </div>
+        <span className={styles.gallerySubtitle}>
+          (artworks • experiences • events)
+        </span>
 
         {/* Content */}
         <div className={styles.galleryContent}>
@@ -57,21 +57,20 @@ function GallerySection({ isOwner = true }) {
             <GallerySlider photos={photos} isOwner={isOwner} />
           ) : (
             // Show Placeholder when no photos
-            <div className={styles.placeholder}>
-              <div className={styles.placeholderIcon}>
-                {isOwner ? <ImagePlus size={48} /> : <Camera size={48} />}
-              </div>
-
+            <div className={styles.galleryPlaceholder}>
               {isOwner ? (
                 <>
-                  <h4 className={styles.placeholderTitle}>
-                    Share your visual story
-                  </h4>
-                  <p className={styles.placeholderText}>
-                    Add photos to showcase your artworks, experiences, and
-                    memorable events
-                  </p>
-                  <Button
+                  <div className={styles.placeholderIcon}>
+                    <ImagePlus size={48} />
+                  </div>
+                  <div className={styles.placeholderText}>
+                    <h4>Share your visual story</h4>
+                    <p>
+                      Add photos to showcase your artworks, experiences, and
+                      memorable events
+                    </p>
+                  </div>
+                  <motion.button
                     className={styles.placeholderBtn}
                     onClick={handleOpenGalleryModal}
                     whileHover={{ scale: 1.02 }}
@@ -79,14 +78,17 @@ function GallerySection({ isOwner = true }) {
                   >
                     <Camera size={16} />
                     Add Your First Photos
-                  </Button>
+                  </motion.button>
                 </>
               ) : (
                 <>
-                  <h4 className={styles.placeholderTitle}>No photos yet</h4>
-                  <p className={styles.placeholderText}>
-                    This user hasn't shared any photos in their gallery
-                  </p>
+                  <div className={styles.placeholderIcon}>
+                    <Camera size={48} />
+                  </div>
+                  <div className={styles.placeholderText}>
+                    <h4>No photos yet</h4>
+                    <p>This user hasn't shared any photos in their gallery</p>
+                  </div>
                 </>
               )}
             </div>
@@ -95,18 +97,18 @@ function GallerySection({ isOwner = true }) {
 
         {/* Photo Count Info */}
         {photos.length > 0 && (
-          <div className={styles.galleryFooter}>
+          <div className={styles.galleryInfo}>
             <span className={styles.photoCount}>
               {photos.length} / 3 photos
             </span>
-            {/* {isOwner && canAddPhotos && (
+            {isOwner && canAddPhotos && (
               <button
-                className={styles.addMoreLink}
+                className={styles.addMoreBtn}
                 onClick={handleOpenGalleryModal}
               >
                 Add more
               </button>
-            )} */}
+            )}
           </div>
         )}
       </div>
