@@ -2,7 +2,9 @@ import React from "react";
 import { Activity, X, Trophy, Target, Cookie } from "lucide-react";
 import { useSelector } from "react-redux";
 import { selectDemoState } from "@/services/xpService";
-import styles from "./ActivityModal.module.css";
+import baseStyles from "./CookieModal.module.css";
+import extendedStyles from "./ActivityModal.module.css";
+const styles = { ...baseStyles, ...extendedStyles };
 
 const ActivityModalTest = ({ isOpen, onClose }) => {
   // Accesso diretto Redux per dati attività

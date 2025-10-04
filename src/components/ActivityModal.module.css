@@ -91,3 +91,52 @@
   font-weight: 700;
   font-size: 1rem;
 }
+
+/* ActivityModal.module.css */
+
+/* ... tutto il tuo codice esistente ... */
+
+/* Progress Bar - AGGIUNGI QUESTE CLASSI */
+/* Progress Bar */
+.progressContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.progressBar {
+  width: 100%;
+  background: var(--surface-variant);
+  border-radius: var(--radius-md);
+  height: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.progressTeal {
+  background: linear-gradient(90deg, var(--tertiary), var(--primary));
+}
+
+.progressGold {
+  background: linear-gradient(90deg, var(--secondary), #fbbf24);
+}
+
+.progressText {
+  text-align: center;
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--on-surface-variant);
+}
+
+.progressText strong {
+  color: var(--on-surface);
+  font-weight: var(--font-bold);
+}

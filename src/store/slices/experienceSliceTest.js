@@ -66,7 +66,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "programming-marco",
           name: "Coding",
-          icon: "💻",
+          icon: Code,
           detail: "React & Node.js",
           description:
             "Sviluppatore full-stack specializzato in React e backend Node.js.",
@@ -77,7 +77,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "design-marco",
           name: "Design",
-          icon: "🎨",
+          icon: Palette,
           detail: "UI/UX Design",
           description:
             "Designer esperto in interfacce moderne e user experience.",
@@ -90,7 +90,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "exp-programming-marco-001",
           skillId: "programming-marco",
-          icon: "💻",
+          icon: Code,
           title: "React / Full-Stack",
           modalita: "online",
           lingua: "🇬🇧",
@@ -104,7 +104,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "exp-design-marco-002",
           skillId: "design-marco",
-          icon: "🎨",
+          icon: Palette,
           title: "Design / Modern UI",
           modalita: "online",
           lingua: "🇮🇹",
@@ -122,7 +122,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "programming-marco",
           name: "Coding",
-          icon: "💻",
+          icon: Code,
           detail: "React & Node.js",
           description:
             "Sviluppatore full-stack specializzato in React e backend Node.js.",
@@ -133,7 +133,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "design-marco",
           name: "Design",
-          icon: "🎨",
+          icon: Palette,
           detail: "UI/UX Design",
           description:
             "Designer esperto in interfacce moderne e user experience.",
@@ -146,7 +146,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "exp-programming-marco-001",
           skillId: "programming-marco",
-          icon: "💻",
+          icon: Code,
           title: "React / Full-Stack",
           modalita: "online",
           lingua: "🇬🇧",
@@ -160,7 +160,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "exp-design-marco-002",
           skillId: "design-marco",
-          icon: "🎨",
+          icon: Palette,
           title: "Design / Modern UI",
           modalita: "online",
           lingua: "🇮🇹",
@@ -178,7 +178,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "programming-sara",
           name: "Coding",
-          icon: "💻",
+          icon: Code,
           detail: "React & Node.js",
           description:
             "Sviluppatore full-stack specializzato in React e backend Node.js.",
@@ -189,7 +189,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "design-sara",
           name: "Design",
-          icon: "🎨",
+          icon: Palette,
           detail: "UI/UX Design",
           description:
             "Designer esperto in interfacce moderne e user experience.",
@@ -202,7 +202,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "exp-programming-sara-001",
           skillId: "programming-sara",
-          icon: "💻",
+          icon: Code,
           title: "React / Full-Stack",
           modalita: "online",
           lingua: "🇬🇧",
@@ -216,7 +216,7 @@ const getPeopleMockData = (personName) => {
         {
           id: "exp-design-sara-002",
           skillId: "design-sara",
-          icon: "🎨",
+          icon: Palette,
           title: "Design / Modern UI",
           modalita: "online",
           lingua: "🇮🇹",

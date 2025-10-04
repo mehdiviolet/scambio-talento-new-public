@@ -519,8 +519,11 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
     {
       icon: <Key size={16} />,
       label: "Cambia password",
-      description: "da definire... ",
-      action: handlePrivacySettings,
+      description: "Aggiorna la tua password",
+      action: () => {
+        setCurrentSubmenu("password");
+        setIsInSubmenu(true);
+      },
       hasSubmenu: true,
     },
     {
@@ -692,6 +695,67 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
         <p className={styles.submenuInfoText}>
           Le tue impostazioni privacy vengono applicate immediatamente e
           controllano chi può vedere il tuo profilo e le tue attività.
+        </p>
+      </div>
+    </div>
+  );
+
+  const renderPasswordSubmenu = () => (
+    <div className={styles.submenuContent}>
+      {/* Password Icon Section */}
+      <div className={styles.submenuHeader}>
+        <div className={styles.submenuIconContainer}>
+          <Key size={32} className={styles.submenuIcon} />
+        </div>
+        <h4 className={styles.submenuTitle}>Cambia la tua password</h4>
+      </div>
+
+      {/* Password Form Section */}
+      <div className={styles.submenuSection}>
+        <h3 className={styles.submenuSectionTitle}>Nuova password</h3>
+        <div className={styles.submenuOptions}>
+          <div style={{ marginBottom: "1rem" }}>
+            <label className={styles.miniModalLabel}>Password attuale</label>
+            <input
+              type="password"
+              placeholder="Inserisci password attuale"
+              style={{ borderRadius: "0.75rem" }}
+            />
+          </div>
+
+          <div style={{ marginBottom: "1rem" }}>
+            <label className={styles.miniModalLabel}>Nuova password</label>
+            <input
+              type="password"
+              placeholder="Inserisci nuova password"
+              style={{ borderRadius: "0.75rem" }}
+            />
+          </div>
+
+          <div style={{ marginBottom: "1rem" }}>
+            <label className={styles.miniModalLabel}>Conferma password</label>
+            <input
+              type="password"
+              placeholder="Conferma nuova password"
+              style={{ borderRadius: "0.75rem" }}
+            />
+          </div>
+
+          <div style={{ display: "flex", gap: "0.75rem", marginTop: "1.5rem" }}>
+            {/* <button className={styles.miniModalCancel}>Annulla</button> */}
+            <ButtonCancel />
+            <ButtonSave />
+            {/* <button className={styles.miniModalConfirm}>Salva password</button> */}
+          </div>
+        </div>
+      </div>
+
+      {/* Info */}
+      <div className={styles.submenuInfo}>
+        <Key size={20} className={styles.submenuInfoIcon} />
+        <p className={styles.submenuInfoText}>
+          La password deve contenere almeno 8 caratteri, includendo lettere
+          maiuscole, minuscole e numeri.
         </p>
       </div>
     </div>
@@ -875,11 +939,20 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
           >
             <ChevronLeft size={20} />
             {/* <span>{isInSubmenu ? "Privacy del profilo" : "Impostazioni"}</span> */}
-            <span>
+            {/* <span>
               {isInSubmenu
                 ? currentSubmenu === "privacy"
                   ? "Privacy del profilo"
                   : "Aiuto e supporto"
+                : "Impostazioni"}
+            </span> */}
+            <span>
+              {isInSubmenu
+                ? currentSubmenu === "privacy"
+                  ? "Privacy del profilo"
+                  : currentSubmenu === "help"
+                  ? "Aiuto e supporto"
+                  : "Cambia password" // <-- AGGIUNGI QUESTO
                 : "Impostazioni"}
             </span>
           </button>
@@ -907,7 +980,8 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
             </div>
           ) : (
             (currentSubmenu === "privacy" && renderPrivacySubmenu()) ||
-            (currentSubmenu === "help" && renderHelpSubmenu()) // <-- nuovo
+            (currentSubmenu === "help" && renderHelpSubmenu()) || // <-- nuovo
+            (currentSubmenu === "password" && renderPasswordSubmenu()) // <-- AGGIUNGI QUESTA RIGA
           )}
         </div>
       </div>
