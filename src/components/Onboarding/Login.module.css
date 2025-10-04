@@ -226,17 +226,17 @@
   width: 18px;
   height: 18px;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .checkbox:checked + .checkmark::after {
   content: "✓";
-  position: absolute;
   color: white;
   font-size: 12px;
   font-weight: bold;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(50%, 20%);
 }
 
 .forgotPassword {

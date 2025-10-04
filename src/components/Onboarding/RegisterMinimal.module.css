@@ -117,7 +117,8 @@
   color: var(--on-primary-container);
   text-decoration: underline;
   cursor: pointer;
-  font-size: inherit;
+  /* font-size: inherit; */
+  font-size: var(--text-xs);
   font-weight: 600;
   transition: color 0.3s ease;
 }

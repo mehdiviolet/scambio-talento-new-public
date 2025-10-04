@@ -38,7 +38,8 @@ const SlideEventCard = ({
   // Dati mock dell'evento per la card preview
   const mockEvent = {
     id: "demo_event_001",
-    title: "Boardgame Night a San Salvario",
+    // title: "Boardgame Night a San Salvario",
+    title: "Boardgame Night ",
     description:
       "Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare.Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare.Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare...",
     category: "Hobby e passioni",
