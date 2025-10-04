@@ -169,16 +169,17 @@ const QRCodeComponent = ({ isOwner = false, size = 80 }) => {
         }
 
       case "fatto":
-        return {
-          style: {
-            background: "var(--glass-bg-light)",
-            border: "2px solid var(--gray-400)",
-            color: "var(--gray-600)",
-          },
-          content: "Finito",
-          cursor: "default",
-          title: "Evento terminato",
-        };
+        return null;
+      //  {
+      //   style: {
+      //     background: "var(--glass-bg-light)",
+      //     border: "2px solid var(--gray-400)",
+      //     color: "var(--gray-600)",
+      //   },
+      //   content: "Finito",
+      //   cursor: "default",
+      //   title: "Evento terminato",
+      // }
 
       default:
         return {
@@ -193,6 +194,8 @@ const QRCodeComponent = ({ isOwner = false, size = 80 }) => {
         };
     }
   };
+
+  if (eventState === "fatto") return null;
 
   const qrContent = getQRContent();
 

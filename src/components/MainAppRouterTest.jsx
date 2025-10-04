@@ -51,6 +51,7 @@ import {
 import EsperienzePage from "./EsperienzePage";
 import EventiPage from "./EventiPage";
 import SearchPage from "./SearchPage";
+import CookieModalTest from "./CookieModalTest";
 
 const MainAppRouterTest = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -388,7 +389,7 @@ const MainAppRouterTest = () => {
         onClose={() => setIsActivityModalOpen(false)}
       />
 
-      <CookieModal
+      <CookieModalTest
         isOpen={isCookieModalOpen}
         onClose={() => setIsCookieModalOpen(false)}
         userXP={userXP}

@@ -188,6 +188,7 @@
 /* === CONTENT === */
 .cardContent {
   flex: 1;
+  padding: var(--space-lg);
 }
 
 .eventTitle {
@@ -275,7 +276,7 @@
 
 /* === EXTRA DETAILS === */
 .extraDetails {
-  padding: var(--space-lg);
+  /* padding: var(--space-lg); */
 }
 
 .extraItem {
@@ -314,15 +315,17 @@
 .statusBadge {
   position: absolute;
   /* top: var(--space-sm); */
-  top: 0;
+  top: 0px;
   left: var(--space-sm);
-  z-index: 10;
+  /* z-index: 10; */
+  z-index: 1;
   /* color: var(--on-primary); */
   background: var(--primary);
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-md);
   font-size: var(--text-xs);
   font-weight: var(--font-medium);
+  color: var(--on-primary);
 }
 
 /* === COVER IMAGE === */
@@ -577,13 +580,13 @@
 .feedbackSection {
   background: var(--primary-container);
   border-color: var(--primary);
-  margin: var(--space-lg);
+  /* margin: var(--space-lg); */
 }
 
 .gallerySection {
   background: var(--surface-variant);
   border-color: var(--outline);
-  margin: var(--space-lg);
+  /* margin: var(--space-lg); */
 }
 
 .notificationsHeader {

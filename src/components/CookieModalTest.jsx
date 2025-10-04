@@ -13,7 +13,7 @@ import {
 import styles from "./CookieModal.module.css";
 import IconButton from "./ui/IconButton";
 
-const CookieModal = ({ isOpen, onClose, userXP }) => {
+const CookieModalTest = ({ isOpen, onClose, userXP }) => {
   if (!isOpen) return null;
 
   const handleOverlayClick = (e) => {
@@ -67,13 +67,13 @@ const CookieModal = ({ isOpen, onClose, userXP }) => {
               <div className={styles.statItem}>
                 <Cookie size={20} className={styles.todayIcon} />
                 <span className={styles.statLabel}>Oggi</span>
-                <span className={styles.statValue}>+200 XP</span>
+                <span className={styles.statValue}>+25 XP</span>
               </div>
 
               <div className={styles.statItem}>
                 <TrendingUp size={20} className={styles.weekIcon} />
                 <span className={styles.statLabel}>Questa settimana</span>
-                <span className={styles.statValue}>+200 XP</span>
+                <span className={styles.statValue}>+120 XP</span>
               </div>
             </div>
 
@@ -83,25 +83,25 @@ const CookieModal = ({ isOpen, onClose, userXP }) => {
               <div className={styles.statItemUno}>
                 <Cherry size={20} className={styles.weekIcon} />
                 <span className={styles.statLabel}>Slot Machine:</span>
-                <span className={styles.statValueUno}>0 XP</span>
+                <span className={styles.statValueUno}>+10 XP</span>
               </div>
 
               <div className={styles.statItemUno}>
                 <Telescope size={20} className={styles.weekIcon} />
                 <span className={styles.statLabel}>Feedback Positivi:</span>
-                <span className={styles.statValueUno}>0 XP </span>
+                <span className={styles.statValueUno}>+10 XP </span>
               </div>
               <div className={styles.statItemUno}>
                 <Activity size={20} className={styles.weekIcon} />
                 <span className={styles.statLabel}>
                   21 Giorni Consecutivi Attivi:
                 </span>
-                <span className={styles.statValueUno}>0 XP </span>
+                <span className={styles.statValueUno}>+50 XP </span>
               </div>
               <div className={styles.statItemUno}>
                 <Book size={20} className={styles.weekIcon} />
                 <span className={styles.statLabel}>Esperienza:</span>
-                <span className={styles.statValueUno}>-80 XP </span>
+                <span className={styles.statValueUno}>+80 XP </span>
               </div>
               <div className={styles.statItemUno}>
                 <TrendingUp size={20} className={styles.weekIcon} />
@@ -124,4 +124,4 @@ const CookieModal = ({ isOpen, onClose, userXP }) => {
   );
 };
 
-export default CookieModal;
+export default CookieModalTest;

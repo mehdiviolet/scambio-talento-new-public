@@ -51,6 +51,11 @@ import MapComponent from "./MapComponent";
 import SimpleImageModal from "./SimpleImageModal";
 import LoadingSpinner from "./LoadingSpinner";
 import GallerySlider from "./GallerySlider";
+import {
+  ButtonConfirmEvent,
+  ButtonEndEvent,
+  ButtonParticipate,
+} from "./ui/ButtonActions";
 
 // DATI MOCK COMPLETI
 // const mockEvent = {
@@ -213,31 +218,36 @@ const MockEventCard = ({
     }
   };
 
-  // Helper per get stato display
+  const getEventStateDisplay = () => {
+    const stateLabels = {
+      idle: { label: " Aperto", color: "var(--primary)" },
+      waiting: { label: " In attesa conferma", color: "var(--secondary)" },
+      confirmed: { label: " Confermato", color: "var(--tertiary)" },
+      "in svolgimento": {
+        label: " In corso",
+        color: "var(--on-secondary-container)",
+      },
+      fatto: { label: "✅ Completato", color: "var(--on-surface-variant)" },
+    };
+    return (
+      stateLabels[eventState] || {
+        label: "❓ Sconosciuto",
+        color: "var(--on-surface-variant)",
+      }
+    );
+  };
   // const getEventStateDisplay = () => {
   //   const stateLabels = {
-  //     idle: { label: "🟢 Aperto", color: "#28a745" },
-  //     waiting: { label: "🟡 In attesa conferma", color: "#ffc107" },
-  //     confirmed: { label: "🔵 Confermato", color: "#007bff" },
-  //     "in svolgimento": { label: "🟠 In corso", color: "#fd7e14" },
+  //     idle: { label: " Aperto", color: "#28a745" },
+  //     waiting: { label: " In attesa conferma", color: "#ffc107" },
+  //     confirmed: { label: " Confermato", color: "#007bff" },
+  //     "in svolgimento": { label: " In corso", color: "#fd7e14" },
   //     fatto: { label: "✅ Completato", color: "#6c757d" },
   //   };
   //   return (
   //     stateLabels[eventState] || { label: "❓ Sconosciuto", color: "#6c757d" }
   //   );
   // };
-  const getEventStateDisplay = () => {
-    const stateLabels = {
-      idle: { label: " Aperto", color: "#28a745" },
-      waiting: { label: " In attesa conferma", color: "#ffc107" },
-      confirmed: { label: " Confermato", color: "#007bff" },
-      "in svolgimento": { label: " In corso", color: "#fd7e14" },
-      fatto: { label: "✅ Completato", color: "#6c757d" },
-    };
-    return (
-      stateLabels[eventState] || { label: "❓ Sconosciuto", color: "#6c757d" }
-    );
-  };
   // ✅ HANDLER CLICK NOME IN NOTIFICA
   const handleNameClick = (userId, userName) => {
     // TODO: [SOSTITUIRE CON COMPONENTE PROFILO]
@@ -283,12 +293,6 @@ const MockEventCard = ({
         )} */}
 
         {/* Status Badge */}
-        <div
-          className={styles.statusBadge}
-          style={{ backgroundColor: stateDisplay.color }}
-        >
-          {stateDisplay.label}
-        </div>
 
         {/* Immagine copertina con overlay */}
         <div className={styles.coverImageWithOverlay}>
@@ -356,6 +360,12 @@ const MockEventCard = ({
         {/* Info aggiuntive quando espanso */}
         {isExpanded && (
           <div className={styles.cardHeader}>
+            <div
+              className={styles.statusBadge}
+              style={{ backgroundColor: stateDisplay.color }}
+            >
+              {stateDisplay.label}
+            </div>
             <h3 className={styles.eventTitleOverlay}>{mockEvent.title}</h3>
             <div className={styles.bottomContent}>
               <div className={styles.titleAndMeta}>
@@ -444,6 +454,27 @@ const MockEventCard = ({
 
         {/* Contenuto principale */}
         <div className={styles.cardContent}>
+          {/* Dettagli extra quando espanso */}
+          {isExpanded && (
+            <div className={styles.extraDetails}>
+              {/* Descrizione evento */}
+              <div className={styles.extraItem}>
+                <strong>Descrizione:</strong>
+                <div className={styles.description}>
+                  <p className={styles.descriptionText}>
+                    {mockEvent.description}
+                  </p>
+                </div>
+              </div>
+
+              {/* Lingua */}
+              {/* {mockEvent.language && (
+                <div className={styles.extraItem}>
+                  <strong>Lingua:</strong> {mockEvent.language}
+                </div>
+              )} */}
+            </div>
+          )}
           {/* Notifiche per Owner quando espanso */}
           {isExpanded && isOwner && notifications.length > 0 && (
             <div className={styles.notificationsSection}>
@@ -653,37 +684,49 @@ const MockEventCard = ({
               />
             </div>
           )}
-
-          {/* Dettagli extra quando espanso */}
-          {isExpanded && (
-            <div className={styles.extraDetails}>
-              {/* Descrizione evento */}
-              <div className={styles.extraItem}>
-                <strong>Descrizione:</strong>
-                <div className={styles.description}>
-                  <p className={styles.descriptionText}>
-                    {mockEvent.description}
-                  </p>
-                </div>
-              </div>
-
-              {/* Lingua */}
-              {/* {mockEvent.language && (
-                <div className={styles.extraItem}>
-                  <strong>Lingua:</strong> {mockEvent.language}
-                </div>
-              )} */}
-            </div>
-          )}
         </div>
 
         {/* Bottoni Owner */}
         {isOwner && eventState !== "idle" && (
           <div className={styles.confermButtonOwner}>
             {eventState === "waiting" && (
-              <button
-                className={`${styles.actionButton} ${styles.actionButtonEdit}`}
+              // <button
+              //   className={`${styles.actionButton} ${styles.actionButtonEdit}`}
+              //   disabled={isConfirmingEvent}
+              //   onClick={(e) => {
+              //     e.stopPropagation();
+              //     dispatch(
+              //       setLoading({ operation: "confirmEvent", isLoading: true })
+              //     );
+
+              //     setTimeout(() => {
+              //       dispatch(confirmEvent());
+              //       dispatch(
+              //         setLoading({
+              //           operation: "confirmEvent",
+              //           isLoading: false,
+              //         })
+              //       );
+              //     }, 1200);
+              //   }}
+              // >
+              //   {isConfirmingEvent ? (
+              //     <LoadingSpinner
+              //       size={16}
+              //       color="white"
+              //       text="Confermando..."
+              //       showText={true}
+              //     />
+              //   ) : (
+              //     <>
+              //       <CheckCircle size={16} />
+              //       <span>Conferma Evento</span>
+              //     </>
+              //   )}
+              // </button>
+              <ButtonConfirmEvent
                 disabled={isConfirmingEvent}
+                isLoading={isConfirmingEvent}
                 onClick={(e) => {
                   e.stopPropagation();
                   dispatch(
@@ -700,27 +743,13 @@ const MockEventCard = ({
                     );
                   }, 1200);
                 }}
-              >
-                {isConfirmingEvent ? (
-                  <LoadingSpinner
-                    size={16}
-                    color="white"
-                    text="Confermando..."
-                    showText={true}
-                  />
-                ) : (
-                  <>
-                    <CheckCircle size={16} />
-                    <span>Conferma Evento</span>
-                  </>
-                )}
-              </button>
+              />
             )}
 
             {eventState === "in svolgimento" && (
-              <button
-                className={`${styles.actionButton} ${styles.actionButtonDelete}`}
+              <ButtonEndEvent
                 disabled={isEndingEvent}
+                isLoading={isEndingEvent}
                 onClick={(e) => {
                   e.stopPropagation();
                   dispatch(
@@ -734,21 +763,38 @@ const MockEventCard = ({
                     );
                   }, 1000);
                 }}
-              >
-                {isEndingEvent ? (
-                  <LoadingSpinner
-                    size={16}
-                    color="white"
-                    text="Terminando..."
-                    showText={true}
-                  />
-                ) : (
-                  <>
-                    <CheckCircle size={16} />
-                    <span>Termina Evento</span>
-                  </>
-                )}
-              </button>
+              />
+              // <button
+              //   className={`${styles.actionButton} ${styles.actionButtonDelete}`}
+              //   disabled={isEndingEvent}
+              //   onClick={(e) => {
+              //     e.stopPropagation();
+              //     dispatch(
+              //       setLoading({ operation: "endEvent", isLoading: true })
+              //     );
+
+              //     setTimeout(() => {
+              //       dispatch(endEvent());
+              //       dispatch(
+              //         setLoading({ operation: "endEvent", isLoading: false })
+              //       );
+              //     }, 1000);
+              //   }}
+              // >
+              //   {isEndingEvent ? (
+              //     <LoadingSpinner
+              //       size={16}
+              //       color="white"
+              //       text="Terminando..."
+              //       showText={true}
+              //     />
+              //   ) : (
+              //     <>
+              //       <CheckCircle size={16} />
+              //       <span>Termina Evento</span>
+              //     </>
+              //   )}
+              // </button>
             )}
           </div>
         )}
@@ -756,7 +802,7 @@ const MockEventCard = ({
         {/* Bottoni Participant */}
         {!isOwner && eventState !== "fatto" && (
           <div className={styles.actionButtons}>
-            <button
+            {/* <button
               disabled={
                 eventState === "confirmed" ||
                 eventState === "fatto" ||
@@ -780,7 +826,19 @@ const MockEventCard = ({
             >
               <UserCheck size={16} />
               <span>{isParticipating ? "Partecipo! ✓" : "Ci sono!"}</span>
-            </button>
+            </button> */}
+            <ButtonParticipate
+              disabled={
+                eventState === "confirmed" ||
+                eventState === "fatto" ||
+                eventState === "in svolgimento"
+              }
+              isParticipating={isParticipating}
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch(toggleParticipation({ firstName }));
+              }}
+            />
           </div>
         )}
 

@@ -66,15 +66,23 @@
 }
 
 /* === PRIMARY VARIANTS === */
-.primary.solid {
+/* .primary.solid {
   --btn-bg: var(--primary-container);
   --btn-border: var(--primary);
   --btn-color: var(--primary);
   --btn-hover-bg: var(--primary);
   --btn-hover-border: var(--primary);
   --btn-hover-color: var(--on-primary);
-}
+} */
 
+.primary.solid {
+  --btn-bg: var(--primary);
+  --btn-border: var(--primary);
+  --btn-color: var(--on-primary);
+  --btn-hover-bg: var(--primary-container);
+  --btn-hover-border: var(--primary);
+  --btn-hover-color: var(--primary);
+}
 .primary.outline {
   --btn-bg: transparent;
   --btn-border: var(--primary);

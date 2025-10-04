@@ -1,5 +1,13 @@
 import React from "react";
-import { Trash2, X, Save, Edit2, LogOut } from "lucide-react";
+import {
+  Trash2,
+  X,
+  Save,
+  Edit2,
+  LogOut,
+  UserCheck,
+  CheckCircle,
+} from "lucide-react";
 import styles from "./Button.module.css";
 
 // ===== COMPONENTE BASE BUTTON =====
@@ -166,6 +174,112 @@ export const ButtonLogout = ({
       ) : (
         <>
           <LogOut size={16} />
+          <span>{children}</span>
+        </>
+      )}
+    </Button>
+  );
+};
+
+// ===== BUTTON PARTECIPA =====
+
+export const ButtonParticipate = ({
+  onClick,
+  disabled = false,
+  isParticipating = false,
+  disabledMessage = "Impossibile modificare partecipazione",
+  size = "md",
+  children,
+  ...props
+}) => {
+  return (
+    <Button
+      variant={isParticipating ? "tertiary" : "primary"}
+      mode="solid"
+      size={size}
+      onClick={onClick}
+      disabled={disabled}
+      disabledMessage={disabledMessage}
+      title={
+        isParticipating ? "Rimuovi partecipazione" : "Partecipa all'evento"
+      }
+      {...props}
+    >
+      <UserCheck size={16} />
+      <span>{children || (isParticipating ? "Partecipo! ✓" : "Ci sono!")}</span>
+    </Button>
+  );
+};
+
+// ===== BUTTON CONFERMA EVENTO =====
+export const ButtonConfirmEvent = ({
+  onClick,
+  disabled = false,
+  isLoading = false,
+  disabledMessage = "Impossibile confermare l'evento",
+  size = "md",
+  mode = "solid",
+  children = "Conferma Evento",
+  loadingText = "Confermando...",
+  ...props
+}) => {
+  return (
+    <Button
+      variant="primary"
+      mode={mode}
+      size={size}
+      onClick={onClick}
+      disabled={disabled || isLoading}
+      disabledMessage={disabledMessage}
+      title="Conferma evento"
+      {...props}
+    >
+      {isLoading ? (
+        <>
+          <div className={styles.spinner}></div>
+          <span>{loadingText}</span>
+        </>
+      ) : (
+        <>
+          <CheckCircle size={16} />
+          <span>{children}</span>
+        </>
+      )}
+    </Button>
+  );
+};
+
+// ===== BUTTON TERMINA EVENTO =====
+export const ButtonEndEvent = ({
+  onClick,
+  disabled = false,
+  isLoading = false,
+  disabledMessage = "Impossibile terminare l'evento",
+  size = "md",
+  mode = "solid",
+  children = "Termina Evento",
+  loadingText = "Terminando...",
+  ...props
+}) => {
+  return (
+    <Button
+      variant="primary"
+      mode={mode}
+      size={size}
+      onClick={onClick}
+      disabled={disabled || isLoading}
+      disabledMessage={disabledMessage}
+      title="Termina evento"
+      {...props}
+    >
+      {isLoading ? (
+        <>
+          <div className={styles.spinner}></div>
+          <span>{loadingText}</span>
+        </>
+      ) : (
+        <>
+          <CheckCircle size={16} />
           <span>{children}</span>
         </>
       )}
