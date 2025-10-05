@@ -169,6 +169,7 @@ const SlideEventCard = ({
           </div>
         </div>
         <div className={styles.flexCard}>
+          {/* COLONNA 1: Solo immagine */}
           <div className={styles.flexCardMe}>
             <div className={styles.cardImage}>
               {coverImage ? (
@@ -185,10 +186,12 @@ const SlideEventCard = ({
                 <div className={styles.imagePlaceholder}>📅</div>
               )}
             </div>
-            <h4 className={styles.eventTitle}>{title}</h4>
           </div>
 
+          {/* COLONNA 2: Titolo + Meta info */}
           <div className={styles.cardPreviewContent}>
+            <h4 className={styles.eventTitle}>{title}</h4>
+
             <div className={styles.eventMeta}>
               <div className={styles.metaItem}>
                 <Calendar size={14} />
@@ -198,12 +201,11 @@ const SlideEventCard = ({
                 <Clock size={14} />
                 <span>{startTime}</span>
               </div>
-              <div className={styles.metaItem}>
-                <Users size={14} />
-                <span>0/{maxParticipants}</span>
-              </div>
             </div>
-
+            <div className={styles.metaItem}>
+              <Users size={14} />
+              <span>0/{maxParticipants}</span>
+            </div>
             <div className={styles.metaItem}>
               <MapPin size={14} />
               <span>{placeName}</span>

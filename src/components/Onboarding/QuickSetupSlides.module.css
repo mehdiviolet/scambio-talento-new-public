@@ -369,6 +369,7 @@
 
 .inputGroup {
   position: relative;
+  color: var(--on-primary-container);
 }
 
 .inputGroup.withIcon {

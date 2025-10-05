@@ -39,7 +39,7 @@ const SlideEventCard = ({
   const mockEvent = {
     id: "demo_event_001",
     // title: "Boardgame Night a San Salvario",
-    title: "Boardgame Night ",
+    title: "Boardgame Night",
     description:
       "Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare.Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare.Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare...",
     category: "Hobby e passioni",
@@ -147,40 +147,11 @@ const SlideEventCard = ({
           </div>
 
           <div className={styles.actionButtons}>
-            {!isOwner && (
-              <div className={styles.bookShareLayout}>
-                {/* <button
-                  className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("📤 DEMO: Condividi evento");
-                  }}
-                  title="Condividi"
-                >
-                  <Share size={16} />
-                </button> */}
-
-                {/* <button
-                  className={`${styles.actionButton} ${
-                    isSaved
-                      ? styles.actionButtonSaved
-                      : styles.actionButtonSecondary
-                  }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsSaved(!isSaved);
-                    console.log("🔖 DEMO: Bookmark evento");
-                  }}
-                  title="Salva evento"
-                >
-                  <Bookmark size={16} />
-                </button> */}
-              </div>
-            )}
+            {!isOwner && <div className={styles.bookShareLayout}></div>}
           </div>
         </div>
 
-        <div className={styles.flexCard}>
+        {/* <div className={styles.flexCard}>
           <div className={styles.flexCardMe}>
             <div className={styles.cardImage}>
               {mockEvent.coverImage ? (
@@ -214,6 +185,48 @@ const SlideEventCard = ({
               </div>
             </div>
 
+            <div className={styles.metaItem}>
+              <MapPin size={14} />
+              <span>{mockEvent.placeName}</span>
+            </div>
+          </div>
+        </div> */}
+        <div className={styles.flexCard}>
+          {/* COLONNA 1: Solo immagine */}
+          <div className={styles.flexCardMe}>
+            <div className={styles.cardImage}>
+              {mockEvent.coverImage ? (
+                <img
+                  src={mockEvent.coverImage}
+                  alt={mockEvent.title}
+                  className={styles.eventImage}
+                />
+              ) : (
+                <div className={styles.imagePlaceholder}>📅</div>
+              )}
+            </div>
+          </div>
+
+          {/* COLONNA 2: Titolo + Meta info */}
+          <div className={styles.cardPreviewContent}>
+            <h4 className={styles.eventTitle}>{mockEvent.title}</h4>
+
+            <div className={styles.eventMeta}>
+              <div className={styles.metaItem}>
+                <Calendar size={14} />
+                <span>{mockEvent.startDate}</span>
+              </div>
+              <div className={styles.metaItem}>
+                <Clock size={14} />
+                <span>{mockEvent.startTime}</span>
+              </div>
+            </div>
+            <div className={styles.metaItem}>
+              <Users size={14} />
+              <span>
+                {mockEvent.participants}/{mockEvent.maxParticipants}
+              </span>
+            </div>
             <div className={styles.metaItem}>
               <MapPin size={14} />
               <span>{mockEvent.placeName}</span>

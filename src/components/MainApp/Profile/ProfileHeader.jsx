@@ -743,7 +743,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
 
           <div style={{ display: "flex", gap: "0.75rem", marginTop: "1.5rem" }}>
             {/* <button className={styles.miniModalCancel}>Annulla</button> */}
-            <ButtonCancel />
+            <ButtonCancel onClick={handleBackToMainMenu} />
             <ButtonSave />
             {/* <button className={styles.miniModalConfirm}>Salva password</button> */}
           </div>
