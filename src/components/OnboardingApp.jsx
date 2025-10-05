@@ -38,7 +38,7 @@ const OnboardingApp = () => {
     const timer = setTimeout(() => {
       setIsLoading(false);
       setCurrentStep("login");
-    }, 500);
+    }, 500000);
 
     return () => clearTimeout(timer);
   }, []);

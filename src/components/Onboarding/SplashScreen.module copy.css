@@ -3,13 +3,13 @@
 /* Layout principale */
 .screen {
   /* min-height: 100vh; */
-  background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+  background: var(--mole-primary-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius-lg);
+  border-radius: var(--card-border-radius);
   /* padding: 10px; */
 }
 
@@ -20,9 +20,9 @@
   height: 844px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,9 +38,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
-  justify-content: space-between;
-
+  justify-content: center;
   height: 100%;
   width: 100%;
 }
@@ -59,13 +57,28 @@
 }
 
 /* Contenitore icona con animazione di movimento */
+.iconContainer {
+  margin: 3.2rem;
+  position: relative;
+  animation: moveToTop 3s ease-out forwards;
+}
+
+.iconContainerCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+}
 
 .mainIcon {
   width: 80px;
   height: 80px;
-  color: var(--on-primary);
+  color: var(--text-color);
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-  animation: bounce 2s ease-in-out 2.5s infinite;
+  opacity: 0;
+  animation: fadeIn 0.01s ease-out 2.5s forwards,
+    bounce 2s ease-in-out 0.5s infinite;
 }
 
 .pingIcon {
@@ -74,53 +87,57 @@
   left: 0;
   width: 80px;
   height: 80px;
-  color: var(--on-primary);
-  animation: ping 2s ease-out 2s infinite;
+  color: var(--text-color);
+  opacity: 0;
+  animation: fadeIn 0.1s ease-out 2s forwards, ping 2s ease-out 0.5s infinite;
 }
 
 /* Titolo principale */
 .title {
-  /* font-size: var(--text-2xl); */
-  font-size: 4.2rem;
-  font-family: "Lobster";
-  font-weight: var(--font-bold);
-  color: var(--on-primary);
-  margin-bottom: var(--space-lg);
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 1rem;
   text-align: center;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   line-height: 1.2;
-  /* text-transform: lowercase; */
-  letter-spacing: 0.1em;
-  /* Rimuovo animazioni CSS - gestite da Motion */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease-out 1.2s forwards,
+    pulse 2s ease-in-out 3s infinite;
+  text-transform: uppercase;
+  /* font-family: "Montserrat ", Courier, monospaceMontserrat; */
 }
 
 /* Sottotitolo */
 .subtitleSplash {
-  font-size: var(--text-base);
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: var(--space-2xl);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  margin-bottom: 2.5rem;
   text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease-out 3.2s forwards,
+    pulse 2s ease-in-out 3.5s infinite;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  /* Rimuovo animazioni CSS - gestite da Motion */
 }
 
 /* Dots di caricamento */
 .loadingDots {
   display: flex;
   justify-content: center;
-  gap: var(--space-sm);
+  gap: 8px;
   margin-top: auto;
   opacity: 0;
   animation: fadeIn 0.5s ease-out 0s forwards;
-  margin-bottom: var(--space-2xl);
+  margin-bottom: 30px;
 }
 
 .dot {
   width: 12px;
   height: 12px;
-  background-color: var(--on-primary);
-  border-radius: var(--radius-full);
+  background-color: var(--text-color);
+  border-radius: 50%;
   animation: bounce 1.4s ease-in-out 0s infinite;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -215,32 +232,4 @@
   100% {
     opacity: 1;
   }
-}
-
-.iconContainer {
-  margin: var(--space-3xl);
-  position: relative;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.iconContainerCenter {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.loadingDots {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-sm);
-  opacity: 0;
-  animation: fadeIn 0.5s ease-out 0s forwards;
-  margin-bottom: var(--space-2xl);
-  flex: 1;
-  align-items: flex-end;
 }
