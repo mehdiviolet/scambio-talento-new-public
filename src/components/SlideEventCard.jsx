@@ -19,6 +19,7 @@ import MockEventCard from "./MockEventCard";
 import {
   selectParticipants,
   selectEventStats,
+  selectEventState,
 } from "../store/slices/sharedEventSlice";
 import { useSelector } from "react-redux";
 
@@ -39,7 +40,7 @@ const SlideEventCard = ({
   const mockEvent = {
     id: "demo_event_001",
     // title: "Boardgame Night a San Salvario",
-    title: "Boardgame Night",
+    title: "Boardgame night",
     description:
       "Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare.Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare.Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare. Serata di giochi da tavolo al Café Central! Ambiente rilassato per socializzare...",
     category: "Hobby e passioni",
@@ -91,6 +92,28 @@ const SlideEventCard = ({
     participationScore: 126, // Mantieni valore di default o calcolalo
   };
 
+  const eventState = useSelector(selectEventState);
+  // Copia la funzione helper da MockEventCard
+  const getEventStateDisplay = () => {
+    const stateLabels = {
+      idle: { label: "Aperto", color: "var(--primary)" },
+      waiting: { label: "In attesa conferma", color: "var(--secondary)" },
+      confirmed: { label: "Confermato", color: "var(--tertiary)" },
+      "in svolgimento": {
+        label: "In corso",
+        color: "var(--on-secondary-container)",
+      },
+      fatto: { label: "Completato", color: "var(--on-surface-variant)" },
+    };
+    return (
+      stateLabels[eventState] || {
+        label: "Sconosciuto",
+        color: "var(--on-surface-variant)",
+      }
+    );
+  };
+  const stateDisplay = getEventStateDisplay();
+
   return (
     <>
       {/* Card Preview - versione compatta */}
@@ -104,32 +127,11 @@ const SlideEventCard = ({
           <div className={styles.organizerInfoPiccolo}>
             <div
               className={styles.statusBadge}
-              style={{ backgroundColor: "#28a745" }}
+              style={{ backgroundColor: stateDisplay.color }}
             >
-              Aperto
+              {stateDisplay.label}
             </div>
-            {/* <div className={styles.avatar}>
-              {selectedPersonData?.profile?.profilePhoto ? (
-                <img
-                  src={
-                    selectedPersonData?.profile.profilePhoto instanceof File
-                      ? URL.createObjectURL(
-                          selectedPersonData?.profile.profilePhoto
-                        )
-                      : selectedPersonData?.profile.profilePhoto
-                  }
-                  alt={`${selectedPersonData?.profile?.firstName || "Sara"} ${
-                    selectedPersonData?.profile?.lastName || "Dormand"
-                  }`}
-                />
-              ) : (
-                <div className={styles.avatarEmoji}>👩‍🎨</div>
-              )}
-            </div>
-            <div className={styles.organizerDetails}>
-              <span className={styles.organizerLabel}>Organizzato da</span>
-              <span className={styles.organizerName}>{organizer.name}</span>
-            </div> */}
+
             <span className={styles.categoryIcons}>
               <span>
                 {" "}

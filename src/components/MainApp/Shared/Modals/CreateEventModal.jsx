@@ -4,9 +4,17 @@ import { Calendar, Clock, MapPin, Users, Globe, Languages } from "lucide-react";
 
 import baseStyles from "./AddSkillModal.module.css";
 import extendedStyles from "./CreateEventModal.module.css";
+import extendedStyles2 from "../../../../components/CookieModal.module.css";
+import experienceStyles from "./AddExperienceModal.module.css";
+
 import IconButton from "@/components/ui/IconButton";
 
-const styles = { ...baseStyles, ...extendedStyles };
+const styles = {
+  ...baseStyles,
+  ...extendedStyles,
+  ...extendedStyles2,
+  experienceStyles,
+};
 
 const CreateEventModal = ({
   isOpen,
@@ -322,14 +330,11 @@ const CreateEventModal = ({
 
           <div className={styles.content}>
             <div className={styles.stepContent}>
-              <div className={styles.stepHeader}>
-                {/* <div className={styles.iconContainer}>
-                  <span>✏️</span>
-                </div> */}
+              {/* <div className={styles.stepHeader}>
                 <h3 className={styles.stepTitle}>
                   Modifica evento: {initialData.title}
                 </h3>
-              </div>
+              </div> */}
 
               <div className={styles.formGroup}>
                 <label>Descrizione *</label>
