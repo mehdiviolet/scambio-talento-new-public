@@ -437,7 +437,7 @@ const CherryComp = ({
 
               {/* 📖 GUIDA COMPLETA */}
               <div className={styles.detailedSection}>
-                <h3 className={styles.sectionTitle}>Guida Completa</h3>
+                <h3 className={styles.sectionTitle}>Guida Completa:</h3>
 
                 {/* Sezione 1: Come Funziona */}
                 <div className={styles.guideItem}>
@@ -458,8 +458,8 @@ const CherryComp = ({
                 {/* Sezione 2: Ricompense */}
                 <div className={styles.gridItems}>
                   <div className={styles.guidCookie}>
-                    <Cookie size={18} />
-                    <span>Ricompense XP</span>
+                    {/* <Cookie size={18} /> */}
+                    <span>Ricompense XP:</span>
                   </div>
                   <div className={styles.guideContent}>
                     {/* <h4 className={styles.guideTitle}>Ricompense XP</h4> */}

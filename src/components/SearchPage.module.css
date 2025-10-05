@@ -427,3 +427,24 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.suggestionStats {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+  margin-top: 0.25rem;
+}
+
+.suggestionStats span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}

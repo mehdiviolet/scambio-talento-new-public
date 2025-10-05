@@ -36,7 +36,7 @@ const ProfileTabs = () => {
                   // Importa useQuickSetup all'inizio del componente
                   const aboutText =
                     profileData.aboutMe || "Nessuna descrizione disponibile";
-                  const maxChars = 150;
+                  const maxChars = 1500;
                   return aboutText.length > maxChars
                     ? aboutText.substring(0, maxChars).trim() + "..."
                     : aboutText;

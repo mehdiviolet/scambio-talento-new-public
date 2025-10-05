@@ -225,11 +225,11 @@ const MyEventCardDetails = ({
           <span className={styles.categoryIcons}>
             <span>
               <Star />
-              {organizer.trustScore}
+              {/* {organizer.trustScore} */}0
             </span>
             <span>
               <ShieldCheck />
-              {organizer.participationScore}
+              {/* {organizer.participationScore} */}0
             </span>
           </span>
         </div>

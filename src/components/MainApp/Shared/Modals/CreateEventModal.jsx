@@ -12,8 +12,8 @@ import IconButton from "@/components/ui/IconButton";
 const styles = {
   ...baseStyles,
   ...extendedStyles,
-  ...extendedStyles2,
-  experienceStyles,
+  // ...extendedStyles2,
+  // experienceStyles,
 };
 
 const CreateEventModal = ({

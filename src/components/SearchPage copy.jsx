@@ -9,8 +9,6 @@ import {
   Cookie,
   ChevronLeft,
   X,
-  Gem,
-  Shield,
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import SlideDrawer from "./SlideDrawer";
@@ -34,182 +32,102 @@ const peopleList = [
   {
     firstName: "Sara",
     lastName: "Dormand",
-    photo: "/images/people/sarad.jpg",
-    gems: 145,
-    trustScore: 85,
-    participationScore: 92,
-    activityStreak: 12,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Marco",
     lastName: "Rossi",
-    photo: "/images/people/marcor.png",
-    gems: 78,
-    trustScore: 72,
-    participationScore: 68,
-    activityStreak: 5,
+    photo: "/images/people/marco-ro.jpg",
   },
   {
     firstName: "Sara",
     lastName: "Bianchi",
-    photo: "/images/people/sarab.png",
-    gems: 123,
-    trustScore: 90,
-    participationScore: 85,
-    activityStreak: 8,
+    photo: "/images/people/laura-la.jpg",
   },
   {
     firstName: "Sara",
     lastName: "Ferrari",
-    photo: "/images/people/saraf.jpg",
-    gems: 56,
-    trustScore: 65,
-    participationScore: 70,
-    activityStreak: 3,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Marco",
     lastName: "Verdi",
-    photo: "/images/people/marcov.png",
-    gems: 91,
-    trustScore: 78,
-    participationScore: 74,
-    activityStreak: 6,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Marco",
     lastName: "Neri",
-    photo: "/images/people/marcon.png",
-    gems: 102,
-    trustScore: 81,
-    participationScore: 79,
-    activityStreak: 9,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Anna",
     lastName: "Romano",
-    photo: "/images/people/annar.png",
-    gems: 134,
-    trustScore: 88,
-    participationScore: 91,
-    activityStreak: 11,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Anna",
     lastName: "Conti",
-    photo: "/images/people/annac.png",
-    gems: 67,
-    trustScore: 70,
-    participationScore: 66,
-    activityStreak: 4,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Luca",
     lastName: "Moretti",
-    photo: "/images/people/lucam.png",
-    gems: 156,
-    trustScore: 93,
-    participationScore: 95,
-    activityStreak: 15,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Luca",
     lastName: "Ricci",
-    photo: "/images/people/lucar.png",
-    gems: 45,
-    trustScore: 62,
-    participationScore: 58,
-    activityStreak: 2,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Giulia",
     lastName: "Colombo",
-    photo: "/images/people/giuliac.png",
-    gems: 118,
-    trustScore: 84,
-    participationScore: 82,
-    activityStreak: 7,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Giulia",
     lastName: "Esposito",
-    photo: "/images/people/giuliae.png",
-    gems: 89,
-    trustScore: 76,
-    participationScore: 73,
-    activityStreak: 5,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Alessandro",
     lastName: "Gallo",
-    photo: "/images/people/alessandrog.png",
-    gems: 167,
-    trustScore: 95,
-    participationScore: 97,
-    activityStreak: 18,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Francesca",
     lastName: "Marino",
-    photo: "/images/people/francescam.png",
-    gems: 73,
-    trustScore: 71,
-    participationScore: 69,
-    activityStreak: 4,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Federico",
     lastName: "De Luca",
-    photo: "/images/people/federicod.png",
-    gems: 142,
-    trustScore: 87,
-    participationScore: 89,
-    activityStreak: 10,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Chiara",
     lastName: "Santoro",
-    photo: "/images/people/chiaras.png",
-    gems: 98,
-    trustScore: 79,
-    participationScore: 77,
-    activityStreak: 6,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Matteo",
     lastName: "Caruso",
-    photo: "/images/people/matteoc.png",
-    gems: 125,
-    trustScore: 86,
-    participationScore: 84,
-    activityStreak: 9,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Elena",
     lastName: "Greco",
-    photo: "/images/people/elenag.png",
-    gems: 61,
-    trustScore: 68,
-    participationScore: 64,
-    activityStreak: 3,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Andrea",
     lastName: "Leone",
-    photo: "/images/people/andreal.png",
-    gems: 179,
-    trustScore: 96,
-    participationScore: 98,
-    activityStreak: 20,
+    photo: "/images/people/sara-dormand.jpg",
   },
   {
     firstName: "Valentina",
     lastName: "Bruno",
-    photo: "/images/people/valentinab.png",
-    gems: 112,
-    trustScore: 83,
-    participationScore: 81,
-    activityStreak: 8,
+    photo: "/images/people/sara-dormand.jpg",
   },
 ];
 
@@ -376,6 +294,39 @@ const SearchPage = () => {
     }, 300);
   };
 
+  // const renderGameHUD = () => {
+  //   return (
+  //     <div className={searchStyles.gameHud}>
+  //       <div className={searchStyles.hudTop}>
+  //         <div className={searchStyles.hudLeft}>
+  //           <div className={searchStyles.hudLevel}>
+  //             <div
+  //               className={`${searchStyles.hudLevel} ${searchStyles.clickable}`}
+  //               onClick={() => setIsCookieModalOpen(true)}
+  //               style={{ cursor: "pointer" }}
+  //             >
+  //               <Cookie style={{ color: "var(--text-secondary)" }} />
+  //             </div>
+  //           </div>
+  //           <div
+  //             className={`${searchStyles.hudAchievements} ${searchStyles.clickable}`}
+  //             onClick={() => setsStarteModalOpen(true)}
+  //             style={{ cursor: "pointer" }}
+  //           >
+  //             <Star style={{ color: "var(--text-secondary)" }} />
+  //           </div>
+  //           <div
+  //             className={`${searchStyles.hudAchievements} ${searchStyles.clickable}`}
+  //             onClick={() => setIsActivityModalOpen(true)}
+  //             style={{ cursor: "pointer" }}
+  //           >
+  //             <Activity style={{ color: "var(--text-secondary)" }} />
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
   const renderGameHUD = () => {
     return (
       <div className={searchStyles.gameHud}>
@@ -470,42 +421,16 @@ const SearchPage = () => {
               className={searchStyles.suggestionItem}
             >
               <div className={searchStyles.suggestionAvatar}>
-                {person.photo ? (
-                  <img
-                    src={person.photo}
-                    alt={`${person.firstName} ${person.lastName}`}
-                    className={searchStyles.avatarImage}
-                  />
-                ) : (
-                  <User size={20} />
-                )}
+                <User size={20} />
               </div>
               <div className={searchStyles.suggestionInfo}>
                 <div className={searchStyles.suggestionName}>
                   {person.firstName} {person.lastName}
                 </div>
-                {/* <div className={searchStyles.suggestionUsername}>
+                <div className={searchStyles.suggestionUsername}>
                   @{person.firstName.toLowerCase()}
                   {person.lastName.toLowerCase().slice(0, 3)}
-                </div> */}
-                <div className={searchStyles.suggestionStats}>
-                  <span>
-                    <Gem size={12} /> {person.gems}
-                  </span>
-                  <span>
-                    <Star size={12} /> {person.trustScore}
-                  </span>
-                  <span>
-                    <Shield size={12} /> {person.participationScore}
-                  </span>
-                  <span>
-                    <Activity size={12} /> {person.activityStreak}
-                  </span>
                 </div>
-                {/* <div className={searchStyles.suggestionUsername}>
-                  <span>coding: 20</span>
-                  <span>Design: 85</span>
-                </div> */}
               </div>
             </div>
           ))}
@@ -526,38 +451,16 @@ const SearchPage = () => {
                 className={searchStyles.pageListItem}
               >
                 <div className={searchStyles.suggestionAvatar}>
-                  {person.photo ? (
-                    <img
-                      src={person.photo}
-                      alt={`${person.firstName} ${person.lastName}`}
-                      className={searchStyles.avatarImage}
-                    />
-                  ) : (
-                    <User size={24} />
-                  )}
+                  <User size={24} />
                 </div>
                 <div className={searchStyles.suggestionInfo}>
                   <div className={searchStyles.suggestionName}>
                     {person.firstName} {person.lastName}
                   </div>
-                  <div className={searchStyles.suggestionStats}>
-                    <span>
-                      <Gem size={12} /> {person.gems}
-                    </span>
-                    <span>
-                      <Star size={12} /> {person.trustScore}
-                    </span>
-                    <span>
-                      <Shield size={12} /> {person.participationScore}
-                    </span>
-                    <span>
-                      <Activity size={12} /> {person.activityStreak}
-                    </span>
-                  </div>
-                  {/* <div className={searchStyles.suggestionUsername}>
+                  <div className={searchStyles.suggestionUsername}>
                     @{person.firstName.toLowerCase()}
                     {person.lastName.toLowerCase().slice(0, 3)}
-                  </div> */}
+                  </div>
                 </div>
               </div>
             ))}

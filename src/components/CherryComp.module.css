@@ -355,7 +355,7 @@
 
 .modalTitleSection {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-md);
 }
 
@@ -512,15 +512,15 @@
 .guidCookie {
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   /* width: 2rem; */
   height: 2rem;
   background: var(--surface);
-  border-radius: var(--radius-sm);
+  /* border-radius: var(--radius-sm); */
   /* border: 1px solid var(--secondary); */
-  border: 1px solid var(--on-surface);
+  /* border: 1px solid var(--on-surface); */
   /* color: #374151; */
-  /* color: var(--secondary); */
+  color: var(--on-primary-container);
   flex-shrink: 0;
   margin-top: var(--space-xs);
   gap: var(--space-sm);
