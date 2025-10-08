@@ -1,0 +1,97 @@
+/* Bottom Navigation Container */
+.bottomNav {
+  position: absolute;
+  height: 80px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-top: 1px solid #e5e7eb;
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 -2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* z-index: 10000; */
+}
+
+.bottomNavContainer {
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.bottomNavTabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Tab Button */
+.bottomNavTab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 0.5rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Active Tab */
+.bottomNavTabActive {
+  color: #9333ea;
+  background-color: #faf5ff;
+}
+
+/* Inactive Tab */
+.bottomNavTabInactive {
+  color: #4b5563;
+}
+
+.bottomNavTabInactive:hover {
+  color: #9333ea;
+  background-color: #f9fafb;
+}
+
+/* Icon Wrapper */
+.bottomNavIconWrapper {
+  position: relative;
+}
+
+/* Icon */
+.bottomNavIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Badge */
+.bottomNavBadge {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.75rem;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Label */
+.bottomNavLabel {
+  font-size: 0.75rem;
+}

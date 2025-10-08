@@ -101,7 +101,7 @@ const Login = forwardRef(
       <div className={styles.loginContainer}>
         <div className={styles.loginCard}>
           <div className={styles.cardHeader}>
-            <h1 className={styles.title}>Login</h1>
+            <h1 className={styles.title}>Welcome</h1>
             {error && <div className={styles.errorMessage}>{error}</div>}
           </div>
 

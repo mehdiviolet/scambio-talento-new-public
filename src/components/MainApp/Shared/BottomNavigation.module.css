@@ -1,97 +1,117 @@
-/* Bottom Navigation Container */
+/* ========================================
+   BOTTOM NAVIGATION - Design System Aligned
+   ======================================== */
+
+/* Container principale */
 .bottomNav {
-  position: absolute;
+  position: fixed; /* Cambiato da absolute → fixed per evitare problemi di scroll */
   height: 80px;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: white;
-  border-top: 1px solid #e5e7eb;
-  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 -2px 4px -1px rgba(0, 0, 0, 0.06);
-  /* z-index: 10000; */
+  background-color: var(--background); /* Usa variabile invece di white */
+  border-top: 1px solid var(--outline);
+  box-shadow: var(--shadow-lg); /* Coerente con design system */
+  z-index: 100; /* Aggiungi z-index nel design system se manca */
 }
 
 .bottomNavContainer {
-  max-width: 28rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  max-width: 28rem; /* 448px - equivale a "max-w-md" in Tailwind */
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  height: 100%;
 }
 
 .bottomNavTabs {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  height: 100%;
+  gap: var(--space-sm); /* Spacing coerente */
 }
 
-/* Tab Button */
+/* ========================================
+   TAB BUTTON STATES
+   ======================================== */
+
 .bottomNavTab {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  border-radius: 0.5rem;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-  position: relative;
+  justify-content: center;
+  gap: var(--space-xs); /* Spacing tra icona e label */
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
   background: none;
   border: none;
   cursor: pointer;
+  position: relative;
+
+  /* Accessibility */
+  -webkit-tap-highlight-color: transparent; /* Rimuove highlight su mobile */
 }
 
-/* Active Tab */
+/* Active State */
 .bottomNavTabActive {
-  color: #9333ea;
-  background-color: #faf5ff;
+  color: var(--primary);
+  background-color: var(--primary-container);
 }
 
-/* Inactive Tab */
+/* Inactive State */
 .bottomNavTabInactive {
-  color: #4b5563;
+  color: var(--on-surface-variant);
 }
 
 .bottomNavTabInactive:hover {
-  color: #9333ea;
-  background-color: #f9fafb;
+  color: var(--primary);
+  background-color: var(--surface-variant);
 }
 
-/* Icon Wrapper */
+/* Focus State (accessibilità tastiera) */
+.bottomNavTab:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   ICON & BADGE
+   ======================================== */
+
 .bottomNavIconWrapper {
   position: relative;
-}
-
-/* Icon */
-.bottomNavIcon {
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-bottom: 0.25rem;
-}
-
-/* Badge */
-.bottomNavBadge {
-  position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
-  background-color: #ef4444;
-  color: white;
-  font-size: 0.75rem;
-  border-radius: 50%;
-  width: 1rem;
-  height: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.bottomNavIcon {
+  width: 24px; /* Invece di 1.25rem = 20px, uso multiplo di 8px */
+  height: 24px;
+}
+
+/* Badge di notifica */
+.bottomNavBadge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: var(--error);
+  color: var(--on-error);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  border-radius: var(--radius-full);
+  min-width: 18px; /* Cambiato da width fisso per testi più lunghi (es. "99+") */
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px; /* Padding orizzontale per badge con più cifre */
+  box-shadow: 0 0 0 2px var(--background); /* Bordo bianco per distacco visivo */
+}
+
 /* Label */
 .bottomNavLabel {
-  font-size: 0.75rem;
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  white-space: nowrap; /* Evita che il testo vada a capo */
 }

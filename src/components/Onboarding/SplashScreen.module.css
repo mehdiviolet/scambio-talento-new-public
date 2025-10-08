@@ -1,8 +1,7 @@
-/* SplashScreen.module.css - CSS isolato solo per SplashScreen */
+/* SplashScreen.module.css */
 
 /* Layout principale */
 .screen {
-  /* min-height: 100vh; */
   background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
   display: flex;
   align-items: center;
@@ -10,7 +9,6 @@
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  /* padding: 10px; */
 }
 
 /* Carta principale */
@@ -22,13 +20,47 @@
   backdrop-filter: blur(20px);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  /* border: 1px solid rgba(255, 255, 255, 0.2); */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  overflow-y: hidden;
-  /* animation: float 6s ease-in-out infinite; */
+  overflow: hidden;
+}
+
+/* Cookie gigante di sfondo SUPERIORE */
+.backgroundCookie {
+  position: absolute;
+  top: -220px;
+  right: 30px;
+  width: 500px;
+  height: 400px;
+  z-index: 1;
+  pointer-events: none;
+  rotate: 94deg;
+}
+
+/* Cookie gigante di sfondo INFERIORE */
+.backgroundCookieBottom {
+  position: absolute;
+  bottom: -220px;
+  left: 30px;
+  width: 500px;
+  height: 400px;
+  z-index: 1;
+  pointer-events: none;
+  rotate: -86deg;
+}
+
+.cookieSvg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Briciole di cookie (loading crumbs) */
+.crumb {
+  position: absolute;
+  z-index: 1; /* Dietro al contenuto principale */
+  pointer-events: none;
 }
 
 /* Contenuto sovrapposto */
@@ -38,209 +70,45 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   justify-content: space-between;
-
   height: 100%;
   width: 100%;
+  padding: var(--space-2xl);
 }
 
-/* SVG di sfondo */
-.backgroundMole {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  min-height: 100%;
-  min-width: 100%;
-}
-
-/* Contenitore icona con animazione di movimento */
-
-.mainIcon {
-  width: 80px;
-  height: 80px;
-  color: var(--on-primary);
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-  animation: bounce 2s ease-in-out 2.5s infinite;
-}
-
-.pingIcon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 80px;
-  height: 80px;
-  color: var(--on-primary);
-  animation: ping 2s ease-out 2s infinite;
-}
-
-/* Titolo principale */
-.title {
-  /* font-size: var(--text-2xl); */
-  font-size: 4.2rem;
-  font-family: "Lobster";
-  font-weight: var(--font-bold);
-  color: var(--on-primary);
-  margin-bottom: var(--space-lg);
-  text-align: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  line-height: 1.2;
-  /* text-transform: lowercase; */
-  letter-spacing: 0.1em;
-  /* Rimuovo animazioni CSS - gestite da Motion */
-}
-
-/* Sottotitolo */
-.subtitleSplash {
-  font-size: var(--text-base);
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: var(--space-2xl);
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  /* Rimuovo animazioni CSS - gestite da Motion */
-}
-
-/* Dots di caricamento */
-.loadingDots {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-sm);
-  margin-top: auto;
-  opacity: 0;
-  animation: fadeIn 0.5s ease-out 0s forwards;
-  margin-bottom: var(--space-2xl);
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  background-color: var(--on-primary);
-  border-radius: var(--radius-full);
-  animation: bounce 1.4s ease-in-out 0s infinite;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-/* Animazioni */
-@keyframes bounce {
-  0%,
-  20%,
-  53%,
-  80%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-  40%,
-  43% {
-    transform: translate3d(0, -30px, 0);
-  }
-  70% {
-    transform: translate3d(0, -15px, 0);
-  }
-  90% {
-    transform: translate3d(0, -4px, 0);
-  }
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-@keyframes ping {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  75%,
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes moveToTop {
-  0% {
-    transform: translate(0%, 50vh) scale(0.2);
-    opacity: 0;
-  }
-  100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.iconContainer {
-  margin: var(--space-3xl);
-  position: relative;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.iconContainerCenter {
+/* Container centrale per SVG */
+.svgCenterContainer {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 90%;
+  gap: var(--space-lg);
 }
 
-.loadingDots {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-sm);
-  opacity: 0;
-  animation: fadeIn 0.5s ease-out 0s forwards;
-  margin-bottom: var(--space-2xl);
-  flex: 1;
-  align-items: flex-end;
+/* SVG Talento */
+.talentoSvg {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.3));
+}
+
+/* Slogan */
+.slogan {
+  font-size: var(--text-base);
+  font-weight: var(--font-normal);
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.05em;
+}
+/* Briciole di cookie (loading crumbs) */
+.crumb {
+  position: absolute;
+  z-index: 1; /* Dietro al contenuto principale */
+  pointer-events: none;
 }
