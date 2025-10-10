@@ -20,8 +20,8 @@ const ProfileTabs = () => {
   const tabs = [
     { id: "about", label: "About" },
     { id: "skills", label: "Skills" },
-    { id: "experiences", label: "Esperienze" },
-    { id: "events", label: "Eventi" },
+    { id: "experiences", label: "Experiences" },
+    { id: "events", label: "Events" },
   ];
 
   const renderContent = () => {

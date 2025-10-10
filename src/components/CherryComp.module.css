@@ -26,8 +26,10 @@
 }
 
 .placeholder {
-  font-size: var(--text-base);
-  color: var(--on-surface-variant);
+  /* font-size: var(--text-base); */
+  font-size: var(--text-2xl);
+  /* color: var(--on-surface-variant); */
+  color: var(--secondary);
   font-weight: var(--font-medium);
 }
 
@@ -262,9 +264,12 @@
 .slotHeader {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  /* gap: 20px; */
+  width: 100%;
   margin-bottom: var(--space-lg);
   position: relative;
+  /* margin-right: auto; */
 }
 
 .slotTitle {
@@ -283,8 +288,8 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: var(--primary-container);
-  border: 1px solid var(--primary);
+  /* background: var(--primary-container); */
+  /* border: 1px solid var(--primary); */
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: var(--transition);
@@ -292,10 +297,10 @@
 }
 
 .infoButton:hover {
-  background: var(--primary);
-  color: var(--on-primary);
+  /* background: var(--primary); */
+  /* color: var(--on-primary); */
   transform: translateY(-1px);
-  box-shadow: var(--shadow);
+  /* box-shadow: var(--shadow); */
 }
 
 /* 🆕 OVERLAY - Identico al settings */
@@ -709,6 +714,7 @@
   position: relative;
   overflow: hidden;
   color: var(--secondary);
+  /* font-size: 250px; */
 }
 
 .rewardContainer {
@@ -756,6 +762,7 @@
   /* align-items: baseline; */
   align-items: center;
   gap: var(--space-sm);
+  /* font-size: var(--text-2xl); */
 }
 
 .xpValue {
@@ -803,7 +810,7 @@
 
 .placeholderText {
   font-size: var(--text-lg);
-  color: var(--on-surface);
+  color: var(--secondary);
   font-weight: var(--font-medium);
 }
 
@@ -836,4 +843,11 @@
   60% {
     transform: translateY(-4px);
   }
+}
+
+.btnSpin {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  margin-top: 110px;
 }

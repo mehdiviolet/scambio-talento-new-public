@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import styles from "./CherryComp.module.css";
 import {
   AlertTriangle,
+  BadgeQuestionMark,
   Bell,
   BookOpen,
   Calendar,
   Cherry,
+  CircleQuestionMark,
   Clock,
   Cookie,
   Dices,
@@ -42,20 +44,13 @@ const CherryComp = ({
     dispatch(setCurrentUser({ userId: "currentUser" }));
   }, [dispatch]);
 
-  // console.log(currentUser);
-  // Simboli disponibili nella slot machine
-  // const symbols = ["🍒", "🌴", "🍊", "🍇", "💎", "⭐", Bell];
   const symbols = ["🍒", "🌴", "🍊", "🍇", "💎", "⭐", "🍀"];
 
   // Stati del componente
   const [hasSpunToday, setHasSpunToday] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
   const [result, setResult] = useState(["❓", "❓", "❓"]);
-  // const [result, setResult] = useState([
-  //   <HelpCircle size={64} />,
-  //   <HelpCircle size={64} />,
-  //   <HelpCircle size={64} />,
-  // ]);
+
   const [xpRewarded, setXpRewarded] = useState(0);
   const [showReward, setShowReward] = useState(false);
   const [consecutiveFailures, setConsecutiveFailures] = useState(0);
@@ -184,16 +179,14 @@ const CherryComp = ({
     <div className={styles.container}>
       {/* 🆕 HEADER CON BOTTONE INFO */}
       <div className={styles.slotHeader}>
-        <h3 className={styles.slotTitle}>
-          Slot della Fortuna
-          <button
-            className={styles.infoButton}
-            onClick={() => setShowInfoModal(true)}
-            title="Guida completa della slot"
-          >
-            <BookOpen size={18} />
-          </button>
-        </h3>
+        <h3 className={styles.slotTitle}>Slot della Fortuna</h3>
+        <button
+          className={styles.infoButton}
+          onClick={() => setShowInfoModal(true)}
+          title="Guida completa della slot"
+        >
+          <CircleQuestionMark size={36} />
+        </button>
       </div>
       <div className={styles.slotMachine}>
         {/* Area ricompensa - sempre presente */}
@@ -204,7 +197,7 @@ const CherryComp = ({
                 xpRewarded > 0 ? styles.rewardWin : styles.rewardLoss
               }`}
             >
-              <div className={styles.rewardIcon}>
+              {/* <div className={styles.rewardIcon}>
                 <Cherry
                   size={48}
                   style={{
@@ -220,7 +213,7 @@ const CherryComp = ({
                     xpRewarded > 0 ? styles.cherryWin : styles.cherryNeutral
                   }
                 />
-              </div>
+              </div> */}
 
               <div className={styles.rewardAmount}>
                 <span
@@ -283,7 +276,21 @@ const CherryComp = ({
               <div key={index} className={styles.slotWrapper}>
                 <div className={styles.slot}>
                   <div className={styles.slotFace}>
-                    <span className={styles.symbol}>{symbol}</span>
+                    <span className={styles.symbol}>
+                      {symbol === "❓" ? (
+                        <span
+                          style={{
+                            color: "#95A5A6",
+                            fontSize: "68px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          ?
+                        </span>
+                      ) : (
+                        symbol
+                      )}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -292,52 +299,15 @@ const CherryComp = ({
           <div className={styles.slotShadow} />
         </div>
 
-        {/* Pulsante */}
-        {/* <button
-          className={`${styles.editProfileBtn} ${styles.liquidButton}`}
-          onClick={handleSpin}
-          disabled={hasSpunToday || isSpinning || isBlocked}
-          title={
-            isBlocked
-              ? "Riprova tra 24 ore"
-              : hasSpunToday
-              ? "Hai già girato oggi, torna domani!"
-              : isSpinning
-              ? "La ruota sta girando..."
-              : "Clicca per girare la ruota della fortuna e vincere XP!"
-          }
-        >
-          <div className={styles.buttonContent}>
-            <span className={styles.buttonIcon}>
-              {isBlocked ? "🔒" : isSpinning ? "⏳" : hasSpunToday ? "✓" : "🎲"}
-            </span>
-
-            <span className={styles.buttonText}>
-              {isSpinning ? (
-                "Girando..."
-              ) : (
-                <>
-                  {isBlocked
-                    ? "Bloccato per 1 giorno"
-                    : hasSpunToday
-                    ? "Torna domani!"
-                    : "GIRA ORA"}
-                </>
-              )}
-            </span>
-
-            <Cherry size={16} />
-          </div>
-        </button> */}
-        <ButtonSpinWheel
-          onClick={handleSpin}
-          isSpinning={isSpinning}
-          hasSpunToday={hasSpunToday}
-          isBlocked={isBlocked}
-        />
         <div className={styles.statusInfo}>
+          {consecutiveFailures >= 3 && (
+            <p className={styles.blockText}>
+              3 perdite di fila bloccano la slot per 24h
+            </p>
+          )}
           <div className={styles.statusItem}>
             <span>Tentativi falliti: </span>
+
             <span className={styles.failureCount}>
               {Array.from({ length: 3 }, (_, i) => (
                 <span
@@ -353,17 +323,14 @@ const CherryComp = ({
               ))}
             </span>
           </div>
-          {consecutiveFailures >= 3 && (
-            <p className={styles.blockText}>
-              Dopo 3 tentativi falliti, la lotteria si blocca per un giorno.
-            </p>
-          )}
-
-          {/* DEBUG INFO */}
-          {/* <div className={styles.debugInfo}>
-            <div>🆔 Current User: {currentUserId}</div>
-            <div>💰 Current XP: {currentUserXP}</div>
-          </div> */}
+        </div>
+        <div className={styles.btnSpin}>
+          <ButtonSpinWheel
+            onClick={handleSpin}
+            isSpinning={isSpinning}
+            hasSpunToday={hasSpunToday}
+            isBlocked={isBlocked}
+          />
         </div>
       </div>
       {/* 🆕 MODAL INFO - Stile identico al settings */}

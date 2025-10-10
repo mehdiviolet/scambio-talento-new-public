@@ -140,7 +140,7 @@ const ProfileHeader = ({ isOwnProfile = true, userData = null, role }) => {
     aboutMe: profileData.aboutMe,
     location: profileData.location,
     profilePhoto: profileData.profilePhoto,
-    joinedDate: "oggi",
+    joinedDate: "Today",
     verified: achievements.length >= 3,
     followers: profileData.social.followers.length,
     following: myFollowing,

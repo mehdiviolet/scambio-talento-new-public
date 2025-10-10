@@ -341,7 +341,7 @@ export const ButtonSpinWheel = ({
     >
       {getButtonIcon()}
       <span>{getButtonText()}</span>
-      <Cherry size={16} />
+      {/* <Cherry size={16} /> */}
     </Button>
   );
 };
