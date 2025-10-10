@@ -7,13 +7,11 @@
 
 .tabsNavigation {
   display: flex;
-  /* border-radius: var(--radius-lg); */
   backdrop-filter: blur(10px);
 }
 
 .tabButton {
   flex: 1;
-  /* padding: var(--space-lg) var(--space-xl); */
   padding: var(--space-md) var(--space-lg);
   border: none;
   font-size: var(--text-sm);
@@ -22,26 +20,46 @@
   cursor: pointer;
   transition: var(--transition);
   position: relative;
-  background: var(--surface);
-  /* border-radius: var(--radius-lg); */
+  background: transparent;
 }
 
 .tabButton:hover {
   background: var(--primary-container);
   color: var(--on-primary-container);
-  transform: translateY(-1px);
 }
 
 .tabButton.active {
-  /* background: var(--primary-container); */
   background: transparent;
-  /* color: var(--on-primary-container); */
   color: var(--primary);
   font-weight: var(--font-semibold);
 }
 
+/* Stili specifici per le sub-tab (Cerco/Offro, Partecipati/Creati) */
+.tabsNavigationBorder {
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  border-bottom: 1px solid var(--primary);
+  padding: 0 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.tabButtonBorder {
+  border: 1px solid rgba(102, 100, 100, 0.23);
+  border-bottom: 1px solid rgba(102, 100, 100, 0.23);
+  z-index: 10; /* più alto di tutto */
+  margin-bottom: -1px;
+  position: relative;
+}
+
+.tabButtonBorder.active {
+  border-color: var(--primary);
+  background: var(--surface);
+  border-bottom: 1px solid var(--surface);
+  z-index: 3;
+}
+
 .tabContent {
-  /* margin-top: var(--space-lg); */
   /* margin-top: var(--space-sm); */
 }
 
@@ -75,7 +93,6 @@
   justify-content: center;
   gap: var(--space-xs);
   background: var(--surface-variant);
-  /* border-radius: var(--radius-lg); */
   padding: var(--space-xs);
 }
 
@@ -83,7 +100,6 @@
   padding: var(--space-lg) var(--space-lg);
   background: transparent;
   border: none;
-  /* border-radius: var(--radius-md); */
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   color: var(--on-surface-variant);

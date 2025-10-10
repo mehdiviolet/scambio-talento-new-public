@@ -54,9 +54,11 @@ const ProfileTabs = () => {
         return (
           <>
             {/* <div className={styles.content}> */}
-            <div className={styles.tabsNavigation}>
+            <div
+              className={`${styles.tabsNavigation} ${styles.tabsNavigationBorder}`}
+            >
               <button
-                className={`${styles.tabButton} ${
+                className={`${styles.tabButton} ${styles.tabButtonBorder} ${
                   experienceMode === "offer" ? styles.active : ""
                 }`}
                 onClick={() => setExperienceMode("offer")}
@@ -65,7 +67,7 @@ const ProfileTabs = () => {
                 Cerco
               </button>
               <button
-                className={`${styles.tabButton} ${
+                className={`${styles.tabButton} ${styles.tabButtonBorder} ${
                   experienceMode === "seek" ? styles.active : ""
                 }`}
                 onClick={() => setExperienceMode("seek")}
@@ -80,8 +82,6 @@ const ProfileTabs = () => {
             ) : (
               <ExperiencesSection />
             )}
-            {/* </div> */}
-            {/* </div> */}
           </>
         );
       case "events":
