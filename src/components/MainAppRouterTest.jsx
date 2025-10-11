@@ -327,7 +327,9 @@ const MainAppRouterTest = () => {
                 onClick={() => setIsCookieModalOpen(true)}
                 style={{ cursor: "pointer" }}
               >
-                <h1 style={{ color: "var(--secondary)" }}>XP</h1>
+                {/* <h1 style={{ color: "var(--secondary)" }}>XP</h1> */}
+                <Cookie style={{ color: "var(--secondary)" }} />
+
                 <p className={styles.userXP}>{userXP}</p>
               </div>
             </div>

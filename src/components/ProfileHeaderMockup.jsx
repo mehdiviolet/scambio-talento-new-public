@@ -10,6 +10,7 @@ import {
   UserPlus,
   UserCheck,
   Camera,
+  MoreHorizontal,
 } from "lucide-react";
 import styles from "../components/MainApp/Profile/ProfileHeader.module.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -137,6 +138,13 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
               <>
                 <button
                   className={styles.actionBtn}
+                  // onClick={() => setIsViewerDrawerOpen(true)}
+                  title="More options"
+                >
+                  <MoreHorizontal size={16} />
+                </button>
+                <button
+                  className={styles.actionBtn}
                   onClick={handleMessage}
                   title="Send message"
                 >
@@ -144,9 +152,9 @@ const ProfileHeaderMockup = ({ selectedPerson, isInstructorPanel = false }) => {
                 </button>
                 <button className={styles.followBtn} onClick={handleFollow}>
                   {isFollowingIstruttore ? (
-                    <UserCheck size={17} />
-                  ) : (
                     <UserPlus size={17} />
+                  ) : (
+                    <UserCheck size={17} />
                   )}
                 </button>
               </>

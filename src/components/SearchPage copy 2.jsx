@@ -1,4 +1,4 @@
-// SearchPage.jsx - CON TAB NAVIGATION COME PROFILETABSTEST
+// SearchPage.jsx - VERSIONE CORRETTA CON SELEZIONE UNIFICATA
 import React, { useState } from "react";
 import {
   Search,
@@ -28,7 +28,6 @@ import CookieModal from "./CookieModal";
 import StarModal from "./StarModal";
 import { selectDemoState, selectUserXP } from "@/services/xpService";
 import SlideDrawerSearch from "./SlideDrawerSearch";
-import SearchSectionTest from "@/components/SearchSectionTest";
 
 // Lista di persone (come nel codice originale)
 const peopleList = [
@@ -225,13 +224,9 @@ const SearchPage = () => {
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
   const [isStarteModalOpen, setsStarteModalOpen] = useState(false);
-
   // State per la modalità lista in pagina
   const [showPageList, setShowPageList] = useState(false);
   const [frozenSuggestions, setFrozenSuggestions] = useState([]);
-
-  // **NUOVO: State per le tab navigation (come ProfileTabsTest)**
-  const [activeTab, setActiveTab] = useState("about");
 
   // Hook per gestire il slide drawer
   const { isOpen, openDrawer, closeDrawer } = useSlideDrawer();
@@ -256,19 +251,12 @@ const SearchPage = () => {
     gems: skill.gems + (skillGemBonus[skill.id] || 0),
   }));
 
-  // **NUOVO: Definizione tab (come ProfileTabsTest)**
-  const tabs = [
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "experiences", label: "Experiences" },
-    { id: "events", label: "Events" },
-  ];
-
   // Handler per il cambiamento della ricerca
   const handleSearchChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
 
+    // Se digiti una nuova lettera, esci dalla modalità lista
     if (showPageList) {
       setShowPageList(false);
       setFrozenSuggestions([]);
@@ -285,6 +273,7 @@ const SearchPage = () => {
     } else {
       setSuggestions([]);
       setShowSuggestions(false);
+      // Reset Redux state quando la ricerca è vuota
       handleClearSelection();
     }
   };
@@ -292,35 +281,44 @@ const SearchPage = () => {
   // Handler per il pulsante lista
   const handleListButtonClick = () => {
     if (suggestions.length > 0) {
+      // Congela i suggerimenti attuali
       setFrozenSuggestions([...suggestions]);
+      // Attiva modalità lista in pagina
       setShowPageList(true);
+      // Nascondi dropdown
       setShowSuggestions(false);
     }
   };
 
-  // Handler per click su suggerimento
+  // Handler per click su suggerimento - VERSIONE UNIFICATA
   const handleSuggestionClick = (person) => {
     console.log("Selecting person:", person);
+
+    // 1. Salva la persona selezionata per il drawer
     setSelectedPersonForDrawer(person);
+
+    // 2. UNIFICA LE DUE DISPATCH IN UNA FUNZIONE
     handlePersonSelection(person);
+
+    // 3. Pulisci ricerca e suggerimenti
     setSearchQuery(`${person.firstName} ${person.lastName}`);
     setShowSuggestions(false);
     setShowPageList(false);
     setFrozenSuggestions([]);
 
-    // **NUOVO: Reset tab quando apri un nuovo profilo**
-    setActiveTab("about");
-
+    // 4. Apri il slide drawer con animazione
     openDrawer();
   };
 
-  // Funzione unificata per selezione persona
+  // NUOVA FUNZIONE UNIFICATA per selezione persona
   const handlePersonSelection = (person) => {
+    // Validazione input
     if (!person?.firstName || !person?.lastName) {
       console.error("Invalid person data:", person);
       return;
     }
 
+    // 1. Aggiorna experienceSliceTest (per skills e experiences)
     dispatch(
       setSelectedPersonData({
         firstName: person.firstName,
@@ -329,6 +327,7 @@ const SearchPage = () => {
       })
     );
 
+    // 2. Aggiorna chatSlice (per conversazioni)
     dispatch(
       setSelectedOwner({
         firstName: person.firstName,
@@ -340,7 +339,7 @@ const SearchPage = () => {
     console.log("Person selection updated in both slices");
   };
 
-  // Funzione per pulire selezione
+  // NUOVA FUNZIONE per pulire selezione
   const handleClearSelection = () => {
     dispatch(
       setSelectedPersonData({
@@ -365,65 +364,23 @@ const SearchPage = () => {
   const handleCloseDrawer = () => {
     closeDrawer();
 
+    // Pulisci UI state dopo un delay per evitare flickering
     setTimeout(() => {
       setSelectedPersonForDrawer(null);
       setSearchQuery("");
       setShowPageList(false);
       setFrozenSuggestions([]);
-      setActiveTab("about"); // Reset tab
-    }, 300);
-  };
 
-  // **NUOVO: Render content basato su activeTab (come ProfileTabsTest)**
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case "about":
-        return (
-          <>
-            <div className={searchStyles.aboutSection}>
-              <p className={searchStyles.aboutText}>
-                Passionate about creating beautiful digital experiences. I love
-                exploring new design trends and bringing creative visions to
-                life. When I'm not designing, you can find me painting or
-                exploring the beautiful streets of Torino.
-              </p>
-            </div>
-            <SearchSectionTest />
-          </>
-        );
-      case "skills":
-        return (
-          <SkillMockup
-            mockSkills={updatedSkills}
-            selectedPersonData={selectedPersonData}
-            isInstructorPanel={false}
-          />
-        );
-      case "experiences":
-        return (
-          <ExperiencesMockupRedux
-            isInstructorPanel={false}
-            mockSkills={updatedSkills}
-            mockExperiencesNew={selectedPersonData.experiences}
-          />
-        );
-      case "events":
-        return (
-          <EventSectionTest
-            isInstructorPanel={false}
-            isOwner={false}
-            selectedPersonData={selectedPersonData}
-          />
-        );
-      default:
-        return null;
-    }
+      // OPZIONALE: Pulisci anche Redux state
+      // handleClearSelection();
+    }, 300);
   };
 
   const renderGameHUD = () => {
     return (
       <div className={searchStyles.gameHud}>
         <div className={searchStyles.hudTop}>
+          {/* Lato sinistro - Freccia indietro (solo se drawer aperto) */}
           <div className={searchStyles.hudLeft}>
             {isOpen && (
               <button
@@ -435,30 +392,45 @@ const SearchPage = () => {
             )}
           </div>
 
-          {isOpen && <div className={searchStyles.hudCenter}></div>}
+          {/* Centro - Titolo (solo se drawer aperto) */}
+          {isOpen && (
+            <div className={searchStyles.hudCenter}>
+              <h2 className={searchStyles.drawerTitle}>
+                {selectedPersonForDrawer
+                  ? `${selectedPersonForDrawer.firstName} ${selectedPersonForDrawer.lastName}`
+                  : "Profilo"}
+              </h2>
+            </div>
+          )}
 
+          {/* Lato destro - Icone sempre visibili */}
           <div className={searchStyles.hudRight}>
             <div
               className={`${searchStyles.hudLevel} ${searchStyles.clickable}`}
               onClick={() => setIsCookieModalOpen(true)}
             >
-              <Cookie style={{ color: "var(--secondary)" }} />
-              <p className={searchStyles.userXP}>{userXP}</p>
+              <Cookie style={{ color: "var(--text-secondary)" }} />
             </div>
             <div
               className={`${searchStyles.hudAchievements} ${searchStyles.clickable}`}
               onClick={() => setsStarteModalOpen(true)}
             >
-              <Star style={{ color: "var(--secondary)" }} />
-              <p className={searchStyles.userXP}>36</p>
+              <Star style={{ color: "var(--text-secondary)" }} />
             </div>
             <div
               className={`${searchStyles.hudAchievements} ${searchStyles.clickable}`}
               onClick={() => setIsActivityModalOpen(true)}
             >
-              <Activity style={{ color: "var(--secondary)" }} />
-              <p className={searchStyles.userXP}>0</p>
+              <Activity style={{ color: "var(--text-secondary)" }} />
             </div>
+            {/* {isOpen && (
+              <button
+                className={searchStyles.drawerCloseBtn}
+                onClick={handleCloseDrawer}
+              >
+                <X size={20} />
+              </button>
+            )} */}
           </div>
         </div>
       </div>
@@ -488,7 +460,7 @@ const SearchPage = () => {
         </button>
       </div>
 
-      {/* Dropdown suggerimenti */}
+      {/* Dropdown suggerimenti (solo se NON in modalità lista) */}
       {showSuggestions && !showPageList && suggestions.length > 0 && (
         <div>
           {suggestions.map((person, index) => (
@@ -512,6 +484,10 @@ const SearchPage = () => {
                 <div className={searchStyles.suggestionName}>
                   {person.firstName} {person.lastName}
                 </div>
+                {/* <div className={searchStyles.suggestionUsername}>
+                  @{person.firstName.toLowerCase()}
+                  {person.lastName.toLowerCase().slice(0, 3)}
+                </div> */}
                 <div className={searchStyles.suggestionStats}>
                   <span>
                     <Gem size={12} /> {person.gems}
@@ -526,13 +502,17 @@ const SearchPage = () => {
                     <Activity size={12} /> {person.activityStreak}
                   </span>
                 </div>
+                {/* <div className={searchStyles.suggestionUsername}>
+                  <span>coding: 20</span>
+                  <span>Design: 85</span>
+                </div> */}
               </div>
             </div>
           ))}
         </div>
       )}
 
-      {/* Lista in pagina */}
+      {/* Lista in pagina (modalità congelata) */}
       {showPageList && frozenSuggestions.length > 0 && (
         <div className={searchStyles.pageList}>
           <div className={searchStyles.pageListHeader}>
@@ -574,6 +554,10 @@ const SearchPage = () => {
                       <Activity size={12} /> {person.activityStreak}
                     </span>
                   </div>
+                  {/* <div className={searchStyles.suggestionUsername}>
+                    @{person.firstName.toLowerCase()}
+                    {person.lastName.toLowerCase().slice(0, 3)}
+                  </div> */}
                 </div>
               </div>
             ))}
@@ -581,7 +565,7 @@ const SearchPage = () => {
         </div>
       )}
 
-      {/* Nessun risultato */}
+      {/* Messaggio quando nessun risultato */}
       {showSuggestions &&
         !showPageList &&
         suggestions.length === 0 &&
@@ -591,7 +575,7 @@ const SearchPage = () => {
           </div>
         )}
 
-      {/* Slide Drawer con TAB NAVIGATION */}
+      {/* Slide Drawer per visualizzare profilo selezionato */}
       <SlideDrawerSearch
         isOpen={isOpen}
         onClose={handleCloseDrawer}
@@ -601,6 +585,7 @@ const SearchPage = () => {
             : "Profilo"
         }
       >
+        {/* Content del drawer - caricato solo quando drawer è aperto */}
         {isOpen && selectedPersonData.profile.firstName && (
           <div className={searchStyles.screenBg}>
             <div className={searchStyles.cardApp}>
@@ -612,27 +597,22 @@ const SearchPage = () => {
                       selectedPerson={selectedPersonData.profile}
                       isInstructorPanel={false}
                     />
-
-                    {/* **NUOVO: TAB NAVIGATION (come ProfileTabsTest)** */}
-                    <div className={searchStyles.tabsContainer}>
-                      <div className={searchStyles.tabsNavigation}>
-                        {tabs.map((tab) => (
-                          <button
-                            key={tab.id}
-                            className={`${searchStyles.tabButton} ${
-                              activeTab === tab.id ? searchStyles.active : ""
-                            }`}
-                            onClick={() => setActiveTab(tab.id)}
-                          >
-                            {tab.label}
-                          </button>
-                        ))}
-                      </div>
-
-                      <div className={searchStyles.tabContent}>
-                        {renderTabContent()}
-                      </div>
-                    </div>
+                    <SkillMockup
+                      mockSkills={updatedSkills}
+                      selectedPersonData={selectedPersonData}
+                      isInstructorPanel={false}
+                    />
+                    <ExperiencesMockupRedux
+                      isInstructorPanel={false}
+                      mockSkills={updatedSkills}
+                      mockExperiencesNew={selectedPersonData.experiences}
+                    />
+                    <EventSectionTest
+                      isInstructorPanel={false}
+                      isOwner={false}
+                      selectedPersonData={selectedPersonData}
+                    />
+                    <ExperiencesSectionStudenteTest />
                   </div>
                 </div>
               </div>
@@ -640,14 +620,14 @@ const SearchPage = () => {
           </div>
         )}
 
+        {/* Loading state */}
         {isOpen && !selectedPersonData.profile.firstName && (
           <div className={searchStyles.loadingState}>
             <p>Caricamento profilo...</p>
           </div>
         )}
       </SlideDrawerSearch>
-
-      {/* Modals */}
+      {/* Activity Modal */}
       <ActivityModalTest
         isOpen={isActivityModalOpen}
         onClose={() => setIsActivityModalOpen(false)}

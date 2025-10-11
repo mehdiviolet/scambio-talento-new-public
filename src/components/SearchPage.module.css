@@ -1,28 +1,9 @@
-/* SearchPage.module.css - VERSIONE FINALE PULITA */
-.profilePage {
-  min-height: 100vh;
-  margin-bottom: 80px;
-  margin: 0px auto 50px auto;
-  /* border: 1px solid red; */
-  /* background-color: #f9fafb; */
-}
+/* SearchPage.module.css - VERSIONE CON DRAWER STYLE PULITO */
 
-.profileContainer {
-  /* background-color: #f9fafb; */
-  max-width: 42rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  /* padding-top: 1.5rem; */
-  padding-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  /* gap: 1.5rem; */
-  min-height: 100vh; /* AGGIUNGI QUESTA */
-}
+/* ========================================
+   SEARCHBAR E SUGGERIMENTI - MANTENIAMO COSÌ
+   ======================================== */
 
-/* --------------------------------- */
 .searchContainer {
   padding: 0 20px;
   max-width: 100%;
@@ -32,7 +13,6 @@
   width: 100vw;
 }
 
-/* Barra di ricerca */
 .searchInputContainer {
   position: relative;
   margin-bottom: 20px;
@@ -44,16 +24,11 @@
   box-sizing: border-box;
 }
 
-/* Pulsante lista */
 .listButton {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px 8px 16px 8px;
-  /* width: 48px; */
-  /* height: 48px; */
-  /* padding: 16px 8px 16px 8px; */
-
   border: 2px solid #e5e7eb;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.9);
@@ -77,8 +52,6 @@
 
 .searchInput {
   flex: 1;
-  /* padding: 16px 8px 16px 8px; */
-  /* padding: 16px 48px 16px 48px; */
   padding: 16px 8px 16px 8px;
   border: 2px solid #e5e7eb;
   border-radius: 16px;
@@ -104,23 +77,6 @@
   color: #9ca3af;
   pointer-events: none;
   z-index: 2;
-}
-
-/* Dropdown suggerimenti */
-.suggestionsDropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 56px;
-  right: 0;
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  z-index: 50;
-  max-height: 300px;
-  overflow-y: auto;
-  min-width: 280px;
-  width: calc(100% - 56px);
 }
 
 .suggestionItem {
@@ -169,14 +125,12 @@
   color: #6b7280;
 }
 
-/* No results */
 .noResults {
   text-align: center;
   padding: 40px 20px;
   color: #6b7280;
   position: absolute;
   top: calc(100% + 8px);
-  /* left: 56px; */
   left: 0px;
   right: 0;
   background: white;
@@ -192,7 +146,6 @@
   margin: 0;
 }
 
-/* Lista in pagina */
 .pageList {
   margin-top: 24px;
 }
@@ -233,50 +186,91 @@
   transform: translateX(8px);
 }
 
-/* Loading state */
-.loadingState {
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.suggestionStats {
   display: flex;
-  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+  margin-top: 0.25rem;
+}
+
+.suggestionStats span {
+  display: flex;
   align-items: center;
-  padding: 40px;
-  color: #6b7280;
+  gap: 0.25rem;
 }
 
-/* ***************** */
+/* ========================================
+   DRAWER CONTENT - STILE PULITO COME PROFILETABS
+   ======================================== */
 
-.contentArea {
-  flex: 1;
-  overflow-y: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.screenBg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.contentArea::-webkit-scrollbar {
-  display: none;
+.cardApp {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  background: var(--surface);
+  border-radius: var(--radius-lg, 24px);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--outline-variant);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-/* Game HUD */
+/* ========================================
+   GAME HUD - MANTENIAMO MA PULIAMO
+   ======================================== */
+
 .gameHud {
   flex-shrink: 0;
   width: 100%;
-  /* color: var(--text-primary); */
-  padding: 1.25rem 1.5rem;
+  padding: var(--space-lg) var(--space-lg);
   position: sticky;
   z-index: 3;
   top: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--outline-variant);
 }
 
 .hudTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.75rem;
+  min-height: 40px;
 }
 
 .hudLeft {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  min-width: 50px;
+}
+
+.hudCenter {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.hudRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
 }
 
 .hudLevel,
@@ -284,116 +278,20 @@
 .hudAchievements {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 600;
-  /* font-size: 16px; */
+  gap: var(--space-sm);
+  font-weight: var(--font-medium);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: var(--transition);
 }
 
-.hudLevel {
-  font-size: 1rem;
+.hudLevel:hover,
+.hudAchievements:hover {
+  color: var(--primary);
 }
 
-.leggero {
-  font-weight: 120;
-}
-
-/* Fissa anche il container padre */
-.hudXp {
-  font-weight: 500;
-  min-width: fit-content; /* Non cambia mai dimensione */
-  align-items: center; /* Mantiene allineamento verticale */
-}
-
-.progressSection {
-  width: 100%;
-}
-
-.progressLabel {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.875rem;
-  margin-bottom: 0.5rem;
-  color: rgba(191, 219, 254, 1);
-}
-
-.progressBar {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 9999px;
-  height: 0.5rem;
-  overflow: hidden;
-}
-
-.progressFill {
-  background: linear-gradient(to right, #2e9688, #aaebe2);
-  height: 100%;
-  border-radius: 9999px;
-  transition: var(--transition-slow);
-}
-.screenBg {
-  /* background: linear-gradient(135deg, #3b82f6, #6366f1); */
-  /* background: linear-gradient(135deg, #187599, #28f50d); */
-  /* background: linear-gradient(135deg, #3e82f0, #4b4dc7); */
-  /* background: var(--card-gradient); */
-
-  /* min-height: 100vh; */
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Transizione smooth */
-  border-radius: var(--card-border-radius);
-  /* border: none; */
-}
-.cardApp {
-  position: relative;
-  width: 390px;
-  height: 844px;
-  background: var(--bianco);
-  /* background: var(--card-app-bg); */
-  /* background: rgba(255, 255, 255, 0.1); */
-  backdrop-filter: blur(20px);
-  border-radius: var(--card-border-radius);
-  box-shadow: var(--card-shadow);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  /* animation: float 6s ease-in-out infinite; */
-  /* overflow-y: hidden; */
-  overflow: hidden;
-  /* border: 2px solid red; */
-  /* margin: 84px 0; */
-}
-
-/* **************** */
-.hudTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.75rem;
-  min-height: 40px; /* Altezza fissa */
-}
-
-.hudLeft {
-  display: flex;
-  align-items: center;
-  min-width: 50px; /* Spazio riservato per freccia */
-}
-
-.hudCenter {
-  flex: 1;
-  display: flex;
-  /* justify-content: center; */
-  justify-content: flex-start;
-  /* margin: 0 1rem; */
-}
-
-.hudRight {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.clickable {
+  cursor: pointer;
 }
 
 .drawerBackBtn,
@@ -404,28 +302,353 @@
   width: 40px;
   height: 40px;
   border: none;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  background: transparent;
   cursor: pointer;
-  transition: all 0.2s ease;
-  color: var(--text-secondary);
+  transition: var(--transition);
+  color: var(--on-surface-variant);
+  border-radius: var(--radius-sm);
 }
 
 .drawerBackBtn:hover,
 .drawerCloseBtn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
+  background: var(--surface-variant);
+  color: var(--on-surface);
 }
 
 .drawerTitle {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--on-surface);
   margin: 0;
-  text-align: center;
+  text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* ========================================
+   CONTENT AREA - STILE PULITO
+   ======================================== */
+
+.contentArea {
+  flex: 1;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background: var(--surface);
+}
+
+.contentArea::-webkit-scrollbar {
+  display: none;
+}
+
+.profilePage {
+  min-height: 100vh;
+  background: var(--surface);
+}
+
+.profileContainer {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  padding-bottom: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ========================================
+   LOADING STATE
+   ======================================== */
+
+.loadingState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-xl);
+  color: var(--on-surface-variant);
+  font-size: var(--text-sm);
+}
+
+/* ========================================
+   PROGRESS BAR (se serve)
+   ======================================== */
+
+.progressSection {
+  width: 100%;
+}
+
+.progressLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-sm);
+  color: var(--on-surface-variant);
+}
+
+.progressBar {
+  width: 100%;
+  background: var(--surface-variant);
+  border-radius: 9999px;
+  height: 0.5rem;
+  overflow: hidden;
+}
+
+.progressFill {
+  background: var(--primary);
+  height: 100%;
+  border-radius: 9999px;
+  transition: var(--transition-slow);
+}
+
+.leggero {
+  font-weight: 400;
+}
+
+/* ========================================
+   TAB NAVIGATION - STILE UGUALE A PROFILETABSTEST
+   ======================================== */
+
+.tabsContainer {
+  width: 100%;
+  max-width: 400px;
+}
+
+.tabsNavigation {
+  display: flex;
+  backdrop-filter: blur(10px);
+}
+
+.tabButton {
+  flex: 1;
+  padding: var(--space-md) var(--space-lg);
+  border: none;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  background: transparent;
+}
+
+.tabButton:hover {
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+}
+
+.tabButton.active {
+  background: transparent;
+  color: var(--primary);
+  font-weight: var(--font-semibold);
+}
+
+.tabContent {
+  /* margin-top: var(--space-sm); */
+}
+
+/* About Section */
+.aboutSection {
+  width: 100%;
+  margin: var(--space-lg) 0;
+}
+
+.aboutText {
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  color: var(--on-surface-variant);
+  margin: 0;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* SearchPage.module.css - VERSIONE CON DRAWER STYLE PULITO */
+
+/* ========================================
+   SEARCHBAR E SUGGERIMENTI - MANTENIAMO COSÌ
+   ======================================== */
+
+.searchContainer {
+  padding: 0 20px;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+  width: 100vw;
+}
+
+.searchInputContainer {
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.listButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 8px 16px 8px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.listButton:hover:not(:disabled) {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.listButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 16px 8px 16px 8px;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  background: rgba(255, 255, 255, 1);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 72px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.suggestionItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.suggestionItem:hover {
+  background: #f8fafc;
+  transform: translateX(4px);
+}
+
+.suggestionItem:last-child {
+  border-bottom: none;
+}
+
+.suggestionAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.suggestionInfo {
+  flex: 1;
+}
+
+.suggestionName {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 2px;
+}
+
+.suggestionUsername {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.noResults {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0px;
+  right: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  margin: 0 20px;
+}
+
+.noResults p {
+  font-style: italic;
+  margin: 0;
+}
+
+.pageList {
+  margin-top: 24px;
+}
+
+.pageListHeader {
+  margin-bottom: 16px;
+}
+
+.pageListHeader h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.pageListContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pageListItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid transparent;
+}
+
+.pageListItem:hover {
+  background: rgba(59, 130, 246, 0.05);
+  border-color: rgba(59, 130, 246, 0.2);
+  transform: translateX(8px);
 }
 
 .avatarImage {
@@ -447,4 +670,304 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
+}
+
+/* ========================================
+   DRAWER CONTENT - STILE PULITO COME PROFILETABS
+   ======================================== */
+
+.screenBg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cardApp {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  background: var(--surface);
+  border-radius: var(--radius-lg, 24px);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--outline-variant);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ========================================
+   GAME HUD - STILE UGUALE A MAINAPPTEST
+   ======================================== */
+
+.gameHud {
+  flex-shrink: 0;
+  width: 100%;
+  padding: var(--space-lg) var(--space-xl);
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.hudTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 2rem;
+}
+
+.hudLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  height: 100%;
+  width: 240px;
+}
+
+.hudLevel,
+.hudXp,
+.hudAchievements {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-weight: var(--font-semibold);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.userXP {
+  color: var(--secondary);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  margin: 0;
+}
+
+.hudLevel {
+  font-size: var(--text-base);
+}
+
+.clickable {
+  cursor: pointer;
+  transition: var(--transition);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.clickable:hover {
+  background: var(--surface-variant);
+  transform: translateY(-1px);
+}
+
+.hudAchievements.clickable {
+  position: relative;
+}
+
+.drawerBackBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--on-surface-variant);
+  border-radius: var(--radius-sm);
+  padding: 0;
+  margin-right: var(--space-sm);
+}
+
+.drawerBackBtn:hover {
+  background: var(--surface-variant);
+  color: var(--on-surface);
+}
+
+.drawerTitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--on-surface);
+  margin: 0;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+/* Badge per notifiche (opzionale) */
+.notificationBadge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--error);
+  color: var(--on-error);
+  border-radius: var(--radius-full);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  border: 2px solid var(--surface);
+  animation: badgeBounce 0.5s ease-out;
+}
+
+.notificationBadge.large {
+  width: 24px;
+}
+
+@keyframes badgeBounce {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ========================================
+   CONTENT AREA - STILE PULITO
+   ======================================== */
+
+.contentArea {
+  flex: 1;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background: var(--surface);
+}
+
+.contentArea::-webkit-scrollbar {
+  display: none;
+}
+
+.profilePage {
+  min-height: 100vh;
+  background: var(--surface);
+}
+
+.profileContainer {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  padding-bottom: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ========================================
+   LOADING STATE
+   ======================================== */
+
+.loadingState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-xl);
+  color: var(--on-surface-variant);
+  font-size: var(--text-sm);
+}
+
+/* ========================================
+   PROGRESS BAR (se serve)
+   ======================================== */
+
+.progressSection {
+  width: 100%;
+}
+
+.progressLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-sm);
+  color: var(--on-surface-variant);
+}
+
+.progressBar {
+  width: 100%;
+  background: var(--surface-variant);
+  border-radius: 9999px;
+  height: 0.5rem;
+  overflow: hidden;
+}
+
+.progressFill {
+  background: var(--primary);
+  height: 100%;
+  border-radius: 9999px;
+  transition: var(--transition-slow);
+}
+
+.leggero {
+  font-weight: 400;
+}
+
+/* ========================================
+   TAB NAVIGATION - STILE UGUALE A PROFILETABSTEST
+   ======================================== */
+
+.tabsContainer {
+  width: 100%;
+  max-width: 400px;
+}
+
+.tabsNavigation {
+  display: flex;
+  backdrop-filter: blur(10px);
+}
+
+.tabButton {
+  flex: 1;
+  padding: var(--space-md) var(--space-lg);
+  border: none;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  background: transparent;
+}
+
+.tabButton:hover {
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+}
+
+.tabButton.active {
+  background: transparent;
+  color: var(--primary);
+  font-weight: var(--font-semibold);
+}
+
+.tabContent {
+  /* margin-top: var(--space-sm); */
+}
+
+/* About Section */
+.aboutSection {
+  width: 100%;
+  margin: var(--space-lg) 0;
+}
+
+.aboutText {
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  color: var(--on-surface-variant);
+  margin: 0;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
