@@ -54,7 +54,7 @@ const ProfileTabs = ({ selectedPersonData }) => {
               </p>
             </div>
             {/* <SearchSection /> */}
-            <SearchSectionTest />
+            <SearchSectionTest isInstructorPanel={true} />
             {/* <GallerySection isOwner={true} /> */}
             {/* </div> */}
           </>

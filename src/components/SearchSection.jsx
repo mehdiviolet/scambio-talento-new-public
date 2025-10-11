@@ -170,7 +170,7 @@ const SearchSection = () => {
       <div className={styles.container}>
         <div className={styles.content}>
           {/* <div className={styles.header}> */}
-          <h3 className={styles.title}>Alla Ricerca</h3>
+          <h3 className={styles.title}>Cosa voglio imparare?</h3>
           {/* </div> */}
           {isOwner && (
             // <button
@@ -363,7 +363,7 @@ const SearchSection = () => {
             //     Seleziona le skill che stai cercando di imparare
             //   </p>
             // </div>
-            <p>Nessuna skill selezionata </p>
+            <p className={styles.emptyTitle}>Nessuna skill selezionata </p>
           )}
         </div>
       </div>

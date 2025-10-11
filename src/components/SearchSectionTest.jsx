@@ -3,7 +3,7 @@ import { ChevronDown, Gem, Camera, Music, Trash2, X, Save } from "lucide-react";
 import styles from "./SkillsSection.module.css";
 import { HeaderAddButton } from "./ui/AddButtons";
 
-const SearchSectionTest = () => {
+const SearchSectionTest = ({ isInstructorPanel }) => {
   const [expandedSkillId, setExpandedSkillId] = useState(null);
 
   // 🎯 DATI MOCKUP STATICI
@@ -24,21 +24,19 @@ const SearchSectionTest = () => {
     },
   ];
 
-  const isOwner = true; // 🔒 SEMPRE TRUE NEL MOCKUP
-
   const handleToggle = (skillId) => {
     setExpandedSkillId(expandedSkillId === skillId ? null : skillId);
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <h3 className={styles.title}>Alla Ricerca</h3>
-      </div>
+      <h3 className={styles.title}>Cosa voglio imparare?</h3>
+      {/* <div className={styles.header}> */}
+      {/* </div> */}
 
       <div className={styles.content}>
         <div className={styles.header}>
-          {isOwner && (
+          {isInstructorPanel && (
             <HeaderAddButton
               // onClick={handleAddSkill}
               title="Aggiungi nuova skill"
@@ -91,7 +89,7 @@ const SearchSectionTest = () => {
                     </p>
                   </div>
                   {/* 
-                  {isOwner && (
+                  {isInstructorPanel && (
                     <div className={styles.actions}>
                       <div className={styles.actionButtons}>
                         <button className={styles.actionButtonDelete}>

@@ -388,7 +388,7 @@ const SearchPage = () => {
                 exploring the beautiful streets of Torino.
               </p>
             </div>
-            <SearchSectionTest />
+            <SearchSectionTest isInstructorPanel={false} />
           </>
         );
       case "skills":
