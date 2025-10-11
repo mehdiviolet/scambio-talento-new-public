@@ -87,9 +87,11 @@ const ProfileTabs = () => {
       case "events":
         return (
           <>
-            <div className={styles.tabsNavigation}>
+            <div
+              className={`${styles.tabsNavigation} ${styles.tabsNavigationBorder}`}
+            >
               <button
-                className={`${styles.tabButton} ${
+                className={`${styles.tabButton} ${styles.tabButtonBorder} ${
                   eventMode === "joined" ? styles.active : ""
                 }`}
                 onClick={() => setEventMode("joined")}
@@ -97,7 +99,7 @@ const ProfileTabs = () => {
                 Partecipati
               </button>
               <button
-                className={`${styles.tabButton} ${
+                className={`${styles.tabButton}  ${styles.tabButtonBorder}  ${
                   eventMode === "created" ? styles.active : ""
                 }`}
                 onClick={() => setEventMode("created")}

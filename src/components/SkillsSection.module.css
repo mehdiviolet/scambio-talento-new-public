@@ -7,11 +7,23 @@
 }
 
 /* === HEADER === */
+/* .header { */
+/* display: flex;
+  align-items: center; */
+/* justify-content: flex-end; */
+/* justify-content: flex-end; */
+/* margin: var(--space-sm) 0; */
+/* } */
+
 .header {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  margin: var(--space-sm) 0;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 10px;
+  position: fixed;
+  width: 100%;
+  bottom: 80px;
 }
 
 .title {

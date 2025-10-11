@@ -217,6 +217,33 @@ const ExperiencesSection = () => {
         initialData={experienceToEdit}
       />
       <div className={styles.container}>
+        <div
+          className={`${styles.filtersContainer} ${
+            showFilters ? styles.expanded : ""
+          }`}
+        >
+          <div className={styles.filtersContainer}>
+            <button
+              className={styles.toggleFiltersBtn}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              Filtri {showFilters ? "↑" : "↓"}
+            </button>
+            <div
+              className={`${styles.filterContent} ${
+                showFilters ? styles.open : ""
+              }`}
+            >
+              <StatusFilterButtons
+                activeFilter={statusFilter}
+                onFilterChange={setStatusFilter}
+                filterCounts={filterCounts}
+                filterConfig={filterConfig}
+                totalCount={experiences.length} // ← AGGIUNGI QUESTA LINEA
+              />
+            </div>
+          </div>
+        </div>
         {/* Header */}
         <div className={styles.header}>
           {isOwner && skills?.length > 0 && (
@@ -237,33 +264,6 @@ const ExperiencesSection = () => {
         <div className={styles.content}>
           {experiences.length > 0 ? (
             <>
-              <div
-                className={`${styles.filtersContainer} ${
-                  showFilters ? styles.expanded : ""
-                }`}
-              >
-                <div className={styles.filtersContainer}>
-                  <button
-                    className={styles.toggleFiltersBtn}
-                    onClick={() => setShowFilters(!showFilters)}
-                  >
-                    Filtri {showFilters ? "↑" : "↓"}
-                  </button>
-                  <div
-                    className={`${styles.filterContent} ${
-                      showFilters ? styles.open : ""
-                    }`}
-                  >
-                    <StatusFilterButtons
-                      activeFilter={statusFilter}
-                      onFilterChange={setStatusFilter}
-                      filterCounts={filterCounts}
-                      filterConfig={filterConfig}
-                      totalCount={experiences.length} // ← AGGIUNGI QUESTA LINEA
-                    />
-                  </div>
-                </div>
-              </div>
               <div className={styles.experiencesGrid}>
                 {experiences.map((experience) => {
                   // ✅ Trova la skill associata per ottenere i gem corretti

@@ -18,7 +18,8 @@
   width: 355px;
   position: relative;
   border-bottom: 1px solid #e5e7eb;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  margin: 20px 0;
 }
 
 /* Header */

@@ -78,53 +78,35 @@ const EventiPartecipati = () => {
 
   return (
     <div className={styles.container}>
-      {/* <h3 className={styles.eventsTitle}>Eventi Partecipati</h3> */}
-
-      {/* <StatusFilterButtons
-        activeFilter={statusFilter}
-        onFilterChange={setStatusFilter}
-        filterCounts={filterCounts}
-        filterConfig={filterConfig}
-      /> */}
-      {/* <DropdownFilters
-        filters={Object.entries(filterConfig).map(([key, config]) => ({
-          key,
-          label: config.label,
-          count: filterCounts[key] || 0,
-        }))}
-        activeFilter={statusFilter}
-        onFilterChange={setStatusFilter}
-      /> */}
-      <div className={styles.header}>
-        <div
-          className={`${styles.filtersContainer} ${
-            showFilters ? styles.expanded : ""
-          }`}
-        >
-          <div className={styles.filtersContainer}>
-            <button
-              className={styles.toggleFiltersBtn}
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              Filtri {showFilters ? "↑" : "↓"}
-            </button>
-            <div
-              className={`${styles.filterContent} ${
-                showFilters ? styles.open : ""
-              }`}
-            >
-              {/* Filtri */}
-              <StatusFilterButtons
-                activeFilter={statusFilter}
-                onFilterChange={setStatusFilter}
-                filterCounts={filterCounts}
-                filterConfig={filterConfig}
-                totalCount={allEvents.length}
-              />
-            </div>
+      <div
+        className={`${styles.filtersContainer} ${
+          showFilters ? styles.expanded : ""
+        }`}
+      >
+        <div className={styles.filtersContainer}>
+          <button
+            className={styles.toggleFiltersBtn}
+            onClick={() => setShowFilters(!showFilters)}
+          >
+            Filtri {showFilters ? "↑" : "↓"}
+          </button>
+          <div
+            className={`${styles.filterContent} ${
+              showFilters ? styles.open : ""
+            }`}
+          >
+            {/* Filtri */}
+            <StatusFilterButtons
+              activeFilter={statusFilter}
+              onFilterChange={setStatusFilter}
+              filterCounts={filterCounts}
+              filterConfig={filterConfig}
+              totalCount={allEvents.length}
+            />
           </div>
         </div>
       </div>
+      <div className={styles.header}></div>
 
       {isParticipating && filteredEvents.length > 0 ? (
         <div className={styles.eventsContainer}>

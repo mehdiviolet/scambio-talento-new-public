@@ -223,37 +223,36 @@ const ExperiencesSectionStudente = () => {
 
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <div className={styles.header}>
-        <div
-          className={`${styles.filtersContainer} ${
-            showFilters ? styles.expanded : ""
-          }`}
-        >
-          <div className={styles.filtersContainer}>
-            <button
-              className={styles.toggleFiltersBtn}
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              Filtri {showFilters ? "↑" : "↓"}
-            </button>
-            <div
-              className={`${styles.filterContent} ${
-                showFilters ? styles.open : ""
-              }`}
-            >
-              {/* Filtri */}
-              <StatusFilterButtons
-                activeFilter={statusFilter}
-                onFilterChange={setStatusFilter}
-                filterCounts={filterCounts}
-                filterConfig={filterConfig}
-                totalCount={allUserExperiences.length}
-              />
-            </div>
+      <div
+        className={`${styles.filtersContainer} ${
+          showFilters ? styles.expanded : ""
+        }`}
+      >
+        <div className={styles.filtersContainer}>
+          <button
+            className={styles.toggleFiltersBtn}
+            onClick={() => setShowFilters(!showFilters)}
+          >
+            Filtri {showFilters ? "↑" : "↓"}
+          </button>
+          <div
+            className={`${styles.filterContent} ${
+              showFilters ? styles.open : ""
+            }`}
+          >
+            {/* Filtri */}
+            <StatusFilterButtons
+              activeFilter={statusFilter}
+              onFilterChange={setStatusFilter}
+              filterCounts={filterCounts}
+              filterConfig={filterConfig}
+              totalCount={allUserExperiences.length}
+            />
           </div>
         </div>
       </div>
+      {/* Header */}
+      <div className={styles.header}></div>
 
       {/* <DropdownFilters
         filters={Object.entries(filterConfig).map(([key, config]) => ({
