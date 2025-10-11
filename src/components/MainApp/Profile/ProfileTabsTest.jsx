@@ -24,9 +24,9 @@ const ProfileTabs = ({ selectedPersonData }) => {
 
   const tabs = [
     { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "experiences", label: "Experiences" },
-    { id: "events", label: "Events" },
+    { id: "skills", label: "Skill" },
+    { id: "experiences", label: "Esperienze" },
+    { id: "events", label: "Eventi" },
   ];
 
   const skillGemBonus = useSelector(

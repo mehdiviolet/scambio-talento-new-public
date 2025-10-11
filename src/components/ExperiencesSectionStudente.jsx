@@ -174,7 +174,6 @@ const ExperiencesSectionStudente = () => {
         />
       );
     }
-
     // Bookmark - dati dall'esperienza originale
     const bookmark = item.data;
     const experience = bookmark.experienceData;

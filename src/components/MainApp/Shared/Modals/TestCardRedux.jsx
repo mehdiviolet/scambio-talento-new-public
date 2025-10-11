@@ -81,6 +81,7 @@ import {
 import { useQuickSetup } from "@/hooks/useQuickSetup";
 import { createSelector } from "@reduxjs/toolkit";
 import { Button } from "@/components/ui/Button";
+import { ButtonCancel } from "@/components/ui/ButtonActions";
 
 function TestCardRedux({
   // Identificativo unico dell'esperienza
@@ -989,6 +990,7 @@ function TestCardRedux({
                   disabledMessage="XP insufficienti!" // ✅ MESSAGGIO PERSONALIZZATO
                 >
                   <Send size={16} />
+                  {/* Invia la richiesta */}
                 </Button>
               ) : (
                 <div className={styles.actionButtons}>
@@ -1037,15 +1039,16 @@ function TestCardRedux({
                     Annulla
                   </button> */}
 
-                  <Button variant="gray" onClick={handleCancelRequest}>
+                  <Button variant="neutral" onClick={handleCancelRequest}>
                     Rifiuto
                   </Button>
                   <Button
                     disabled={!requestMessage.trim()}
-                    variant="gray"
+                    variant="primary"
                     onClick={handleSendRequest}
                   >
-                    <Send size={14} /> Invia
+                    {/* <Send size={14} /> */}
+                    Invia
                   </Button>
                 </div>
               </div>
@@ -1075,14 +1078,14 @@ function TestCardRedux({
                 {/* STATO: ready - Messaggi */}
                 {courseState.status === "ready" && !isInstructor && (
                   <div className={styles.studentWaiting}>
-                    <span>⏳ L'istruttore sta preparando il corso...</span>
+                    <span>L'istruttore sta preparando il corso...</span>
                   </div>
                 )}
 
                 {/* STATO: waiting - Messaggi */}
                 {courseState.status === "waiting" && isInstructor && (
                   <div className={styles.waitingMessage}>
-                    <span>⏳ In attesa dello student...</span>
+                    <span> In attesa dello student...</span>
                   </div>
                 )}
 
@@ -1220,6 +1223,12 @@ function TestCardRedux({
                       ✅ Accetto
                       </button> */}
 
+                    <ButtonCancel
+                      variant="neutral"
+                      onClick={handleInstructorRejectRequest}
+                    >
+                      Rifiuto
+                    </ButtonCancel>
                     <Button
                       size="md"
                       variant="primary"
@@ -1228,13 +1237,6 @@ function TestCardRedux({
                     >
                       {/* <Heart></Heart> */}
                       Accetto
-                    </Button>
-
-                    <Button
-                      variant="gray"
-                      onClick={handleInstructorRejectRequest}
-                    >
-                      Rifiuto
                     </Button>
                   </div>
                 )}
@@ -1255,14 +1257,14 @@ function TestCardRedux({
                 {/* STATO: waiting - Pulsanti */}
                 {courseState.status === "waiting" && !isInstructor && (
                   <div className={styles.buttonContainer}>
-                    <Button
+                    <ButtonCancel
                       className={styles.flex25}
-                      variant="primary"
+                      variant="neutral"
                       mode="solid"
                       onClick={handleStudentAccepts}
-                    >
-                      cancella
-                    </Button>
+                    />
+                    {/* cancella */}
+                    {/* </ButtonCancel> */}
                     <Button
                       variant="primary"
                       mode="solid"
@@ -1278,13 +1280,13 @@ function TestCardRedux({
                 {/* STATO: active - Pulsanti */}
                 {courseState.status === "active" && (
                   <div className={styles.buttonContainer}>
-                    <Button
-                      variant="gray"
+                    <ButtonCancel
+                      variant="neutral"
                       className={styles.flex25}
                       onClick={handleRejectCourse}
                     >
                       Rifiuto
-                    </Button>
+                    </ButtonCancel>
 
                     <Button
                       className={styles.flex75}
@@ -1308,7 +1310,7 @@ function TestCardRedux({
                 {/* STATO: pending_feedback - Pulsanti */}
                 {courseState.status === "pending_feedback" && !isInstructor && (
                   <Button
-                    variant="gray"
+                    variant="primary"
                     onClick={() => setShowFeedbackModal(true)}
                   >
                     Lascia Feedback
@@ -1330,24 +1332,24 @@ function TestCardRedux({
                   rows={3}
                 />
                 <div className={styles.rejectActions}>
-                  <button
+                  <ButtonCancel
                     onClick={handleCancelReject}
-                    className={styles.rejectCancel}
+                    // className={styles.rejectCancel}
                   >
-                    Annulla
-                  </button>
-                  <button
+                    Chiudi
+                  </ButtonCancel>
+                  <ButtonCancel
                     onClick={() => handleConfirmReject(false)}
-                    className={styles.rejectNoComment}
+                    // className={styles.rejectNoComment}
                   >
                     No comment (-10 XP)
-                  </button>
-                  <button
+                  </ButtonCancel>
+                  <Button
                     onClick={() => handleConfirmReject(true)}
-                    className={styles.rejectConfirm}
+                    // className={styles.rejectConfirm}
                   >
                     Invia commento
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -1383,29 +1385,29 @@ function TestCardRedux({
                 </div>
 
                 <div className={styles.rejectActions}>
-                  <button
+                  <ButtonCancel
                     onClick={handleSkipResponse}
-                    className={styles.rejectCancel}
+                    // className={styles.rejectCancel}
                   >
                     Chiudi
-                  </button>
+                  </ButtonCancel>
 
-                  <button
+                  <ButtonCancel
                     onClick={() => {
                       setResponseToRejectComment(""); // Assicura che sia vuoto
                       handleRespondToRejection(); // Applica penalità -10 XP
                     }}
-                    className={styles.rejectNoComment}
+                    // className={styles.rejectNoComment}
                   >
                     No comment (-10 XP)
-                  </button>
-                  <button
+                  </ButtonCancel>
+                  <Button
                     onClick={handleRespondToRejection}
-                    className={styles.rejectConfirm}
+                    // className={styles.rejectConfirm}
                     disabled={!responseToRejectComment.trim()}
                   >
                     Invia Risposta
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -1448,7 +1450,8 @@ function TestCardRedux({
                               }`}
                               onClick={() => setFeedbackGems(gem)}
                             >
-                              💎 {gem}
+                              <Gem size={16} />
+                              {gem}
                             </button>
                           ))}
                         </div>
@@ -1461,24 +1464,24 @@ function TestCardRedux({
                       </div>
                     ) : null}
                     <div className={styles.feedbackActions}>
-                      <button
+                      <ButtonCancel
                         onClick={handleSkipFeedback}
-                        className={styles.skipFeedback}
+                        // className={styles.skipFeedback}
                       >
                         Salta
-                      </button>
-                      <button
+                      </ButtonCancel>
+                      <Button
                         onClick={handleSubmitFeedback}
-                        className={styles.submitFeedback}
+                        // className={styles.submitFeedback}
                         // disabled={feedbackRating === 0}
                       >
                         Invia Feedback
-                      </button>
+                      </Button>
                     </div>
                   </>
                 ) : (
                   <div className={styles.feedbackSuccess}>
-                    <h4>✅ Grazie per il feedback!</h4>
+                    <h4>Grazie per il feedback!</h4>
                     <p>Hai ricevuto bonus XP!</p>
                   </div>
                 )}

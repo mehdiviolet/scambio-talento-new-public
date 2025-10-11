@@ -597,7 +597,7 @@
 .feedbackSection,
 .gallerySection {
   border: 1px solid var(--outline);
-  border-radius: var(--radius-md);
+  /* border-radius: var(--radius-md); */
   padding: var(--space-lg);
   margin-bottom: var(--space-lg);
 }

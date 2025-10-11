@@ -1,6 +1,50 @@
 import React, { useState, useMemo, useEffect } from "react";
+import {
+  BookOpen,
+  ChefHat,
+  Camera,
+  GraduationCap,
+  Music,
+  Zap,
+  Palette,
+  Film,
+  Building,
+  Drama,
+  Sparkles,
+  Brain,
+  Monitor,
+  Shirt,
+  Dumbbell,
+  Leaf,
+  Languages,
+  Gamepad2,
+  Mic,
+} from "lucide-react";
 import MockupCard from "./MainApp/Shared/Modals/MockupCard";
 import styles from "./MyExplorePage.module.css";
+
+// Mapping icone esperienze (stesso pattern di EventiPage)
+const EXPERIENCE_ICONS = {
+  writing: BookOpen,
+  cooking: ChefHat,
+  photography: Camera,
+  history: GraduationCap,
+  music: Music,
+  dance: Zap,
+  painting: Palette,
+  video: Film,
+  architecture: Building,
+  theater: Drama,
+  entertainment: Sparkles,
+  wellness: Brain,
+  tech: Monitor,
+  fashion: Shirt,
+  fitness: Dumbbell,
+  nature: Leaf,
+  languages: Languages,
+  gaming: Gamepad2,
+  podcast: Mic,
+};
 
 const EsperienzePage = () => {
   // State per filtri (solo per esperienze)
@@ -13,14 +57,14 @@ const EsperienzePage = () => {
       {
         id: "exp1",
         tipo: "esperienze",
-        categoria: "📸",
+        categoria: "photography",
         stato: "idle",
         component: <MockupCard key="exp1" />,
       },
       {
         id: "exp2",
         tipo: "esperienze",
-        categoria: "📸",
+        categoria: "photography",
         stato: "active",
         component: (
           <MockupCard
@@ -35,7 +79,7 @@ const EsperienzePage = () => {
       {
         id: "exp3",
         tipo: "esperienze",
-        categoria: "🍳",
+        categoria: "cooking",
         stato: "idle",
         component: (
           <MockupCard
@@ -43,7 +87,7 @@ const EsperienzePage = () => {
             title="Cucina / Francese"
             istruttore="Sara Dormand"
             modalita="presenza"
-            icon="🍳"
+            icon="cooking"
             skillGems={120}
           />
         ),
@@ -51,7 +95,7 @@ const EsperienzePage = () => {
       {
         id: "exp4",
         tipo: "esperienze",
-        categoria: "🎨",
+        categoria: "painting",
         stato: "idle",
         component: (
           <MockupCard
@@ -59,7 +103,7 @@ const EsperienzePage = () => {
             title="Pittura / Acquerello"
             istruttore="Anna Verdi"
             modalita="online"
-            icon="🎨"
+            icon="painting"
             skillGems={65}
             costo={45}
             lezioni={3}
@@ -69,7 +113,7 @@ const EsperienzePage = () => {
       {
         id: "exp5",
         tipo: "esperienze",
-        categoria: "🎵",
+        categoria: "music",
         stato: "active",
         component: (
           <MockupCard
@@ -77,7 +121,7 @@ const EsperienzePage = () => {
             title="Chitarra / Rock"
             istruttore="Luca Metal"
             modalita="presenza"
-            icon="🎵"
+            icon="music"
             skillGems={89}
             costo={60}
             lezioni={6}
@@ -89,27 +133,27 @@ const EsperienzePage = () => {
     []
   );
 
-  // Icone disponibili (solo per esperienze)
+  // Icone disponibili (sostituiscono le emoji)
   const iconeDisponibili = [
-    "✍️",
-    "🍳",
-    "📸",
-    "📚",
-    "🎵",
-    "💃",
-    "🎨",
-    "🎬",
-    "🏛️",
-    "🎭",
-    "🎪",
-    "🧠",
-    "💻",
-    "👗",
-    "💪",
-    "🌱",
-    "🗣️",
-    "🎮",
-    "🎙️",
+    { id: "writing", name: "Scrittura", icon: BookOpen },
+    { id: "cooking", name: "Cucina", icon: ChefHat },
+    { id: "photography", name: "Fotografia", icon: Camera },
+    { id: "history", name: "Storia", icon: GraduationCap },
+    { id: "music", name: "Musica", icon: Music },
+    { id: "dance", name: "Danza", icon: Zap },
+    { id: "painting", name: "Pittura", icon: Palette },
+    { id: "video", name: "Video", icon: Film },
+    { id: "architecture", name: "Architettura", icon: Building },
+    { id: "theater", name: "Teatro", icon: Drama },
+    { id: "entertainment", name: "Intrattenimento", icon: Sparkles },
+    { id: "wellness", name: "Benessere", icon: Brain },
+    { id: "tech", name: "Tech", icon: Monitor },
+    { id: "fashion", name: "Fashion", icon: Shirt },
+    { id: "fitness", name: "Fitness", icon: Dumbbell },
+    { id: "nature", name: "Natura", icon: Leaf },
+    { id: "languages", name: "Lingue", icon: Languages },
+    { id: "gaming", name: "Gaming", icon: Gamepad2 },
+    { id: "podcast", name: "Podcast", icon: Mic },
   ];
 
   const statiDisponibili = ["idle", "active"];
@@ -130,9 +174,11 @@ const EsperienzePage = () => {
   }, [filtroIcone, filtroStati, tuttiElementi]);
 
   // Handler filtri
-  const handleIconToggle = (icon) => {
+  const handleIconToggle = (iconId) => {
     setFiltroIcone((prev) =>
-      prev.includes(icon) ? prev.filter((i) => i !== icon) : [...prev, icon]
+      prev.includes(iconId)
+        ? prev.filter((i) => i !== iconId)
+        : [...prev, iconId]
     );
   };
 
@@ -155,34 +201,46 @@ const EsperienzePage = () => {
     let scrollLeft;
 
     if (slider) {
-      slider.addEventListener("mousedown", (e) => {
+      const handleMouseDown = (e) => {
         isDown = true;
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
-      });
+      };
 
-      slider.addEventListener("mouseleave", () => {
+      const handleMouseLeave = () => {
         isDown = false;
-      });
+      };
 
-      slider.addEventListener("mouseup", () => {
+      const handleMouseUp = () => {
         isDown = false;
-      });
+      };
 
-      slider.addEventListener("mousemove", (e) => {
+      const handleMouseMove = (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
         const walk = (x - startX) * 2;
         slider.scrollLeft = scrollLeft - walk;
-      });
+      };
+
+      slider.addEventListener("mousedown", handleMouseDown);
+      slider.addEventListener("mouseleave", handleMouseLeave);
+      slider.addEventListener("mouseup", handleMouseUp);
+      slider.addEventListener("mousemove", handleMouseMove);
+
+      return () => {
+        slider.removeEventListener("mousedown", handleMouseDown);
+        slider.removeEventListener("mouseleave", handleMouseLeave);
+        slider.removeEventListener("mouseup", handleMouseUp);
+        slider.removeEventListener("mousemove", handleMouseMove);
+      };
     }
   }, []);
 
   return (
     <>
       <div className={styles.filtersSection}>
-        <h1 className={styles.pageTitle}>📚 Esperienze</h1>
+        <h1 className={styles.pageTitle}>Esperienze</h1>
 
         {/* Filtro Stati */}
         <div className={styles.filterGroup}>
@@ -208,23 +266,26 @@ const EsperienzePage = () => {
               Reset filtri
             </button>
           </div>
+
           {/* Filtro Icone - Scroll orizzontale */}
           <div className={styles.verticalIconScroll}>
-            {iconeDisponibili.map((icon) => {
+            {iconeDisponibili.map((iconItem) => {
               const count = tuttiElementi.filter(
-                (e) => e.categoria === icon
+                (e) => e.categoria === iconItem.id
               ).length;
+              const IconComponent = iconItem.icon;
+
               return (
                 <button
-                  key={icon}
-                  onClick={() => handleIconToggle(icon)}
+                  key={iconItem.id}
+                  onClick={() => handleIconToggle(iconItem.id)}
                   disabled={count === 0}
                   className={`${styles.verticalIconButton} ${
-                    filtroIcone.includes(icon) ? styles.selected : ""
+                    filtroIcone.includes(iconItem.id) ? styles.selected : ""
                   } ${count === 0 ? styles.disabled : ""}`}
+                  title={iconItem.name}
                 >
-                  <span className={styles.iconEmoji}>{icon}</span>
-                  {/* <span className={styles.iconCount}>({count})</span> */}
+                  <IconComponent size={20} className={styles.iconComponent} />
                 </button>
               );
             })}
@@ -239,14 +300,10 @@ const EsperienzePage = () => {
             elementiFiltered.map((elemento) => elemento.component)
           ) : (
             <div className={styles.emptyState}>
-              <h3>🔍 Nessun risultato</h3>
+              <h3>Nessun risultato</h3>
               <p>Prova a modificare i filtri per vedere più contenuti</p>
             </div>
           )}
-
-          {/* <p className={styles.hint}>
-            💡 Clicca sulla carta per espandere/comprimere
-          </p> */}
         </div>
       </div>
     </>

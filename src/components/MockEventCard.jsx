@@ -410,7 +410,7 @@ const MockEventCard = ({
                           title={participant.name}
                         >
                           <img
-                            src={`/images/people/pic-${index}.jpg`}
+                            src={`/images/people/pic-${index}.png`}
                             alt="ax"
                           />
                         </div>
@@ -481,7 +481,7 @@ const MockEventCard = ({
             </div>
           )}
           {/* Notifiche per Owner quando espanso */}
-          {isExpanded && isOwner && notifications.length > 0 && (
+          {/* {isExpanded && isOwner && notifications.length > 0 && (
             <div className={styles.notificationsSection}>
               <div className={styles.notificationsHeader}>
                 <button
@@ -544,6 +544,44 @@ const MockEventCard = ({
                   ))}
                 </div>
               )}
+            </div>
+          )} */}
+
+          {/* ✅ GALLERY DROPDOWN (visibile a tutti quando foto presenti) */}
+          {isExpanded && galleryPhotos.length > 0 && (
+            <div className={styles.gallerySection}>
+              {/* <button
+                className={styles.dropdownTrigger}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowGallery(!showGallery);
+                }}
+              >
+                Gallery ({galleryPhotos.length} foto)
+                {showGallery ? (
+                  <ChevronDown size={16} />
+                ) : (
+                  <ChevronRight size={16} />
+                )}
+              </button> */}
+
+              {showGallery && (
+                <div className={styles.galleryGrid}>
+                  <GallerySlider photos={galleryPhotos} isOwner={isOwner} />
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Loading gallery per owner */}
+          {isExpanded && isOwner && isUploadingGallery && (
+            <div className={styles.galleryLoading}>
+              <LoadingSpinner
+                size={20}
+                color="#007bff"
+                text="Caricando foto..."
+                showText={true}
+              />
             </div>
           )}
 
@@ -627,66 +665,6 @@ const MockEventCard = ({
                   ))}
                 </div>
               )}
-            </div>
-          )}
-
-          {/* ✅ GALLERY DROPDOWN (visibile a tutti quando foto presenti) */}
-          {isExpanded && galleryPhotos.length > 0 && (
-            <div className={styles.gallerySection}>
-              <button
-                className={styles.dropdownTrigger}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowGallery(!showGallery);
-                }}
-              >
-                Gallery ({galleryPhotos.length} foto)
-                {showGallery ? (
-                  <ChevronDown size={16} />
-                ) : (
-                  <ChevronRight size={16} />
-                )}
-              </button>
-
-              {showGallery && (
-                <div className={styles.galleryGrid}>
-                  <GallerySlider photos={galleryPhotos} isOwner={isOwner} />
-
-                  {/* {galleryPhotos.map((photo, index) => (
-                    <div
-                      key={photo.id}
-                      className={styles.galleryItem}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handlePhotoClick(index);
-                      }}
-                    >
-                      <img
-                        src={photo.url}
-                        alt={photo.alt}
-                        className={styles.galleryImage}
-                      />
-                      <div className={styles.galleryOverlay}>
-                        <span className={styles.galleryIcon}>
-                          <ZoomIn style={{ color: "var(--primary-lighter)" }} />
-                        </span>
-                      </div>
-                    </div>
-                  ))} */}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Loading gallery per owner */}
-          {isExpanded && isOwner && isUploadingGallery && (
-            <div className={styles.galleryLoading}>
-              <LoadingSpinner
-                size={20}
-                color="#007bff"
-                text="Caricando foto..."
-                showText={true}
-              />
             </div>
           )}
         </div>

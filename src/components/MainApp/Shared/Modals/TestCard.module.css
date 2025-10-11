@@ -751,8 +751,9 @@
 
 /* === FORMS & MODALS === */
 .unifiedSection {
-  background: var(--secondary-container);
+  /* background: var(--secondary-container); */
   margin-bottom: var(--space-md);
+  /* margin-bottom: var(--space-md); */
   border-radius: var(--radius-md);
   animation: slideDown 0.3s ease-out;
 }
@@ -1081,7 +1082,7 @@
 .rejectCommentsSection {
   margin-bottom: var(--space-md);
   background: var(--surface-variant);
-  border-radius: var(--radius-md);
+  /* border-radius: var(--radius-md); */
   border: 1px solid var(--outline);
   overflow: hidden;
   animation: slideDown 0.3s ease-out;
@@ -1092,7 +1093,7 @@
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-md);
-  background: var(--error-container);
+  /* background: var(--secondary-container); */
   border-bottom: 1px solid var(--outline);
 }
 
@@ -1112,7 +1113,7 @@
 
 .rejectCommentItem {
   background: var(--surface);
-  border-radius: var(--radius-sm);
+  /* border-radius: var(--radius-sm); */
   border: 1px solid var(--outline);
   overflow: hidden;
   transition: var(--transition);
@@ -1214,8 +1215,8 @@
 .feedbackModal {
   /* position: fixed; */
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(5px);
+  /* background: rgba(0, 0, 0, 0.4); */
+  /* backdrop-filter: blur(5px); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1226,13 +1227,16 @@
 .rejectModalContent,
 .feedbackModalContent {
   background: var(--primary-container);
-  border-radius: var(--radius-xl);
-  padding: var(--space-2xl);
+  /* border-radius: var(--radius-xl); */
+  padding: var(--space-xl);
+  /* padding-top: 0; */
   max-width: 450px;
-  width: 90%;
-  border: 1px solid var(--outline);
+  width: 100%;
+  /* border: 1px solid var(--outline); */
   box-shadow: var(--shadow-lg);
   animation: slideUp 0.3s ease-out;
+  /* margin-top: -0.8rem; */
+  margin-bottom: 0.8rem;
 }
 
 .rejectModalContent h4,
@@ -1265,8 +1269,8 @@
 .rejectTextarea:focus,
 .feedbackTextarea:focus {
   outline: none;
-  border-color: var(--error);
-  background: var(--error-container);
+  border-color: var(--primary);
+  background: var(--primary-container);
 }
 
 .rejectTextarea::placeholder,
@@ -1279,7 +1283,8 @@
 .feedbackActions {
   display: flex;
   gap: var(--space-sm);
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
+  justify-content: center;
 }
 
 .rejectCancel,
@@ -1391,6 +1396,10 @@
   font-weight: var(--font-semibold);
   cursor: pointer;
   transition: var(--transition);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .gemButton:hover {
@@ -1399,19 +1408,20 @@
 }
 
 .gemSelected {
-  background: var(--secondary-container);
-  border-color: var(--secondary);
-  color: var(--on-secondary-container);
+  background: var(--primary-container);
+  border-color: var(--primary);
+  color: var(--on-primary-container);
 }
 
 .gemSelected:hover {
-  background: var(--secondary);
-  color: var(--on-secondary);
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
 .feedbackSuccess {
   text-align: center;
   padding: var(--space-lg);
+  margin-bottom: var(--space-sm);
 }
 
 .feedbackSuccess h4 {

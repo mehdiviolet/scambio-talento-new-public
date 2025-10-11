@@ -1,8 +1,48 @@
 import React, { useState, useMemo, useEffect } from "react";
+import {
+  Drama,
+  Music,
+  Palette,
+  ChefHat,
+  BookOpen,
+  Film,
+  Zap,
+  Building,
+  Sparkles,
+  Brain,
+  Monitor,
+  Shirt,
+  Dumbbell,
+  Leaf,
+  Languages,
+  Gamepad2,
+  Mic,
+} from "lucide-react";
 import StaticEventShowcase from "./StaticEventShowcase";
 import styles from "./MyExplorePage.module.css";
 import SlideEventCardInCorso from "./SlideEventCardInCorso";
 import SlideEventCardCompleted from "./SlideEventCardCompleted";
+
+// Mapping icone eventi (come SKILL_ICONS in AddSkillModal)
+const EVENT_ICONS = {
+  theater: Drama,
+  music: Music,
+  art: Palette,
+  cooking: ChefHat,
+  books: BookOpen,
+  cinema: Film,
+  dance: Zap,
+  architecture: Building,
+  entertainment: Sparkles,
+  wellness: Brain,
+  tech: Monitor,
+  fashion: Shirt,
+  fitness: Dumbbell,
+  nature: Leaf,
+  languages: Languages,
+  gaming: Gamepad2,
+  podcast: Mic,
+};
 
 const EventiPage = ({ currentUser }) => {
   // State per filtri (solo per eventi)
@@ -38,7 +78,7 @@ const EventiPage = ({ currentUser }) => {
       {
         id: "event1",
         tipo: "eventi",
-        categoria: "🎭",
+        categoria: "theater",
         stato: "idle",
         component: (
           <SlideEventCardInCorso
@@ -50,7 +90,7 @@ const EventiPage = ({ currentUser }) => {
       {
         id: "event2",
         tipo: "eventi",
-        categoria: "🎵",
+        categoria: "music",
         stato: "active",
         component: (
           <SlideEventCardCompleted
@@ -59,11 +99,10 @@ const EventiPage = ({ currentUser }) => {
           />
         ),
       },
-      // Puoi aggiungere altri eventi qui seguendo lo stesso pattern
       {
         id: "event3",
         tipo: "eventi",
-        categoria: "🎨",
+        categoria: "art",
         stato: "idle",
         component: (
           <SlideEventCardCompleted
@@ -75,11 +114,11 @@ const EventiPage = ({ currentUser }) => {
       {
         id: "event4",
         tipo: "eventi",
-        categoria: "🍳",
+        categoria: "cooking",
         stato: "active",
         component: (
           <SlideEventCardInCorso
-            key="event1"
+            key="event4"
             selectedPersonData={selectedPersonData.saraDormand}
           />
         ),
@@ -88,25 +127,25 @@ const EventiPage = ({ currentUser }) => {
     []
   );
 
-  // Icone disponibili (per eventi)
+  // Icone disponibili (sostituiscono le emoji)
   const iconeDisponibili = [
-    "🎭", // teatro/spettacoli
-    "🎵", // musica
-    "🎨", // arte
-    "🍳", // cucina/food
-    "📚", // cultura/libri
-    "🎬", // cinema
-    "💃", // danza
-    "🏛️", // architettura/musei
-    "🎪", // intrattenimento
-    "🧠", // psicologia/benessere
-    "💻", // tech/digitale
-    "👗", // fashion/stile
-    "💪", // sport/fitness
-    "🌱", // natura/ambiente
-    "🗣️", // lingue/conversazione
-    "🎮", // gaming
-    "🎙️", // podcast/radio
+    { id: "theater", name: "Teatro", icon: Drama },
+    { id: "music", name: "Musica", icon: Music },
+    { id: "art", name: "Arte", icon: Palette },
+    { id: "cooking", name: "Cucina", icon: ChefHat },
+    { id: "books", name: "Cultura", icon: BookOpen },
+    { id: "cinema", name: "Cinema", icon: Film },
+    { id: "dance", name: "Danza", icon: Zap },
+    { id: "architecture", name: "Architettura", icon: Building },
+    { id: "entertainment", name: "Intrattenimento", icon: Sparkles },
+    { id: "wellness", name: "Benessere", icon: Brain },
+    { id: "tech", name: "Tech", icon: Monitor },
+    { id: "fashion", name: "Fashion", icon: Shirt },
+    { id: "fitness", name: "Fitness", icon: Dumbbell },
+    { id: "nature", name: "Natura", icon: Leaf },
+    { id: "languages", name: "Lingue", icon: Languages },
+    { id: "gaming", name: "Gaming", icon: Gamepad2 },
+    { id: "podcast", name: "Podcast", icon: Mic },
   ];
 
   const statiDisponibili = ["idle", "active"];
@@ -127,9 +166,11 @@ const EventiPage = ({ currentUser }) => {
   }, [filtroIcone, filtroStati, tuttiElementi]);
 
   // Handler filtri
-  const handleIconToggle = (icon) => {
+  const handleIconToggle = (iconId) => {
     setFiltroIcone((prev) =>
-      prev.includes(icon) ? prev.filter((i) => i !== icon) : [...prev, icon]
+      prev.includes(iconId)
+        ? prev.filter((i) => i !== iconId)
+        : [...prev, iconId]
     );
   };
 
@@ -152,34 +193,46 @@ const EventiPage = ({ currentUser }) => {
     let scrollLeft;
 
     if (slider) {
-      slider.addEventListener("mousedown", (e) => {
+      const handleMouseDown = (e) => {
         isDown = true;
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
-      });
+      };
 
-      slider.addEventListener("mouseleave", () => {
+      const handleMouseLeave = () => {
         isDown = false;
-      });
+      };
 
-      slider.addEventListener("mouseup", () => {
+      const handleMouseUp = () => {
         isDown = false;
-      });
+      };
 
-      slider.addEventListener("mousemove", (e) => {
+      const handleMouseMove = (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
         const walk = (x - startX) * 2;
         slider.scrollLeft = scrollLeft - walk;
-      });
+      };
+
+      slider.addEventListener("mousedown", handleMouseDown);
+      slider.addEventListener("mouseleave", handleMouseLeave);
+      slider.addEventListener("mouseup", handleMouseUp);
+      slider.addEventListener("mousemove", handleMouseMove);
+
+      return () => {
+        slider.removeEventListener("mousedown", handleMouseDown);
+        slider.removeEventListener("mouseleave", handleMouseLeave);
+        slider.removeEventListener("mouseup", handleMouseUp);
+        slider.removeEventListener("mousemove", handleMouseMove);
+      };
     }
   }, []);
 
   return (
     <>
       <div className={styles.filtersSection}>
-        <h1 className={styles.pageTitle}>🎭 Eventi</h1>
+        <h1 className={styles.pageTitle}>Eventi</h1>
 
         {/* Filtro Stati */}
         <div className={styles.filterGroup}>
@@ -205,29 +258,31 @@ const EventiPage = ({ currentUser }) => {
               Reset filtri
             </button>
           </div>
+          <div className={styles.verticalIconScroll}>
+            {iconeDisponibili.map((iconItem) => {
+              const count = tuttiElementi.filter(
+                (e) => e.categoria === iconItem.id
+              ).length;
+              const IconComponent = iconItem.icon;
+
+              return (
+                <button
+                  key={iconItem.id}
+                  onClick={() => handleIconToggle(iconItem.id)}
+                  disabled={count === 0}
+                  className={`${styles.verticalIconButton} ${
+                    filtroIcone.includes(iconItem.id) ? styles.selected : ""
+                  } ${count === 0 ? styles.disabled : ""}`}
+                  title={iconItem.name}
+                >
+                  <IconComponent size={20} className={styles.iconComponent} />
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Filtro Icone - Scroll orizzontale */}
-        <div className={styles.verticalIconScroll}>
-          {iconeDisponibili.map((icon) => {
-            const count = tuttiElementi.filter(
-              (e) => e.categoria === icon
-            ).length;
-            return (
-              <button
-                key={icon}
-                onClick={() => handleIconToggle(icon)}
-                disabled={count === 0}
-                className={`${styles.verticalIconButton} ${
-                  filtroIcone.includes(icon) ? styles.selected : ""
-                } ${count === 0 ? styles.disabled : ""}`}
-              >
-                <span className={styles.iconEmoji}>{icon}</span>
-                {/* <span className={styles.iconCount}>({count})</span> */}
-              </button>
-            );
-          })}
-        </div>
       </div>
 
       <div className={styles.container}>
@@ -237,14 +292,10 @@ const EventiPage = ({ currentUser }) => {
             elementiFiltered.map((elemento) => elemento.component)
           ) : (
             <div className={styles.emptyState}>
-              <h3>🔍 Nessun risultato</h3>
+              <h3>Nessun risultato</h3>
               <p>Prova a modificare i filtri per vedere più contenuti</p>
             </div>
           )}
-
-          {/* <p className={styles.hint}>
-            💡 Clicca sulla carta per espandere/comprimere
-          </p> */}
         </div>
       </div>
     </>

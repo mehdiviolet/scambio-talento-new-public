@@ -92,7 +92,7 @@ const initialState = {
       toUserId: "sara_dormand",
       stars: 3,
       comment: "Ottima organizzazione!",
-      timestamp: "2024-12-19T20:00:00Z",
+      timestamp: "2025-10-24T20:00:00Z",
     },
     {
       id: "feedback_existing_2",
@@ -101,7 +101,7 @@ const initialState = {
       toUserId: "sara_dormand",
       stars: 2,
       comment: "Buono ma poteva essere meglio",
-      timestamp: "2024-12-19T20:15:00Z",
+      timestamp: "2025-10-25T20:15:00Z",
     },
   ],
   showFeedbackModal: false,
