@@ -264,7 +264,8 @@
 .slotHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: flex-end;
   /* gap: 20px; */
   width: 100%;
   margin-bottom: var(--space-lg);
@@ -683,13 +684,14 @@
 
 /* === REWARD MESSAGE MIGLIORATA === */
 .rewardMessage {
-  min-height: 180px;
+  /* min-height: 180px; */
+  min-height: 130px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: var(--radius-xl);
-  padding: var(--space-xl);
+  /* padding: var(--space-xl); */
   position: relative;
   overflow: hidden;
   color: var(--secondary);
@@ -745,10 +747,11 @@
 }
 
 .xpValue {
-  font-size: 2.5rem;
+  font-size: 8rem;
   font-weight: var(--font-bold);
   color: var(--on-surface);
   line-height: 1;
+  color: var(--secondary);
 }
 
 .rewardWin .xpValue {
@@ -756,11 +759,12 @@
 }
 
 .xpLabel {
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
-  /* color: var(--text-primary-light); */
-  /* color: var(--teal-light); */
+  font-size: 1.7rem;
+  font-weight: var(--font-bold);
+  color: var(--on-surface);
+  line-height: 1;
   opacity: 0.8;
+  color: var(--secondary);
 }
 
 .rewardText {

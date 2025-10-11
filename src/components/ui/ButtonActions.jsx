@@ -309,8 +309,8 @@ export const ButtonSpinWheel = ({
 }) => {
   const getButtonText = () => {
     if (isSpinning) return "Girando...";
-    if (isBlocked) return "Bloccato per 1 giorno";
-    if (hasSpunToday) return "Torna domani!";
+    // if (isBlocked) return "Bloccato per 1 giorno";
+    // if (hasSpunToday) return "Torna domani!";
     return "GIRA ORA";
   };
 

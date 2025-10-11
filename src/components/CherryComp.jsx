@@ -179,7 +179,7 @@ const CherryComp = ({
     <div className={styles.container}>
       {/* 🆕 HEADER CON BOTTONE INFO */}
       <div className={styles.slotHeader}>
-        <h3 className={styles.slotTitle}>Slot della Fortuna</h3>
+        {/* <h3 className={styles.slotTitle}>Slot della Fortuna</h3> */}
         <button
           className={styles.infoButton}
           onClick={() => setShowInfoModal(true)}
@@ -218,30 +218,30 @@ const CherryComp = ({
               <div className={styles.rewardAmount}>
                 <span
                   className={styles.xpValue}
-                  style={{
-                    color:
-                      xpRewarded >= 10
-                        ? "var(--danger-red)"
-                        : xpRewarded >= 30
-                        ? "var(--text-secondary)"
-                        : "var(--teal-light)",
-                    transition: "var(--transition-normal)",
-                  }}
+                  // style={{
+                  //   color:
+                  //     xpRewarded >= 10
+                  //       ? "var(--danger-red)"
+                  //       : xpRewarded >= 30
+                  //       ? "var(--text-secondary)"
+                  //       : "var(--teal-light)",
+                  //   transition: "var(--transition-normal)",
+                  // }}
                 >
                   {xpRewarded > 0 ? `+${xpRewarded}` : "0"}
                 </span>
                 <span
                   // className={styles.xpLabel}
-                  className={styles.xpValue}
-                  style={{
-                    color:
-                      xpRewarded >= 10
-                        ? "var(--danger-red)"
-                        : xpRewarded >= 30
-                        ? "var(--text-secondary)"
-                        : "var(--teal-light)",
-                    transition: "var(--transition-normal)",
-                  }}
+                  className={styles.xpLabel}
+                  // style={{
+                  //   color:
+                  //     xpRewarded >= 10
+                  //       ? "var(--danger-red)"
+                  //       : xpRewarded >= 30
+                  //       ? "var(--text-secondary)"
+                  //       : "var(--teal-light)",
+                  //   transition: "var(--transition-normal)",
+                  // }}
                 >
                   XP
                 </span>
@@ -256,6 +256,8 @@ const CherryComp = ({
                     : "Bene!"}
                 </div>
               )} */}
+              {hasSpunToday && !isBlocked && <p>Torna domani!</p>}
+              {isBlocked && <p>Bloccato per 1 giorno!</p>}
             </div>
           ) : (
             <div className={styles.placeholder}>
@@ -263,9 +265,9 @@ const CherryComp = ({
               <div className={styles.placeholderIcon}>
                 <Dices size={80} />
               </div>
-              <div className={styles.placeholderText}>
+              {/* <div className={styles.placeholderText}>
                 {hasSpunToday ? "Completato per oggi!" : "Clicca per girare!"}
-              </div>
+              </div> */}
             </div>
           )}
         </div>
@@ -323,14 +325,6 @@ const CherryComp = ({
               ))}
             </span>
           </div>
-        </div>
-        <div className={styles.btnSpin}>
-          <ButtonSpinWheel
-            onClick={handleSpin}
-            isSpinning={isSpinning}
-            hasSpunToday={hasSpunToday}
-            isBlocked={isBlocked}
-          />
         </div>
       </div>
       {/* 🆕 MODAL INFO - Stile identico al settings */}
@@ -520,6 +514,14 @@ const CherryComp = ({
           </div>
         </>
       )}
+      <div className={styles.btnSpin}>
+        <ButtonSpinWheel
+          onClick={handleSpin}
+          isSpinning={isSpinning}
+          hasSpunToday={hasSpunToday}
+          isBlocked={isBlocked}
+        />
+      </div>
     </div>
   );
 };
