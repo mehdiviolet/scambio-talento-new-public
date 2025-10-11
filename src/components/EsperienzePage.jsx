@@ -59,7 +59,9 @@ const EsperienzePage = () => {
         tipo: "esperienze",
         categoria: "photography",
         stato: "idle",
-        component: <MockupCard key="exp1" />,
+        component: (
+          <MockupCard key="exp1" ownerPhoto="/public/images/people/sarad.jpg" />
+        ),
       },
       {
         id: "exp2",
@@ -73,6 +75,7 @@ const EsperienzePage = () => {
             istruttore="Marco Rossi"
             modalita="presenza"
             stato="active"
+            ownerPhoto="/public/images/people/marcor.png"
           />
         ),
       },

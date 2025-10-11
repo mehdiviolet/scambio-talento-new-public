@@ -1,28 +1,17 @@
 import React, { useState } from "react";
 import {
-  MonitorSpeaker,
-  Users,
-  Type,
-  User,
-  Clock,
-  Gem,
-  MoreHorizontal,
+  Globe,
+  Home,
   ChevronDown,
   ChevronUp,
-  Edit,
-  Share,
-  Heart,
-  Bookmark,
-  Trash2,
   MessageCircle,
-  Star,
-  Send,
-  CheckCircle,
-  Globe2,
-  Home,
+  Gem,
+  Share,
+  Bookmark,
+  User,
+  Users,
 } from "lucide-react";
 import styles from "./TestCard.module.css";
-import { Button } from "@/components/ui/Button";
 
 const MockupCard = ({
   // Dati base corso
@@ -34,37 +23,38 @@ const MockupCard = ({
 
   // Istruttore
   istruttore = "Sara Dormand",
-  ownerPhoto = null,
+  instructorPhoto = null,
   skillGems = 45,
   icon = "📸",
 
   // Info aggiuntive
   lingua = "IT",
+  partecipanti = 3,
   modalita = "online", // "online" o "presenza"
 
-  // Feedback
+  // Feedback personalizzabili
   feedbacks = [
     {
       id: 1,
       user: "Marco",
-      avatar: "👨‍💼",
-      rating: 5,
+      avatar: null,
       comment: "Esperienza fantastica! Molto professionale e coinvolgente.",
       date: "2 giorni fa",
     },
     {
       id: 2,
       user: "Laura",
-      avatar: "👩‍🎨",
-      rating: 4,
+      avatar: null,
       comment: "Ottima lezione, ho imparato tantissimo. Consigliato!",
       date: "1 settimana fa",
     },
   ],
+
+  // Stato mockup (opzionale per future espansioni)
+  mockupState = "idle",
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isFeedbackExpanded, setIsFeedbackExpanded] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
@@ -81,123 +71,66 @@ const MockupCard = ({
 
   const handleBookmarkClick = (e) => {
     e.stopPropagation();
-    setIsBookmarked(!isBookmarked);
     console.log("Bookmark esperienza:", title);
   };
 
-  // Calcola rating medio
-  const getAverageRating = () => {
-    if (!feedbacks || feedbacks.length === 0) return 0;
-    const total = feedbacks.reduce((sum, feedback) => sum + feedback.rating, 0);
-    return (total / feedbacks.length).toFixed(1);
-  };
-
-  // Genera stelle per rating
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <Star
-        key={index}
-        size={12}
-        className={`${styles.star} ${
-          index < rating ? styles.starFilled : styles.starEmpty
-        }`}
-      />
-    ));
-  };
-
   return (
-    <div className={`${styles.testCard} ${isExpanded ? styles.expanded : ""}`}>
-      {/* NAV - Identico a TestCard */}
+    <div className={styles.testCard}>
       <div className={styles.nav} onClick={toggleExpanded}>
-        {icon && (
-          <span className={styles.experienceIcon}>
-            {typeof icon === "string"
-              ? icon
-              : React.createElement(icon, { size: 18 })}
-          </span>
-        )}
         <h4 className={styles.navTitle}>{title}</h4>
         <div className={styles.navRight}>
-          <div className={styles.actionSpacer}></div>
-          <div className={styles.hoverButtons}>
-            <button
-              className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
-              onClick={handleShareClick}
-              title="Condividi"
-            >
-              <Share size={16} />
-            </button>
-
-            <button
-              className={`${styles.actionButton} ${
-                styles.actionButtonSecondary
-              } ${isBookmarked ? styles.bookmarked : ""}`}
-              onClick={handleBookmarkClick}
-              title={isBookmarked ? "Rimuovi dai salvati" : "Salva"}
-            >
-              <Bookmark size={16} />
-            </button>
-          </div>
-          {!isExpanded && <div className={styles.userGem}>{costo} XP</div>}
+          <ul className={styles.navUl}>
+            <li>
+              {modalita === "online" ? <Globe size={20} /> : <Home size={20} />}
+            </li>
+            <li>{lingua}</li>
+          </ul>
         </div>
       </div>
 
-      {/* CONTENT - Identico a TestCard */}
       {isExpanded && (
         <div className={styles.cardContentSperienza}>
-          {/* Info Lezione */}
           <div className={styles.infoLezione}>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>Lezioni:</span>
               <span className={styles.infoValue}>{lezioni}</span>
             </div>
             <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Durata:</span>
+              <span className={styles.infoLabel}>Durata lezione:</span>
               <span className={styles.infoValue}>{durataLezione}</span>
             </div>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>Costo:</span>
               <span className={styles.infoValue}>{costo} XP</span>
             </div>
-            <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Lingua:</span>
-              <span className={styles.infoValue}>{lingua}</span>
-            </div>
-            <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Modalità:</span>
-              <span className={styles.infoValue}>{modalita}</span>
-            </div>
           </div>
 
-          {/* Descrizione + Avatar */}
           <div className={styles.descAvat}>
             <div className={styles.descriptionBox}>{descrizione}</div>
-
             <div className={styles.requestSection}>
-              {/* ReadOnly - Nessun bottone interattivo */}
-              <div className={styles.actionButtons}>
-                {/* Spazio vuoto per mantenere layout */}
-                <Button
-                // className={styles.requestButton}
-                // onClick={handleRequestClick}
-                >
-                  <Send size={16} />
-                </Button>
+              <div className={styles.ownerPhotoContainer}>
+                {instructorPhoto ? (
+                  <img
+                    src={instructorPhoto}
+                    alt={`Foto profilo ${istruttore}`}
+                    className={styles.ownerPhotoSmall}
+                  />
+                ) : (
+                  <div className={styles.ownerPlaceholder}>
+                    <User size={20} />
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Feedback Section */}
+          {/* Sezione Feedback */}
           {feedbacks && feedbacks.length > 0 && (
             <div className={styles.feedbackSection}>
               <div className={styles.feedbackHeader} onClick={toggleFeedback}>
                 <div className={styles.feedbackTitle}>
                   {/* <MessageCircle size={16} /> */}
                   <span>Feedback ({feedbacks.length})</span>
-                  {/* <div className={styles.ratingBadge}>
-                    <Star size={12} className={styles.starFilled} />
-                    <span>{getAverageRating()}</span>
-                  </div> */}
                 </div>
                 {isFeedbackExpanded ? (
                   <ChevronUp size={16} />
@@ -211,16 +144,24 @@ const MockupCard = ({
                   {feedbacks.map((feedback) => (
                     <div key={feedback.id} className={styles.feedbackItem}>
                       <div className={styles.feedbackUser}>
-                        <div className={styles.feedbackAvatar}>
-                          {feedback.avatar}
+                        <div>
+                          {feedback.avatar ? (
+                            <img
+                              src={feedback.avatar}
+                              alt={feedback.user}
+                              className={styles.feedbackAvatar}
+                            />
+                          ) : (
+                            <div className={styles.avatarPlaceholder}>
+                              {feedback.user?.[0]}
+                            </div>
+                          )}
                         </div>
+
                         <div className={styles.feedbackInfo}>
                           <span className={styles.feedbackName}>
                             {feedback.user}
                           </span>
-                          {/* <div className={styles.feedbackRating}>
-                            {renderStars(feedback.rating)}
-                          </div> */}
                         </div>
                         <span className={styles.feedbackDate}>
                           {feedback.date}
@@ -236,26 +177,48 @@ const MockupCard = ({
             </div>
           )}
 
-          {/* Footer User */}
+          <div className={styles.dividere}></div>
+
+          {/* Footer Istruttore */}
           <div className={styles.footerUser}>
             <ul className={styles.userInfo}>
               <li>
-                {ownerPhoto ? (
+                {instructorPhoto ? (
                   <img
-                    src={ownerPhoto}
+                    src={instructorPhoto}
                     alt={`Foto profilo ${istruttore}`}
-                    className={styles.ownerPhoto}
+                    className={styles.instructorPhoto}
                   />
                 ) : (
-                  <User />
+                  <div className={styles.userAvatar}>👨‍🎤</div>
                 )}
               </li>
               <p>{istruttore}</p>
             </ul>
             <div className={styles.userGem}>
-              <Gem size={20} />
+              <Gem size={16} />
               <span>{skillGems}</span>
+              <div className={styles.iconclass}>{icon}</div>
             </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className={styles.actionButtons}>
+            <div className={styles.actionSpacer}></div>
+            <button
+              className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
+              onClick={handleShareClick}
+              title="Condividi"
+            >
+              <Share size={16} />
+            </button>
+            <button
+              className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
+              onClick={handleBookmarkClick}
+              title="Salva"
+            >
+              <Bookmark size={16} />
+            </button>
           </div>
         </div>
       )}

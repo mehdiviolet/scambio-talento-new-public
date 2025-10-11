@@ -752,7 +752,7 @@ function TestCard({
             <div className={styles.feedbackSection}>
               <div className={styles.feedbackHeader} onClick={toggleFeedback}>
                 <div className={styles.feedbackTitle}>
-                  <MessageCircle size={16} />
+                  {/* <MessageCircle size={16} /> */}
                   <span>Feedback ({feedbacks.length})</span>
                   <div className={styles.ratingBadge}>
                     <Star size={12} className={styles.starFilled} />
