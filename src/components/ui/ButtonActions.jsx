@@ -47,13 +47,13 @@ export const ButtonTrash = ({
   disabled = false,
   disabledMessage = "Impossibile eliminare",
   size = "md",
-  mode = "solid",
+  mode = "outline",
   children = "Elimina",
   ...props
 }) => {
   return (
     <Button
-      variant="error"
+      variant="neutral"
       mode={mode}
       size={size}
       onClick={onClick}
@@ -62,7 +62,7 @@ export const ButtonTrash = ({
       title="Elimina"
       {...props}
     >
-      <Trash2 size={16} />
+      {/* <Trash2 size={16} /> */}
       <span>{children}</span>
     </Button>
   );
@@ -89,7 +89,7 @@ export const ButtonCancel = ({
       title="Annulla modifiche"
       {...props}
     >
-      <X size={14} />
+      {/* <X size={14} /> */}
       <span>{children}</span>
     </Button>
   );
@@ -116,7 +116,7 @@ export const ButtonSave = ({
       title="Salva modifiche"
       {...props}
     >
-      <Save size={14} />
+      {/* <Save size={14} /> */}
       <span>{children}</span>
     </Button>
   );
@@ -128,7 +128,7 @@ export const ButtonEdit = ({
   disabled = false,
   disabledMessage = "Impossibile modificare",
   size = "md",
-  mode = "outline",
+  mode = "solid",
   children = "Modifica",
   ...props
 }) => {
@@ -143,7 +143,7 @@ export const ButtonEdit = ({
       title="Modifica"
       {...props}
     >
-      <Edit2 size={14} />
+      {/* <Edit2 size={14} /> */}
       <span>{children}</span>
     </Button>
   );

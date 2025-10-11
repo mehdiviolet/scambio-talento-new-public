@@ -89,64 +89,14 @@ const SkillMockup = ({ mockSkills, selectedPersonData, isInstructorPanel }) => {
               {/* Expanded Content */}
               {isSkillExpanded && (
                 <div className={styles.skillExpanded}>
-                  {/* Description Box - viewer mode only */}
                   <div className={styles.descriptionBox}>
                     <p className={styles.descriptionText}>
-                      {skill.description}
+                      {skill.description || (
+                        <span className={styles.descriptionPlaceholder}>
+                          Nessuna descrizione disponibile.
+                        </span>
+                      )}
                     </p>
-                  </div>
-
-                  {/* Divider */}
-                  <div className={styles.divider}></div>
-
-                  {/* Footer */}
-                  <div className={styles.footer}>
-                    <div className={styles.userInfo}>
-                      {/* <div className={styles.avatar}>
-                        {mockUserData.profilePhoto ? (
-                          <img
-                            src={mockUserData.profilePhoto}
-                            alt={`${mockUserData.firstName} ${mockUserData.lastName}`}
-                            className={styles.avatarImage}
-                          />
-                        ) : (
-                          <div className={styles.avatarEmoji}>👩‍🎨</div>
-                        )}
-                      </div> */}
-
-                      <div className={styles.avatar}>
-                        {selectedPersonData?.profile?.profilePhoto ? (
-                          <img
-                            src={
-                              selectedPersonData?.profile
-                                .profilePhoto instanceof File
-                                ? URL.createObjectURL(
-                                    selectedPersonData?.profile.profilePhoto
-                                  )
-                                : selectedPersonData?.profile.profilePhoto
-                            }
-                            alt={`${
-                              selectedPersonData?.profile?.firstName || "Sara"
-                            } ${
-                              selectedPersonData?.profile?.lastName || "Dormand"
-                            }`}
-                          />
-                        ) : (
-                          <div className={styles.avatarEmoji}>👩‍🎨</div>
-                        )}
-                      </div>
-                      <span className={styles.userName}>
-                        {selectedPersonData?.profile.firstName}{" "}
-                        {selectedPersonData?.profile.lastName}
-                      </span>
-                    </div>
-
-                    {/* <div className={styles.skillGemsDisplay}>
-                      <span className={styles.gemsIcon}>⚡</span>
-                      <span className={styles.gemsCount}>
-                        {skill.gems || 0}
-                      </span>
-                    </div> */}
                   </div>
                 </div>
               )}

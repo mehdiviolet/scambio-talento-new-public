@@ -168,14 +168,10 @@ const SearchSection = () => {
         currentWantedSkills={currentProfile?.wantedSkills || []}
       />
       <div className={styles.container}>
-        <div className={styles.header}>
-          <h3 className={styles.title}>
-            {/* <span className={styles.searchIcon}>🎯</span> */}
-            Alla Ricerca
-          </h3>
-        </div>
-
         <div className={styles.content}>
+          {/* <div className={styles.header}> */}
+          <h3 className={styles.title}>Alla Ricerca</h3>
+          {/* </div> */}
           {isOwner && (
             // <button
             //   onClick={handleAddSkill}

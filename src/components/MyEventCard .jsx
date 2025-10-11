@@ -91,7 +91,7 @@ const SlideEventCard = ({
           <div className={styles.organizerInfoPiccolo}>
             <div
               className={styles.statusBadge}
-              style={{ backgroundColor: "#28a745" }}
+              style={{ backgroundColor: "var(--primary)" }}
             >
               Aperto
             </div>

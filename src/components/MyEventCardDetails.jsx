@@ -100,7 +100,7 @@ const MyEventCardDetails = ({
       {/* Status Badge */}
       <div
         className={styles.statusBadge}
-        style={{ backgroundColor: "#28a745" }}
+        style={{ backgroundColor: "var(--primary)" }}
       >
         Aperto
       </div>
@@ -149,7 +149,7 @@ const MyEventCardDetails = ({
                 </div>
 
                 <div className={styles.participantsOverlay}>
-                  <span>0/{mockEvent.maxParticipants} posti</span>
+                  <span>0/{mockEvent.maxParticipants} partecipanti</span>
                 </div>
               </div>
             </div>

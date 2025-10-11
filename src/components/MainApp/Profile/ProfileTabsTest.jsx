@@ -25,8 +25,8 @@ const ProfileTabs = ({ selectedPersonData }) => {
   const tabs = [
     { id: "about", label: "About" },
     { id: "skills", label: "Skills" },
-    { id: "experiences", label: "Esperienze" },
-    { id: "events", label: "Eventi" },
+    { id: "experiences", label: "Experiences" },
+    { id: "events", label: "Events" },
   ];
 
   const skillGemBonus = useSelector(
@@ -71,18 +71,20 @@ const ProfileTabs = ({ selectedPersonData }) => {
         return (
           <>
             {/* <div className={styles.content}> */}
-            <div className={styles.tabsNavigation}>
+            <div
+              className={`${styles.tabsNavigation} ${styles.tabsNavigationBorder}`}
+            >
               <button
-                className={`${styles.tabButton} ${
+                className={`${styles.tabButton} ${styles.tabButtonBorder}  ${
                   experienceMode === "offer" ? styles.active : ""
                 }`}
                 onClick={() => setExperienceMode("offer")}
               >
                 {/* Offro */}
-                Cerco
+                Ricevo
               </button>
               <button
-                className={`${styles.tabButton} ${
+                className={`${styles.tabButton} ${styles.tabButtonBorder} ${
                   experienceMode === "seek" ? styles.active : ""
                 }`}
                 onClick={() => setExperienceMode("seek")}
@@ -95,8 +97,8 @@ const ProfileTabs = ({ selectedPersonData }) => {
             {experienceMode === "offer" ? (
               // <ExperiencesSectionStudente />
 
-              // <ExperiencesSection />
-              <h1>Experience che sta facendo</h1>
+              // <h1>Experience che sta facendo</h1>
+              <p>............</p>
             ) : (
               <ExperiencesMockupRedux
                 isInstructorPanel={true}
@@ -111,22 +113,24 @@ const ProfileTabs = ({ selectedPersonData }) => {
       case "events":
         return (
           <>
-            <div className={styles.tabsNavigation}>
+            <div
+              className={`${styles.tabsNavigation} ${styles.tabsNavigationBorder}`}
+            >
               <button
-                className={`${styles.tabButton} ${
+                className={`${styles.tabButton}  ${styles.tabButtonBorder} ${
                   eventMode === "joined" ? styles.active : ""
                 }`}
                 onClick={() => setEventMode("joined")}
               >
-                Partecipati
+                Frequento
               </button>
               <button
-                className={`${styles.tabButton} ${
+                className={`${styles.tabButton}  ${styles.tabButtonBorder} ${
                   eventMode === "created" ? styles.active : ""
                 }`}
                 onClick={() => setEventMode("created")}
               >
-                Creati
+                Propongo
               </button>
             </div>
 

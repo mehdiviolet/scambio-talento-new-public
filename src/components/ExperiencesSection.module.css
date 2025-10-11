@@ -312,10 +312,12 @@
   /* margin: 1rem 0; */
   overflow: hidden;
   transition: flex 0.3s ease; /* animazione smooth */
+  margin-bottom: var(--space-sm);
 }
 
 .filtersContainer.expanded {
   flex: 1 1 100%; /* occupa tutta la larghezza quando espanso */
+  margin-bottom: 0;
 }
 
 /* Animazione tendina */

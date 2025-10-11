@@ -64,7 +64,7 @@ const ProfileTabs = () => {
                 onClick={() => setExperienceMode("offer")}
               >
                 {/* Offro */}
-                Cerco
+                Ricevo
               </button>
               <button
                 className={`${styles.tabButton} ${styles.tabButtonBorder} ${
@@ -96,7 +96,7 @@ const ProfileTabs = () => {
                 }`}
                 onClick={() => setEventMode("joined")}
               >
-                Partecipati
+                Frequento
               </button>
               <button
                 className={`${styles.tabButton}  ${styles.tabButtonBorder}  ${
@@ -104,7 +104,7 @@ const ProfileTabs = () => {
                 }`}
                 onClick={() => setEventMode("created")}
               >
-                Creati
+                Propongo
               </button>
             </div>
 
