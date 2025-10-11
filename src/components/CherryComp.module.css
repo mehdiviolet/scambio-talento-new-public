@@ -293,7 +293,7 @@
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: var(--transition);
-  /* color: #3b82f6; */
+  color: var(--on-primary-container);
 }
 
 .infoButton:hover {
@@ -652,27 +652,6 @@
   font-size: var(--text-xs);
   color: var(--primary);
   line-height: 1.4;
-}
-
-/* Header migliorato */
-/* .slotHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 0 1rem;
-  position: relative;
-} */
-
-.slotTitle {
-  font-size: var(--text-xl);
-  font-weight: var(--font-bold);
-  /* background: linear-gradient(135deg, var(--secondary-500), #d97706); */
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin: 0;
 }
 
 /* Cherry indicator migliorato */

@@ -163,7 +163,7 @@ export const ButtonLogout = ({
 }) => {
   return (
     <Button
-      variant="error"
+      variant="secondary"
       mode={mode}
       size={size}
       onClick={onClick}

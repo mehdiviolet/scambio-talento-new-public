@@ -7,20 +7,20 @@
   gap: 1rem;
   text-align: center;
   padding: 1.5rem;
-  background: var(--error-container);
+  background: var(--secondary-container);
   /* border-radius: var(--radius-lg); */
-  border: 1px solid var(--error);
+  border: 1px solid var(--secondary);
 }
 
 .warningIcon {
-  color: var(--error);
+  color: var(--secondary);
   align-self: center;
 }
 
 .warningTitle {
   margin: 0 0 0.5rem 0;
   font-weight: var(--font-semibold);
-  color: var(--on-error-container);
+  color: var(--on-secondary-container);
   font-size: var(--text-base);
 }
 
@@ -59,7 +59,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
-  background: var(--error);
+  background: var(--secondary);
   color: var(--on-error);
   border: none;
   padding: var(--space-md);
@@ -97,25 +97,25 @@
 /* === INFO SECTION === */
 .logoutInfo {
   padding: var(--space-md);
-  background: var(--error-container);
+  background: var(--secondary-container);
   border-radius: var(--radius-sm);
 }
 
 .logoutInfoText {
   margin: 0;
   font-size: var(--text-sm);
-  color: var(--on-error-container);
+  color: var(--on-secondary-container);
   text-align: center;
 }
 
 /* === ICON STYLES === */
 .logoutIcon {
-  color: var(--error);
+  /* color: var(--secondary); */
 }
 
 .logoutTitle {
-  color: var(--error);
-  margin: var(--space-md) 0;
+  /* color: var(--secondary); */
+  margin: var(--space-md) auto;
   font-size: var(--text-xl);
   font-weight: var(--font-bold);
 }
